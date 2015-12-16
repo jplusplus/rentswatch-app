@@ -11,8 +11,8 @@ var all = module.exports.all = function() {
     'FROM ad',
     'WHERE total_rent < 3000',
     'AND living_space < 200',
-    'AND price_per_sqm < 70',
-    'AND price_per_sqm > 3',
+    // 'AND price_per_sqm < 70',
+    // 'AND price_per_sqm > 3',
   ].join("\n");
   // Query the database
   sqldb.mysql.query(query, function(err, rows) {

@@ -1,12 +1,6 @@
 'use strict'
 
-angular.module 'rentswatchApp'
-.controller 'NavbarCtrl', ($scope, $location) ->
-  $scope.menu = [
-    title: 'Home'
-    link: '/'
-  ]
-  $scope.isCollapsed = true
-
-  $scope.isActive = (route) ->
-    route is $location.path()
+angular
+  .module 'rentswatchApp'
+    .controller 'NavbarCtrl', ($scope)->
+      $scope.isCollapsed = true

@@ -1,3 +1,222 @@
 .main {
-  
+
+  position:relative;
+  max-width:600px;
+  margin:auto;
+
+  .animated {
+    .transition(all linear .4s);
+
+    &.ng-enter, &.ng-leave-active {
+      opacity:0;
+    }
+
+
+    &.hslide {
+      &.ng-enter, &.ng-leave-active  {
+        width:0%;
+      }
+    }
+
+
+    &.vslide {
+      &.ng-enter, &.ng-leave-active  {
+        height:0%;
+      }
+    }
+  }
+
+
+  &__step {
+    position:absolute;
+    width:80%;
+    top:50px;
+    left:50%;
+    .transform( translate(-50%, 0) );
+
+    &__form {
+      margin-top:100px;
+    }
+
+    &__scatterplot {
+      position: absolute;
+      left:0;
+      width:100%;
+
+      &__middle-instruction,
+      &__bottom-instruction {
+        position: absolute;
+        left:50%;
+
+        width:100%;
+        padding:10px 30px;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+
+        &__action {
+          margin-top:40px;
+        }
+      }
+
+      &__middle-instruction {
+        top:50%;
+        .translate(-50%, -50%);
+      }
+
+      &__bottom-instruction {
+        top:100%;
+        .translate(-50%, 20px);
+      }
+
+      &__chart {
+        width:100%;
+        position:absolute;
+        left:0;
+        top:0;
+        z-index:-1;
+      }
+
+      &__dummy {
+        width:100%;
+        padding-top:100%;
+        visibility: hidden;
+      }
+
+      &__sample-point {
+        position:absolute;
+        bottom:0;
+        left:0;
+        width:(70/200)*100%;
+        height:(600/3000)*100%;
+        display: block;
+        border:0px dashed fade(@text-color, 50%);
+        border-top-width:1px;
+        border-right-width:1px;
+
+        &:after {
+          animation: glowing .5s ease-in-out alternate infinite both running;
+          content:"";
+          border-radius: 5px;
+          height:5px;
+          width:5px;
+          background: white;
+          position:absolute;
+          top:0;
+          right:0;
+          .translate(50%, -50%);
+        }
+      }
+
+      &__axis {
+
+        width:1px;
+        height:1px;
+        color:fade(@text-color, 75%);
+
+        &__ticks {
+          display:flex;
+          justify-content:space-between;
+          align-items: stretch;
+          font-size:0.8em;
+
+          &__tick {
+            position:relative;
+            flex:1;
+
+            &:nth-child(odd) &__wrap {
+              @media (max-width: @screen-xs-max) {
+                visibility:hidden
+              }
+            }
+
+            &:first-child {
+              visibility: hidden;
+            }
+
+            &:after {
+              position:absolute;
+              content:"";
+              background:fade(@text-color, 75%);
+              height:1px;
+              width:1px;
+            }
+
+            &__wrap {
+              position:absolute;
+            }
+          }
+        }
+
+        &--x &__ticks {
+          flex-direction: row;
+          width:100%;
+
+          &__tick {
+
+            &:after {
+              top:0;
+              right:100%;
+              height:3px;
+            }
+
+            &__wrap {
+              left:0;
+              top:0;
+              .translate(-50%, 5px);
+            }
+          }
+        }
+
+        &--y &__ticks {
+          flex-direction:column-reverse;
+          height:100%;
+          text-align: right;
+          position:absolute;
+          bottom:0;
+          left:0;
+
+          .translate(-100%, 0);
+
+          &__tick {
+            width:100%;
+            align-self: flex-end;
+
+            &:after {
+              top:100%;
+              right:0;
+              width:3px;
+            }
+
+            &__wrap {
+              right:0;
+              bottom:0;
+              .translate(-10px, 50%);
+            }
+          }
+        }
+
+        &, &__line {
+          position:absolute;
+          bottom:0;
+          left:0;
+        }
+
+        &__line {
+          width:100%;
+          height:100%;
+          background:fade(@text-color, 50%);
+        }
+
+        &--x {
+          width:100%;
+        }
+
+        &--y {
+          height:100%;
+        }
+      }
+    }
+
+  }
 }

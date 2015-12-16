@@ -4,14 +4,14 @@ var Canvas = require('canvas'),
 
 module.exports.scatterplot = function(rows, cvswidth, cvsheight) {
   // Default canvas sizes
-  cvswidth  = cvswidth || 1200;
+  cvswidth  = cvswidth || 800;
   cvsheight = cvsheight || cvswidth || 800;
 
   var canvas = new Canvas(cvswidth, cvsheight);
   var ctx = canvas.getContext('2d');
   // Fill background
-  ctx.fillStyle = '#121119';
-  ctx.fillRect(0, 0, cvswidth, cvsheight);
+  // ctx.fillStyle = '#121119';
+  // ctx.fillRect(0, 0, cvswidth, cvsheight);
 
   var max_living_space = _.max(rows, 'living_space').living_space;
   var max_total_rent   = _.max(rows, 'total_rent').total_rent;
@@ -28,6 +28,6 @@ module.exports.scatterplot = function(rows, cvswidth, cvsheight) {
     var row = rows[r];
     ctx.fillRect( x(row.living_space), y(row.total_rent), 1, 1);
   }
-  
+
   return canvas;
 };

@@ -6,7 +6,7 @@ var response = require('../response');
 
 var router = express.Router();
 
-router.get('/', response.cachedPng(), controller.index);
-router.get('/center', response.cachedPng(), controller.center);
+router.get('/all.png', response.cachedPng(), controller.index);
+router.get('/center.png', response.cachedPng(), controller.center);
 
 module.exports = router;

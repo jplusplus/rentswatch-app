@@ -1,0 +1,14 @@
+.glowing(@color) {
+	from {
+    box-shadow: 0 0 0px 0px @color;
+  }
+	to {
+    box-shadow: 0 0 10px 5px @color;
+  }
+}
+
+@-webkit-keyframes glowing { .glowing(@brand-primary); }
+@-moz-keyframes glowing { .glowing(@brand-primary); }
+@-ms-keyframes glowing { .glowing(@brand-primary); }
+@-o-keyframes glowing { .glowing(@brand-primary); }
+@keyframes glowing { .glowing(@brand-primary); }
