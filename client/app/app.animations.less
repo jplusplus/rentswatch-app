@@ -1,4 +1,36 @@
-.glowing(@color) {
+.animated {
+	.transition(all linear .4s);
+
+	&.ng-enter, &.ng-leave-active {
+		opacity:0;
+	}
+
+	&.hopen {
+		&.ng-enter, &.ng-leave-active  {
+			width:0%;
+		}
+	}
+
+	&.vopen {
+		&.ng-enter, &.ng-leave-active  {
+			height:0%;
+		}
+	}
+
+	&.slideup {
+		&.ng-enter, &.ng-leave-active  {
+			.translate(0, 100%);
+		}
+	}
+
+	&.slidedown {
+		&.ng-enter, &.ng-leave-active  {
+			.translate(0, -100%);
+		}
+	}
+}
+
+.box-glowing(@color) {
 	from {
     box-shadow: 0 0 0px 0px @color;
   }
@@ -7,8 +39,23 @@
   }
 }
 
-@-webkit-keyframes glowing { .glowing(@brand-primary); }
-@-moz-keyframes glowing { .glowing(@brand-primary); }
-@-ms-keyframes glowing { .glowing(@brand-primary); }
-@-o-keyframes glowing { .glowing(@brand-primary); }
-@keyframes glowing { .glowing(@brand-primary); }
+.text-glowing(@color) {
+	from {
+    text-shadow: 0 0 0px @color;
+  }
+	to {
+    text-shadow: 0 0 10px @color;
+  }
+}
+
+@-webkit-keyframes box-glowing { .box-glowing(@brand-primary); }
+@-moz-keyframes box-glowing { .box-glowing(@brand-primary); }
+@-ms-keyframes box-glowing { .box-glowing(@brand-primary); }
+@-o-keyframes box-glowing { .box-glowing(@brand-primary); }
+@keyframes box-glowing { .box-glowing(@brand-primary); }
+
+@-webkit-keyframes text-glowing { .text-glowing(@brand-primary); }
+@-moz-keyframes text-glowing { .text-glowing(@brand-primary); }
+@-ms-keyframes text-glowing { .text-glowing(@brand-primary); }
+@-o-keyframes text-glowing { .text-glowing(@brand-primary); }
+@keyframes text-glowing { .text-glowing(@brand-primary); }

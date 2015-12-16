@@ -12,7 +12,7 @@ exports.index = function(req, res) {
   ad.all().then(function(rows) {
     try {
       // Drawing points...
-      var canvas = require('../../canvas/ad').scatterplot(rows, 800);
+      var canvas = require('../../canvas/ad').scatterplot(rows, 480*2);
     // Something may happen
     } catch(e) {
       return response.validationError(res)({ error: "Unbale to generate"});
