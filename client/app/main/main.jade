@@ -3,14 +3,13 @@ div(ng-include='"components/navbar/navbar.html"')
 
 .main
   .container
-    .main__nav.animated.slideup(ng-if="main.in(1)")    
-      
+    .main__nav.animated
       .main__nav__item.main__nav__item--progress
         | {{ main.step + 1}}/{{ main.stepCount }} steps
         .progress
-         .progress-bar(role="progressbar", ng-style="{ width: (main.step+1)/main.stepCount * 100 + '%'}")
+         .progress-bar(role="progressbar", ng-style="{ width: (main.step)/(main.stepCount-1) * 100 + '%'}")
          
-      .main__nav__item
+      .main__nav__item(ng-show="main.rent")
         | Your rent is {{main.rent}}€/month.
          
       .main__nav__item.main__nav__item--right
@@ -18,7 +17,7 @@ div(ng-include='"components/navbar/navbar.html"')
           i.fa.fa-chevron-left
           span.sr-only Previous
         span &nbsp;
-        button.btn.btn-primary(ng-disabled="main.step < 1 && main.step >= main.stepCount", ng-click="main.next()")
+        button.btn.btn-primary(ng-disabled="main.step+1 >= main.stepCount || !main.rent", ng-click="main.next()")
           i.fa.fa-chevron-right
           span.sr-only Next
     .main__step
