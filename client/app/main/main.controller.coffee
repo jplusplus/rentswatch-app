@@ -13,7 +13,7 @@ angular
         allAds: new Image
         constructor: ->
           # Set the Image src to start loading it
-          @allAds.src =  '/api/ads/all.png'
+          @allAds.src =  '/api/docs/all.png'
           # Start randomized estimation loop
           do @estimationLoop
           # Create axis ticks

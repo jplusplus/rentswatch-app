@@ -1,4 +1,4 @@
-var sqldb = require('./index'),
+var sqldb = require('../../sqldb'),
         _ = require('lodash'),
         Q = require('q');
 
