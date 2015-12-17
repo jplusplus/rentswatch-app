@@ -43,3 +43,32 @@ var center = module.exports.center = function(lat, lng, distance) {
     });
   });
 };
+
+// Count rents by decades
+var decades = module.exports.decades = function() {
+  var deferred = Q.defer();
+  // Build a query to get every trustable ads
+  var query = [
+    'SELECT',
+      '10 * (total_rent div 10) as "from",',
+      '10 * (total_rent div 10) + 10 as "to",',
+      'COUNT(id) as "count"',
+    'FROM ad',
+    'WHERE total_rent IS NOT NULL',
+    'AND total_rent < 3000',
+    'AND living_space < 200',
+    'GROUP BY total_rent div 10'
+  ].join("\n");
+  // For better performance we use a poolConnection
+  sqldb.mysql.getConnection(function(err, connection) {
+    // We use the given connection
+    connection.query(query, function(err, rows, fields) {
+      if(err) deferred.reject(err);
+      else deferred.resolve(rows, fields);
+      // And done with the connection.
+      connection.release();
+    });
+  });
+  // Return the promise
+  return deferred.promise;
+};

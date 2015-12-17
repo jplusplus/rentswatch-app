@@ -5,7 +5,7 @@ div(ng-include='"components/navbar/navbar.html"')
   .container
     .main__nav.animated
       .main__nav__item.main__nav__item--progress
-        | {{ main.step + 1}}/{{ main.stepCount }} steps
+        | {{ main.step + 1}}/{{ main.stepCount }} steps        
         .progress
          .progress-bar(role="progressbar", ng-style="{ width: (main.step)/(main.stepCount-1) * 100 + '%'}")
          
@@ -76,5 +76,5 @@ div(ng-include='"components/navbar/navbar.html"')
           .animated(ng-if="main.in(5,5)")
             p.main__step__scatterplot__user-level__label
               | You're here: {{ main.rent }}€/month
-            p It is more expensive than 80% of all rents we have!        
+            p It is more expensive than {{ main.userRentLevel().level*100 | number:1 }}% of all rents we have!        
             

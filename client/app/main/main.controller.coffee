@@ -2,13 +2,14 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'MainCtrl', ($scope, $timeout, settings)->
+    .controller 'MainCtrl', ($scope, $timeout, decades, settings)->
       'ngInject'
       # Return an instance of the class
       new class
         # Current step
         step: 0
         stepCount: 7
+        rent: 800
         # An image with all ads
         allAds: new Image
         constructor: ->
@@ -26,6 +27,18 @@ angular
         previous: => @step-- if @step > 0
         # Get the part of the user rent's according to the max value
         userRentPart: => @rent/settings.MAX_TOTAL_RENT * 100 + '%'
+        # Get the user level compared to other decades
+        userRentLevel: =>
+          # Count smaller and higher values
+          figures = _.reduce decades, (res, row)=>
+            res.smaller += row.count * (row.to <= @rent)
+            res.higher += row.count * (row.from > @rent)
+            res
+          , higher: 0, smaller: 0
+          # Compute level
+          figures.level = figures.smaller/( figures.smaller + figures.higher)
+          # Returns the 3 figures
+          figures
         # There is approximatively 1 ad scraped by second so
         # we should be able to estimated approximatively the number
         # of ad currently in the database.

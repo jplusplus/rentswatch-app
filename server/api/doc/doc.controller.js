@@ -7,7 +7,7 @@ response = require("../response"),
 // Default cache duration
 var CACHE_DURATION = 24*60*60*1000;
 
-exports.index = function(req, res) {
+exports.all = function(req, res) {
   // Extracting ads...
   doc.all().then(function(rows) {
     try {
@@ -26,6 +26,17 @@ exports.index = function(req, res) {
     res.end(image, 'binary');
   });
 };
+
+
+exports.decades  = function(req, res) {
+  // Extracting ads...
+  doc.decades().then(function(rows) {
+    // Cache the result
+    response.setCachedRequest(req, rows, null, CACHE_DURATION);
+    res.json(rows);
+  });
+};
+
 
 exports.center = function(req, res) {
   // Check parameters
