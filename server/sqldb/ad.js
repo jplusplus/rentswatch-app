@@ -14,10 +14,15 @@ var all = module.exports.all = function() {
     // 'AND price_per_sqm < 70',
     // 'AND price_per_sqm > 3',
   ].join("\n");
-  // Query the database
-  sqldb.mysql.query(query, function(err, rows) {
-    if(err) deferred.reject(err);
-    else deferred.resolve(rows);
+  // For better performance we use a poolConnection
+  sqldb.mysql.getConnection(function(err, connection) {
+    // We use the given connection
+    connection.query(query, function(err, rows) {
+      if(err) deferred.reject(err);
+      else deferred.resolve(rows);
+      // And done with the connection.
+      connection.release();
+    });
   });
   // Return the promise
   return deferred.promise;

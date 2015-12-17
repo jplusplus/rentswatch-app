@@ -25,6 +25,12 @@ var all = {
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
     session: 'rentswatch-app-secret'
+  },
+  // MySQL connection options
+  mysql: {
+    uri: process.env.CLEARDB_DATABASE_URL ||
+         process.env.DATABASE_URL ||
+         'mysql://localhost/rentswatch'
   }
 };
 

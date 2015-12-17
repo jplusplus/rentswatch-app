@@ -22,13 +22,7 @@ server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
-sqldb.mysql.connect(function(err) {
-  if(err) {
-    console.error('Error connecting to MySQL: ' + err.stack);
-  } else {
-    console.log('MySQL connected as id ' + sqldb.mysql.threadId);
-  }
-});
+
 
 // Expose app
 exports = module.exports = app;
