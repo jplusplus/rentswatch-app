@@ -1,0 +1,13 @@
+{
+  "name": "Rentswatch App",
+  "description": "A user dashboard for Rentswatch",
+  "repository": "https://github.com/jplusplus/rentswatch-app",
+  "keywords": [
+    "node",
+    "express",
+    "static",
+    "grunt",
+    "cario"
+  ],
+  "image": "heroku/nodejs"
+}

@@ -22,8 +22,8 @@ angular
         # Comparaison helper
         in: (from, to=1e9)=> @step >= from and @step <= to
         # Go the next step
-        next: => @step++
-        previous: => @step--
+        next: => @step++ if @step < @stepCount - 1
+        previous: => @step-- if @step > 0
         # Get the part of the user rent's according to the max value
         userRentPart: => @rent/settings.MAX_TOTAL_RENT * 100 + '%'
         # There is approximatively 1 ad scraped by second so
