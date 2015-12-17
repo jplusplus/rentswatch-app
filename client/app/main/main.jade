@@ -31,7 +31,7 @@ div(ng-include='"components/navbar/navbar.html"')
             .col-sm-10
               .form-group.form-group-lg
                   .input-group
-                    input.form-control.input-lg(type='number', id="inputrent", ng-model='main.rent', required='required', placeholder="e.g 700")
+                    input.form-control.input-lg(type='number', min="100", max="3000", id="inputrent", ng-model='main.rent', required='required', placeholder="e.g 700")
                     span.input-group-addon €
             .col-sm-2
               button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Start
