@@ -20,7 +20,7 @@ exports.index = function(req, res) {
 
     var image = canvas.toBuffer();
     // Cache the result
-    response.setCachedRequest(req, image, CACHE_DURATION);
+    response.setCachedRequest(req, image, null, CACHE_DURATION);
 
     res.type('image/png');
     res.end(image, 'binary');

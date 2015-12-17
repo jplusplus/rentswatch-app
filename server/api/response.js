@@ -1,7 +1,7 @@
 'use strict';
 
 var crypto = require("crypto"),
-     cache = require('memory-cache');
+     cache = require('../cache');
 
 module.exports.validationError = function(res, statusCode) {
   statusCode = statusCode || 422;
@@ -24,11 +24,16 @@ module.exports.respondWith = function(res, statusCode) {
   };
 }
 
-var setCachedRequest = module.exports.setCachedRequest = function(req, value, duration) {
+var setCachedRequest = module.exports.setCachedRequest = function(req, value, callback, duration) {
   // Default duration of 2000 ms
   duration = duration || 2000;
-  // Save the value
-  cache.put(requestKey(req),  value, duration);
+  try {
+    var key = requestKey(req);
+    // Save the value
+    cache.set( key, value, callback, duration);
+  } catch(e) {
+    console.error("Unable to cache %s", key);
+  }
 };
 
 var requestKey = module.exports.requestKey = function(req) {
@@ -43,15 +48,12 @@ var cachedRequest = module.exports.cachedRequest = function(callback) {
     // Create a cache key
     var key = requestKey(req);
     // Proxy the real end function
-    var value = cache.get(key);
-    // A value already exists
-    if( value ) {
-      // Send the value as JSON
-      callback(req, res, value);
-    } else {
+    cache.get(key, function(err, value) {
       // Continue
-      next();
-    }
+      if(err || !value) next();
+      // Send the value
+      else callback(req, res, value);
+    });
   };
 };
 

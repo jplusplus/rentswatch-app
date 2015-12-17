@@ -31,6 +31,12 @@ var all = {
     uri: process.env.CLEARDB_DATABASE_URL ||
          process.env.DATABASE_URL ||
          'mysql://localhost/rentswatch'
+  },
+  // Memcached options (set to false to disable)
+  memcached: {
+    servers: process.env.MEMCACHIER_SERVERS || process.env.MEMCACHEDCLOUD_SERVERS,
+    password: process.env.MEMCACHIER_PASSWORD || process.env.MEMCACHEDCLOUD_PASSWORD,
+    username: process.env.MEMCACHIER_USERNAME || process.env.MEMCACHEDCLOUD_USERNAME
   }
 };
 
