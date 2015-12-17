@@ -1,5 +1,6 @@
+
 build:
-	grunt build --force
+	grunt --force
 
 deploy: build
-	docker build .
+	heroku docker:release -a rentswatch-app
