@@ -2,7 +2,8 @@ var memjs = require('memjs'),
    memory = require('memory-cache');
 
 function Cache(config) {
-  if(config) {
+  if(config && config.servers) {
+    console.log("Cache servers: %s", config.servers);
     this.client = memjs.Client.create(config.servers, {
       username: config.username,
       password: config.password
