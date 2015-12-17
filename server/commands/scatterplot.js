@@ -32,16 +32,16 @@ prompt.get([{
   var promise = function() {
     if(params.center) {
       var center = params.center.split(",").reverse();
-      return require("../sqldb/ad").center.apply(null, center)
+      return require("../api/doc/doc.model").center.apply(null, center)
     } else {
-      return require("../sqldb/ad").all()
+      return require("../api/doc/doc.model").all()
     }
   };
 
   console.log("Extracting data...");
   promise().then(function(rows) {
     console.log("Drawing %s points...", rows.length);
-    var canvas = require('../canvas/ad').scatterplot(rows, 1200, 800);
+    var canvas = require('../canvas/doc').scatterplot(rows, 1200, 800);
     console.log("Saving plot...");
     fs.writeFile(params.output, canvas.toBuffer(), process.exit);
   });
