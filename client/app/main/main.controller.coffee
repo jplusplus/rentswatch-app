@@ -7,10 +7,10 @@ angular
       # Return an instance of the class
       new class
         # Current step
-        step: 0
+        step: 7
         stepCount: 9
-        # rent: 800
-        # space: 35
+        rent: 800
+        space: 35
         # An image with all ads
         allAds: new Image
         constructor: ->
@@ -72,3 +72,23 @@ angular
           @totalAds = do @estimateAds
           # Use a random timeout to estimate the number of ad
           $timeout @estimationLoop, Math.random() * 1000
+        # Draw the linear regression of the data
+        losRegression: (slope=stats.slope)=>
+          cvsheight = cvsheight = 480*2
+          canvas = angular.element("<canvas />").attr width: cvsheight, height: cvsheight
+          ctx = canvas[0].getContext '2d'
+
+          max_living_space = 200
+          # Create scale for x (living_space)
+          x = d3.scale.linear().domain([0, max_living_space]).range [0, cvsheight]
+          # Points color
+          ctx.strokeStyle = "#ffd633"
+
+          do ctx.beginPath
+          ctx.moveTo 0, cvsheight
+          ctx.lineWidth = 2
+          ctx.lineTo x(max_living_space), slope * x(max_living_space)
+          do ctx.stroke
+
+          # Returns a base64
+          do canvas[0].toDataURL

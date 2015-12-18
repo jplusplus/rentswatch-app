@@ -44,7 +44,7 @@ div(ng-include='"components/navbar/navbar.html"')
         .main__step__scatterplot__dummy
         // The plot itself!
         img.main__step__scatterplot__chart.animated(src="/api/docs/all.png", ng-if="main.in(4)")
-        img.main__step__scatterplot__figure.animated(src="/api/docs/los-regression.png", ng-if="main.in(7)")
+        img.main__step__scatterplot__figure.animated(src="{{ :: main.losRegression() }}", ng-if="main.in(7)")
         // Axis group for the living space
         .main__step__scatterplot__axis.main__step__scatterplot__axis--x
           // Axis Line on x
