@@ -2,13 +2,13 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'MainCtrl', ($scope, $timeout, decades, settings)->
+    .controller 'MainCtrl', ($scope, $timeout, decades, settings, hotkeys)->
       'ngInject'
       # Return an instance of the class
       new class
         # Current step
-        step: 0
-        stepCount: 7
+        step: 6
+        stepCount: 8
         rent: 800
         # An image with all ads
         allAds: new Image
@@ -20,10 +20,25 @@ angular
           # Create axis ticks
           @xticks = ( t * 20 for t in [0..(settings.MAX_LIVING_SPACE/20)-1] )
           @yticks = ( t * 200 for t in [0..(settings.MAX_TOTAL_RENT/200)-1] )
+          # Bind keyboard shortcuts
+          hotkeys.add
+            combo: ['right', 'space']
+            description: "Go to the next screen."
+            callback: @next
+          hotkeys.add
+            combo: ['left']
+            description: "Go to the previous screen."
+            callback: @previous
         # Comparaison helper
         in: (from, to=1e9)=> @step >= from and @step <= to
         # Go the next step
-        next: => @step++ if @step < @stepCount - 1
+        next: =>
+          # Disabled going further step 0 without rent
+          return if @step + 1 > 0 and not @rent
+          # Disabled step beyond the end
+          return if @step >= @stepCount - 1
+          # We can go further
+          @step++
         previous: => @step-- if @step > 0
         # Get the part of the user rent's according to the max value
         userRentPart: => @rent/settings.MAX_TOTAL_RENT * 100 + '%'

@@ -6,10 +6,8 @@ angular.module 'rentswatchApp', [
   'ngSanitize',
   'ngAnimate',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'cfp.hotkeys'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
-  $urlRouterProvider
-  .otherwise '/'
-
-  $locationProvider.html5Mode true
+  $urlRouterProvider.otherwise '/'
