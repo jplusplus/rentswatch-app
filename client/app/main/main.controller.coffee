@@ -2,7 +2,7 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'MainCtrl', ($scope, $timeout, decades, settings, hotkeys)->
+    .controller 'MainCtrl', ($scope, $timeout, stats, settings, hotkeys)->
       'ngInject'
       # Return an instance of the class
       new class
@@ -53,7 +53,7 @@ angular
         # Get the user level compared to other decades
         userRentLevel: =>
           # Count smaller and higher values
-          figures = _.reduce decades, (res, row)=>
+          figures = _.reduce stats.decades, (res, row)=>
             res.smaller += row.count * (row.to <= @rent)
             res.higher += row.count * (row.from > @rent)
             res

@@ -8,7 +8,7 @@ angular.module 'rentswatchApp'
     templateUrl: 'app/main/main.html'
     controller: 'MainCtrl as main'
     resolve:
-      decades: ($http)->
+      stats: ($http)->
         'ngInject';
-        # Simply gets decades figures from database
-        $http.get('/api/docs/decades.json').then (rows)-> rows.data
+        # Simply gets figures from database
+        $http.get('/api/docs/stats.json').then (rows)-> rows.data

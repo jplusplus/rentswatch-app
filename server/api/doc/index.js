@@ -8,7 +8,6 @@ var router = express.Router();
 
 router.get('/all.png', response.cachedPng(), controller.all);
 router.get('/center.png', response.cachedPng(), controller.center);
-router.get('/los-regression.png', response.cachedPng(), controller.losRegression);
-router.get('/decades.json', response.cachedJson(), controller.decades);
+router.get('/stats.json', response.cachedJson(), controller.stats);
 
 module.exports = router;

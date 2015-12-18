@@ -7,6 +7,7 @@ var Canvas = require('canvas'),
         fs = require('fs'),
         d3 = require('d3'),
          _ = require('lodash'),
+       doc = require("../api/doc/doc.model"),
     prompt = require('prompt'),
       argv = require('yargs').argv;
 
@@ -32,16 +33,16 @@ prompt.get([{
   var promise = function() {
     if(params.center) {
       var center = params.center.split(",").reverse();
-      return require("../api/doc/doc.model").center.apply(null, center)
+      return doc.center.apply(null, center)
     } else {
-      return require("../api/doc/doc.model").all()
+      return doc.all()
     }
   };
 
   console.log("Extracting data...");
   promise().then(function(rows) {
     console.log("Drawing %s points...", rows.length);
-    var canvas = require('../canvas/doc').scatterplot(rows, 1200, 800);
+    var canvas = require('../canvas/doc').scatterplot(rows, 480*2);
     console.log("Saving plot...");
     fs.writeFile(params.output, canvas.toBuffer(), process.exit);
   });
