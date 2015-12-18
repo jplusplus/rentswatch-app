@@ -31,3 +31,26 @@ module.exports.scatterplot = function(rows, cvswidth, cvsheight) {
 
   return canvas;
 };
+
+module.exports.losRegression = function(slope, cvswidth, cvsheight) {
+  // Default canvas sizes
+  cvswidth  = cvswidth || 800;
+  cvsheight = cvsheight || cvswidth || 800;
+
+  var canvas = new Canvas(cvswidth, cvsheight);
+  var ctx = canvas.getContext('2d');
+
+  var max_living_space = 200;
+  // Create scale for x (living_space)
+  var x = d3.scale.linear().domain([0, max_living_space]).range([0, cvswidth]);
+  // Points color
+  ctx.strokeStyle = "#ffd633";
+
+  ctx.beginPath();
+  ctx.moveTo(0, cvsheight);
+  ctx.lineWidth = 2;
+  ctx.lineTo(x(max_living_space), slope * x(max_living_space) );
+  ctx.stroke();
+
+  return canvas;
+};

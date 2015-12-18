@@ -37,6 +37,25 @@ exports.decades  = function(req, res) {
   });
 };
 
+exports.losRegression = function(req, res) {
+  doc.losRegression().then(function(slope) {
+      try {
+        // Drawing points...
+        var canvas = require('../../canvas/doc').losRegression(slope, 480*2);
+      // Something may happen
+      } catch(e) {
+        return response.validationError(res)({ error: "Unbale to generate: " + e});
+      }
+      console.log(slope);
+      var image = canvas.toBuffer();
+      // Cache the result
+      response.setCachedRequest(req, image, null, CACHE_DURATION);
+
+      res.type('image/png');
+      res.end(image, 'binary');
+  });
+}
+
 
 exports.center = function(req, res) {
   // Check parameters

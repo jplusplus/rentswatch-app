@@ -7,9 +7,10 @@ angular
       # Return an instance of the class
       new class
         # Current step
-        step: 6
-        stepCount: 8
-        rent: 800
+        step: 0
+        stepCount: 9
+        # rent: 800
+        # space: 35
         # An image with all ads
         allAds: new Image
         constructor: ->
@@ -37,12 +38,18 @@ angular
           # Disabled going further step 0 without rent
           return if @step + 1 > 0 and not @rent
           # Disabled step beyond the end
+          return if @step + 1 > 6 and not @space
+          # Disabled step beyond the end
           return if @step >= @stepCount - 1
           # We can go further
           @step++
         previous: => @step-- if @step > 0
         # Get the part of the user rent's according to the max value
         userRentPart: => @rent/settings.MAX_TOTAL_RENT * 100 + '%'
+        # Get position of the user point
+        userPoint: =>
+          bottom: do @userRentPart,
+          left: @space/settings.MAX_LIVING_SPACE * 100 + '%'
         # Get the user level compared to other decades
         userRentLevel: =>
           # Count smaller and higher values

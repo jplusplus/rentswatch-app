@@ -9,8 +9,9 @@ div(ng-include='"components/navbar/navbar.html"')
         .progress
          .progress-bar(role="progressbar", ng-style="{ width: (main.step)/(main.stepCount-1) * 100 + '%'}")
          
-      .main__nav__item(ng-show="main.rent")
-        | Your rent is {{main.rent}}€/month.
+      .main__nav__item
+        span(ng-show="main.rent") Your rent is {{main.rent}}€/month
+        span(ng-show="main.space") for {{main.space}}m² flat
          
       .main__nav__item.main__nav__item--right
         button.btn.btn-primary(ng-disabled="main.step < 1", ng-click="main.previous()")
@@ -19,8 +20,7 @@ div(ng-include='"components/navbar/navbar.html"')
         span &nbsp;
         button.btn.btn-primary(ng-disabled="main.step+1 >= main.stepCount || !main.rent", ng-click="main.next()")
           i.fa.fa-chevron-right
-          span.sr-only Next
-          
+          span.sr-only Next          
           
     .main__step
       .animated(ng-if="main.is(0)")
@@ -44,6 +44,7 @@ div(ng-include='"components/navbar/navbar.html"')
         .main__step__scatterplot__dummy
         // The plot itself!
         img.main__step__scatterplot__chart.animated(src="/api/docs/all.png", ng-if="main.in(4)")
+        img.main__step__scatterplot__figure.animated(src="/api/docs/los-regression.png", ng-if="main.in(7)")
         // Axis group for the living space
         .main__step__scatterplot__axis.main__step__scatterplot__axis--x
           // Axis Line on x
@@ -74,12 +75,14 @@ div(ng-include='"components/navbar/navbar.html"')
           p Let's now plot all the flats in Europe we collected 
             
         .main__step__scatterplot__user-level(ng-style="{ bottom: main.userRentPart() }")
-          .main__step__scatterplot__user-level__line.animated.hopen(ng-if="main.in(5)")
-          .animated(ng-if="main.is(5)")
+          .main__step__scatterplot__user-level__line.animated.hopen(ng-if="main.in(5,6)")
+          .animated(ng-if="main.in(5,6)")
             p.main__step__scatterplot__user-level__label
               | You're here: {{ main.rent }}€/month
-            p It is more expensive than {{ main.userRentLevel().level*100 | number:1 }}% of all rents we have!        
-    
+            p It is more expensive than {{ main.userRentLevel().level*100 | number:1 }}% of all rents we have!  
+            
+        .main__step__scatterplot__user-point.animated(ng-if="main.in(8)", ng-style="main.userPoint()")
+        
     .main__step.animated(ng-if="main.is(6)")    
       form.main__step__form(name="form", ng-submit="main.next()")
         label.control-label(for="inputspace")
@@ -92,3 +95,4 @@ div(ng-include='"components/navbar/navbar.html"')
                   span.input-group-addon m²
           .col-sm-3
             button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue
+                  

@@ -9,10 +9,11 @@ var all = module.exports.all = function() {
   var query = [
     'SELECT total_rent, living_space, latitude, longitude',
     'FROM ad',
-    'WHERE total_rent < 3000',
+    'WHERE total_rent IS NOT NULL',
+    'AND total_rent < 3000',
     'AND living_space < 200',
-    // 'AND price_per_sqm < 70',
-    // 'AND price_per_sqm > 3',
+    'AND price_per_sqm < 70',
+    'AND price_per_sqm > 3',
   ].join("\n");
   // For better performance we use a poolConnection
   sqldb.mysql.getConnection(function(err, connection) {
@@ -71,4 +72,25 @@ var decades = module.exports.decades = function() {
   });
   // Return the promise
   return deferred.promise;
+};
+
+var losRegression = module.exports.losRegression = function() {
+  // Return the promise
+  return all().then(function(rows) {
+    // Pluck two values at a time
+    var values = _.reduce(rows, function(res, row) {
+      res.x.push(row.total_rent);
+      res.y.push(row.living_space);
+      return res;
+    }, { x:[], y:[] });
+
+    var sum_xy = sum_xx = 0;
+
+    for (var i = 0; i < values.y.length; i++) {
+      sum_xy += (values.x[i]*values.y[i]);
+      sum_xx += (values.x[i]*values.x[i]);
+    }
+
+    return sum_xy / sum_xx;
+  })
 };
