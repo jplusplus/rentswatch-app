@@ -3,7 +3,7 @@ div(ng-include='"components/navbar/navbar.html"')
 
 .main
   .container
-    .main__nav.animated
+    .main__nav
       .main__nav__item.main__nav__item--progress
         | {{ main.step + 1}}/{{ main.stepCount }} steps        
         .progress
@@ -20,23 +20,25 @@ div(ng-include='"components/navbar/navbar.html"')
         button.btn.btn-primary(ng-disabled="main.step+1 >= main.stepCount || !main.rent", ng-click="main.next()")
           i.fa.fa-chevron-right
           span.sr-only Next
+          
+          
     .main__step
-      .animated(ng-if="main.in(0,0)")
+      .animated(ng-if="main.is(0)")
         h2 We analyzed <strong>{{ main.totalAds }} rents</strong>. Here's what we found.
         
         form.main__step__form(name="form", ng-submit="main.next()")
           label.control-label(for="inputrent")
             | How much is your rent?
           .row
-            .col-sm-10
+            .col-sm-9
               .form-group.form-group-lg
                   .input-group
                     input.form-control.input-lg(type='number', min="100", max="3000", id="inputrent", ng-model='main.rent', required='required', placeholder="e.g 700")
                     span.input-group-addon €
-            .col-sm-2
+            .col-sm-3
               button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Start
             
-    .main__step(ng-show="main.in(1)")
+    .main__step(ng-show="main.in(1)", ng-class="{ 'main__step--disabled': main.is(6) }")
       .main__step__scatterplot
         // Empty element to occupy the space
         .main__step__scatterplot__dummy
@@ -60,21 +62,33 @@ div(ng-include='"components/navbar/navbar.html"')
         .main__step__scatterplot__middle-label.animated(ng-if="main.in(0,1)") 
           p First, an axis for the area in m²
             
-        .main__step__scatterplot__middle-label.animated(ng-if="main.in(2,2)") 
+        .main__step__scatterplot__middle-label.animated(ng-if="main.is(2)") 
           p Now, an axis for the price of the flat, in € per month
           
-        .main__step__scatterplot__middle-label.animated(ng-if="main.in(3,3)")
+        .main__step__scatterplot__middle-label.animated(ng-if="main.is(3)")
           p This point represents a 70-sqm flat that costs 600€ per month to rent
             
-        .main__step__scatterplot__sample-point.animated(ng-if="main.in(3,3)")
+        .main__step__scatterplot__sample-point.animated(ng-if="main.is(3)")
           
-        .main__step__scatterplot__middle-label.animated(ng-if="main.in(4,4)")
+        .main__step__scatterplot__middle-label.animated(ng-if="main.is(4)")
           p Let's now plot all the flats in Europe we collected 
             
         .main__step__scatterplot__user-level(ng-style="{ bottom: main.userRentPart() }")
           .main__step__scatterplot__user-level__line.animated.hopen(ng-if="main.in(5)")
-          .animated(ng-if="main.in(5,5)")
+          .animated(ng-if="main.is(5)")
             p.main__step__scatterplot__user-level__label
               | You're here: {{ main.rent }}€/month
             p It is more expensive than {{ main.userRentLevel().level*100 | number:1 }}% of all rents we have!        
-            
+    
+    .main__step.animated(ng-if="main.is(6)")    
+      form.main__step__form(name="form", ng-submit="main.next()")
+        label.control-label(for="inputspace")
+          | How big is your flat?
+        .row
+          .col-sm-9
+            .form-group.form-group-lg
+                .input-group
+                  input.form-control.input-lg(type='number', min="1", max="200", id="inputspace", ng-model='main.space', required='required', placeholder="e.g 60")
+                  span.input-group-addon m²
+          .col-sm-3
+            button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue

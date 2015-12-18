@@ -47,10 +47,19 @@
     top:0px;
     left:50%;
     .transform( translate(-50%, 0) );
+    .transition(all linear .4s);
+
+    &--disabled {
+      .transform( translate(-50%, 0) scale(0.95) );
+      filter: blur(5px);
+      pointer-events: none;
+      opacity:.5;
+    }
 
     &__form {
       margin-top:100px;
     }
+
 
     &__scatterplot {
       position: relative;

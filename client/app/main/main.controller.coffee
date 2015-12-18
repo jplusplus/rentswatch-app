@@ -31,6 +31,7 @@ angular
             callback: @previous
         # Comparaison helper
         in: (from, to=1e9)=> @step >= from and @step <= to
+        is: (s)=> @step is s
         # Go the next step
         next: =>
           # Disabled going further step 0 without rent

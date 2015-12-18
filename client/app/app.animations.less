@@ -1,49 +1,51 @@
 .animated {
-	.transition(all linear .4s);
+  .transition(all linear .4s);
 
-	&.ng-enter, &.ng-leave-active {
-		opacity:0;
-	}
+  &.ng-enter, &.ng-leave-active {
+    opacity:0;
+    filter:blur(20px);
+  }
 
-	&.hopen {
-		&.ng-enter, &.ng-leave-active  {
-			width:0%;
-		}
-	}
+  &.hopen {
+    &.ng-enter, &.ng-leave-active  {
+      width:0%;
+    }
+  }
 
-	&.vopen {
-		&.ng-enter, &.ng-leave-active  {
-			height:0%;
-		}
-	}
+  &.vopen {
+    &.ng-enter, &.ng-leave-active  {
+      height:0%;
+    }
+  }
 
-	&.slideup {
-		&.ng-enter, &.ng-leave-active  {
-			.translate(0, 100%);
-		}
-	}
+  &.slideup {
+    &.ng-enter, &.ng-leave-active  {
+      .translate(0, 100%);
+    }
+  }
 
-	&.slidedown {
-		&.ng-enter, &.ng-leave-active  {
-			.translate(0, -100%);
-		}
-	}
+  &.slidedown {
+    &.ng-enter, &.ng-leave-active  {
+      .translate(0, -100%);
+    }
+  }
+
 }
 
 .box-glowing(@color) {
-	from {
+  from {
     box-shadow: 0 0 0px 0px @color;
   }
-	to {
+  to {
     box-shadow: 0 0 10px 5px @color;
   }
 }
 
 .text-glowing(@color) {
-	from {
+  from {
     text-shadow: 0 0 0px @color;
   }
-	to {
+  to {
     text-shadow: 0 0 10px @color;
   }
 }
