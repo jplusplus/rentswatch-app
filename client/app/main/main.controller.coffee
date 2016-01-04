@@ -65,7 +65,8 @@ angular
         # There is approximatively 1 ad scraped by second so
         # we should be able to estimated approximatively the number
         # of ad currently in the database.
-        estimateAds: -> settings.TOTAL_ADS + ~~(Date.now()/1e3 - settings.LAST_SNAPSHOT)
+        estimateAds: ->
+          stats.total + ~~(stats.pace * (Date.now()/1e3 - stats.lastSnapshot))
         # This will trigger an infinite (and irregular loop of estimation)
         estimationLoop: =>
           # This value will be updated regulary

@@ -4,6 +4,7 @@
 require('../env')();
 
 var fs = require('fs'),
+     _ = require('lodash'),
    doc = require("../api/doc/doc.model"),
 prompt = require('prompt'),
   argv = require('yargs').argv;
@@ -29,6 +30,14 @@ prompt.get([{
     // Extracting slope...
     doc.losRegression().then(function(slope) {
       stats.slope = slope;
+      // Raw number of doc extracted by second
+      stats.pace = 0.7;
+      // Timestamp of the last snapshot
+      stats.lastSnapshot =  ~~(Date.now()/1e3)
+      // Calculates the total number of docs
+      stats.total = _.reduce( _.pluck(decades, 'count'), function(sum, c) {
+        return sum + c;
+      }, 0);
       console.log("Saving stats...");
       fs.writeFile(params.output, JSON.stringify(stats, null, 2), process.exit);
     });
