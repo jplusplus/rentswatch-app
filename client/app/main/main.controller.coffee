@@ -7,10 +7,10 @@ angular
       # Return an instance of the class
       new class
         # Current step
-        step: 7
+        step: 0
         stepCount: 9
-        rent: 800
-        space: 35
+        # rent: 800
+        # space: 35
         # An image with all ads
         allAds: new Image
         constructor: ->
