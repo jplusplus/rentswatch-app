@@ -43,7 +43,7 @@ div(ng-include='"components/navbar/navbar.html"')
         // Empty element to occupy the space
         .main__step__scatterplot__dummy
         // The plot itself!
-        img.main__step__scatterplot__chart.animated(src="/api/docs/all.png", ng-if="main.in(4)")
+        img.main__step__scatterplot__chart.animated(ng-src="/api/docs/all.png", ng-if="main.in(4)")
         // Axis group for the living space
         .main__step__scatterplot__axis.main__step__scatterplot__axis--x
           // Axis Line on x
@@ -81,7 +81,7 @@ div(ng-include='"components/navbar/navbar.html"')
             p It is more expensive than {{ main.userRentLevel().level*100 | number:1 }}% of all rents we have!  
             
         // The regression line
-        img.main__step__scatterplot__figure.animated(src="{{ :: main.losRegression() }}", ng-if="main.in(7)")             
+        img.main__step__scatterplot__figure.animated(ng-src="{{ :: main.losRegression() }}", ng-if="main.in(7)")             
         div.main__step__scatterplot__top-label.animated(ng-if="main.is(7)")
           p This is the trend line for all flats in our sample.
         // An additional amount on y axis...
