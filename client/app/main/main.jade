@@ -11,7 +11,7 @@ div(ng-include='"components/navbar/navbar.html"')
          
       .main__nav__item
         span(ng-show="main.rent") Your rent is {{main.rent}}€/month
-        span(ng-show="main.space") for {{main.space}}m² flat
+        span(ng-show="main.space") &nbsp;for {{main.space}}m² flat
          
       .main__nav__item.main__nav__item--right
         button.btn.btn-primary(ng-disabled="main.step < 1", ng-click="main.previous()")
@@ -44,7 +44,6 @@ div(ng-include='"components/navbar/navbar.html"')
         .main__step__scatterplot__dummy
         // The plot itself!
         img.main__step__scatterplot__chart.animated(src="/api/docs/all.png", ng-if="main.in(4)")
-        img.main__step__scatterplot__figure.animated(src="{{ :: main.losRegression() }}", ng-if="main.in(7)")
         // Axis group for the living space
         .main__step__scatterplot__axis.main__step__scatterplot__axis--x
           // Axis Line on x
@@ -81,7 +80,27 @@ div(ng-include='"components/navbar/navbar.html"')
               | You're here: {{ main.rent }}€/month
             p It is more expensive than {{ main.userRentLevel().level*100 | number:1 }}% of all rents we have!  
             
-        .main__step__scatterplot__user-point.animated(ng-if="main.in(8)", ng-style="main.userPoint()")
+        // The regression line
+        img.main__step__scatterplot__figure.animated(src="{{ :: main.losRegression() }}", ng-if="main.in(7)")             
+        div.main__step__scatterplot__top-label.animated(ng-if="main.is(7)")
+          p This is the trend line for all flats in our sample.
+        // An additional amount on y axis...
+        .main__step__scatterplot__add-y(ng-style=":: main.yArrowStyle()")
+          .main__step__scatterplot__add-y__arrow.animated.vopen(ng-if="main.in(8, 9)")        
+        .main__step__scatterplot__top-label.animated(ng-if="main.is(8)")
+          p An additional 400€ on the vertical axis...
+        // Gives an additional space on x axis...
+        .main__step__scatterplot__add-x(ng-style=":: main.xArrowStyle()")
+          .main__step__scatterplot__add-x__arrow.animated.hopen(ng-if="main.is(9)")
+        .main__step__scatterplot__top-label.animated(ng-if="main.is(9)")
+          p ...gives an additional sqm on the horizontal axis
+        
+        .main__step__scatterplot__middle-label.animated(ng-if="main.is(10)")
+          p Flats above the line are more expensive than average (and vice versa)
+                  
+        .main__step__scatterplot__user-point.animated(ng-if="main.in(11)", ng-style="main.userPoint()")
+        .main__step__scatterplot__middle-label.animated(ng-if="main.is(11)")
+          p You are here.
         
     .main__step.animated(ng-if="main.is(6)")    
       form.main__step__form(name="form", ng-submit="main.next()")

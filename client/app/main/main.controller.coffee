@@ -8,7 +8,7 @@ angular
       new class
         # Current step
         step: 0
-        stepCount: 9
+        stepCount: 12
         # rent: 800
         # space: 35
         # An image with all ads
@@ -72,22 +72,30 @@ angular
           @totalAds = do @estimateAds
           # Use a random timeout to estimate the number of ad
           $timeout @estimationLoop, Math.random() * 1000
+        yArrowStyle: (growth=400, rent=200)=>
+          left: rent * stats.slope / settings.MAX_LIVING_SPACE * 100 + '%'
+          bottom: rent / settings.MAX_TOTAL_RENT * 100 + '%'
+          height: growth / settings.MAX_TOTAL_RENT * 100 + '%'
+        xArrowStyle: (growth=400, rent=200)=>
+          left: rent * stats.slope / settings.MAX_LIVING_SPACE * 100 + '%'
+          bottom: (rent / settings.MAX_TOTAL_RENT * 100) + (growth / settings.MAX_TOTAL_RENT * 100) + '%'
+          width: growth * stats.slope / settings.MAX_LIVING_SPACE * 100 + '%'
         # Draw the linear regression of the data
         losRegression: (slope=stats.slope)=>
-          cvsheight = cvsheight = 480*2
-          canvas = angular.element("<canvas />").attr width: cvsheight, height: cvsheight
+          cvswidth = cvsheight = 480*2
+          canvas = angular.element("<canvas />").attr width: cvswidth, height: cvsheight
           ctx = canvas[0].getContext '2d'
 
-          max_living_space = 200
-          # Create scale for x (living_space)
-          x = d3.scale.linear().domain([0, max_living_space]).range [0, cvsheight]
+          MAX_TOTAL_RENT = settings.MAX_TOTAL_RENT
+          # Create scale for y (rent)
+          y = d3.scale.linear().domain([0, MAX_TOTAL_RENT]).range [cvsheight, 0]
           # Points color
           ctx.strokeStyle = "#ffd633"
 
           do ctx.beginPath
           ctx.moveTo 0, cvsheight
           ctx.lineWidth = 2
-          ctx.lineTo x(max_living_space), slope * x(max_living_space)
+          ctx.lineTo cvswidth, y(settings.MAX_LIVING_SPACE / slope)
           do ctx.stroke
 
           # Returns a base64
