@@ -9,18 +9,19 @@ angular
         # Current step
         step: 0
         stepCount: 12
-        # rent: 800
+        # rent: 3000
         # space: 35
         # An image with all ads
         allAds: new Image
+        # Default currency
+        currency: settings.DEFAULT_CURRENCY
+        # List of available currencies
+        currencies: settings.CURRENCIES
         constructor: ->
           # Set the Image src to start loading it
           @allAds.src =  '/api/docs/all.png'
           # Start randomized estimation loop
           do @estimationLoop
-          # Create axis ticks
-          @xticks = ( t * 20 for t in [0..(settings.MAX_LIVING_SPACE/20)-1] )
-          @yticks = ( t * 200 for t in [0..(settings.MAX_TOTAL_RENT/200)-1] )
           # Bind keyboard shortcuts
           hotkeys.add
             combo: ['right', 'space']
@@ -30,6 +31,21 @@ angular
             combo: ['left']
             description: "Go to the previous screen."
             callback: @previous
+          # Save the currency's conversion rate
+          $scope.$watch 'main.currency', (c)=>
+            if c? and @currencies[c]?
+              @rate = @currencies[c].CONVERSION_RATE
+        # Create axis ticks
+        xticks: =>
+          min  = 20
+          max  = settings.MAX_LIVING_SPACE
+          tick = 20
+          ( Math.round(t * min) for t in [0..(max/tick)-1] )
+        yticks: =>
+          min  = @rate * 200
+          max  = @rate * settings.MAX_TOTAL_RENT
+          tick = @currencies[@currency].TICK
+          ( Math.round(t * min) for t in [0..(max/tick)-1] )
         # Comparaison helper
         in: (from, to=1e9)=> @step >= from and @step <= to
         is: (s)=> @step is s
@@ -43,19 +59,22 @@ angular
           return if @step >= @stepCount - 1
           # We can go further
           @step++
-        previous: => @step-- if @step > 0
+        previous: =>
+          @step-- if @step > 0
         # Get the part of the user rent's according to the max value
-        userRentPart: => @rent/settings.MAX_TOTAL_RENT * 100 + '%'
+        userRentPart: =>
+          @rent/(@rate * settings.MAX_TOTAL_RENT) * 100 + '%'
         # Get position of the user point
         userPoint: =>
           bottom: do @userRentPart,
           left: @space/settings.MAX_LIVING_SPACE * 100 + '%'
         # Get the user level compared to other decades
         userRentLevel: =>
+          rent = @rate * @rent
           # Count smaller and higher values
           figures = _.reduce stats.decades, (res, row)=>
-            res.smaller += row.count * (row.to <= @rent)
-            res.higher += row.count * (row.from > @rent)
+            res.smaller += row.count * (row.to <= rent)
+            res.higher += row.count * (row.from > rent)
             res
           , higher: 0, smaller: 0
           # Compute level
@@ -73,11 +92,15 @@ angular
           @totalAds = do @estimateAds
           # Use a random timeout to estimate the number of ad
           $timeout @estimationLoop, Math.random() * 1000
-        yArrowStyle: (growth=400, rent=200)=>
+        yArrowStyle: (growth=@currencies[@currency].DEMO_GROWTH, rent=@currencies[@currency].DEMO_RENT)=>
+          rent = rent / @rate
+          growth = growth / @rate
           left: rent * stats.slope / settings.MAX_LIVING_SPACE * 100 + '%'
           bottom: rent / settings.MAX_TOTAL_RENT * 100 + '%'
           height: growth / settings.MAX_TOTAL_RENT * 100 + '%'
-        xArrowStyle: (growth=400, rent=200)=>
+        xArrowStyle: (growth=@currencies[@currency].DEMO_GROWTH, rent=@currencies[@currency].DEMO_RENT)=>
+          rent = rent / @rate
+          growth = growth / @rate
           left: rent * stats.slope / settings.MAX_LIVING_SPACE * 100 + '%'
           bottom: (rent / settings.MAX_TOTAL_RENT * 100) + (growth / settings.MAX_TOTAL_RENT * 100) + '%'
           width: growth * stats.slope / settings.MAX_LIVING_SPACE * 100 + '%'

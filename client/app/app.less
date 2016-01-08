@@ -39,6 +39,11 @@
 @navbar-default-link-color: contrast(@body-bg);
 @navbar-default-link-active-color: contrast(@body-bg);
 
+body {
+  background:url("../assets/images/buildings.png") 0 calc(~"100% - 50px") fixed no-repeat @body-bg;
+  background-size:100% auto;
+}
+
 // injector
 @import 'app.animations.less';
 @import 'main/main.less';
