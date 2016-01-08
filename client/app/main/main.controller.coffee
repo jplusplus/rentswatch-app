@@ -8,9 +8,9 @@ angular
       new class
         # Current step
         step: 0
-        stepCount: 12
-        # rent: 3000
-        # space: 35
+        stepCount: 13
+        #rent: 550
+        #space: 65
         # An image with all ads
         allAds: new Image
         # Default currency
@@ -78,9 +78,48 @@ angular
             res
           , higher: 0, smaller: 0
           # Compute level
-          figures.level = figures.smaller/( figures.smaller + figures.higher)
-          # Returns the 3 figures
-          figures
+          figures.smaller/( figures.smaller + figures.higher)
+        userRendLevelFeedback: =>
+          bellow = do @userRentLevel
+          bellow_percent = Math.round bellow * 100
+          above_percent = Math.round (1-bellow) * 100
+          if bellow > .9
+            "Wow, that’s a lot! Your rent is more expensive than #{bellow_percent}% of all rents in our sample."
+          else if bellow > .6
+            "Your rent is more expensive than #{bellow_percent}% of all rents in our sample!"
+          else if bellow > .4
+            "Your rent is about the average compared to our sample"
+          else if bellow > .1
+            "#{above_percent}% of all rents in our sample are more expensive than yours!"
+          else
+            "Wow, that’s not much! #{above_percent}% of all rents in our sample are more expensive than yours."
+        # User's average space by euro
+        userSlope: => stats.slope / (@space / @rent)
+        userSlopeFeedback: =>
+          # How big is the difference between the user's average space by euro
+          # and the global average we get from the ads
+          proportion = do @userSlope
+          # 3 times bigger
+          if proportion > 3
+            "Your rent is amazingly expensive! Wanna drop us an e-mail to tell us more about your contract?"
+          # 2 times bigger
+          else if proportion > 2
+            "Your rent per sqm is very high, it’s twice average!"
+          # 1.5 times bigger
+          else if proportion > 1.5
+            "Relative to the size of your flat, you pay more than average."
+          #  .8 times bigger
+          else if proportion > .8
+            "Your rent is about right, when compared to other European rents."
+          #  .5 times bigger
+          else if proportion > .5
+            "Lucky you, your rent is slightly bellow average."
+          #  .2 times bigger
+          else if proportion > .2
+            "Wow, your rent is low, much lower than average!"
+          # other case
+          else
+            "Your rent seems incredibly cheap! Don’t hesitate to drop us an e-mail to tell us more about this deal."
         # There is approximatively 1 ad scraped by second so
         # we should be able to estimated approximatively the number
         # of ad currently in the database.

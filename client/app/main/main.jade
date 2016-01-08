@@ -84,7 +84,7 @@ div(ng-include='"components/navbar/navbar.html"')
         .animated(ng-if="main.in(5,6)")
           p.main__step__scatterplot__user-level__label
             | You're here: {{ main.rent }}€/month
-          p It is more expensive than {{ main.userRentLevel().level*100 | number:1 }}% of all rents we have!  
+          p {{ main.userRendLevelFeedback() }}
           
       // The regression line
       img.main__step__scatterplot__figure.animated(ng-src="{{ :: main.losRegression() }}", ng-if="main.in(7)")             
@@ -107,6 +107,8 @@ div(ng-include='"components/navbar/navbar.html"')
       .main__step__scatterplot__user-point.animated(ng-if="main.in(11)", ng-style="main.userPoint()")
       .main__step__scatterplot__middle-label.animated(ng-if="main.is(11)")
         p You are here.
+        p.small {{ main.userSlopeFeedback() }}
+
       
   .main__step.animated(ng-if="main.is(6)")    
     form.main__step__form(name="form", ng-submit="main.next()")
@@ -121,3 +123,18 @@ div(ng-include='"components/navbar/navbar.html"')
         .col-sm-3
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue
                 
+  .main__step.main__step--share.animated(ng-if="main.is(12)")
+    p Spread the word
+    ul.list-inline
+      li 
+        a
+          span.fa-stack.fa-lg
+            i.fa.fa-square.fa-stack-2x
+            i.fa.fa-fw.fa-twitter.fa-stack-1x.fa-inverse
+          span.sr-only Twitter
+      li 
+        a
+          span.fa-stack.fa-lg
+            i.fa.fa-square.fa-stack-2x
+            i.fa.fa-fw.fa-facebook.fa-stack-1x.fa-inverse
+          span.sr-only Facebook

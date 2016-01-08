@@ -12,8 +12,8 @@ var all = module.exports.all = function() {
     'WHERE total_rent IS NOT NULL',
     'AND total_rent < 3000',
     'AND living_space < 200',
-    'AND price_per_sqm < 70',
-    'AND price_per_sqm > 3',
+    //'AND price_per_sqm < 70',
+    // 'AND price_per_sqm > 3',
   ].join("\n");
   // For better performance we use a poolConnection
   sqldb.mysql.getConnection(function(err, connection) {
