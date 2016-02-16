@@ -4,13 +4,18 @@ angular
   .module 'rentswatchApp'
     .controller 'MainCtrl', ($scope, $timeout, stats, settings, hotkeys)->
       'ngInject'
+      RENT_REQUIRED_FROM  = 14
+      SPACE_REQUIRED_FROM = 16
+      ADDR_REQUIRED_FROM  = 18
+      AUTOPLAYED_STEPS    = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      AUTOPLAY_TIMEOUT    = 4000
       # Return an instance of the class
       new class
         # Current step
         step: 0
-        stepCount: 13
-        #rent: 550
-        #space: 65
+        stepCount: 21
+        rent: 550
+        space: 65
         # An image with all ads
         allAds: new Image
         # Default currency
@@ -33,8 +38,15 @@ angular
             callback: @previous
           # Save the currency's conversion rate
           $scope.$watch 'main.currency', (c)=>
-            if c? and @currencies[c]?
-              @rate = @currencies[c].CONVERSION_RATE
+            @rate = @currencies[c].CONVERSION_RATE if c? and @currencies[c]?
+          # Save the currency's conversion rate
+          $scope.$watch 'main.step', (step)=>
+            # Always cancel current timeout
+            $timeout.cancel @autoplay
+            # Then if the step must be autoplayed...
+            if AUTOPLAYED_STEPS.indexOf(step) > -1
+              # Create a new timeout
+              @autoplay = $timeout @next, AUTOPLAY_TIMEOUT
         # Create axis ticks
         xticks: =>
           min  = 20
@@ -47,14 +59,13 @@ angular
           tick = @currencies[@currency].TICK
           ( Math.round(t * min) for t in [0..(max/tick)-1] )
         # Comparaison helper
-        in: (from, to=1e9)=> @step >= from and @step <= to
-        is: (s)=> @step is s
+        in: (from, to=1e9)=> @step >= from and @step <= to        
+        is: => _.chain(arguments).values().any( (s)=> @step is s ).value()
         # Go the next step
         next: =>
-          # Disabled going further step 0 without rent
-          return if @step + 1 > 0 and not @rent
-          # Disabled step beyond the end
-          return if @step + 1 > 6 and not @space
+          # Disabled going further step N without rent
+          return if @step + 1 > RENT_REQUIRED_FROM and not @rent
+          return if @step + 1 > SPACE_REQUIRED_FROM and not @space
           # Disabled step beyond the end
           return if @step >= @stepCount - 1
           # We can go further

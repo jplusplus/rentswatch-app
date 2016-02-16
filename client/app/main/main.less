@@ -56,6 +56,10 @@
       opacity:.5;
     }
 
+    &--bg {
+      z-index:-1;
+    }
+
     &__form {
       margin-top:100px;
 
@@ -69,6 +73,15 @@
       }
     }
 
+    &__heading {
+      padding:20px;
+      margin-bottom:20px;
+      text-align: center;
+      small, .small {
+        color: fade(white, 50);        
+      }
+    }
+
 
     &__scatterplot {
       position: relative;
@@ -76,9 +89,21 @@
       top:0;
       width:100%;
       margin-bottom:@navbar-height * 2px;
+      text-align: center;
       text-shadow: 0 0 5px @body-bg, -2px -2px 5px @body-bg,
                    -2px 0 5px @body-bg, 0 -2px 5px @body-bg;
 
+
+
+       &:before {
+         width:100%;
+         padding-top:100%;
+         visibility: hidden;
+         display: block;
+         content:"";
+       }
+
+      /* Use to be: a gradient at the top of the graph
       &:before {
         content:"";
         position: absolute;
@@ -88,7 +113,7 @@
         height:50%;
         z-index:100;
         #gradient > .vertical(@body-bg, transparent);
-      }
+      } */
 
       &__figure {
         position: absolute;
@@ -140,12 +165,6 @@
         left:0;
         top:0;
         z-index:-1;
-      }
-
-      &__dummy {
-        width:100%;
-        padding-top:100%;
-        visibility: hidden;
       }
 
       &__sample-point {

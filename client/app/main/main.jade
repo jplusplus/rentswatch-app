@@ -2,6 +2,172 @@
 div(ng-include='"components/navbar/navbar.html"')
 
 .main
+  .main__step.animated(ng-if="main.is(0)")
+    h2.main__step__heading
+      div.small We analyzed {{ main.totalAds }} flats and can tell you.
+      div Do you pay the right rent for the right flat?
+    .text-center
+      button.btn.btn-lg.btn-primary(ng-click="main.next()") Find out
+            
+  .main__step.animated(ng-if="main.is(1)")
+    h2.main__step__heading Are you sure you want to know?
+    .text-center
+      button.btn.btn-lg.btn-primary(ng-click="main.next()") Yes
+            
+  .main__step.animated(ng-if="main.is(2)")
+    h2.main__step__heading OK. It will be quick but we can’t promise it will be painless.
+            
+  .main__step.animated(ng-if="main.is(3)")
+    h2.main__step__heading Here is how it works:
+    
+  .main__step.animated(ng-if="main.is(4)")
+    h2.main__step__heading This is the size of the flat
+      
+  .main__step.main__step--bg(ng-class=" { 'main__step--disabled' : main.is(12, 13, 15) } ")
+    .main__step__scatterplot
+      // Empty element to occupy the space
+      .main__step__scatterplot__dummy
+      // Axis group for the living space
+      .main__step__scatterplot__axis.main__step__scatterplot__axis--x 
+        // Axis Line on x
+        span.main__step__scatterplot__axis__line.animated.hopen(ng-if="main.in(4)")
+        span.main__step__scatterplot__axis__ticks.animated(ng-if="main.in(4)")
+          span.main__step__scatterplot__axis__ticks__tick(ng-repeat="t in main.xticks()") 
+            span.main__step__scatterplot__axis__ticks__tick__wrap {{ t }} 
+      
+  .main__step.animated(ng-if="main.is(5)")
+    h2.main__step__heading And this, the rent in € per month.
+          
+  .main__step.main__step--bg(ng-class=" { 'main__step--disabled' : main.is(12, 13, 15) } ")
+    .main__step__scatterplot
+      // Axis group for the total rent
+      .main__step__scatterplot__axis.main__step__scatterplot__axis--y
+        // Axis Line on y
+        span.main__step__scatterplot__axis__line.animated.vopen(ng-if="main.in(5)")
+        span.main__step__scatterplot__axis__ticks.animated(ng-if="main.in(5)")
+          span.main__step__scatterplot__axis__ticks__tick(ng-repeat="t in main.yticks()")
+            span.main__step__scatterplot__axis__ticks__tick__wrap {{ t }}
+            
+  .main__step.animated(ng-if="main.is(6)")
+    h2.main__step__heading To be clear…
+            
+  .main__step.animated(ng-if="main.is(7)")
+    h2.main__step__heading …cheap and small
+            
+  .main__step.animated(ng-if="main.is(8)")
+    h2.main__step__heading …expensive and big
+            
+  .main__step.animated(ng-if="main.is(9)")
+    h2.main__step__heading …in your dreams.        
+        
+  .main__step.animated(ng-if="main.is(10)")
+    h2.main__step__heading Easy, right? Now, here are all the flats we have collected in Europe…
+        
+  .main__step.animated(ng-if="main.in(10)", ng-class=" { 'main__step--disabled' : main.is(12, 13, 15) } ")
+    // The plot itself!
+    .main__step__scatterplot
+      img.main__step__scatterplot__chart(ng-src="/api/docs/all.png")
+        
+  .main__step.animated(ng-if="main.is(11)")
+    h2.main__step__heading …and the average price
+        
+  .main__step.animated(ng-if="main.in(11)", ng-class=" { 'main__step--disabled' : main.is(12, 13, 15) } ")
+    // The regression line
+    .main__step__scatterplot
+      img.main__step__scatterplot__figure(ng-src="{{ :: main.losRegression() }}")    
+          
+  .main__step.animated(ng-if="main.in(12, 13)")
+    form.main__step__form(name="form", ng-submit="main.next()")
+      label.control-label(for="inputrent")
+        span Let’s get real: how much is your rent?
+      .row
+        .col-sm-9
+          .form-group.form-group-lg
+              .input-group
+                input.form-control.input-lg(type='number', min="100", max="3000", id="inputrent", ng-model='main.rent', required='required', placeholder="e.g 700")
+                span.input-group-addon.dropdown.main__step__form__dropdown
+                  .dropdown-toggle
+                    | {{ main.currency }}&nbsp;<i class="caret"></i>
+                  ul.dropdown-menu.dropdown-menu-right.main__step__form__dropdown__menu
+                    li(ng-repeat="(currency, value) in main.currencies", 
+                       ng-class="{ 'active': main.currency === currency }",
+                       ng-click="main.currency = currency")
+                      a {{ currency }}
+        .col-sm-3
+          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue  
+              
+      strong.animated(ng-if="main.is(13)") Don't be shy…
+      
+  .main__step.animated(ng-if="main.is(14)")
+    h2.main__step__heading Wow, this is one expensive flat! It must be really big…
+    h2.main__step__heading OK, that’s pretty expensive… but hey, let’s see how big it is
+    h2.main__step__heading Average… which is good. At least for an average size flat…
+    h2.main__step__heading That’s cheap… and cheap is good! Especially if your flat is big.
+    
+  .main__step.animated(ng-if="main.is(15)")    
+    form.main__step__form(name="form", ng-submit="main.next()")
+      label.control-label(for="inputaddr")
+        | How big is it?
+      .row
+        .col-sm-9
+          .form-group.form-group-lg
+              .input-group
+                input.form-control.input-lg(type='number', min="1", max="200", id="inputaddr", ng-model='main.space', required='required', placeholder="e.g 60")
+                span.input-group-addon m²
+        .col-sm-3
+          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue  
+          
+  .main__step.animated(ng-if="main.is(16)")
+    h2.main__step__heading Aoutch. We told you it may be painful: you pay X times more than average for a flat this large
+    h2.main__step__heading Well, sounds good, you seem to pay an average rent for a flat this large.
+    h2.main__step__heading Well, some have to be the lucky ones…
+    h2.main__step__heading Your rent is cheaper than average for a flat this large
+    
+  .main__step.animated(ng-if="main.is(17)")    
+    form.main__step__form(name="form", ng-submit="main.next()")
+      label.control-label(for="inputaddr")
+        | But of course, average may be different where you live.<br />
+        | What is your address?
+      .row
+        .col-sm-9
+          input.form-control.input-lg(type='text', id="inputaddr", ng-model='main.addr', required='required', placeholder="")                
+        .col-sm-3
+          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue  
+          
+  .main__step.animated(ng-if="main.is(18)")  
+    h2.main__step__heading OK, there is nothing we can do for you… YOU PAY GOD DAMN TOO MUCH !
+    h2.main__step__heading Not bad… which is very good. You pay a good price, you may have a good day."
+    h2.main__step__heading Good news: Your rent is very cheap, lucky you! Bad news: Everybody hates you!"
+    
+    
+  .main__step.animated(ng-if="main.is(19)")
+    h2.main__step__heading Maybe you’re not the only one to get f***ked… Share your disappointment with your friends and create a club.
+    h2.main__step__heading Make your day even better: share and find out what friends of yours are not as lucky.
+    h2.main__step__heading Tell all your friends how lucky you are, you deserve to be envied (who cares if you lose a few Facebook friends?).    
+    ul.list-inline
+      li 
+        a
+          span.fa-stack.fa-lg
+            i.fa.fa-square.fa-stack-2x
+            i.fa.fa-fw.fa-twitter.fa-stack-1x.fa-inverse
+          span.sr-only Twitter
+      li 
+        a
+          span.fa-stack.fa-lg
+            i.fa.fa-square.fa-stack-2x
+            i.fa.fa-fw.fa-facebook.fa-stack-1x.fa-inverse
+          span.sr-only Facebook
+    
+  .main__step.animated(ng-if="main.is(20)")
+    h2.main__step__heading Can we use the data you just entered? You'll be doing a good deed for the next user!
+    .text-center
+      button.btn.btn-lg.btn-default(ng-click="main.next()") No
+      =" "
+      button.btn.btn-lg.btn-primary(ng-click="main.next()") Yes
+      
+  .main__step.animated(ng-if="main.is(21)")
+    h2.main__step__heading To know more about rents near you, visit rentswatch.com (yes, we’re non-profit and nice)
+
   .main__nav
     .main__nav__item.main__nav__item--progress
       | {{ main.step + 1}}/{{ main.stepCount }} steps        
@@ -21,120 +187,3 @@ div(ng-include='"components/navbar/navbar.html"')
         i.fa.fa-chevron-right
         span.sr-only Next          
         
-  .main__step
-    .animated(ng-if="main.is(0)")
-      h2 We analyzed <strong>{{ main.totalAds }} rents</strong>. Here's what we found.
-      
-      form.main__step__form(name="form", ng-submit="main.next()")
-        label.control-label(for="inputrent")
-          | How much is your rent?
-        .row
-          .col-sm-9
-            .form-group.form-group-lg
-                .input-group
-                  input.form-control.input-lg(type='number', min="100", max="3000", id="inputrent", ng-model='main.rent', required='required', placeholder="e.g 700")
-                  span.input-group-addon.dropdown.main__step__form__dropdown
-                    .dropdown-toggle
-                      | {{ main.currency }}&nbsp;<i class="caret"></i>
-                    ul.dropdown-menu.dropdown-menu-right.main__step__form__dropdown__menu
-                      li(ng-repeat="(currency, value) in main.currencies", 
-                         ng-class="{ 'active': main.currency === currency }",
-                         ng-click="main.currency = currency")
-                        a {{ currency }}
-          .col-sm-3
-            button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Start
-          
-  .main__step(ng-show="main.in(1)", ng-class="{ 'main__step--disabled': main.is(6) }")
-    .main__step__scatterplot
-      // Empty element to occupy the space
-      .main__step__scatterplot__dummy
-      // The plot itself!
-      img.main__step__scatterplot__chart.animated(ng-src="/api/docs/all.png", ng-if="main.in(4)")
-      // Axis group for the living space
-      .main__step__scatterplot__axis.main__step__scatterplot__axis--x
-        // Axis Line on x
-        span.main__step__scatterplot__axis__line.animated.hopen(ng-if="main.in(1)")
-        span.main__step__scatterplot__axis__ticks.animated(ng-if="main.in(1)")
-          span.main__step__scatterplot__axis__ticks__tick(ng-repeat="t in main.xticks()") 
-            span.main__step__scatterplot__axis__ticks__tick__wrap {{ t }}
-      // Axis group for the total rent
-      .main__step__scatterplot__axis.main__step__scatterplot__axis--y
-        // Axis Line on y
-        span.main__step__scatterplot__axis__line.animated.vopen(ng-if="main.in(2)")
-        span.main__step__scatterplot__axis__ticks.animated(ng-if="main.in(2)")
-          span.main__step__scatterplot__axis__ticks__tick(ng-repeat="t in main.yticks()")
-            span.main__step__scatterplot__axis__ticks__tick__wrap {{ t }}
-              
-      .main__step__scatterplot__middle-label.animated(ng-if="main.in(0,1)") 
-        p First, an axis for the area in m²
-          
-      .main__step__scatterplot__middle-label.animated(ng-if="main.is(2)") 
-        p Now, an axis for the price of the flat, in € per month
-        
-      .main__step__scatterplot__middle-label.animated(ng-if="main.is(3)")
-        p This point represents a 70-sqm flat that costs 600€ per month to rent
-          
-      .main__step__scatterplot__sample-point.animated(ng-if="main.is(3)")
-        
-      .main__step__scatterplot__middle-label.animated(ng-if="main.is(4)")
-        p Let's now plot all the flats in Europe we collected 
-          
-      .main__step__scatterplot__user-level(ng-style="{ bottom: main.userRentPart() }")
-        .main__step__scatterplot__user-level__line.animated.hopen(ng-if="main.in(5,6)")
-        .animated(ng-if="main.in(5,6)")
-          p.main__step__scatterplot__user-level__label
-            | You're here: {{ main.rent }}€/month
-          p {{ main.userRendLevelFeedback() }}
-          
-      // The regression line
-      img.main__step__scatterplot__figure.animated(ng-src="{{ :: main.losRegression() }}", ng-if="main.in(7)")             
-      div.main__step__scatterplot__top-label.animated(ng-if="main.is(7)")
-        p This is the trend line for all flats in our sample.
-      // An additional amount on y axis...
-      .main__step__scatterplot__add-y(ng-style=":: main.yArrowStyle()")
-        .main__step__scatterplot__add-y__arrow.animated.vopen(ng-if="main.in(8, 9)")        
-      .main__step__scatterplot__top-label.animated(ng-if="main.is(8)")
-        p An additional {{ main.currencies[main.currency].DEMO_GROWTH }} {{ main.currency }} on the vertical axis...
-      // Gives an additional space on x axis...
-      .main__step__scatterplot__add-x(ng-style=":: main.xArrowStyle()")
-        .main__step__scatterplot__add-x__arrow.animated.hopen(ng-if="main.is(9)")
-      .main__step__scatterplot__top-label.animated(ng-if="main.is(9)")
-        p ...gives an additional sqm on the horizontal axis
-      
-      .main__step__scatterplot__middle-label.animated(ng-if="main.is(10)")
-        p Flats above the line are more expensive than average (and vice versa)
-                
-      .main__step__scatterplot__user-point.animated(ng-if="main.in(11)", ng-style="main.userPoint()")
-      .main__step__scatterplot__middle-label.animated(ng-if="main.is(11)")
-        p You are here.
-        p.small {{ main.userSlopeFeedback() }}
-
-      
-  .main__step.animated(ng-if="main.is(6)")    
-    form.main__step__form(name="form", ng-submit="main.next()")
-      label.control-label(for="inputspace")
-        | How big is your flat?
-      .row
-        .col-sm-9
-          .form-group.form-group-lg
-              .input-group
-                input.form-control.input-lg(type='number', min="1", max="200", id="inputspace", ng-model='main.space', required='required', placeholder="e.g 60")
-                span.input-group-addon m²
-        .col-sm-3
-          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue
-                
-  .main__step.main__step--share.animated(ng-if="main.is(12)")
-    p Spread the word
-    ul.list-inline
-      li 
-        a
-          span.fa-stack.fa-lg
-            i.fa.fa-square.fa-stack-2x
-            i.fa.fa-fw.fa-twitter.fa-stack-1x.fa-inverse
-          span.sr-only Twitter
-      li 
-        a
-          span.fa-stack.fa-lg
-            i.fa.fa-square.fa-stack-2x
-            i.fa.fa-fw.fa-facebook.fa-stack-1x.fa-inverse
-          span.sr-only Facebook
