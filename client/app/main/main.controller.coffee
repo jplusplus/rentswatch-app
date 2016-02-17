@@ -10,7 +10,7 @@ angular
       CENTER_REQUIRED_FROM = 17
       # Some steps trigger an autoplay
       AUTOPLAYED_STEPS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16]
-      AUTOPLAY_TIMEOUT = 4000
+      AUTOPLAY_TIMEOUT = 6000
       # Some steps contain forms
       FORM_STEPS = [12, 13, 15, 17]
       # Return an instance of the class
