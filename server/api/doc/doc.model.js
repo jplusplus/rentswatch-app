@@ -3,6 +3,8 @@ var sqldb = require('../../sqldb'),
         Q = require('q');
 
 const DEFAULT_CENTER_DISTANCE = 5;
+const MAX_TOTAL_RENT = module.exports.MAX_TOTAL_RENT = 3000;
+const MAX_LIVING_SPACE = module.exports.MAX_LIVING_SPACE = 200;
 
 var extractSlope = module.exports.extractSlope = function(rows) {
   // Pluck two values at a time
@@ -30,8 +32,8 @@ var all = module.exports.all = function() {
     'SELECT total_rent, living_space, latitude, longitude',
     'FROM ad',
     'WHERE total_rent IS NOT NULL',
-    'AND total_rent < 3000',
-    'AND living_space < 200',
+    'AND total_rent < ' + MAX_TOTAL_RENT,
+    'AND living_space < ' + MAX_LIVING_SPACE,
     //'AND price_per_sqm < 70',
     // 'AND price_per_sqm > 3',
   ].join("\n");
@@ -60,8 +62,8 @@ var center = module.exports.center = function(lat, lng, distance) {
     'SELECT total_rent, living_space, latitude, longitude',
     'FROM ad',
     'WHERE total_rent IS NOT NULL',
-    'AND total_rent < 3000',
-    'AND living_space < 200',
+    'AND total_rent < ' + MAX_TOTAL_RENT,
+    'AND living_space < ' + MAX_LIVING_SPACE,
     'AND POWER(' + lng + ' - longitude, 2) + POWER(' + lat + ' - latitude, 2) <= POWER(' + deg + ', 2)',
     //'AND price_per_sqm < 70',
     // 'AND price_per_sqm > 3',
@@ -91,8 +93,8 @@ var decades = module.exports.decades = function() {
       'COUNT(id) as "count"',
     'FROM ad',
     'WHERE total_rent IS NOT NULL',
-    'AND total_rent < 3000',
-    'AND living_space < 200',
+    'AND total_rent < ' + MAX_TOTAL_RENT,
+    'AND living_space < ' + MAX_LIVING_SPACE,
     'GROUP BY total_rent div 10'
   ].join("\n");
   // For better performance we use a poolConnection
@@ -123,8 +125,8 @@ var centeredDecades = module.exports.centeredDecades = function(lat, lng, distan
       'COUNT(id) as "count"',
     'FROM ad',
     'WHERE total_rent IS NOT NULL',
-    'AND total_rent < 3000',
-    'AND living_space < 200',
+    'AND total_rent < ' + MAX_TOTAL_RENT,
+    'AND living_space < ' + MAX_LIVING_SPACE,
     'AND POWER(' + lng + ' - longitude, 2) + POWER(' + lat + ' - latitude, 2) <= POWER(' + deg + ', 2)',
     'GROUP BY total_rent div 10'
   ].join("\n");
