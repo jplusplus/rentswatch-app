@@ -22,13 +22,12 @@ prompt.get([{
   default: 'stats.json',
   description: "Name of the ouput file:".magenta
 }], function (err, params) {
-  var stats = {};
   console.log("Extracting data...");
   // Extracting decades...
   doc.decades().then(function(decades) {
-    stats.decades = decades;
+    var stats = { decades: decades };
     // Extracting slope...
-    doc.losRegression().then(function(slope) {
+    doc.centeredLosRegression().then(function(slope) {
       stats.slope = slope;
       // Raw number of doc extracted by second
       stats.pace = 0.7;
