@@ -4,7 +4,7 @@ div(ng-include='"components/navbar/navbar.html"')
 .main
   .main__step.animated(ng-if="main.is(0)")
     h2.main__step__heading
-      div.small We analyzed {{ main.totalAds }} flats and can tell you.
+      div.small We analyzed {{ main.totalAds }} flats and can tell you:
       div Do you pay the right rent for the right flat?
     .text-center
       button.btn.btn-lg.btn-primary(ng-click="main.next()") Find out

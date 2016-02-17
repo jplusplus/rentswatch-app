@@ -9,6 +9,7 @@ angular
       ADDR_REQUIRED_FROM  = 18
       AUTOPLAYED_STEPS    = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
       AUTOPLAY_TIMEOUT    = 4000
+      FORM_STEPS          = [12, 13, 15, 17]
       # Return an instance of the class
       new class
         # Current step
@@ -61,7 +62,7 @@ angular
         # Comparaison helper
         in: (from, to=1e9)=> @step >= from and @step <= to
         is: => _.chain(arguments).values().any( (s)=> @step is s ).value()
-        hasForm: => @is 12, 13, 15, 17
+        hasForm: => @is.apply @, FORM_STEPS
         # Go the next step
         next: =>
           # Disabled going further step N without rent
@@ -111,7 +112,6 @@ angular
               when 0 then return @level > (1/stats.slope) *  2
               when 1 then return @level > (1/stats.slope) * .8 and not @is(0)
               when 2 then return @level < (1/stats.slope) * .8
-
         # There is approximatively 1 ad scraped by second so
         # we should be able to estimated approximatively the number
         # of ad currently in the database.
@@ -123,18 +123,6 @@ angular
           @totalAds = do @estimateAds
           # Use a random timeout to estimate the number of ad
           $timeout @estimationLoop, Math.random() * 1000
-        yArrowStyle: (growth=@currencies[@currency].DEMO_GROWTH, rent=@currencies[@currency].DEMO_RENT)=>
-          rent = rent / @rate
-          growth = growth / @rate
-          left: rent * stats.slope / settings.MAX_LIVING_SPACE * 100 + '%'
-          bottom: rent / settings.MAX_TOTAL_RENT * 100 + '%'
-          height: growth / settings.MAX_TOTAL_RENT * 100 + '%'
-        xArrowStyle: (growth=@currencies[@currency].DEMO_GROWTH, rent=@currencies[@currency].DEMO_RENT)=>
-          rent = rent / @rate
-          growth = growth / @rate
-          left: rent * stats.slope / settings.MAX_LIVING_SPACE * 100 + '%'
-          bottom: (rent / settings.MAX_TOTAL_RENT * 100) + (growth / settings.MAX_TOTAL_RENT * 100) + '%'
-          width: growth * stats.slope / settings.MAX_LIVING_SPACE * 100 + '%'
         # Draw the linear regression of the data
         losRegression: (slope=stats.slope)=>
           cvswidth = cvsheight = 480*2
