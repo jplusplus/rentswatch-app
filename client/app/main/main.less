@@ -1,8 +1,42 @@
 .main {
 
-  position:relative;
+  position: relative;
   max-width:600px;
   margin:auto;
+
+  &:after {
+    text-align: center;
+    content:"Almost ready…";
+    position:absolute;
+    top:50%;
+    left:50%;
+    padding-top:50%;
+    z-index:910;
+    opacity:0;
+    .translate(-50%, -100%);
+    .transition(.6s);
+  }
+
+  &--freezed{
+
+    &:before {
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      bottom:0;
+      right:0;
+      z-index:900;
+      padding-top:100%;
+      #gradient > .vertical(@body-bg, transparent);
+    }
+
+    &:after {
+      opacity:1;
+      .translate(-50%, 0);
+    }
+
+  }
 
   &__nav {
     position:fixed;
@@ -23,20 +57,13 @@
         float:right;
       }
 
-      &--progress {
-        min-width:100px;
-        width:15%;
-        font-size:0.7em;
+      &--space {
+        line-height:@navbar-height;
         font-weight: bold;
-        line-height:@navbar-height/2px;
         position: absolute;
         left:50%;
+        text-align: center;
         .translate(-50%, 0);
-
-        .progress {
-          height: 15px;
-          margin:0;
-        }
       }
     }
   }
@@ -46,6 +73,7 @@
     width:80%;
     top:0px;
     left:50%;
+    z-index:500;
     .transform( translate(-50%, 0) );
     .transition(all linear .4s);
 
@@ -78,7 +106,57 @@
       margin-bottom:20px;
       text-align: center;
       small, .small {
-        color: fade(white, 50);        
+        color: fade(white, 50);
+      }
+
+      &--tlc,
+      &--blc,
+      &--trc,
+      &--brc {
+        position: absolute;
+        font-weight:lighter;
+        margin:0;
+
+        &:after {
+          font-size:1.5em;
+          content:"x";
+          position:absolute;
+        }
+      }
+
+      &--trc:after { content: "⬏"; }
+      &--brc:after { content: "⬎"; }
+      &--blc:after { content: "⬐"; }
+      &--tlc:after { content: "⬑"; }
+
+      &--tlc, &--trc {
+        top:20px;
+        &:after {
+          bottom:50%;
+          .translate(0, 50%);
+        }
+      }
+
+      &--blc, &--brc {
+        bottom:20px;
+        &:after {
+          top:50%;
+          .translate(0, -50%);
+        }
+      }
+
+      &--brc, &--trc {
+        right:calc(~"20px + 10%");
+        &:after {
+          left:100%;
+        }
+      }
+
+      &--blc, &--tlc {
+        left:calc(~"20px + 10%");
+        &:after {
+          right:100%;
+        }
       }
     }
 
@@ -102,62 +180,6 @@
          display: block;
          content:"";
        }
-
-      /* Use to be: a gradient at the top of the graph
-      &:before {
-        content:"";
-        position: absolute;
-        top:0;
-        left:-50px;
-        right:-50px;
-        height:50%;
-        z-index:100;
-        #gradient > .vertical(@body-bg, transparent);
-      } */
-
-      &__figure {
-        position: absolute;
-        width:100%;
-        left:0;
-        bottom:0;
-      }
-
-      &__middle-label,
-      &__top-label,
-      &__bottom-label {
-        position: absolute;
-        left:50%;
-        z-index:150;
-
-        width:100%;
-        padding:10px 30px;
-        text-align: center;
-        font-size: 1.5em;
-        font-weight: bold;
-
-        &__action {
-          margin-top:40px;
-        }
-      }
-
-      &__middle-label {
-        top:50%;
-        .translate(-50%, -50%);
-      }
-
-      &__bottom-label {
-        top:100%;
-        .translate(-50%, 20px);
-      }
-
-      &__top-label {
-        font-size: 1.2em;
-        text-align:left;
-        top: 10%;
-        left: 10%;
-        right: 40%;
-        width: auto;
-      }
 
       &__chart {
         width:100%;
@@ -191,27 +213,6 @@
           .translate(50%, -50%);
         }
 
-      }
-
-      &__user-level {
-        position:absolute;
-        left:0;
-        width: 100%;
-        padding:0 30px;
-
-        &__line {
-          height:0px;
-          width:100%;
-          border-top:1px dashed white;
-          position: absolute;
-          left:0;
-          top:100%;
-        }
-
-        &__label {
-          font-size: 1.5em;
-          font-weight: bold;
-        }
       }
 
       &__user-point {

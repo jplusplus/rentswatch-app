@@ -1,7 +1,7 @@
 
 div(ng-include='"components/navbar/navbar.html"')
 
-.main
+.main(ng-class="{ 'main--freezed': main.freezed }")
   .main__step.animated(ng-if="main.is(0)")
     h2.main__step__heading
       div.small We analyzed {{ main.totalAds }} flats and can tell you:
@@ -52,13 +52,19 @@ div(ng-include='"components/navbar/navbar.html"')
     h2.main__step__heading To be clear…
             
   .main__step.animated(ng-if="main.is(7)")
-    h2.main__step__heading …cheap and small
+    .main__step__scatterplot
+      h2.main__step__heading.main__step__heading--blc
+        | cheap and small
             
   .main__step.animated(ng-if="main.is(8)")
-    h2.main__step__heading …expensive and big
+    .main__step__scatterplot
+      h2.main__step__heading.main__step__heading--trc
+        | expensive and big
             
-  .main__step.animated(ng-if="main.is(9)")
-    h2.main__step__heading …in your dreams.        
+  .main__step.animated(ng-if="main.is(9)")  
+    .main__step__scatterplot
+      h2.main__step__heading.main__step__heading--brc
+        | in your dreams       
         
   .main__step.animated(ng-if="main.is(10)")
     h2.main__step__heading Easy, right? Now, here are all the flats we have collected in Europe…
@@ -74,10 +80,10 @@ div(ng-include='"components/navbar/navbar.html"')
   .main__step.main__step--bg.animated(ng-if="main.in(11)", ng-class=" { 'main__step--disabled' : main.hasForm() } ")
     // The regression line
     .main__step__scatterplot
-      img.main__step__scatterplot__figure(ng-src="{{ :: main.losRegression() }}")    
+      img.main__step__scatterplot__chart(ng-src="{{ :: main.losRegression() }}")    
           
   .main__step.animated(ng-if="main.in(12, 13)")
-    form.main__step__form(name="form", ng-submit="main.next()")
+    form.main__step__form(name="form", ng-submit="main.step = 14")
       label.control-label(for="inputrent")
         span Let’s get real: how much is your rent?
       .row
@@ -122,12 +128,12 @@ div(ng-include='"components/navbar/navbar.html"')
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue  
           
   .main__step.animated(ng-if="main.is(16)")
-    h2.main__step__heading(ng-show=":: main.userSpaceFeedback().is(0)")
+    h2.main__step__heading(ng-show=":: main.userGlobalFeedback().is(0)")
       | Aoutch. We told you it may be painful:
-      | you pay {{ :: main.userSpaceFeedback().times }} times more than average for a flat this large.
-    h2.main__step__heading(ng-show=":: main.userSpaceFeedback().is(1)")
+      | you pay {{ :: main.userGlobalFeedback().times }} times more than average for a flat this large.
+    h2.main__step__heading(ng-show=":: main.userGlobalFeedback().is(1)")
       | Well, sounds good, you seem to pay an average rent for a flat this large.
-    h2.main__step__heading(ng-show=":: main.userSpaceFeedback().is(2)")
+    h2.main__step__heading(ng-show=":: main.userGlobalFeedback().is(2)")
       | Well, some have to be the lucky ones…
       | Your rent is cheaper than average for a flat this large.
     
@@ -136,25 +142,28 @@ div(ng-include='"components/navbar/navbar.html"')
       .main__step__scatterplot__user-point(ng-style="main.userPoint()")
      
   .main__step.animated(ng-if="main.is(17)")    
-    form.main__step__form(name="form", ng-submit="main.next()")
+    form.main__step__form(name="form", ng-submit="main.geocode(main.addr)")
       p But of course, average may be different where you live.
       label.control-label(for="inputaddr")
         | What is your address?
       .row
         .col-sm-9
-          input.form-control.input-lg(type='text', id="inputaddr", ng-model='main.addr', required='required', placeholder="")                
+          input.form-control.input-lg(type='text', id="inputaddr", ng-model='main.addr', required='required', ng-disabled="main.freezed" placeholder="")                
         .col-sm-3
-          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue  
-          
+          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid || main.freezed") Continue  
+            
+  .main__step.main__step--bg.animated(ng-if="main.is(18)")    
+    .main__step__scatterplot
+      img.main__step__scatterplot__chart(ng-src="/api/docs/center.png?latlng={{ main.center.join(',') }}")
+    
   .main__step.animated(ng-if="main.is(18)")  
-    h2.main__step__heading(ng-show="true")
-      | OK, there is nothing we can do for you… YOU PAY GOD DAMN TOO MUCH !
-    h2.main__step__heading(ng-show="false")
-      | Not bad… which is very good. You pay a good price, you may have a good day."
-    h2.main__step__heading(ng-show="false")
-      | Good news: Your rent is very cheap, lucky you! Bad news: Everybody hates you!"
-    
-    
+    h2.main__step__heading(ng-show=":: main.userCenterFeedback().is(0)")
+      | OK, there is nothing we can do for you… YOU PAY GOD DAMN TOO MUCH!
+    h2.main__step__heading(ng-show=":: main.userCenterFeedback().is(1)")
+      | Not bad… which is very good. You pay a good price, you may have a good day.
+    h2.main__step__heading(ng-show=":: main.userCenterFeedback().is(2)")
+      | Good news: Your rent is very cheap, lucky you! Bad news: Everybody hates you!
+        
   .main__step.animated(ng-if="main.is(19)")
     h2.main__step__heading(ng-show="true")
       | Maybe you’re not the only one to get f***ked… Share your disappointment with your friends and create a club.
@@ -187,21 +196,19 @@ div(ng-include='"components/navbar/navbar.html"')
     h2.main__step__heading To know more about rents near you, visit rentswatch.com (yes, we’re non-profit and nice)
 
   .main__nav
-    .main__nav__item.main__nav__item--progress
-      | {{ main.step + 1}}/{{ main.stepCount }} steps        
-      .progress
-       .progress-bar(role="progressbar", ng-style="{ width: (main.step)/(main.stepCount-1) * 100 + '%'}")
+    .main__nav__item.main__nav__item--space(ng-show="main.hasNext()")
+      | Press space to continue.
        
     .main__nav__item
       span(ng-show="main.rent") Your rent is {{main.rent}} {{ main.currency }}/month
       span(ng-show="main.space") &nbsp;for {{main.space}}m² flat
        
     .main__nav__item.main__nav__item--right
-      button.btn.btn-primary(ng-disabled="main.step < 1", ng-click="main.previous()")
+      button.btn.btn-primary(ng-disabled="!main.hasPrevious()", ng-click="main.previous()")
         i.fa.fa-chevron-left
         span.sr-only Previous
       span &nbsp;
-      button.btn.btn-primary(ng-disabled="main.step+1 >= main.stepCount || !main.rent", ng-click="main.next()")
+      button.btn.btn-primary(ng-disabled="!main.hasNext()", ng-click="main.next()")
         i.fa.fa-chevron-right
         span.sr-only Next          
         

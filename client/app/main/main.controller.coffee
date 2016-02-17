@@ -2,27 +2,33 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'MainCtrl', ($scope, $timeout, stats, settings, hotkeys)->
+    .controller 'MainCtrl', ($scope, $timeout, $http, stats, settings, hotkeys, Geocoder)->
       'ngInject'
-      RENT_REQUIRED_FROM  = 14
-      SPACE_REQUIRED_FROM = 16
-      ADDR_REQUIRED_FROM  = 18
-      AUTOPLAYED_STEPS    = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-      AUTOPLAY_TIMEOUT    = 4000
-      FORM_STEPS          = [12, 13, 15, 17]
+      # Some step may not be available until class values are filled
+      RENT_REQUIRED_FROM   = 13
+      SPACE_REQUIRED_FROM  = 15
+      CENTER_REQUIRED_FROM = 17
+      # Some steps trigger an autoplay
+      AUTOPLAYED_STEPS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16]
+      AUTOPLAY_TIMEOUT = 4000
+      # Some steps contain forms
+      FORM_STEPS = [12, 13, 15, 17]
       # Return an instance of the class
       new class
         # Current step
         step: 0
-        stepCount: 21
-        rent: 550
-        space: 65
+        stepCount: 22
+        # rent: 550
+        # space: 65
+        # addr: '27 Boulevard Voltaire, 75011 Paris'
         # An image with all ads
         allAds: new Image
         # Default currency
         currency: settings.DEFAULT_CURRENCY
         # List of available currencies
         currencies: settings.CURRENCIES
+        # True when the whole app is freezed
+        freezed: no
         constructor: ->
           # Set the Image src to start loading it
           @allAds.src =  '/api/docs/all.png'
@@ -63,17 +69,22 @@ angular
         in: (from, to=1e9)=> @step >= from and @step <= to
         is: => _.chain(arguments).values().any( (s)=> @step is s ).value()
         hasForm: => @is.apply @, FORM_STEPS
-        # Go the next step
-        next: =>
-          # Disabled going further step N without rent
-          return if @step + 1 > RENT_REQUIRED_FROM and not @rent
-          return if @step + 1 > SPACE_REQUIRED_FROM and not @space
+        hasNext: =>
+          # Disabled going further step N without:
+          #   * a rend
+          return no if @step + 1 > RENT_REQUIRED_FROM   and not @rent?
+          #   * a space
+          return no if @step + 1 > SPACE_REQUIRED_FROM  and not @space?
+          #   * a center's stats
+          return no if @step + 1 > CENTER_REQUIRED_FROM and not @centerStats?
           # Disabled step beyond the end
-          return if @step >= @stepCount - 1
-          # We can go further
-          @step++
-        previous: =>
-          @step-- if @step > 0
+          return no if @freezed or @step >= @stepCount - 1
+          # At least, yes!
+          return yes
+        hasPrevious: => not @freezed and @step > 0
+        # Go the next step
+        next: => @step++ if do @hasNext
+        previous: => @step-- if do @hasPrevious
         # Get the part of the user rent's according to the max value
         userRentPart: =>
           @rent/(@rate * settings.MAX_TOTAL_RENT) * 100 + '%'
@@ -100,18 +111,23 @@ angular
           # Return an object
           level: level
           is: (p)-> level <= ranges[p][0] and level > ranges[p][1]
-        userSpaceFeedback: =>
+        userSpaceFeedback: (slope)=>
           # How big is the difference between the user's average space by euro
           # and the global average we get from the ads
-          slope: stats.slope
+          slope: slope
           level: @rent / @space
-          times: Math.round (@rent / @space) / (1/stats.slope)
+          times: Math.round (@rent / @space) / (1/slope)
           is: (p)->
             # Part ranges are algorithmically obtained
             switch p
-              when 0 then return @level > (1/stats.slope) *  2
-              when 1 then return @level > (1/stats.slope) * .8 and not @is(0)
-              when 2 then return @level < (1/stats.slope) * .8
+              when 0 then return @level > (1/slope) *  2
+              when 1 then return @level > (1/slope) * .8 and not @is(0)
+              when 2 then return @level < (1/slope) * .8
+        # There is two ways to get feedback about rent and space:
+        #   * using all ads in Europe
+        userGlobalFeedback: => @userSpaceFeedback stats.slope
+        #   * using rents around a given center
+        userCenterFeedback: => @userSpaceFeedback @centerStats.slope
         # There is approximatively 1 ad scraped by second so
         # we should be able to estimated approximatively the number
         # of ad currently in the database.
@@ -123,6 +139,24 @@ angular
           @totalAds = do @estimateAds
           # Use a random timeout to estimate the number of ad
           $timeout @estimationLoop, Math.random() * 1000
+        # Geocoder the given address and extract stats about it
+        geocode: (query)=>
+          # Freeze the app
+          @freezed = yes
+          # Reinitialize address geocoding trackers
+          @center = @centerError = @centerStats = null
+          # Geocode the addreess
+          Geocoder.place(query).then (place)=>
+            @center = [ place.lat, place.lon ]
+            # Get stat about it
+            $http.get '/api/docs/center.json?latlng=' + @center.join(',')
+              .then (res)=>
+                # Un-freeze the app
+                @freezed = no
+                # Save center-related stats
+                @centerStats = res.data
+                # Go to the next point
+                do @next
         # Draw the linear regression of the data
         losRegression: (slope=stats.slope)=>
           cvswidth = cvsheight = 480*2
@@ -140,6 +174,5 @@ angular
           ctx.lineWidth = 2
           ctx.lineTo cvswidth, y(settings.MAX_LIVING_SPACE / slope)
           do ctx.stroke
-
           # Returns a base64
           do canvas[0].toDataURL
