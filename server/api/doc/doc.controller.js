@@ -8,16 +8,16 @@ response = require("../response"),
 // Default cache duration
 var CACHE_DURATION = 24*60*60*1000;
 
-exports.all = function(req, res) {
+exports.allPng = function(req, res) {
   res.sendFile( path.resolve( __dirname, "../../cache/all.png") );
 };
 
 
-exports.stats  = function(req, res) {
-  res.json( require("../../cache/stats.json") );
+exports.allJson  = function(req, res) {
+  res.json( require("../../cache/all.json") );
 };
 
-exports.center = function(req, res) {
+exports.centerPng = function(req, res) {
   // Check parameters
   if(!req.query.latlng) {
     return response.validationError(res)({ error: "'latlng' parameter must not be empty."});
@@ -53,4 +53,8 @@ exports.center = function(req, res) {
     res.type('image/png');
     res.end(image, 'binary');
   });
+};
+
+
+exports.centerJson = function(req, res) {
 };

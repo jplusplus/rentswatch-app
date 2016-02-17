@@ -11,4 +11,4 @@ angular.module 'rentswatchApp'
       stats: ($http)->
         'ngInject';
         # Simply gets figures from database
-        $http.get('/api/docs/stats.json').then (rows)-> rows.data
+        $http.get('/api/docs/all.json').then (rows)-> rows.data
