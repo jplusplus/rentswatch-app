@@ -46,7 +46,7 @@ exports.centerPng = function(req, res) {
   doc.center.apply(null, center).then(function(rows) {
     try {
       // Drawing points...
-      var canvas = require('../../canvas/doc').scatterplot(rows, 600, 400);
+      var canvas = require('../../canvas/doc').scatterplot(rows, 480*2, 480*2, "#F2B100");
     // Something may happen
     } catch(e) {
       return response.validationError(res)({ error: "Unbale to generate"});

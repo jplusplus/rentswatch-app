@@ -2,10 +2,10 @@ var Canvas = require('canvas'),
         d3 = require('d3'),
          _ = require('lodash');
 
-module.exports.scatterplot = function(rows, cvswidth, cvsheight) {
+module.exports.scatterplot = function(rows, cvswidth, cvsheight, color) {
   // Default canvas sizes
-  cvswidth  = cvswidth || 800;
-  cvsheight = cvsheight || cvswidth || 800;
+  cvswidth  = cvswidth || 480*2;
+  cvsheight = cvsheight || cvswidth || 480*2;
 
   var canvas = new Canvas(cvswidth, cvsheight);
   var ctx = canvas.getContext('2d');
@@ -22,7 +22,7 @@ module.exports.scatterplot = function(rows, cvswidth, cvsheight) {
   // Transparent image to allow
   ctx.globalAlpha = .7
   // Points color
-  ctx.fillStyle = "#D35F5F";
+  ctx.fillStyle = color || "#D35F5F";
 
   for(var r in rows) {
     var row = rows[r];
@@ -34,8 +34,8 @@ module.exports.scatterplot = function(rows, cvswidth, cvsheight) {
 
 module.exports.losRegression = function(slope, cvswidth, cvsheight) {
   // Default canvas sizes
-  cvswidth  = cvswidth || 800;
-  cvsheight = cvsheight || cvswidth || 800;
+  cvswidth  = cvswidth || 480*2;
+  cvsheight = cvsheight || cvswidth || 480*2;
 
   var canvas = new Canvas(cvswidth, cvsheight);
   var ctx = canvas.getContext('2d');
