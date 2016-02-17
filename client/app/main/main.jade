@@ -23,7 +23,7 @@ div(ng-include='"components/navbar/navbar.html"')
   .main__step.animated(ng-if="main.is(4)")
     h2.main__step__heading This is the size of the flat
       
-  .main__step.main__step--bg(ng-class=" { 'main__step--disabled' : main.is(12, 13, 15) } ")
+  .main__step.main__step--bg(ng-class=" { 'main__step--disabled' : main.hasForm() } ")
     .main__step__scatterplot
       // Empty element to occupy the space
       .main__step__scatterplot__dummy
@@ -38,7 +38,7 @@ div(ng-include='"components/navbar/navbar.html"')
   .main__step.animated(ng-if="main.is(5)")
     h2.main__step__heading And this, the rent in € per month.
           
-  .main__step.main__step--bg(ng-class=" { 'main__step--disabled' : main.is(12, 13, 15) } ")
+  .main__step.main__step--bg(ng-class=" { 'main__step--disabled' : main.hasForm() } ")
     .main__step__scatterplot
       // Axis group for the total rent
       .main__step__scatterplot__axis.main__step__scatterplot__axis--y
@@ -63,7 +63,7 @@ div(ng-include='"components/navbar/navbar.html"')
   .main__step.animated(ng-if="main.is(10)")
     h2.main__step__heading Easy, right? Now, here are all the flats we have collected in Europe…
         
-  .main__step.animated(ng-if="main.in(10)", ng-class=" { 'main__step--disabled' : main.is(12, 13, 15) } ")
+  .main__step.main__step--bg.animated(ng-if="main.in(10)", ng-class=" { 'main__step--disabled' : main.hasForm() } ")
     // The plot itself!
     .main__step__scatterplot
       img.main__step__scatterplot__chart(ng-src="/api/docs/all.png")
@@ -71,7 +71,7 @@ div(ng-include='"components/navbar/navbar.html"')
   .main__step.animated(ng-if="main.is(11)")
     h2.main__step__heading …and the average price
         
-  .main__step.animated(ng-if="main.in(11)", ng-class=" { 'main__step--disabled' : main.is(12, 13, 15) } ")
+  .main__step.main__step--bg.animated(ng-if="main.in(11)", ng-class=" { 'main__step--disabled' : main.hasForm() } ")
     // The regression line
     .main__step__scatterplot
       img.main__step__scatterplot__figure(ng-src="{{ :: main.losRegression() }}")    
@@ -99,10 +99,14 @@ div(ng-include='"components/navbar/navbar.html"')
       strong.animated(ng-if="main.is(13)") Don't be shy…
       
   .main__step.animated(ng-if="main.is(14)")
-    h2.main__step__heading Wow, this is one expensive flat! It must be really big…
-    h2.main__step__heading OK, that’s pretty expensive… but hey, let’s see how big it is
-    h2.main__step__heading Average… which is good. At least for an average size flat…
-    h2.main__step__heading That’s cheap… and cheap is good! Especially if your flat is big.
+    h2.main__step__heading(ng-show=":: main.userRentFeedback().is(0)")
+      | Wow, this is one expensive flat! It must be really big…
+    h2.main__step__heading(ng-show=":: main.userRentFeedback().is(1)")
+      | OK, that’s pretty expensive… but hey, let’s see how big it is
+    h2.main__step__heading(ng-show=":: main.userRentFeedback().is(2)")
+      | Average… which is good. At least for an average size flat…
+    h2.main__step__heading(ng-show=":: main.userRentFeedback().is(3)")
+      | That’s cheap… and cheap is good! Especially if your flat is big.
     
   .main__step.animated(ng-if="main.is(15)")    
     form.main__step__form(name="form", ng-submit="main.next()")
@@ -118,15 +122,23 @@ div(ng-include='"components/navbar/navbar.html"')
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue  
           
   .main__step.animated(ng-if="main.is(16)")
-    h2.main__step__heading Aoutch. We told you it may be painful: you pay X times more than average for a flat this large
-    h2.main__step__heading Well, sounds good, you seem to pay an average rent for a flat this large.
-    h2.main__step__heading Well, some have to be the lucky ones…
-    h2.main__step__heading Your rent is cheaper than average for a flat this large
+    h2.main__step__heading(ng-show=":: main.userSpaceFeedback().is(0)")
+      | Aoutch. We told you it may be painful:
+      | you pay {{ :: main.userSpaceFeedback().times }} times more than average for a flat this large.
+    h2.main__step__heading(ng-show=":: main.userSpaceFeedback().is(1)")
+      | Well, sounds good, you seem to pay an average rent for a flat this large.
+    h2.main__step__heading(ng-show=":: main.userSpaceFeedback().is(2)")
+      | Well, some have to be the lucky ones…
+      | Your rent is cheaper than average for a flat this large.
     
+  .main__step.main__step--bg.animated(ng-if="main.in(16)", ng-class=" { 'main__step--disabled' : main.hasForm() } ")  
+    .main__step__scatterplot
+      .main__step__scatterplot__user-point(ng-style="main.userPoint()")
+     
   .main__step.animated(ng-if="main.is(17)")    
     form.main__step__form(name="form", ng-submit="main.next()")
+      p But of course, average may be different where you live.
       label.control-label(for="inputaddr")
-        | But of course, average may be different where you live.<br />
         | What is your address?
       .row
         .col-sm-9
@@ -135,16 +147,22 @@ div(ng-include='"components/navbar/navbar.html"')
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue  
           
   .main__step.animated(ng-if="main.is(18)")  
-    h2.main__step__heading OK, there is nothing we can do for you… YOU PAY GOD DAMN TOO MUCH !
-    h2.main__step__heading Not bad… which is very good. You pay a good price, you may have a good day."
-    h2.main__step__heading Good news: Your rent is very cheap, lucky you! Bad news: Everybody hates you!"
+    h2.main__step__heading(ng-show="true")
+      | OK, there is nothing we can do for you… YOU PAY GOD DAMN TOO MUCH !
+    h2.main__step__heading(ng-show="false")
+      | Not bad… which is very good. You pay a good price, you may have a good day."
+    h2.main__step__heading(ng-show="false")
+      | Good news: Your rent is very cheap, lucky you! Bad news: Everybody hates you!"
     
     
   .main__step.animated(ng-if="main.is(19)")
-    h2.main__step__heading Maybe you’re not the only one to get f***ked… Share your disappointment with your friends and create a club.
-    h2.main__step__heading Make your day even better: share and find out what friends of yours are not as lucky.
-    h2.main__step__heading Tell all your friends how lucky you are, you deserve to be envied (who cares if you lose a few Facebook friends?).    
-    ul.list-inline
+    h2.main__step__heading(ng-show="true")
+      | Maybe you’re not the only one to get f***ked… Share your disappointment with your friends and create a club.
+    h2.main__step__heading(ng-show="false")
+      | Make your day even better: share and find out what friends of yours are not as lucky.
+    h2.main__step__heading(ng-show="false")
+      | Tell all your friends how lucky you are, you deserve to be envied (who cares if you lose a few Facebook friends?).    
+    ul.list-inline.text-center
       li 
         a
           span.fa-stack.fa-lg
