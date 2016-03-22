@@ -1,7 +1,7 @@
 .quiz(ng-class="{ 'quiz--freezed': quiz.freezed }")
   .quiz__step.animated(ng-if="quiz.is(0)")
     h2.quiz__step__heading
-      div.small We analyzed {{ quiz.totalAds }} flats and can tell you:
+      div.small We analyzed {{ main.totalAds }} flats and can tell you:
       div Do you pay the right rent for the right flat?
     .text-center
       button.btn.btn-lg.btn-primary(ng-click="quiz.next()") Find out

@@ -1,4 +1,4 @@
-.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
+.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl', ng-hide="'main' | isState")
   .container-fluid
     .navbar-header
       button.navbar-toggle(type='button', ng-click='isCollapsed = !isCollapsed')

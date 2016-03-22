@@ -32,8 +32,6 @@ angular
         constructor: ->
           # Set the Image src to start loading it
           @allAds.src =  '/api/docs/all.png'
-          # Start randomized estimation loop
-          do @estimationLoop
           # Bind keyboard shortcuts
           hotkeys.add
             combo: ['right', 'space']
@@ -128,17 +126,6 @@ angular
         userGlobalFeedback: => @userSpaceFeedback stats.slope
         #   * using rents around a given center
         userCenterFeedback: => @userSpaceFeedback @centerStats.slope
-        # There is approximatively 1 ad scraped by second so
-        # we should be able to estimated approximatively the number
-        # of ad currently in the database.
-        estimateAds: ->
-          stats.total + ~~(stats.pace * (Date.now()/1e3 - stats.lastSnapshot))
-        # This will trigger an infinite (and irregular loop of estimation)
-        estimationLoop: =>
-          # This value will be updated regulary
-          @totalAds = do @estimateAds
-          # Use a random timeout to estimate the number of ad
-          $timeout @estimationLoop, Math.random() * 1000
         # Geocoder the given address and extract stats about it
         geocode: (query)=>
           # Freeze the app

@@ -1,3 +1,188 @@
 .main {
-  
+
+  overflow: hidden;
+
+  &__intro {
+    text-align: center;
+    background:@brand-primary 40px bottom no-repeat;
+    background-size: 250px auto;
+    padding:40px 0;
+    margin-bottom:-40px;
+    position: relative;
+    z-index:110;
+    .box-shadow(0 20px 40px 0 fade(black, 20));
+
+    a { color: mix(@brand-primary, white); }
+
+    &__heading {
+      .sr-only();
+    }
+
+    &__logo {
+      display: block;
+      margin: auto;
+    }
+
+    &__punchline {
+      padding-top:30px;
+      font-size:1.3em;
+      font-weight:800;
+      max-width: 250px;
+      color: white;
+      display: inline-block;
+      text-transform: uppercase;
+      .lead { font-size:1em; }
+    }
+
+
+    &:after, &:before {
+      content:"";
+      z-index:-1;
+      position: absolute;
+      top:100%;
+      left:0;
+      right:0;
+      height:40px;
+      background-color: @brand-primary;
+      transform-origin: top left;
+      transform: rotate(-2deg) translateX(-10px);
+    }
+
+    &:before {
+      transform-origin: top right;
+      transform: rotate(2deg) translateX(10px);;
+    }
+
+  }
+
+  &__links {
+    text-align:center;
+    position:relative;
+    z-index:90;
+    background:url("../assets/images/buildings.png") left bottom no-repeat @body-bg;
+    background-size:100% auto;
+
+    &__pan {
+      position:absolute;
+      width:25%;
+      height:100%;
+      color:@text-color;
+      animation: fade-in-top 0.8s;
+      animation-fill-mode: forwards;
+      opacity: 0;
+      .translate3d(0, 0, 0);
+
+      @media (max-width: 990px) {
+        width:50%;
+        height:50%;
+      }
+
+      &:hover, &:active, &:focus {
+        color:inherit;
+        text-decoration: none;
+      }
+
+      &--1 {
+        left:0; top:0;
+        animation-delay: 0s;
+        @bg-start:fade(black, 20%);
+        #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+      }
+      &--2 {
+        left:25%; top:0;
+        animation-delay: 0.2s;
+        @bg-start:fade(black, 30%);
+        #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+        @media (max-width: 990px) { left:50%; }
+      }
+      &--3 {
+        left:50%; top:0;
+        animation-delay: 0.4s;
+        @bg-start:fade(black, 40%);
+        #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+
+        @media (max-width: 990px) {
+          left:0%; top: 50%;
+          @bg-start:fade(black, 30%);
+          #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+        }
+      }
+      &--4 {
+        left:75%; top:0;
+        animation-delay: 0.6s;
+        @bg-start:fade(black, 50%);
+        #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+
+        @media (max-width: 990px) {
+          left:50%; top: 50%;
+          @bg-start:fade(black, 20%);
+          #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+        }
+      }
+
+      &__wrapper {
+        position:absolute;
+        right:50%;
+        bottom:50%;
+        .translate(50%, 50%);
+        .transition(0.3s);
+
+      }
+
+      &__heading {
+        font-size:1.4em;
+        font-weight: bold;
+      }
+
+      &__btn {
+        display: inline-block;
+        padding:5px 15px;
+        margin-top:20px;
+        color:white;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size:1.3em;
+        border:3px solid white;
+        opacity:0;
+        .scale(0);
+        .transition(0.3s);
+      }
+
+      &:hover &__wrapper {
+        .translate(50%, 0%,);
+      }
+
+      &:hover &__btn {
+        opacity: 1;
+        .scale(1);
+      }
+    }
+  }
+
+
+  &__outro {
+    #gradient > .vertical(fade(#211F30, 90), #211F30, 0%, 10%);
+    margin-top:-40px;
+    padding:60px;
+    position:relative;
+    z-index:100;
+    color:white;
+    text-align: left;
+    color:  mix(#211F30, white, 30);
+    a { color: mix(#211F30, white); }
+
+    &__miz {
+
+      img {
+        max-width:300px;
+        width:100%;
+        opacity: .7;
+      }
+    }
+
+    &__legal {
+      padding-top:15px;
+      max-width:400px;
+    }
+  }
 }
