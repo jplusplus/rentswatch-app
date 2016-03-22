@@ -7,9 +7,15 @@
         span.icon-bar
         span.icon-bar
       a.navbar-brand(ui-sref="main")   
-        img(src="assets/images/site-logo.svg", height="80px", alt="Rentswatch")
+        img(src="assets/images/site-logo-bordered.svg", height="60px", alt="Rentswatch")
 
     #navbar-main.navbar-collapse.collapse(collapse='isCollapsed')
       ul.nav.navbar-nav
-        li(ui-sref-active="active")
+        li(ui-sref-active-eq="active")
+          a(ui-sref='main') Rent in your city
+        li(ui-sref-active-eq="active")
           a(ui-sref='main.quiz') Do you pay the right rent?
+        li
+          a(href="http://blog.rentswatch.com", target="_blank") Blog
+        li
+          a(href="http://api.rentswatch.com", target="_blank") API

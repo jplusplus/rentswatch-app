@@ -1,10 +1,25 @@
 .navbar {
 
   &-brand {
-    padding:0 20px;
+    padding:5px 20px;
     img {
-      height:@navbar-height;
+      max-height:@navbar-height - 10px;
     }
   }
+
+  & &-nav > li > a {
+    margin-top:8px;
+    padding-top:12px;
+    padding-bottom:12px;
+    line-height: @line-height-computed - 10px;
+    border-radius:2px; 
+    &:hover, &:active, &:focus {
+      color:white;
+    }
+  }
+
+    & &-nav > li.active a {
+      .box-shadow(1px 1px 6px 0 black inset);
+    }
 
 }
