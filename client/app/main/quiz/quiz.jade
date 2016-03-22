@@ -1,0 +1,211 @@
+.quiz(ng-class="{ 'quiz--freezed': quiz.freezed }")
+  .quiz__step.animated(ng-if="quiz.is(0)")
+    h2.quiz__step__heading
+      div.small We analyzed {{ quiz.totalAds }} flats and can tell you:
+      div Do you pay the right rent for the right flat?
+    .text-center
+      button.btn.btn-lg.btn-primary(ng-click="quiz.next()") Find out
+            
+  .quiz__step.animated(ng-if="quiz.is(1)")
+    h2.quiz__step__heading Are you sure you want to know?
+    .text-center
+      button.btn.btn-lg.btn-primary(ng-click="quiz.next()") Yes
+            
+  .quiz__step.animated(ng-if="quiz.is(2)")
+    h2.quiz__step__heading OK. It will be quick but we can’t promise it will be painless.
+            
+  .quiz__step.animated(ng-if="quiz.is(3)")
+    h2.quiz__step__heading Here is how it works:
+    
+  .quiz__step.animated(ng-if="quiz.is(4)")
+    h2.quiz__step__heading This is the size of the flat
+      
+  .quiz__step.quiz__step--bg(ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
+    .quiz__step__scatterplot
+      // Empty element to occupy the space
+      .quiz__step__scatterplot__dummy
+      // Axis group for the living space
+      .quiz__step__scatterplot__axis.quiz__step__scatterplot__axis--x 
+        // Axis Line on x
+        span.quiz__step__scatterplot__axis__line.animated.hopen(ng-if="quiz.in(4)")
+        span.quiz__step__scatterplot__axis__ticks.animated(ng-if="quiz.in(4)")
+          span.quiz__step__scatterplot__axis__ticks__tick(ng-repeat="t in quiz.xticks()") 
+            span.quiz__step__scatterplot__axis__ticks__tick__wrap {{ t }} 
+      
+  .quiz__step.animated(ng-if="quiz.is(5)")
+    h2.quiz__step__heading And this, the rent in € per month.
+          
+  .quiz__step.quiz__step--bg(ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
+    .quiz__step__scatterplot
+      // Axis group for the total rent
+      .quiz__step__scatterplot__axis.quiz__step__scatterplot__axis--y
+        // Axis Line on y
+        span.quiz__step__scatterplot__axis__line.animated.vopen(ng-if="quiz.in(5)")
+        span.quiz__step__scatterplot__axis__ticks.animated(ng-if="quiz.in(5)")
+          span.quiz__step__scatterplot__axis__ticks__tick(ng-repeat="t in quiz.yticks()")
+            span.quiz__step__scatterplot__axis__ticks__tick__wrap {{ t }}
+            
+  .quiz__step.animated(ng-if="quiz.is(6)")
+    h2.quiz__step__heading To be clear…
+            
+  .quiz__step.animated(ng-if="quiz.is(7)")
+    .quiz__step__scatterplot
+      h2.quiz__step__heading.quiz__step__heading--blc
+        | cheap and small
+            
+  .quiz__step.animated(ng-if="quiz.is(8)")
+    .quiz__step__scatterplot
+      h2.quiz__step__heading.quiz__step__heading--trc
+        | expensive and big
+            
+  .quiz__step.animated(ng-if="quiz.is(9)")  
+    .quiz__step__scatterplot
+      h2.quiz__step__heading.quiz__step__heading--brc
+        | in your dreams       
+        
+  .quiz__step.animated(ng-if="quiz.is(10)")
+    h2.quiz__step__heading Easy, right? Now, here are all the flats we have collected in Europe…
+        
+  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(10)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
+    // The plot itself!
+    .quiz__step__scatterplot
+      img.quiz__step__scatterplot__chart(ng-src="/api/docs/all.png")
+        
+  .quiz__step.animated(ng-if="quiz.is(11)")
+    h2.quiz__step__heading …and the average price
+        
+  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(11)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
+    // The regression line
+    .quiz__step__scatterplot
+      img.quiz__step__scatterplot__chart(ng-src="{{ :: quiz.losRegression() }}")    
+          
+  .quiz__step.animated(ng-if="quiz.in(12, 13)")
+    form.quiz__step__form(name="form", ng-submit="quiz.step = 14")
+      label.control-label(for="inputrent")
+        span Let’s get real: how much is your rent?
+      .row
+        .col-sm-9
+          .form-group.form-group-lg
+              .input-group
+                input.form-control.input-lg(type='number', min="100", max="3000", id="inputrent", ng-model='quiz.rent', required='required', placeholder="e.g 700")
+                span.input-group-addon.dropdown.quiz__step__form__dropdown
+                  .dropdown-toggle
+                    | {{ quiz.currency }}&nbsp;<i class="caret"></i>
+                  ul.dropdown-menu.dropdown-menu-right.quiz__step__form__dropdown__menu
+                    li(ng-repeat="(currency, value) in quiz.currencies", 
+                       ng-class="{ 'active': quiz.currency === currency }",
+                       ng-click="quiz.currency = currency")
+                      a {{ currency }}
+        .col-sm-3
+          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue  
+              
+      strong.animated(ng-if="quiz.is(13)") Don't be shy…
+      
+  .quiz__step.animated(ng-if="quiz.is(14)")
+    h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(0)")
+      | Wow, this is one expensive flat! It must be really big…
+    h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(1)")
+      | OK, that’s pretty expensive… but hey, let’s see how big it is
+    h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(2)")
+      | Average… which is good. At least for an average size flat…
+    h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(3)")
+      | That’s cheap… and cheap is good! Especially if your flat is big.
+    
+  .quiz__step.animated(ng-if="quiz.is(15)")    
+    form.quiz__step__form(name="form", ng-submit="quiz.next()")
+      label.control-label(for="inputaddr")
+        | How big is it?
+      .row
+        .col-sm-9
+          .form-group.form-group-lg
+              .input-group
+                input.form-control.input-lg(type='number', min="1", max="200", id="inputaddr", ng-model='quiz.space', required='required', placeholder="e.g 60")
+                span.input-group-addon m²
+        .col-sm-3
+          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue  
+          
+  .quiz__step.animated(ng-if="quiz.is(16)")
+    h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(0)")
+      | Aoutch. We told you it may be painful:
+      | you pay {{ :: quiz.userGlobalFeedback().times }} times more than average for a flat this large.
+    h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(1)")
+      | Well, sounds good, you seem to pay an average rent for a flat this large.
+    h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(2)")
+      | Well, some have to be the lucky ones…
+      | Your rent is cheaper than average for a flat this large.
+    
+  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(16)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")  
+    .quiz__step__scatterplot
+      .quiz__step__scatterplot__user-point(ng-style="quiz.userPoint()")
+     
+  .quiz__step.animated(ng-if="quiz.is(17)")    
+    form.quiz__step__form(name="form", ng-submit="quiz.geocode(quiz.addr)")
+      p But of course, average may be different where you live.
+      label.control-label(for="inputaddr")
+        | What is your address?
+      .row
+        .col-sm-9
+          input.form-control.input-lg(type='text', id="inputaddr", ng-model='quiz.addr', required='required', ng-disabled="quiz.freezed" placeholder="")                
+        .col-sm-3
+          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid || quiz.freezed") Continue  
+            
+  .quiz__step.quiz__step--bg.animated(ng-if="quiz.is(18)")    
+    .quiz__step__scatterplot
+      img.quiz__step__scatterplot__chart(ng-src="/api/docs/center.png?latlng={{ quiz.center.join(',') }}")
+    
+  .quiz__step.animated(ng-if="quiz.is(18)")  
+    h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(0)")
+      | OK, there is nothing we can do for you… YOU PAY GOD DAMN TOO MUCH!
+    h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(1)")
+      | Not bad… which is very good. You pay a good price, you may have a good day.
+    h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(2)")
+      | Good news: Your rent is very cheap, lucky you! Bad news: Everybody hates you!
+        
+  .quiz__step.animated(ng-if="quiz.is(19)")
+    h2.quiz__step__heading(ng-show="true")
+      | Maybe you’re not the only one to get f***ked… Share your disappointment with your friends and create a club.
+    h2.quiz__step__heading(ng-show="false")
+      | Make your day even better: share and find out what friends of yours are not as lucky.
+    h2.quiz__step__heading(ng-show="false")
+      | Tell all your friends how lucky you are, you deserve to be envied (who cares if you lose a few Facebook friends?).    
+    ul.list-inline.text-center
+      li 
+        a
+          span.fa-stack.fa-lg
+            i.fa.fa-square.fa-stack-2x
+            i.fa.fa-fw.fa-twitter.fa-stack-1x.fa-inverse
+          span.sr-only Twitter
+      li 
+        a
+          span.fa-stack.fa-lg
+            i.fa.fa-square.fa-stack-2x
+            i.fa.fa-fw.fa-facebook.fa-stack-1x.fa-inverse
+          span.sr-only Facebook
+    
+  .quiz__step.animated(ng-if="quiz.is(20)")
+    h2.quiz__step__heading Can we use the data you just entered? You'll be doing a good deed for the next user!
+    .text-center
+      button.btn.btn-lg.btn-default(ng-click="quiz.next()") No
+      =" "
+      button.btn.btn-lg.btn-primary(ng-click="quiz.next()") Yes
+      
+  .quiz__step.animated(ng-if="quiz.is(21)")
+    h2.quiz__step__heading To know more about rents near you, visit rentswatch.com (yes, we’re non-profit and nice)
+
+  .quiz__nav
+    .quiz__nav__item.quiz__nav__item--space.hidden-sm.hidden-xs(ng-show="quiz.hasNext()")
+      | Press space to continue.
+       
+    .quiz__nav__item
+      span(ng-show="quiz.rent") Your rent is {{quiz.rent}} {{ quiz.currency }}/month
+      span(ng-show="quiz.space") &nbsp;for {{quiz.space}}m² flat
+       
+    .quiz__nav__item.quiz__nav__item--right
+      button.btn.btn-primary(ng-disabled="!quiz.hasPrevious()", ng-click="quiz.previous()")
+        i.fa.fa-chevron-left
+        span.sr-only Previous
+      span &nbsp;
+      button.btn.btn-primary(ng-disabled="!quiz.hasNext()", ng-click="quiz.next()")
+        i.fa.fa-chevron-right
+        span.sr-only Next          
+        

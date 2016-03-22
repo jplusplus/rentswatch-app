@@ -2,7 +2,7 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'MainCtrl', ($scope, $timeout, $http, stats, settings, hotkeys, Geocoder)->
+    .controller 'QuizCtrl', ($scope, $timeout, $http, stats, settings, hotkeys, Geocoder)->
       'ngInject'
       # Some step may not be available until class values are filled
       RENT_REQUIRED_FROM   = 13
