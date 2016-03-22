@@ -1,6 +1,8 @@
 angular
   .module 'rentswatchApp'
     .constant 'settings',
+      # Where should we get the data
+      API_URL: 'http://api.rentswatch.com/api/'
       # Plot bounds
       MAX_LIVING_SPACE: 200
       MAX_TOTAL_RENT: 3000

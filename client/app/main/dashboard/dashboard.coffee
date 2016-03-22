@@ -4,12 +4,14 @@ angular.module 'rentswatchApp'
 .config ($stateProvider) ->
   $stateProvider
   .state 'main.dashboard',
-    url: 'dashboard/:city'
+    url: 'd/:city'
     templateUrl: 'app/main/dashboard/dashboard.html'
     controller: 'DashboardCtrl as dashboard'
     params:
       city:
         value:null
     resolve:
-      city: ($stateParams)->
-        $stateParams.city
+      city: ($stateParams, $http, settings)->
+        return null unless $stateParams.city?
+        # Get the city from the api
+        $http.get(settings.API_URL + 'cities/' + $stateParams.city).then (r)-> r.data

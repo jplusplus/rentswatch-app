@@ -4,12 +4,25 @@
 
   &__pick {
     max-width:550px;
-    padding:60px 20px;
+    padding:0 20px;
+    padding-top:80px;
     margin:auto;
     text-align: center;
 
     animation: blur-in 0.8s;
     animation-fill-mode: forwards;
     opacity: 0;
+
+    .ui-select-container input.form-control,
+    .ui-select-container .ui-select-toggle{
+      .form-control();
+      .input-lg();
+      border-width:2px;
+    }
+
+    &__examples {
+      margin-top:10px;
+    }
   }
+
 }
