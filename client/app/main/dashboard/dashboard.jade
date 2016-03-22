@@ -1,0 +1,17 @@
+.dashboard
+  .dashboard__pick(ng-hide="city")
+    h2 Get insights about your city
+    p We analysed thousands of flats all around Europe. What about your city?        
+    
+    .dashboard__pick__form.form-group.form-group-lg
+      .input-group
+        input.form-control.input-lg(type='text', placeholder="Search your city")
+        span.input-group-addon
+          i.fa.fa-search
+    p.text-left.dashboard__pick__examples
+      | Exemple: <a ui-sref="main.dashboard({city: 'paris'})">Paris</a>, 
+      | <a ui-sref="main.dashboard({city: 'berlin'})">Berlin</a>
+      | or <a ui-sref="main.dashboard({city: 'stockholm'})">Stockholm</a>.
+    
+    
+    

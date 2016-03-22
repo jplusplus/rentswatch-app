@@ -7,6 +7,7 @@ angular.module 'rentswatchApp', [
   'ngAnimate',
   'ui.router',
   'ui.bootstrap',
+  'ui.select',
   'cfp.hotkeys'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->

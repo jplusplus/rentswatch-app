@@ -2,15 +2,16 @@
   "name": "rentswatch-app",
   "version": "0.0.0",
   "dependencies": {
-    "angular": ">=1.2.*",
+    "angular": ">=1.5.*",
     "json3": "~3.3.1",
     "es5-shim": "~3.0.1",
     "bootstrap": "~3.1.1",
-    "angular-resource": ">=1.2.*",
-    "angular-cookies": ">=1.2.*",
-    "angular-sanitize": ">=1.2.*",
-    "angular-animate": ">=1.2.*",
-    "angular-bootstrap": "~0.11.0",
+    "angular-resource": ">=1.5.*",
+    "angular-cookies": ">=1.5.*",
+    "angular-sanitize": ">=1.5.*",
+    "angular-animate": ">=1.5.*",
+    "angular-bootstrap": "~0.13.2",
+    "ui-select": "angular-ui-select#0.13.2",
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
     "angular-ui-router": "~0.2.15",
@@ -18,7 +19,10 @@
     "d3": "~3.5.12"
   },
   "devDependencies": {
-    "angular-mocks": ">=1.2.*",
-    "angular-scenario": ">=1.2.*"
+    "angular-mocks": ">=1.5.*",
+    "angular-scenario": ">=1.5.*"
+  },
+  "resolutions": {
+    "angular": ">=1.5.*"
   }
 }

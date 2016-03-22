@@ -1,5 +1,13 @@
 .navbar {
 
+  .transition(.7s);
+
+  &.ng-hide {
+    opacity:0;
+    .translate(0, -100%);
+  }
+
+
   &-brand {
     padding:5px 20px;
     img {
@@ -12,7 +20,7 @@
     padding-top:12px;
     padding-bottom:12px;
     line-height: @line-height-computed - 10px;
-    border-radius:2px; 
+    border-radius:2px;
     &:hover, &:active, &:focus {
       color:white;
     }

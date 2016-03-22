@@ -3,6 +3,11 @@
   position: relative;
   max-width:600px;
   margin:auto;
+  margin-top:@navbar-height;
+
+  animation: blur-in 0.8s;
+  animation-fill-mode: forwards;
+  opacity: 0;
 
   &:after {
     text-align: center;
@@ -74,6 +79,7 @@
     top:0px;
     left:50%;
     z-index:500;
+
     .transform( translate(-50%, 0) );
     .transition(all linear .4s);
 

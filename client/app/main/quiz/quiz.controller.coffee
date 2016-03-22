@@ -42,10 +42,10 @@ angular
             description: "Go to the previous screen."
             callback: @previous
           # Save the currency's conversion rate
-          $scope.$watch 'main.currency', (c)=>
+          $scope.$watch 'quiz.currency', (c)=>
             @rate = @currencies[c].CONVERSION_RATE if c? and @currencies[c]?
           # Save the currency's conversion rate
-          $scope.$watch 'main.step', (step)=>
+          $scope.$watch 'quiz.step', (step)=>
             # Always cancel current timeout
             $timeout.cancel @autoplay
             # Then if the step must be autoplayed...

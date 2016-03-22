@@ -1,4 +1,4 @@
-.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl', ng-hide="'main' | isState")
+.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl', ng-hide="'main' | isState")
   .container-fluid
     .navbar-header
       button.navbar-toggle(type='button', ng-click='isCollapsed = !isCollapsed')
@@ -12,7 +12,7 @@
     #navbar-main.navbar-collapse.collapse(collapse='isCollapsed')
       ul.nav.navbar-nav
         li(ui-sref-active-eq="active")
-          a(ui-sref='main') Rent in your city
+          a(ui-sref='main.dashboard') Rent in your city
         li(ui-sref-active-eq="active")
           a(ui-sref='main.quiz') Do you pay the right rent?
         li
