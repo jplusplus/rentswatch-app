@@ -1,5 +1,5 @@
 .dashboard
-  .dashboard__pick(ng-hide="dashboard.city")
+  .dashboard__pick(ng-if="!dashboard.city")
     h2 Get insights about your city
     p We analysed thousands of flats all around Europe. What about your city?        
     
@@ -15,7 +15,9 @@
     p.text-left.dashboard__pick__examples
       | Examples: <a ui-sref="main.dashboard({city: 'paris'})">Paris</a>, 
       | <a ui-sref="main.dashboard({city: 'berlin'})">Berlin</a>
-      | or <a ui-sref="main.dashboard({city: 'stockholm'})">Stockholm</a>.
+      | or <a ui-sref="main.dashboard({city: 'geneva'})">Geneva</a>.
     
     
-    
+  .dashboard__view(ng-if="dashboard.city")
+    leaflet.dashboard__view__map(center="dashboard.map.center", tiles="dashboard.map.tiles", defaults="dashboard.map.defaults")
+    .dashboard__view__context

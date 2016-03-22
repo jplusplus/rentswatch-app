@@ -10,7 +10,7 @@
     margin-bottom:-40px;
     position: relative;
     z-index:110;
-    .box-shadow(0 20px 40px 0 fade(black, 20));
+    filter: drop-shadow(0 0 20px fade(black, 40));
 
     a { color: mix(@brand-primary, white); }
 
@@ -59,8 +59,8 @@
     text-align:center;
     position:relative;
     z-index:90;
-    background:url("../assets/images/buildings.png") left bottom no-repeat @body-bg;
-    background-size:100% auto;
+    background:url("../assets/images/buildings.png") right bottom repeat-x @body-bg;
+    background-size:auto 350px;
 
     &__pan {
       position:absolute;

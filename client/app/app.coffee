@@ -8,7 +8,8 @@ angular.module 'rentswatchApp', [
   'ui.router',
   'ui.bootstrap',
   'ui.select',
-  'cfp.hotkeys'
+  'cfp.hotkeys',
+  'leaflet-directive'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $urlRouterProvider.otherwise '/'

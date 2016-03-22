@@ -11,8 +11,8 @@
 
     #navbar-main.navbar-collapse.collapse(collapse='isCollapsed')
       ul.nav.navbar-nav
-        li(ui-sref-active-eq="active")
-          a(ui-sref='main.dashboard') Rent in your city
+        li(ui-sref-active="active")
+          a(ui-sref='main.dashboard({city: null})') Rent in your city
         li(ui-sref-active-eq="active")
           a(ui-sref='main.quiz') Do you pay the right rent?
         li

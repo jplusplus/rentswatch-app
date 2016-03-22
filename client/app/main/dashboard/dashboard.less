@@ -20,8 +20,70 @@
       border-width:2px;
     }
 
+    .ui-select-choices {
+      background: @input-bg;
+      color: @input-color;
+      text-align: left;
+      font-size:1.1em;
+      margin-top:2px;
+
+      .ui-select-choices-row {
+        a {
+          color:inherit;
+          padding:10px 20px;
+          &:hover {
+            color: @input-bg;
+          }
+        }
+
+        &.active a {
+          color: @input-bg;
+          background:@input-border-focus;
+        }
+      }
+    }
+
     &__examples {
       margin-top:10px;
+    }
+  }
+
+  &__view {
+    background: @body-bg;
+    position:absolute;
+    top:@navbar-height;
+    left:0;
+    right:0;
+    bottom:0;
+
+    &__map {
+      min-width:250px;
+      position:absolute;
+      left:0;
+      right:25%;
+      top:0;
+      bottom:0;
+      display: block;
+
+      &.leaflet-container {
+        background:transparent;
+      }
+
+      .leaflet-layer {
+        opacity:.5;
+      }
+    }
+
+    &__context {
+      min-width:250px;
+      width:25%;
+      background:url("../assets/images/buildings.png") right bottom fixed repeat-x @body-bg;
+      background-size:auto 350px;
+      position: absolute;
+      right:0;
+      top:0;
+      bottom:0;
+      .box-shadow(0 0 20px fade(black, 40));
     }
   }
 
