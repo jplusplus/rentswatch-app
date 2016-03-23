@@ -1,24 +1,26 @@
 .quiz(ng-class="{ 'quiz--freezed': quiz.freezed }", ng-click="quiz.next(true)")
   .quiz__step.animated(ng-if="quiz.is(0)")
     h2.quiz__step__heading
-      div.small We analyzed {{ main.totalAds | number }} flats and can tell you:
-      div Do you pay the right rent for the right flat?
+      div.small {{ 'quiz.step.heading.0a' | translate:{ total: main.totalAds } }}
+      div {{ 'quiz.step.heading.0b' | translate }}
     .text-center
-      button.btn.btn-lg.btn-outline(ng-click="quiz.next()") Find out
+      button.btn.btn-lg.btn-outline(ng-click="quiz.next()")
+        | {{ 'quiz.step.start' | translate }}
             
   .quiz__step.animated(ng-if="quiz.is(1)")
-    h2.quiz__step__heading Are you sure you want to know?
+    h2.quiz__step__heading {{ 'quiz.step.heading.1' | translate }}
     .text-center
-      button.btn.btn-lg.btn-outline(ng-click="quiz.next()") Yes...
+      button.btn.btn-lg.btn-outline(ng-click="quiz.next()") 
+        | {{ 'quiz.step.yes' | translate }}
             
   .quiz__step.animated(ng-if="quiz.is(2)")
-    h2.quiz__step__heading OK. It will be quick but we can’t promise it will be painless.
+    h2.quiz__step__heading {{ 'quiz.step.heading.2' | translate }}
             
   .quiz__step.animated(ng-if="quiz.is(3)")
-    h2.quiz__step__heading Here is how it works:
+    h2.quiz__step__heading {{ 'quiz.step.heading.3' | translate }}
     
   .quiz__step.animated(ng-if="quiz.is(4)")
-    h2.quiz__step__heading This is the size of the flat
+    h2.quiz__step__heading {{ 'quiz.step.heading.4' | translate }}
       
   .quiz__step.quiz__step--bg(ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
     .quiz__step__scatterplot
@@ -33,7 +35,7 @@
             span.quiz__step__scatterplot__axis__ticks__tick__wrap {{ t }} 
       
   .quiz__step.animated(ng-if="quiz.is(5)")
-    h2.quiz__step__heading And this, the rent in € per month.
+    h2.quiz__step__heading {{ 'quiz.step.heading.5' | translate }}
           
   .quiz__step.quiz__step--bg(ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
     .quiz__step__scatterplot
@@ -46,25 +48,25 @@
             span.quiz__step__scatterplot__axis__ticks__tick__wrap {{ t }}
             
   .quiz__step.animated(ng-if="quiz.is(6)")
-    h2.quiz__step__heading To be clear…
+    h2.quiz__step__heading {{ 'quiz.step.heading.6a' | translate }}
             
   .quiz__step.animated(ng-if="quiz.is(7)")
     .quiz__step__scatterplot
       h2.quiz__step__heading.quiz__step__heading--blc
-        | cheap and small
+        | {{ 'quiz.step.heading.6b' | translate }}
             
   .quiz__step.animated(ng-if="quiz.is(8)")
     .quiz__step__scatterplot
       h2.quiz__step__heading.quiz__step__heading--trc
-        | expensive and big
+        | {{ 'quiz.step.heading.6c' | translate }}
             
   .quiz__step.animated(ng-if="quiz.is(9)")  
     .quiz__step__scatterplot
       h2.quiz__step__heading.quiz__step__heading--brc
-        | in your dreams       
+        | {{ 'quiz.step.heading.6d' | translate }}
         
   .quiz__step.animated(ng-if="quiz.is(10)")
-    h2.quiz__step__heading Easy, right? Now, here are all the flats we have collected in Europe…
+    h2.quiz__step__heading {{ 'quiz.step.heading.7' | translate }}
         
   .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(10)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
     // The plot itself!
@@ -72,7 +74,7 @@
       img.quiz__step__scatterplot__chart(ng-src="/api/docs/all.png")
         
   .quiz__step.animated(ng-if="quiz.is(11)")
-    h2.quiz__step__heading …and the average price
+    h2.quiz__step__heading {{ 'quiz.step.heading.8' | translate }}
         
   .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(11)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
     // The regression line
@@ -82,12 +84,12 @@
   .quiz__step.animated(ng-if="quiz.in(12, 13)")
     form.quiz__step__form(name="form", ng-submit="quiz.step = 14")
       label.control-label(for="inputrent")
-        span Let’s get real: how much is your rent?
+        span {{ 'quiz.step.how-much.label' | translate }}
       .row
         .col-sm-9
           .form-group.form-group-lg
               .input-group
-                input.form-control.input-lg(type='number', min="100", max="3000", id="inputrent", ng-model='quiz.rent', required='required', placeholder="e.g 700")
+                input.form-control.input-lg(type='number', min="100", max="3000", id="inputrent", ng-model='quiz.rent', required='required', placeholder="{{ 'quiz.step.how-much.placeholder' | translate }}")
                 span.input-group-addon.dropdown.quiz__step__form__dropdown
                   .dropdown-toggle
                     | {{ quiz.currency }}&nbsp;<i class="caret"></i>
@@ -97,42 +99,40 @@
                        ng-click="quiz.currency = currency")
                       a {{ currency }}
         .col-sm-3
-          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue  
+          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") {{ 'quiz.step.continue' | translate }}  
               
-      strong.animated(ng-if="quiz.is(13)") Don't be shy…
+      strong.animated(ng-if="quiz.is(13)")  {{ 'quiz.step.how-much.shy' | translate }}
       
   .quiz__step.animated(ng-if="quiz.is(14)")
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(0)")
-      | Wow, this is one expensive flat! It must be really big…
+      | {{ "quiz.step.feedback.1" | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(1)")
-      | OK, that’s pretty expensive… but hey, let’s see how big it is
+      | {{ "quiz.step.feedback.2" | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(2)")
-      | Average… which is good. At least for an average size flat…
+      | {{ "quiz.step.feedback.3" | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(3)")
-      | That’s cheap… and cheap is good! Especially if your flat is big.
+      | {{ "quiz.step.feedback.4" | translate }}
     
   .quiz__step.animated(ng-if="quiz.is(15)")    
     form.quiz__step__form(name="form", ng-submit="quiz.next()")
       label.control-label(for="inputaddr")
-        | How big is it?
+        | {{ 'quiz.step.how-big.label' | translate }}
       .row
         .col-sm-9
           .form-group.form-group-lg
               .input-group
-                input.form-control.input-lg(type='number', min="1", max="200", id="inputaddr", ng-model='quiz.space', required='required', placeholder="e.g 60")
+                input.form-control.input-lg(type='number', min="1", max="200", id="inputaddr", ng-model='quiz.space', required='required', placeholder="{{ 'quiz.step.how-big.placeholder' | translate }}")
                 span.input-group-addon m²
         .col-sm-3
-          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") Continue  
+          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") {{ 'quiz.step.continue' | translate }}
           
   .quiz__step.animated(ng-if="quiz.is(16)")
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(0)")
-      | Aoutch. We told you it may be painful:
-      | you pay {{ :: quiz.userGlobalFeedback().times }} times more than average for a flat this large.
+      | {{ 'quiz.step.size-feedback.1' | translate: { times: quiz.userGlobalFeedback().times } }}
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(1)")
-      | Well, sounds good, you seem to pay an average rent for a flat this large.
+      | {{ 'quiz.step.size-feedback.2' | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(2)")
-      | Well, some have to be the lucky ones…
-      | Your rent is cheaper than average for a flat this large.
+      | {{ 'quiz.step.size-feedback.3' | translate }}
     
   .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(16)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")  
     .quiz__step__scatterplot
@@ -140,14 +140,15 @@
      
   .quiz__step.animated(ng-if="quiz.is(17)")    
     form.quiz__step__form(name="form", ng-submit="quiz.geocode(quiz.addr)")
-      p But of course, average may be different where you live.
+      p {{ 'quiz.step.addr.heading' | translate }}
       label.control-label(for="inputaddr")
-        | What is your address?
+        | {{ 'quiz.step.addr.label' | translate }}
       .row
         .col-sm-9
           input.form-control.input-lg(type='text', id="inputaddr", ng-model='quiz.addr', required='required', ng-disabled="quiz.freezed" placeholder="")                
         .col-sm-3
-          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid || quiz.freezed") Continue  
+          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid || quiz.freezed")
+            | {{ 'quiz.step.continue' | translate }}
             
   .quiz__step.quiz__step--bg.animated(ng-if="quiz.is(18)")    
     .quiz__step__scatterplot
@@ -155,19 +156,19 @@
     
   .quiz__step.animated(ng-if="quiz.is(18)")  
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(0)")
-      | OK, there is nothing we can do for you… YOU PAY GOD DAMN TOO MUCH!
+      | {{ 'quiz.step.addr-feedback.1' | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(1)")
-      | Not bad… which is very good. You pay a good price, you may have a good day.
+      | {{ 'quiz.step.addr-feedback.2' | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(2)")
-      | Good news: Your rent is very cheap, lucky you! Bad news: Everybody hates you!
+      | {{ 'quiz.step.addr-feedback.3' | translate }}
         
   .quiz__step.animated(ng-if="quiz.is(19)")
     h2.quiz__step__heading(ng-show="true")
-      | Maybe you’re not the only one to get f***ked… Share your disappointment with your friends and create a club.
+      | {{ 'quiz.step.share-feedback.1' | translate }}
     h2.quiz__step__heading(ng-show="false")
-      | Make your day even better: share and find out what friends of yours are not as lucky.
+      | {{ 'quiz.step.share-feedback.2' | translate }}
     h2.quiz__step__heading(ng-show="false")
-      | Tell all your friends how lucky you are, you deserve to be envied (who cares if you lose a few Facebook friends?).    
+      | {{ 'quiz.step.share-feedback.3' | translate }}
     ul.list-inline.text-center
       li 
         a
@@ -183,18 +184,20 @@
           span.sr-only Facebook
     
   .quiz__step.animated(ng-if="quiz.is(20)")
-    h2.quiz__step__heading Can we use the data you just entered? You'll be doing a good deed for the next user!
+    h2.quiz__step__heading {{ 'quiz.step.heading.9' | translate }}
     .text-center
-      button.btn.btn-lg.btn-default(ng-click="quiz.next()") No
+      button.btn.btn-lg.btn-default(ng-click="quiz.next()")
+        | {{ 'quiz.step.save.yes' | translate }}
       =" "
-      button.btn.btn-lg.btn-primary(ng-click="quiz.next()") Yes
+      button.btn.btn-lg.btn-primary(ng-click="quiz.next()")
+        | {{ 'quiz.step.save.no' | translate }}
       
   .quiz__step.animated(ng-if="quiz.is(21)")
-    h2.quiz__step__heading To know more about rents near you, visit rentswatch.com (yes, we’re non-profit and nice)
+    h2.quiz__step__heading {{ 'quiz.step.heading.10' | translate }}
 
 .quiz-nav
   .quiz-nav__item.quiz-nav__item--space.hidden-sm.hidden-xs(ng-show="quiz.hasNext()")
-    | Press space or click anywhere to continue.
+    | {{ 'quiz.nav.manual' | translate }}
      
   .quiz-nav__item
     span(ng-show="quiz.rent") Your rent is {{quiz.rent}} {{ quiz.currency }}/month
@@ -203,9 +206,9 @@
   .quiz-nav__item.quiz-nav__item--right
     button.btn.btn-primary(ng-disabled="!quiz.hasPrevious()", ng-click="quiz.previous()")
       i.fa.fa-chevron-left
-      span.sr-only Previous
+      span.sr-only {{ 'quiz.nav.prev' | translate }}
     span &nbsp;
     button.btn.btn-primary(ng-disabled="!quiz.hasNext()", ng-click="quiz.next()")
       i.fa.fa-chevron-right
-      span.sr-only Next          
+      span.sr-only {{ 'quiz.nav.next' | translate }}
       
