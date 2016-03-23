@@ -13,7 +13,7 @@
       ul.nav.navbar-nav(ng-click="isCollapsed = true")
         li(ui-sref-active="active")
           a(ui-sref='main.dashboard({city: null})')
-            | {{ 'navbar.link.toggler' | translate }}
+            | {{ 'navbar.link.dashboard' | translate }}
         li(ui-sref-active-eq="active")
           a(ui-sref='main.quiz') 
             | {{ 'navbar.link.quiz' | translate }}
