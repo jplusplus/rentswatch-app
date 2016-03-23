@@ -13,7 +13,7 @@ angular.module 'rentswatchApp'
           series = [ ['x'].concat do @getXValues ]
           series.push( ['changes'].concat _.map(scope.months, 'avgPricePerSqm') )
           series
-        generateXAxis: (columns)=>
+        generateXAxis:  =>
           # Return a configuration objects
           type: 'categories'
           categories: do @getXValues
@@ -23,15 +23,30 @@ angular.module 'rentswatchApp'
             culling:
               max: 5
             multiline: no
-        generateYAxis: (columns)=>
-          min: Math.floor _.chain(scope.months).map( (m)-> m.avgPricePerSqm * (1 - m.stdErr) ).min().value()
-          max: Math.ceil  _.chain(scope.months).map( (m)-> m.avgPricePerSqm * (1 + m.stdErr) ).max().value()
+        getMinY: =>
+          Math.floor(_.chain(scope.months)
+          .map( (m)-> m.avgPricePerSqm * (1 - m.stdErr) )
+          .min()
+          .value())
+        getMaxY: =>
+          Math.ceil(_.chain(scope.months)
+          .map( (m)-> m.avgPricePerSqm * (1 + m.stdErr) )
+          .max()
+          .value())
+        generateYAxis: =>
+          min = do @getMinY
+          max = do @getMaxY
+          console.log max - min, min, max
           # Return a configuration objects
+          min: min
+          max: max
           tick:
-            format: (d)-> $filter('number')(d) + ' €/m²'
+            format: (d)->
+              unit = if d is max then ' €/m²' else ''
+              $filter('number')(d) + unit
           padding:
             bottom: 0
-        generateColors: (columns)=>
+        generateColors: =>
           changes: dashboard.fillcolors[0]
         generateChart: =>
           columns = do @generateColumns
@@ -54,8 +69,8 @@ angular.module 'rentswatchApp'
             transition:
               duration: @TRANSITION_DURATION
             axis:
-              x: @generateXAxis columns
-              y: @generateYAxis columns
+              x: @generateXAxis()
+              y: @generateYAxis()
             grid:
               y:
                 show: yes
@@ -63,7 +78,7 @@ angular.module 'rentswatchApp'
               x: 'x'
               type: 'line'
               columns: columns
-              colors: @generateColors columns
+              colors: @generateColors()
           setTimeout @enhanceChart, 1000
         setupAreas: =>
           # First time we create areas

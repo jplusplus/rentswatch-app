@@ -58,4 +58,6 @@ angular
           # Bind it to the map
           map.addLayer @geojsonTileLayer
         setFeatureStyle: (feature, layer)=>
-          layer.setStyle fillColor: @fill(feature.properties.price_per_sqm)
+          if feature.properties?
+            layer.setStyle fillColor: @fill(feature.properties.price_per_sqm)
+            layer.bindPopup('YOLO');
