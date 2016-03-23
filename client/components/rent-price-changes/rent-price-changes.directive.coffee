@@ -24,19 +24,19 @@ angular.module 'rentswatchApp'
               max: 5
             multiline: no
         generateYAxis: (columns)=>
+          min: Math.floor _.chain(scope.months).map( (m)-> m.avgPricePerSqm * (1 - m.stdErr) ).min().value()
+          max: Math.ceil  _.chain(scope.months).map( (m)-> m.avgPricePerSqm * (1 + m.stdErr) ).max().value()
           # Return a configuration objects
           tick:
-            count: 5
-            format: (d)-> $filter('number')(d, 1) + ' €/m²'
+            format: (d)-> $filter('number')(d) + ' €/m²'
           padding:
-            bottom: 20
+            bottom: 0
         generateColors: (columns)=>
           changes: dashboard.fillcolors[0]
         generateChart: =>
           columns = do @generateColumns
-          window.c = @chart = c3.generate
+          @chart = c3.generate
             # Enhance the chart with d3
-            # onrendered: @enhanceChart
             bindto: element[0]
             interaction:
               enabled: yes
@@ -64,6 +64,34 @@ angular.module 'rentswatchApp'
               type: 'line'
               columns: columns
               colors: @generateColors columns
+          setTimeout @enhanceChart, 1000
+        setupAreas: =>
+          # First time we create areas
+          if not @svg? or not @areasGroup?
+            # Create a D3 elemnt
+            @svg = d3.select(element[0]).select('svg')
+            # Select the existing c3 chart
+            @areasGroup = @svg.select '.c3-chart'
+              # Create a group
+              .insert 'g', '.c3-chart-lines'
+              # Name it accordingly
+              .attr 'class', 'd3-chart-areas'
+        getArea: =>
+          d3.svg.area()
+            .x (d, i)=> @chart.internal.x i
+            .y0 (d)=> @chart.internal.y(d.avgPricePerSqm * (1-d.stdErr))
+            .y1 (d)=> @chart.internal.y(d.avgPricePerSqm * (1+d.stdErr))
+        enhanceChart: =>
+          # Prepare areas
+          do @setupAreas
+          # Within the same group... append a path
+          @areasGroup
+            .append 'path'
+            # And bind values to the group
+            .datum scope.months
+            # Name the path after the current group
+            .attr 'class', (d)-> 'd3-chart-area'
+            .attr 'd', do @getArea
         constructor: ->
           # Generate the chart
           do @generateChart
