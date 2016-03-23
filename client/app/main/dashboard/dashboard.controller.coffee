@@ -75,7 +75,7 @@ angular
         onEachFeature: (feature, layer)=>
           if feature.properties?
             layer.setStyle fillColor: @fill(feature.properties.price_per_sqm)
-            layer.on 'mouseover', @bindFeatureClick(feature.properties)
+            layer.on 'mouseover click', @bindFeatureClick(feature.properties)
         bindFeatureClick: (properties)=>
           (event)=>
             # For an unkown reason the map triggers 2 events.
