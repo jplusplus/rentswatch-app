@@ -25,6 +25,7 @@
         h2 {{ dashboard.city.name }} <span class="text-muted">at a glance</span>
         .text-muted We analysed {{ dashboard.city.total | number }} flats in this city
       .dashboard__view__context__body
+      
         .dashboard__view__context__body__neighborhoods(ng-show="dashboard.city.neighborhoods")
           h4 Most expensive neighborhoods
           p.small.text-muted   
@@ -38,3 +39,11 @@
                 span.dashboard__view__context__body__neighborhoods__item__label__price
                   | {{ neighborhood.avgPricePerSqm | number:1 }}
                   span(ng-show="$first")&nbsp;€/m²
+        
+        .dashboard__view__context__body__months(ng-show="dashboard.city.months.length")
+          h4 Rent price changes
+          p.small.text-muted   
+            | Average rent price for a new rental contract within 10km of Düsseldorf. 
+            | The gray area indicates the margin of error.
+          rent-price-changes(months="dashboard.city.months")
+          
