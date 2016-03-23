@@ -4,7 +4,7 @@ angular.module 'rentswatchApp'
 .config ($stateProvider) ->
   $stateProvider
   .state 'main.dashboard',
-    url: 'c/:city'
+    url: ':city'
     templateUrl: 'app/main/dashboard/dashboard.html'
     controller: 'DashboardCtrl as dashboard'
     params:

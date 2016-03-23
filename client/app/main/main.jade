@@ -7,39 +7,42 @@ div(ng-include='"components/navbar/navbar.html"')
       h2.main__intro__heading
         | Rentswatch
       p.main__intro__punchline
-        | All rents, all over Europe, in real time.<br />
-        span.lead By <a href="http://jplusplus.org" target="_blank">Journalism++</a>
+        | {{ 'main.intro.punchline' | translate }}<br />
+        span.lead(ng-bind-html="'main.intro.by' | translate")
         
     .main__links(screen-height)
       a.main__links__pan.main__links__pan--1(ui-sref="main.dashboard")
         .main__links__pan__wrapper
           h2.main__links__pan__heading
-            | What about your city?
+            | {{ 'main.links.dashboard.heading' | translate }}
           p.main__links__pan__description
-            | An inventory of the renting industry in the biggest European cities.
-          span.main__links__pan__btn.btn.btn-outline View
+            | {{ 'main.links.dashboard.description' | translate }}
+          span.main__links__pan__btn.btn.btn-outline
+            | {{ 'main.links.view' | translate }}
       a.main__links__pan.main__links__pan--2(ui-sref="main.quiz")
         .main__links__pan__wrapper
           h2.main__links__pan__heading
-            | What about you?
+            | {{ 'main.links.quiz.heading' | translate }}
           p.main__links__pan__description
-            | You rent price might be too high. You deserve to know how much!
-          span.main__links__pan__btn.btn.btn-outline View
+            | {{ 'main.links.quiz.description' | translate }}
+          span.main__links__pan__btn.btn.btn-outline
+            | {{ 'main.links.view' | translate }}
       a.main__links__pan.main__links__pan--3(href="http://blog.rentswatch.com")
         .main__links__pan__wrapper
           h2.main__links__pan__heading
-            | Stay tuned!
+            | {{ 'main.links.blog.heading' | translate }}
           p.main__links__pan__description
-            | Read our blog for more news and insights about Rentswatch.
-          span.main__links__pan__btn.btn.btn-outline View
+            | {{ 'main.links.blog.description' | translate }}
+          span.main__links__pan__btn.btn.btn-outline
+            | {{ 'main.links.view' | translate }}
       a.main__links__pan.main__links__pan--4(href="http://api.rentswatch.com")
         .main__links__pan__wrapper
           h2.main__links__pan__heading
-            | Developer API
+            | {{ 'main.links.api.heading' | translate }}
           p.main__links__pan__description
-            | We want developers and partners to be able to build 
-            | great stories with our database.
-          span.main__links__pan__btn.btn.btn-outline View
+            | {{ 'main.links.api.description' | translate }}
+          span.main__links__pan__btn.btn.btn-outline
+            | {{ 'main.links.view' | translate }}
           
     footer.main__outro
       .row
@@ -47,6 +50,4 @@ div(ng-include='"components/navbar/navbar.html"')
           a.main__outro__miz(href="http://www.miz-babelsberg.de/", target="_blank")
             img(src="assets/images/miz-logo.svg", width="100%")
         .col-md-6
-          .main__outro__legal
-            | Insert here legal mention about the ownership of data and the code.
-            | Links to Github and Twitter might be good too.
+          .main__outro__legal(ng-bind-html="'main.outro.legal' | translate")

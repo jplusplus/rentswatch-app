@@ -2,20 +2,40 @@
   .container-fluid
     .navbar-header
       button.navbar-toggle(type='button', ng-click='isCollapsed = !isCollapsed')
-        span.sr-only Toggle navigation
+        span.sr-only {{ 'navbar.link.toggler' | translate }}
         span.icon-bar
         span.icon-bar
         span.icon-bar
       a.navbar-brand(ui-sref="main")   
         img(src="assets/images/site-logo-bordered.svg", height="60px", alt="Rentswatch")
 
-    #navbar-main.navbar-collapse(ng-class="{ collapse: isCollapsed }")
+    .navbar-collapse(ng-class="{ collapse: isCollapsed }")
       ul.nav.navbar-nav(ng-click="isCollapsed = true")
         li(ui-sref-active="active")
-          a(ui-sref='main.dashboard({city: null})') Rent in your city
+          a(ui-sref='main.dashboard({city: null})')
+            | {{ 'navbar.link.toggler' | translate }}
         li(ui-sref-active-eq="active")
-          a(ui-sref='main.quiz') Do you pay the right rent?
+          a(ui-sref='main.quiz') 
+            | {{ 'navbar.link.quiz' | translate }}
         li
-          a(href="http://blog.rentswatch.com", target="_blank") Blog
+          a(href="http://blog.rentswatch.com", target="_blank")
+            | {{ 'navbar.link.blog' | translate }}
         li
-          a(href="http://api.rentswatch.com", target="_blank") API
+          a(href="http://api.rentswatch.com", target="_blank")
+            | {{ 'navbar.link.api' | translate }}
+      ul.nav.navbar-nav
+        li(uib-dropdown)
+          a(uib-dropdown-toggle)
+            | {{ 'navbar.link.language' | translate }} <span class="caret"></span>
+          ul(uib-dropdown-menu)
+            li(ng-class="{ active: useLanguage() === 'fr' }")
+              a(ng-click="useLanguage('fr')")
+                | Français
+
+            li(ng-class="{ active: useLanguage() === 'en' }")
+              a(ng-click="useLanguage('en')")
+                | English
+
+            li(ng-class="{ active: useLanguage() === 'es' }")
+              a(ng-click="useLanguage('es')")
+                | Deutch

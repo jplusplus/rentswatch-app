@@ -9,5 +9,6 @@ angular.module 'rentswatchApp', [
   'ui.bootstrap',
   'ui.select',
   'cfp.hotkeys',
-  'leaflet-directive'
+  'leaflet-directive',
+  'pascalprecht.translate'
 ]

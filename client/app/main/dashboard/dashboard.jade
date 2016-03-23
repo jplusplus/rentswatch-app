@@ -1,7 +1,7 @@
 .dashboard
   .dashboard__pick(ng-if="!dashboard.city")
-    h2 Get insights about your city
-    p We analysed thousands of flats all around Europe. What about your city?        
+    h2 {{ 'dashboard.pick.heading' | translate }}
+    p {{ 'dashboard.pick.description' | translate }}
     
     .dashboard__pick__form(ng-init="dashboard.selectedCity = null")
       ui-select(fix-focus, ng-model="dashboard.selectedCity", on-select="dashboard.selectCity($item)")
@@ -12,10 +12,7 @@
                           refresh-delay="200")
           span(ng-bind="city.name")
 
-    p.text-left.dashboard__pick__examples
-      | Examples: <a ui-sref="main.dashboard({city: 'paris'})">Paris</a>, 
-      | <a ui-sref="main.dashboard({city: 'berlin'})">Berlin</a>
-      | or <a ui-sref="main.dashboard({city: 'copenhagen'})">Copenhagen</a>.
+    p.text-left.dashboard__pick__examples(ng-bind-html="'dashboard.pick.examples' | translate")
     
     
   .dashboard__view(ng-if="dashboard.city")
@@ -24,22 +21,21 @@
       | {{ dashboard.currentPricePerSqm() | number:2 }}&nbsp;€/m²
     .dashboard__view__context(ng-class="{ 'dashboard__view__context--open': dashboard.showContext }")
       .dashboard__view__context__heading 
-        h2 {{ dashboard.city.name }} <span class="text-muted">at a glance</span>
-        .text-muted We analysed {{ dashboard.city.total | number }} flats in this city
+        h2(ng-bind-html=" 'dashboard.context.heading.name' | translate:dashboard.city ")
+        .text-muted(ng-bind-html="'dashboard.context.heading.total' | translate:dashboard.city")
         button.dashboard__view__context__heading__toggler(ng-click="dashboard.showContext = !dashboard.showContext")          
           span(ng-hide="dashboard.showContext")
             i.fa.fa-arrow-up.fa-fw
-            | &nbsp;See the metrics
+            | &nbsp;{{ 'dashboard.context.toggler.off' | translate }}
           span(ng-show="dashboard.showContext")
             i.fa.fa-arrow-down.fa-fw
-            | &nbsp;Back to the map
+            | &nbsp;{{ 'dashboard.context.toggler.on' | translate }}
       
       .dashboard__view__context__body      
         .dashboard__view__context__body__ranking(ng-show="dashboard.city.neighborhoods")
-          h4 Most expensive neighborhoods
+          h4(ng-bind="'dashboard.context.neighborhoods.title' | translate")
           p.small.text-muted   
-            | Prices represent the average price for new rental contracts in 
-            | the last 6 months within 2 kilometers of the center of each neighborhood.
+            | {{ 'dashboard.context.neighborhoods.description' | translate }}
           ul.list-unstyled
             li.dashboard__view__context__body__ranking__item(ng-repeat="neighborhood in dashboard.city.neighborhoods | orderBy:'-avgPricePerSqm' ")
               span.dashboard__view__context__body__ranking__item__bar(ng-style="dashboard.itemBarStyle(neighborhood, dashboard.city.neighborhoods)")
@@ -50,17 +46,15 @@
                   span(ng-show="$first")&nbsp;€/m²
         
         .dashboard__view__context__body__months(ng-show="dashboard.city.months.length")
-          h4 Rent price changes
+          h4(ng-bind="'dashboard.context.months.title' | translate")
           p.small.text-muted   
-            | Average rent price for a new rental contract within 10km of Düsseldorf. 
-            | The gray area indicates the margin of error.
+            | {{ 'dashboard.context.months.description' | translate }}
           rent-price-changes(months="dashboard.city.months")
           
         .dashboard__view__context__body__ranking.dashboard__view__context__body__ranking--avg-price-per-sqm
-          h4 Most expensive cities
-          p.small.text-muted
-            | Prices represent the average price for 
-            | new rental contracts in the last 6 months.
+          h4(ng-bind="'dashboard.context.avg.title' | translate")
+          p.small.text-muted   
+            | {{ 'dashboard.context.avg.description' | translate }}
           ul.list-unstyled
             li.dashboard__view__context__body__ranking__item(ng-repeat="city in ::dashboard.getRanking('avgPricePerSqm') | filter:{visible: true}",
                                                              ng-class="{ active: city.name === dashboard.city.name }")
@@ -73,11 +67,9 @@
                   span(ng-show="$first")&nbsp;€/m²
           
         .dashboard__view__context__body__ranking.dashboard__view__context__body__ranking--inequality-index
-          h4 Urban Inequality Index
-          p.small.text-muted
-            | The Urban inequality index measures the difference in prices 
-            | between expensive neighborhoods and cheaper ones. 
-            | 0 means that prices are equal across the whole city.    
+          h4(ng-bind="'dashboard.context.index.title' | translate")
+          p.small.text-muted   
+            | {{ 'dashboard.context.index.description' | translate }}
           ul.list-unstyled
             li.dashboard__view__context__body__ranking__item(ng-repeat="city in ::dashboard.getRanking('inequalityIndex') | filter:{visible: true}",
                                                              ng-class="{ active: city.name === dashboard.city.name }")
