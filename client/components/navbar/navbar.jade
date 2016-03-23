@@ -25,17 +25,17 @@
             | {{ 'navbar.link.api' | translate }}
       ul.nav.navbar-nav
         li(uib-dropdown)
-          a(uib-dropdown-toggle)
+          a(uib-dropdown-toggle, href="")
             | {{ 'navbar.link.language' | translate }} <span class="caret"></span>
           ul(uib-dropdown-menu)
-            li(ng-class="{ active: useLanguage() === 'fr' }")
-              a(ng-click="useLanguage('fr')")
+            li(ng-class="{ active: use() === 'fr' }")
+              a(ng-click="use('fr')", href="")
                 | Français
 
-            li(ng-class="{ active: useLanguage() === 'en' }")
-              a(ng-click="useLanguage('en')")
+            li(ng-class="{ active: use() === 'en' }")
+              a(ng-click="use('en')", href="")
                 | English
 
-            li(ng-class="{ active: useLanguage() === 'es' }")
-              a(ng-click="useLanguage('es')")
+            li(ng-class="{ active: use() === 'es' }")
+              a(ng-click="use('es')", href="")
                 | Deutch
