@@ -9,8 +9,8 @@
       a.navbar-brand(ui-sref="main")   
         img(src="assets/images/site-logo-bordered.svg", height="60px", alt="Rentswatch")
 
-    #navbar-main.navbar-collapse.collapse(collapse='isCollapsed')
-      ul.nav.navbar-nav
+    #navbar-main.navbar-collapse(ng-class="{ collapse: isCollapsed }")
+      ul.nav.navbar-nav(ng-click="isCollapsed = true")
         li(ui-sref-active="active")
           a(ui-sref='main.dashboard({city: null})') Rent in your city
         li(ui-sref-active-eq="active")
