@@ -11,5 +11,3 @@ angular.module 'rentswatchApp', [
   'cfp.hotkeys',
   'leaflet-directive'
 ]
-.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
-  $urlRouterProvider.otherwise '/'

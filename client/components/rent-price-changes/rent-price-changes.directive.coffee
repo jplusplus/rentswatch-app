@@ -55,7 +55,7 @@ angular.module 'rentswatchApp'
             interaction:
               enabled: yes
             padding:
-              right: 20
+              right: 0
               top: 20
             legend:
               show: no

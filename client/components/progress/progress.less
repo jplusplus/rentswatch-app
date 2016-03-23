@@ -1,0 +1,72 @@
+@-webkit-keyframes doublebounce {
+  0%, 100% { .scale(0); }
+  50% { .scale(1) }
+}
+
+@-moz-keyframes doublebounce {
+  0%, 100% { .scale(0); }
+  50% { .scale(1) }
+}
+
+@-o-keyframes doublebounce {
+  0%, 100% { .scale(0); }
+  50% { .scale(1) }
+}
+
+@keyframes doublebounce {
+  0%, 100% { .scale(0); }
+  50% { .scale(1) }
+}
+
+.progress-container {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:100%;
+  background: @body-bg;
+  z-index: @zindex-modal + 100;
+  display:none;
+
+  &--active {
+    display: block;
+  }
+
+  &__spinner {
+
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    .translate(-50%, -50%);
+
+    &:before, &:after {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: @brand-primary;
+      opacity: 0.6;
+      position: absolute;
+      top: 0;
+      left: 0;
+      content:"";
+      animation: doublebounce 2.0s infinite ease-in-out;
+    }
+
+    &:after {
+      animation-delay: -1.0s;
+    }
+  }
+
+}
+
+.body-wrapper {
+  .transition(0.5s);
+}
+
+.body--progress-active .body-wrapper {
+  filter: grayscale(1);
+  -moz-filter: grayscale(1);
+  -webkit-filter: grayscale(1);
+}
