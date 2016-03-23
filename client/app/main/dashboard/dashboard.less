@@ -73,10 +73,38 @@
 
       &.leaflet-container {
         background:transparent;
+        .leaflet-clickable {
+          cursor: help;
+          body.leaflet-dragging & {
+            cursor:move;
+          }
+        }
       }
 
       .leaflet-layer {
         filter:sepia(100%) hue-rotate(205deg) brightness(200%);
+      }
+    }
+
+    &__current-price-per-sqm {
+      position:absolute;
+      left:20px;
+      bottom:20px;
+      font-size:2em;
+      z-index:180;
+      font-weight: bolder;
+      text-shadow: 0 0 10px fade(black, 90);
+      .transition(opacity 1s);
+
+      &.ng-hide {
+        opacity:0;
+      }
+
+      @media (max-width: @screen-md) {
+        top:20px;
+        right:20px;
+        left:auto;
+        bottom:auto;
       }
     }
 

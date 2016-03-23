@@ -2,7 +2,7 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'DashboardCtrl', ($http, $state, settings, dashboard, city, rankings, leafletData)->
+    .controller 'DashboardCtrl', ($http, $state, $scope, $timeout, settings, dashboard, city, rankings, leafletData)->
       'ngInject'
       # Return an instance of the class
       new class
@@ -49,15 +49,38 @@ angular
             @scale = chroma.scale(dashboard.fillcolors).domain([min, max], 7, 'quantiles')
           # Get color for the given value
           do @scale(v).hex
+        showCurrentPricePerSqm: =>!! @_showCurrentPricePerSqm
+        currentPricePerSqm: (currentPricePerSqm)=>
+          if currentPricePerSqm?
+            @_currentPricePerSqm = currentPricePerSqm
+            @_showCurrentPricePerSqm = yes
+            # Clear existing timeout
+            $timeout.cancel @currentPricePerSqmTimeout
+            @currentPricePerSqmTimeout = $timeout =>
+              # Activate price displaying
+              @_showCurrentPricePerSqm = no
+            , 4000
+          @_currentPricePerSqm
         applyGeoJSON: (map)=>
           # Create the tiles layer
           @geojsonTileLayer = new L.TileLayer.GeoJSON dashboard.geojson.url, {
             clipTiles: yes
             unique: (feature)-> feature.id;
-          }, { style: dashboard.geojson.style, onEachFeature: @setFeatureStyle }
+          }, {
+            style: dashboard.geojson.style,
+            onEachFeature: @onEachFeature
+          }
           # Bind it to the map
           map.addLayer @geojsonTileLayer
-        setFeatureStyle: (feature, layer)=>
+        onEachFeature: (feature, layer)=>
           if feature.properties?
             layer.setStyle fillColor: @fill(feature.properties.price_per_sqm)
-            layer.bindPopup('YOLO');
+            layer.on 'mouseover', @bindFeatureClick(feature.properties)
+        bindFeatureClick: (properties)=>
+          (event)=>
+            # For an unkown reason the map triggers 2 events.
+            # The one that do not contain a layer attribute is the right one.
+            unless event.layer?
+              $scope.$apply =>
+                # Register the last overed tile's price
+                @currentPricePerSqm properties.price_per_sqm

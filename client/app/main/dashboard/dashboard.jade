@@ -20,6 +20,8 @@
     
   .dashboard__view(ng-if="dashboard.city")
     leaflet.dashboard__view__map(center="dashboard.map.center", tiles="dashboard.map.tiles", defaults="dashboard.map.defaults")
+    .dashboard__view__current-price-per-sqm(ng-show="dashboard.showCurrentPricePerSqm()")
+      | {{ dashboard.currentPricePerSqm() | number:2 }}&nbsp;€/m²
     .dashboard__view__context(ng-class="{ 'dashboard__view__context--open': dashboard.showContext }")
       .dashboard__view__context__heading 
         h2 {{ dashboard.city.name }} <span class="text-muted">at a glance</span>
@@ -31,7 +33,7 @@
           span(ng-show="dashboard.showContext")
             i.fa.fa-arrow-down.fa-fw
             | &nbsp;Back to the map
-          
+      
       .dashboard__view__context__body      
         .dashboard__view__context__body__ranking(ng-show="dashboard.city.neighborhoods")
           h4 Most expensive neighborhoods

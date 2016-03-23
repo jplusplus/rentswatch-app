@@ -7,7 +7,7 @@ angular
       geojson:
         url: 'http://api.rentswatch.com/api/tiles/{z}/{x}/{y}'
         style:
-          clickable: false
+          clickable: yes
           color: "#211F30"
           fillColor: "#211F30"
           weight: 1.0,

@@ -36,7 +36,6 @@ angular.module 'rentswatchApp'
         generateYAxis: =>
           min = do @getMinY
           max = do @getMaxY
-          console.log max - min, min, max
           # Return a configuration objects
           min: min
           max: max
