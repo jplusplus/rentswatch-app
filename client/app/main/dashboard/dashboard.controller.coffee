@@ -8,6 +8,7 @@ angular
       new class
         constructor: ->
           @city = city
+          @showContext = no
           if not @city?
             do @cityLookup
           else
@@ -24,8 +25,8 @@ angular
           $http.get(settings.API_URL + 'cities/search/', config).then (r)=>
             # Update the cities list
             @cities = r.data
-            selectCity: (city)->
-              $state.go 'main.dashboard', city: city.slug
+        selectCity: (city)->
+          $state.go 'main.dashboard', city: city.slug
         itemBarStyle: (item, set=[], indicator='avgPricePerSqm')=>
           max = _.max set, indicator
           width: 100 * (item[indicator] / max[indicator]) + '%'
