@@ -1,5 +1,35 @@
-.quiz {
+.quiz-nav {
+  position:fixed;
+  z-index:1000;
+  left:0;
+  right:0;
+  bottom:0;
+  height:@navbar-height;
+  line-height:@navbar-height;
+  background:lighten(@body-bg, 10%);
+  border-top:1px lighten(@body-bg, 30%) solid;
 
+  &__item {
+    padding:0 10px;
+    display: inline-block;
+
+    &--right {
+      float:right;
+    }
+
+    &--space {
+      line-height:@navbar-height;
+      font-weight: bold;
+      position: absolute;
+      left:50%;
+      text-align: center;
+      .translate(-50%, 0);
+    }
+  }
+}
+
+.quiz {
+  height:100%;
   position: relative;
   max-width:600px;
   margin:auto;
@@ -8,6 +38,16 @@
   animation: blur-in 0.8s;
   animation-fill-mode: forwards;
   opacity: 0;
+
+  &:before {
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:transparent;
+  }
 
   &:after {
     text-align: center;
@@ -22,19 +62,7 @@
     .transition(.6s);
   }
 
-  &--freezed{
-
-    &:before {
-      content:"";
-      position:absolute;
-      top:0;
-      left:0;
-      bottom:0;
-      right:0;
-      z-index:900;
-      padding-top:100%;
-      #gradient > .vertical(@body-bg, transparent);
-    }
+  &--freezed {
 
     &:after {
       opacity:1;
@@ -43,40 +71,11 @@
 
   }
 
-  &__nav {
-    position:fixed;
-    z-index:1000;
-    left:0;
-    right:0;
-    bottom:0;
-    height:@navbar-height;
-    line-height:@navbar-height;
-    background:lighten(@body-bg, 10%);
-    border-top:1px lighten(@body-bg, 30%) solid;
-
-    &__item {
-      padding:0 10px;
-      display: inline-block;
-
-      &--right {
-        float:right;
-      }
-
-      &--space {
-        line-height:@navbar-height;
-        font-weight: bold;
-        position: absolute;
-        left:50%;
-        text-align: center;
-        .translate(-50%, 0);
-      }
-    }
-  }
 
   &__step {
     position:absolute;
     width:80%;
-    top:0px;
+    top:@navbar-height;
     left:50%;
     z-index:500;
 
@@ -110,10 +109,12 @@
     &__heading {
       padding:20px;
       margin-bottom:20px;
+      line-height: 1.3em;
       text-align: center;
 
       small, .small {
         color: lighten(#211F30, 60%);
+        line-height: 1.3em;
       }
 
       &--tlc,
@@ -294,7 +295,7 @@
 
         width:1px;
         height:1px;
-        color:fade(@text-color, 75%);
+        color:@text-muted;
         text-shadow: none;
 
         &__ticks {
@@ -320,7 +321,7 @@
             &:after {
               position:absolute;
               content:"";
-              background:fade(@text-color, 75%);
+              background:@text-muted;
               height:1px;
               width:1px;
             }
@@ -388,7 +389,7 @@
         &__line {
           width:100%;
           height:100%;
-          background:fade(@text-color, 50%);
+          background:@text-muted;
         }
 
         &--x {

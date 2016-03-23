@@ -1,17 +1,28 @@
 .dashboard {
 
-  margin-top:@navbar-height;
+  height:100%;
+  background: transparent;
 
   &__pick {
-    max-width:550px;
-    padding:0 20px;
-    padding-top:80px;
+    max-width:@screen-sm;
     margin:auto;
     text-align: center;
 
     animation: blur-in 0.8s;
     animation-fill-mode: forwards;
     opacity: 0;
+
+    position:absolute;
+    bottom:50%;
+    left:50%;
+    .translate(-50%, 0);
+
+    @media (max-width: @screen-sm) {
+      position:static;
+      padding:0 20px;
+      margin-top:@navbar-height + 60px;
+      .translate(0, 0);
+    }
 
     .ui-select-container input.form-control,
     .ui-select-container .ui-select-toggle{

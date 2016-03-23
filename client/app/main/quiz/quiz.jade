@@ -1,15 +1,15 @@
-.quiz(ng-class="{ 'quiz--freezed': quiz.freezed }")
+.quiz(ng-class="{ 'quiz--freezed': quiz.freezed }", ng-click="quiz.next(true)")
   .quiz__step.animated(ng-if="quiz.is(0)")
     h2.quiz__step__heading
-      div.small We analyzed {{ main.totalAds }} flats and can tell you:
+      div.small We analyzed {{ main.totalAds | number }} flats and can tell you:
       div Do you pay the right rent for the right flat?
     .text-center
-      button.btn.btn-lg.btn-primary(ng-click="quiz.next()") Find out
+      button.btn.btn-lg.btn-outline(ng-click="quiz.next()") Find out
             
   .quiz__step.animated(ng-if="quiz.is(1)")
     h2.quiz__step__heading Are you sure you want to know?
     .text-center
-      button.btn.btn-lg.btn-primary(ng-click="quiz.next()") Yes
+      button.btn.btn-lg.btn-outline(ng-click="quiz.next()") Yes...
             
   .quiz__step.animated(ng-if="quiz.is(2)")
     h2.quiz__step__heading OK. It will be quick but we can’t promise it will be painless.
@@ -192,20 +192,20 @@
   .quiz__step.animated(ng-if="quiz.is(21)")
     h2.quiz__step__heading To know more about rents near you, visit rentswatch.com (yes, we’re non-profit and nice)
 
-  .quiz__nav
-    .quiz__nav__item.quiz__nav__item--space.hidden-sm.hidden-xs(ng-show="quiz.hasNext()")
-      | Press space to continue.
-       
-    .quiz__nav__item
-      span(ng-show="quiz.rent") Your rent is {{quiz.rent}} {{ quiz.currency }}/month
-      span(ng-show="quiz.space") &nbsp;for {{quiz.space}}m² flat
-       
-    .quiz__nav__item.quiz__nav__item--right
-      button.btn.btn-primary(ng-disabled="!quiz.hasPrevious()", ng-click="quiz.previous()")
-        i.fa.fa-chevron-left
-        span.sr-only Previous
-      span &nbsp;
-      button.btn.btn-primary(ng-disabled="!quiz.hasNext()", ng-click="quiz.next()")
-        i.fa.fa-chevron-right
-        span.sr-only Next          
-        
+.quiz-nav
+  .quiz-nav__item.quiz-nav__item--space.hidden-sm.hidden-xs(ng-show="quiz.hasNext()")
+    | Press space or click anywhere to continue.
+     
+  .quiz-nav__item
+    span(ng-show="quiz.rent") Your rent is {{quiz.rent}} {{ quiz.currency }}/month
+    span(ng-show="quiz.space") &nbsp;for {{quiz.space}}m² flat
+     
+  .quiz-nav__item.quiz-nav__item--right
+    button.btn.btn-primary(ng-disabled="!quiz.hasPrevious()", ng-click="quiz.previous()")
+      i.fa.fa-chevron-left
+      span.sr-only Previous
+    span &nbsp;
+    button.btn.btn-primary(ng-disabled="!quiz.hasNext()", ng-click="quiz.next()")
+      i.fa.fa-chevron-right
+      span.sr-only Next          
+      

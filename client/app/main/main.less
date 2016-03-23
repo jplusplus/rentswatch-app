@@ -95,10 +95,10 @@
         height:auto;
         width:100%;
         background: transparent;
-        &__wrapper {
+        &__wrapper, &__wrapper:hover {
           padding:30px 10px;
           position:static;
-          .translate(0, 0);
+          .translate(0, 0) !important;
         }
       }
     }
@@ -121,35 +121,29 @@
 
       &--1 {
         left:0; top:0;
-        @bg-start:fade(black, 20%);
-        #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+        #gradient > .vertical(fade(black, 20%), transparent, 0%, 70%);
       }
       &--2 {
         left:25%; top:0;
-        @bg-start:fade(black, 30%);
-        #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+        #gradient > .vertical(fade(black, 30%), transparent, 0%, 70%);
         @media (max-width: 990px) { left:50%; }
       }
       &--3 {
         left:50%; top:0;
-        @bg-start:fade(black, 40%);
-        #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+        #gradient > .vertical(fade(black, 40%), transparent, 0%, 70%);
 
         @media (max-width: 990px) {
           left:0%; top: 50%;
-          @bg-start:fade(black, 30%);
-          #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+          #gradient > .vertical(fade(black, 30%), transparent, 0%, 70%);
         }
       }
       &--4 {
         left:75%; top:0;
-        @bg-start:fade(black, 50%);
-        #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+        #gradient > .vertical(fade(black, 50%), transparent, 0%, 70%);
 
         @media (max-width: 990px) {
           left:50%; top: 50%;
-          @bg-start:fade(black, 20%);
-          #gradient > .vertical(@bg-start, transparent, 0%, 70%);
+          #gradient > .vertical(fade(black, 20%), transparent, 0%, 70%);
         }
       }
 
@@ -167,14 +161,6 @@
       }
 
       &__btn {
-        display: inline-block;
-        padding:5px 15px;
-        margin-top:20px;
-        color:white;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size:1.3em;
-        border:3px solid white;
         opacity:0;
         .scale(0);
         .transition(0.3s);

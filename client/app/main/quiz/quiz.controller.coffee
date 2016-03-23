@@ -10,7 +10,7 @@ angular
       CENTER_REQUIRED_FROM = 17
       # Some steps trigger an autoplay
       AUTOPLAYED_STEPS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16]
-      AUTOPLAY_TIMEOUT = 6000
+      AUTOPLAY_TIMEOUT = 4000
       # Some steps contain forms
       FORM_STEPS = [12, 13, 15, 17]
       # Return an instance of the class
@@ -81,7 +81,9 @@ angular
           return yes
         hasPrevious: => not @freezed and @step > 0
         # Go the next step
-        next: => @step++ if do @hasNext
+        next: (disableOnForm=false)=>
+          if do @hasNext and ( not disableOnForm or not @hasForm @step )
+            @step++
         previous: => @step-- if do @hasPrevious
         # Get the part of the user rent's according to the max value
         userRentPart: =>
