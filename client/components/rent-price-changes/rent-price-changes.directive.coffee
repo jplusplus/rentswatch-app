@@ -27,7 +27,7 @@ angular.module 'rentswatchApp'
           # Return a configuration objects
           tick:
             count: 5
-            format: (d)-> $filter('number')(d, 1) + '€/m²'
+            format: (d)-> $filter('number')(d, 1) + ' €/m²'
           padding:
             bottom: 20
         generateColors: (columns)=>

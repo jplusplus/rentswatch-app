@@ -2,7 +2,7 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'DashboardCtrl', ($http, $state, settings, dashboard, city, leafletData)->
+    .controller 'DashboardCtrl', ($http, $state, settings, dashboard, city, rankings, leafletData)->
       'ngInject'
       # Return an instance of the class
       new class
@@ -26,10 +26,21 @@ angular
             @cities = r.data
             selectCity: (city)->
               $state.go 'main.dashboard', city: city.slug
-        neighborhoodBarStyle: (neighborhood)=>
-          max = _.max city.neighborhoods, 'avgPricePerSqm'
-          width: 100 * (neighborhood.avgPricePerSqm / max.avgPricePerSqm) + '%'
-          background: @fill(neighborhood.avgPricePerSqm)
+        itemBarStyle: (item, set=[], indicator='avgPricePerSqm')=>
+          max = _.max set, indicator
+          width: 100 * (item[indicator] / max[indicator]) + '%'
+          background: if indicator is 'avgPricePerSqm' then @fill(item[indicator]) else undefined
+        getRanking: (indicator='avgPricePerSqm')=>
+          cityIdx = _.findIndex rankings[indicator], (c)-> c.name is city.name
+          _.map rankings[indicator], (c, idx)->
+            # Add a rank field
+            c.rank = idx + 1
+            # The city is visible if:
+            #   * it the first of the list
+            #   * it is the current city
+            #   * it is 2 ranks after and before the current city
+            c.visible = idx is 0 or c.name is city.name or Math.abs(cityIdx - idx) <= 2
+            c
         fill: (v)=>
           unless @scale?
             min = @city.avgPricePerSqm - 15

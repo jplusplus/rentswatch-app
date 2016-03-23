@@ -26,17 +26,17 @@
         .text-muted We analysed {{ dashboard.city.total | number }} flats in this city
       .dashboard__view__context__body
       
-        .dashboard__view__context__body__neighborhoods(ng-show="dashboard.city.neighborhoods")
+        .dashboard__view__context__body__ranking(ng-show="dashboard.city.neighborhoods")
           h4 Most expensive neighborhoods
           p.small.text-muted   
             | Prices represent the average price for new rental contracts in 
             | the last 6 months within 2 kilometers of the center of each neighborhood.
           ul.list-unstyled
-            li.dashboard__view__context__body__neighborhoods__item(ng-repeat="neighborhood in dashboard.city.neighborhoods | orderBy:'-avgPricePerSqm' ")
-              span.dashboard__view__context__body__neighborhoods__item__bar(ng-style="dashboard.neighborhoodBarStyle(neighborhood)")
-              span.dashboard__view__context__body__neighborhoods__item__label
+            li.dashboard__view__context__body__ranking__item(ng-repeat="neighborhood in dashboard.city.neighborhoods | orderBy:'-avgPricePerSqm' ")
+              span.dashboard__view__context__body__ranking__item__bar(ng-style="dashboard.itemBarStyle(neighborhood, dashboard.city.neighborhoods)")
+              span.dashboard__view__context__body__ranking__item__label
                 | {{ neighborhood.name }}
-                span.dashboard__view__context__body__neighborhoods__item__label__price
+                span.dashboard__view__context__body__ranking__item__label__price
                   | {{ neighborhood.avgPricePerSqm | number:1 }}
                   span(ng-show="$first")&nbsp;€/m²
         
@@ -47,3 +47,36 @@
             | The gray area indicates the margin of error.
           rent-price-changes(months="dashboard.city.months")
           
+        .dashboard__view__context__body__ranking.dashboard__view__context__body__ranking--avg-price-per-sqm
+          h4 Most expensive cities
+          p.small.text-muted
+            | Prices represent the average price for 
+            | new rental contracts in the last 6 months.
+          ul.list-unstyled
+            li.dashboard__view__context__body__ranking__item(ng-repeat="city in ::dashboard.getRanking('avgPricePerSqm') | filter:{visible: true}",
+                                                             ng-class="{ active: city.name === dashboard.city.name }")
+              span.dashboard__view__context__body__ranking__item__bar(ng-style=":: dashboard.itemBarStyle(city, dashboard.getRanking('avgPricePerSqm') )")
+              span.dashboard__view__context__body__ranking__item__label
+                span.label {{ city.rank }}
+                span {{ city.name }}
+                span.dashboard__view__context__body__ranking__item__label__price
+                  | {{ city.avgPricePerSqm | number:1 }}
+                  span(ng-show="$first")&nbsp;€/m²
+          
+        .dashboard__view__context__body__ranking.dashboard__view__context__body__ranking--inequality-index
+          h4 Urban Inequality Index
+          p.small.text-muted
+            | The Urban inequality index measures the difference in prices 
+            | between expensive neighborhoods and cheaper ones. 
+            | 0 means that prices are equal across the whole city.    
+          ul.list-unstyled
+            li.dashboard__view__context__body__ranking__item(ng-repeat="city in ::dashboard.getRanking('inequalityIndex') | filter:{visible: true}",
+                                                             ng-class="{ active: city.name === dashboard.city.name }")
+              span.dashboard__view__context__body__ranking__item__bar(ng-style=":: dashboard.itemBarStyle(city, dashboard.getRanking('inequalityIndex'), 'inequalityIndex')")
+              span.dashboard__view__context__body__ranking__item__label
+                span.label {{ city.rank }}
+                span {{ city.name }}
+                span.dashboard__view__context__body__ranking__item__label__price
+                  | {{ city.inequalityIndex | number:2 }}
+                  
+                  

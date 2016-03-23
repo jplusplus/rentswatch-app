@@ -105,21 +105,50 @@
         bottom:0;
         overflow: auto;
 
-        &__neighborhoods {
-
+        &__months, &__ranking {
           margin-bottom:30px;
+        }
+
+        &__ranking {
+
+          &--inequality-index &__item__bar {
+            background:white;
+          }
+
+          &--inequality-index &__item__label,
+          &--inequality-index &__item__label .label {
+            color: lighten(#211F30, 40%);
+          }
 
           &__item {
             position: relative;
             margin-bottom:10px;
-
             overflow: hidden;
+
             width:0%;
             animation: slide-out 400ms cubic-bezier(0.645, 0.045, 0.355, 1);
             animation-fill-mode: forwards;
             .animation-delay-loop(0, 100, 200ms);
 
+            &.active {
+              overflow: visible;
+            }
+
+            &.active &__bar {
+
+              &:after {
+                content:"";
+                position:absolute;
+                left:-5px;
+                right:-5px;
+                top:-5px;
+                bottom:-5px;
+                border:2px solid white;
+              }
+            }
+
             &__bar {
+              position: relative;
               display: block;
               height:20px;
               background:  lighten(#211F30, 40%);
@@ -133,12 +162,17 @@
               line-height:20px;
               font-weight: bold;
               font-size:0.8em;
+
+              .label:after {
+                content:". ";
+              }
+
               &__price {
                 font-weight: normal;
                 &:before {
-                  content:"/";
-                  margin:0 5px;
-                  color: darken(#211F30, 20%);
+                  content:" ⇨ ";
+                  margin:0;
+                  color: inherit;
                 }
               }
             }
