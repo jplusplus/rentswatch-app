@@ -69,6 +69,7 @@
       color:@text-color;
       animation: fade-in-top 0.8s;
       animation-fill-mode: forwards;
+      .animation-delay-loop(0, 4, 200ms);
       opacity: 0;
       .translate3d(0, 0, 0);
 
@@ -83,21 +84,18 @@
       }
 
       &--1 {
-        left:0; top:0;
-        animation-delay: 0s;
+        left:0; top:0;        
         @bg-start:fade(black, 20%);
         #gradient > .vertical(@bg-start, transparent, 0%, 70%);
       }
       &--2 {
-        left:25%; top:0;
-        animation-delay: 0.2s;
+        left:25%; top:0;        
         @bg-start:fade(black, 30%);
         #gradient > .vertical(@bg-start, transparent, 0%, 70%);
         @media (max-width: 990px) { left:50%; }
       }
       &--3 {
-        left:50%; top:0;
-        animation-delay: 0.4s;
+        left:50%; top:0;        
         @bg-start:fade(black, 40%);
         #gradient > .vertical(@bg-start, transparent, 0%, 70%);
 
@@ -108,8 +106,7 @@
         }
       }
       &--4 {
-        left:75%; top:0;
-        animation-delay: 0.6s;
+        left:75%; top:0;        
         @bg-start:fade(black, 50%);
         #gradient > .vertical(@bg-start, transparent, 0%, 70%);
 
@@ -161,13 +158,13 @@
 
 
   &__outro {
-    #gradient > .vertical(fade(#211F30, 90), #211F30, 0%, 10%);
     margin-top:-40px;
     padding:60px;
     position:relative;
     z-index:100;
     color:white;
     text-align: left;
+    background:  #211F30;
     color:  mix(#211F30, white, 30);
     a { color: mix(#211F30, white); }
 
@@ -176,7 +173,7 @@
       img {
         max-width:300px;
         width:100%;
-        opacity: .7;
+        filter: brightness(70%);
       }
     }
 

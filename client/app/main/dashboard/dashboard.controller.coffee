@@ -15,6 +15,21 @@ angular
             @map.center.lat = @city.latitude
             @map.center.lng = @city.longitude
             leafletData.getMap().then @applyGeoJSON
+        cityLookup: (q)=>
+          return @cities = [] unless q? and q.length > 1
+          # Build lookup params
+          config = params:
+            q: q, has_neighborhoods: 0
+          # Or returns a promise
+          $http.get(settings.API_URL + 'cities/search/', config).then (r)=>
+            # Update the cities list
+            @cities = r.data
+            selectCity: (city)->
+              $state.go 'main.dashboard', city: city.slug
+        neighborhoodBarStyle: (neighborhood)=>
+          max = _.max city.neighborhoods, 'avgPricePerSqm'
+          width: 100 * (neighborhood.avgPricePerSqm / max.avgPricePerSqm) + '%'
+          background: @fill(neighborhood.avgPricePerSqm)
         fill: (v)=>
           unless @scale?
             min = @city.avgPricePerSqm - 15
@@ -32,14 +47,3 @@ angular
           map.addLayer @geojsonTileLayer
         setFeatureStyle: (feature, layer)=>
           layer.setStyle fillColor: @fill(feature.properties.price_per_sqm)
-        cityLookup: (q)=>
-          return @cities = [] unless q? and q.length > 1
-          # Build lookup params
-          config = params:
-            q: q, has_neighborhoods: 0
-          # Or returns a promise
-          $http.get(settings.API_URL + 'cities/search/', config).then (r)=>
-            # Update the cities list
-            @cities = r.data
-        selectCity: (city)->
-          $state.go 'main.dashboard', city: city.slug

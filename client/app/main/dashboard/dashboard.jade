@@ -4,7 +4,7 @@
     p We analysed thousands of flats all around Europe. What about your city?        
     
     .dashboard__pick__form(ng-init="dashboard.selectedCity = null")
-      ui-select(fix-focus, ng-model="dashboard.selectedCity", on-select="dashboard.selectCity($item)", autofocus="true")
+      ui-select(fix-focus, ng-model="dashboard.selectedCity", on-select="dashboard.selectCity($item)")
         ui-select-match(placeholder="Search a city...")
           span(ng-bind="$select.selected.name")
         ui-select-choices(repeat="city in dashboard.cities", 
@@ -15,9 +15,26 @@
     p.text-left.dashboard__pick__examples
       | Examples: <a ui-sref="main.dashboard({city: 'paris'})">Paris</a>, 
       | <a ui-sref="main.dashboard({city: 'berlin'})">Berlin</a>
-      | or <a ui-sref="main.dashboard({city: 'geneva'})">Geneva</a>.
+      | or <a ui-sref="main.dashboard({city: 'copenhagen'})">Copenhagen</a>.
     
     
   .dashboard__view(ng-if="dashboard.city")
     leaflet.dashboard__view__map(center="dashboard.map.center", tiles="dashboard.map.tiles", defaults="dashboard.map.defaults")
     .dashboard__view__context
+      .dashboard__view__context__heading 
+        h2 {{ dashboard.city.name }} <span class="text-muted">at a glance</span>
+        .text-muted We analysed {{ dashboard.city.total | number }} flats in this city
+      .dashboard__view__context__body
+        .dashboard__view__context__body__neighborhoods(ng-show="dashboard.city.neighborhoods")
+          h4 Most expensive neighborhoods
+          p.small.text-muted   
+            | Prices represent the average price for new rental contracts in 
+            | the last 6 months within 2 kilometers of the center of each neighborhood.
+          ul.list-unstyled
+            li.dashboard__view__context__body__neighborhoods__item(ng-repeat="neighborhood in dashboard.city.neighborhoods | orderBy:'-avgPricePerSqm' ")
+              span.dashboard__view__context__body__neighborhoods__item__bar(ng-style="dashboard.neighborhoodBarStyle(neighborhood)")
+              span.dashboard__view__context__body__neighborhoods__item__label
+                | {{ neighborhood.name }}
+                span.dashboard__view__context__body__neighborhoods__item__label__price
+                  | {{ neighborhood.avgPricePerSqm | number:1 }}
+                  span(ng-show="$first")&nbsp;€/m²

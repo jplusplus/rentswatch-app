@@ -70,20 +70,79 @@
       }
 
       .leaflet-layer {
-        opacity:.5;
+        filter:sepia(100%) hue-rotate(205deg) brightness(200%);
       }
     }
 
     &__context {
       min-width:250px;
       width:25%;
-      background:url("../assets/images/buildings.png") right bottom fixed repeat-x @body-bg;
-      background-size:auto 350px;
       position: absolute;
       right:0;
       top:0;
       bottom:0;
       .box-shadow(0 0 20px fade(black, 40));
+
+      &__heading {
+        background:url("../assets/images/buildings.png") right bottom repeat-x @body-bg;
+        background-size:auto 200px;
+        padding:30px;
+        margin:0;
+        border-bottom: 1px solid lighten(#211F30, 20%);
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:100%;
+        margin-bottom:-200px;
+      }
+
+      &__body {
+        padding:20px 30px;
+        position:absolute;
+        left:0;
+        right:0;
+        top:200px;
+        bottom:0;
+        overflow: auto;
+
+        &__neighborhoods {
+
+          &__item {
+            position: relative;
+            margin-bottom:10px;
+
+            overflow: hidden;
+            width:0%;
+            animation: slide-out 400ms cubic-bezier(0.645, 0.045, 0.355, 1);
+            animation-fill-mode: forwards;
+            .animation-delay-loop(0, 100, 200ms);
+
+            &__bar {
+              display: block;
+              height:20px;
+              background:  lighten(#211F30, 40%);
+            }
+
+            &__label {
+              position:absolute;
+              left:5px;
+              top:0;
+              height:20px;
+              line-height:20px;
+              font-weight: bold;
+              font-size:0.8em;
+              &__price {
+                font-weight: normal;
+                &:before {
+                  content:"/";
+                  margin:0 5px;
+                  color: darken(#211F30, 20%);
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 

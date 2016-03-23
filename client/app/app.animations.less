@@ -32,6 +32,15 @@
 
 }
 
+
+.animation-delay-loop(@from:0, @to:10, @delay: 300ms) when (@from <= @to) {
+  &:nth-child(@{from}) {
+    animation-delay: @from * @delay;
+  }
+  .animation-delay-loop( (@from + 1), @to, @delay );
+}
+
+
 .box-glowing(@color) {
   from {
     box-shadow: 0 0 0px 0px @color;
@@ -74,6 +83,16 @@
   }
 }
 
+.slide-out {
+  from {
+    width:0;
+  }
+
+  to {
+    width:100%;
+  }
+}
+
 @-webkit-keyframes box-glowing { .box-glowing(@brand-primary); }
 @-moz-keyframes box-glowing { .box-glowing(@brand-primary); }
 @-ms-keyframes box-glowing { .box-glowing(@brand-primary); }
@@ -98,3 +117,9 @@
 @-ms-keyframes blur-in { .blur-in(); }
 @-o-keyframes blur-in { .blur-in(); }
 @keyframes blur-in { .blur-in(); }
+
+@-webkit-keyframes slide-out { .slide-out(); }
+@-moz-keyframes slide-out { .slide-out(); }
+@-ms-keyframes slide-out { .slide-out(); }
+@-o-keyframes slide-out { .slide-out(); }
+@keyframes slide-out { .slide-out(); }
