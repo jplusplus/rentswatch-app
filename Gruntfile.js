@@ -16,7 +16,8 @@ module.exports = function (grunt) {
     ngtemplates: 'grunt-angular-templates',
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
-    buildcontrol: 'grunt-build-control'
+    buildcontrol: 'grunt-build-control',
+    i18nextract: 'grunt-angular-translate'
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -328,6 +329,17 @@ module.exports = function (grunt) {
       }
     },
 
+    i18nextract: {
+      default_options: {
+        src: [
+          '<%= yeoman.client %>/{app,components}/**/*.{html,js}',
+          '.tmp/{app,components}/**/*.{html,js}'
+        ],
+        lang: ['en', 'fr', 'de'],
+        dest: '<%= yeoman.client %>/assets/locales'
+      }
+    },
+
     // Replace Google CDN references
     cdnify: {
       dist: {
@@ -349,6 +361,7 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'assets/images/{,*/}*.{png,jpg,svg,webp}',
             'assets/fonts/**/*',
+            'assets/locales/*.json',
             'index.html'
           ]
         }, {
@@ -692,6 +705,7 @@ module.exports = function (grunt) {
     'ngtemplates',
     'concat',
     'ngAnnotate',
+    'i18nextract',
     'copy:dist',
     'cdnify',
     'cssmin',
