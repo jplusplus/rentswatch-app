@@ -10,5 +10,6 @@ angular.module 'rentswatchApp', [
   'ui.select',
   'cfp.hotkeys',
   'leaflet-directive',
-  'pascalprecht.translate'
+  'pascalprecht.translate',
+  'tmh.dynamicLocale'
 ]

@@ -33,7 +33,7 @@
       
       .dashboard__view__context__body      
         .dashboard__view__context__body__ranking(ng-show="dashboard.city.neighborhoods")
-          h4(ng-bind="'dashboard.context.neighborhoods.title' | translate")
+          h4(translate="") dashboard.context.neighborhoods.title
           p.small.text-muted   
             | {{ 'dashboard.context.neighborhoods.description' | translate }}
           ul.list-unstyled
@@ -46,13 +46,13 @@
                   span(ng-show="$first")&nbsp;€/m²
         
         .dashboard__view__context__body__months(ng-show="dashboard.city.months.length")
-          h4(ng-bind="'dashboard.context.months.title' | translate")
+          h4(translate="") dashboard.context.months.title
           p.small.text-muted   
             | {{ 'dashboard.context.months.description' | translate }}
           rent-price-changes(months="dashboard.city.months")
           
         .dashboard__view__context__body__ranking.dashboard__view__context__body__ranking--avg-price-per-sqm
-          h4(ng-bind="'dashboard.context.avg.title' | translate")
+          h4(translate="") dashboard.context.avg.title
           p.small.text-muted   
             | {{ 'dashboard.context.avg.description' | translate }}
           ul.list-unstyled
@@ -67,7 +67,7 @@
                   span(ng-show="$first")&nbsp;€/m²
           
         .dashboard__view__context__body__ranking.dashboard__view__context__body__ranking--inequality-index
-          h4(ng-bind="'dashboard.context.index.title' | translate")
+          h4(translate="") dashboard.context.index.title
           p.small.text-muted   
             | {{ 'dashboard.context.index.description' | translate }}
           ul.list-unstyled

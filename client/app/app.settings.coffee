@@ -24,3 +24,4 @@ angular
         #   DEMO_GROWTH: 1000
         #   DEMO_RENT: 1000
       DEFAULT_CURRENCY: 'EUR'
+      LOCALE_LOCATION: '//code.angularjs.org/1.2.20/i18n/angular-locale_{{locale}}.js'

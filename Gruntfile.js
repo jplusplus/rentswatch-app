@@ -331,6 +331,9 @@ module.exports = function (grunt) {
 
     i18nextract: {
       default_options: {
+        keyAsText: true,
+        safeMode: true,
+        defaultLang: 'en',
         src: [
           '<%= yeoman.client %>/{app,components}/**/*.{html,js}',
           '.tmp/{app,components}/**/*.{html,js}'
