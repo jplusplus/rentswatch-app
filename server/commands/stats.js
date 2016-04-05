@@ -26,8 +26,9 @@ prompt.get([{
   // Extracting decades...
   doc.decades().then(function(decades) {
     var stats = { decades: decades };
+    console.log("Calculating slope...");
     // Extracting slope...
-    doc.centeredLosRegression().then(function(slope) {
+    doc.losRegression().then(function(slope) {
       stats.slope = slope;
       // Raw number of doc extracted by second
       stats.pace = 0.7;
