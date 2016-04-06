@@ -10,16 +10,16 @@ angular
       CENTER_REQUIRED_FROM = 17
       # Some steps trigger an autoplay
       AUTOPLAYED_STEPS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16]
-      AUTOPLAY_TIMEOUT = 4000
+      AUTOPLAY_TIMEOUT = 4000 * 1e5
       # Some steps contain forms
       FORM_STEPS = [12, 13, 15, 17]
       # Return an instance of the class
       new class
         # Current step
-        step: 0
+        step: 16
         stepCount: 22
-        # rent: 550
-        # space: 65
+        rent: 750*2
+        space: 65
         # addr: '27 Boulevard Voltaire, 75011 Paris'
         # An image with all ads
         allAds: new Image
@@ -92,17 +92,17 @@ angular
         userPoint: =>
           bottom: do @userRentPart,
           left: @space/settings.MAX_LIVING_SPACE * 100 + '%'
-        # Get the user level compared to other decades
+        # Get the user level compared to other deciles
         userRentLevel: =>
           rent = @rate * @rent
           # Count smaller and higher values
-          figures = _.reduce stats.decades, (res, row)=>
+          figures = _.reduce stats.deciles, (res, row)=>
             res.smaller += row.count * (row.to <= rent)
             res.higher += row.count * (row.from > rent)
             res
           , higher: 0, smaller: 0
           # Compute level
-          figures.smaller/( figures.smaller + figures.higher)
+          figures.smaller/(figures.smaller + figures.higher)
         userRentFeedback: =>
           # Percentage of flat bellow the user rent
           level = do @userRentLevel
@@ -111,23 +111,26 @@ angular
           # Return an object
           level: level
           is: (p)-> level <= ranges[p][0] and level > ranges[p][1]
-        userSpaceFeedback: (slope)=>
+        userSpaceFeedback: (avgPricePerSqm)=>
           # How big is the difference between the user's average space by euro
           # and the global average we get from the ads
-          slope: slope
+          avgPricePerSqm: avgPricePerSqm
           level: @rent / @space
-          times: Math.round (@rent / @space) / (1/slope)
+          times: Math.round (@rent / @space) / avgPricePerSqm
+          percentage: Math.round( (@rent / @space - avgPricePerSqm) / avgPricePerSqm * 100)
           is: (p)->
             # Part ranges are algorithmically obtained
-            switch p
-              when 0 then return @level > (1/slope) *  2
-              when 1 then return @level > (1/slope) * .8 and not @is(0)
-              when 2 then return @level < (1/slope) * .8
+            if      @level > avgPricePerSqm * 1.5  then 0 is p
+            else if @level > avgPricePerSqm * 1.05 then 1 is p
+            else if @level > avgPricePerSqm * 0.95 then 2 is p
+            else if @level < avgPricePerSqm * 0.85 then 3 is p
+            else if @level < avgPricePerSqm * 0.95 then 4 is p
+            else no
         # There is two ways to get feedback about rent and space:
         #   * using all ads in Europe
-        userGlobalFeedback: => @userSpaceFeedback stats.slope
+        userGlobalFeedback: => @userSpaceFeedback stats.avgPricePerSqm
         #   * using rents around a given center
-        userCenterFeedback: => @userSpaceFeedback @centerStats.slope
+        userCenterFeedback: => @userSpaceFeedback @centerStats.avgPricePerSqm
         # Geocoder the given address and extract stats about it
         geocode: (query)=>
           # Freeze the app
@@ -147,7 +150,7 @@ angular
                 # Go to the next point
                 do @next
         # Draw the linear regression of the data
-        losRegression: (slope=stats.slope)=>
+        losRegression: (avgPricePerSqm=stats.avgPricePerSqm)=>
           cvswidth = cvsheight = 480*2
           canvas = angular.element("<canvas />").attr width: cvswidth, height: cvsheight
           ctx = canvas[0].getContext '2d'
@@ -161,7 +164,7 @@ angular
           do ctx.beginPath
           ctx.moveTo 0, cvsheight
           ctx.lineWidth = 2
-          ctx.lineTo cvswidth, y(settings.MAX_LIVING_SPACE / slope)
+          ctx.lineTo cvswidth, y(settings.MAX_LIVING_SPACE * avgPricePerSqm)
           do ctx.stroke
           # Returns a base64
           do canvas[0].toDataURL

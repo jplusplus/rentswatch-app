@@ -105,13 +105,13 @@
       
   .quiz__step.animated(ng-if="quiz.is(14)")
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(0)")
-      | {{ "quiz.step.feedback.1" | translate }}
+      | {{ "quiz.step.rent-feedback.0" | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(1)")
-      | {{ "quiz.step.feedback.2" | translate }}
+      | {{ "quiz.step.rent-feedback.1" | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(2)")
-      | {{ "quiz.step.feedback.3" | translate }}
+      | {{ "quiz.step.rent-feedback.2" | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(3)")
-      | {{ "quiz.step.feedback.4" | translate }}
+      | {{ "quiz.step.rent-feedback.3" | translate }}
     
   .quiz__step.animated(ng-if="quiz.is(15)")    
     form.quiz__step__form(name="form", ng-submit="quiz.next()")
@@ -128,11 +128,15 @@
           
   .quiz__step.animated(ng-if="quiz.is(16)")
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(0)")
-      | {{ 'quiz.step.size-feedback.1' | translate: { times: quiz.userGlobalFeedback().times } }}
+      | {{ 'quiz.step.space-feedback.0' | translate: { times: quiz.userGlobalFeedback().times } }}
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(1)")
-      | {{ 'quiz.step.size-feedback.2' | translate }}
+      | {{ 'quiz.step.space-feedback.1' | translate: { percentage: quiz.userGlobalFeedback().percentage } }}
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(2)")
-      | {{ 'quiz.step.size-feedback.3' | translate }}
+      | {{ 'quiz.step.space-feedback.2' | translate }}
+    h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(3)")
+      | {{ 'quiz.step.space-feedback.3' | translate }}
+    h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(4)")
+      | {{ 'quiz.step.space-feedback.4' | translate }}
     
   .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(16)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")  
     .quiz__step__scatterplot

@@ -8,7 +8,7 @@ angular.module 'rentswatchApp'
     templateUrl: 'app/main/main.html'
     controller: 'MainCtrl as main'
     resolve:
-      stats: ($http)->
+      stats: ($http, settings)->
         'ngInject'
         # Simply gets figures from database
-        $http.get('/api/docs/all.json', { cache: true}).then (rows)-> rows.data
+        $http.get(settings.API_URL + 'cities/all', cache: true).then (rows)-> rows.data
