@@ -20,10 +20,7 @@ angular
       new class
         # Current step
         step: 0
-        stepCount: 22
-        # rent: 750*2
-        # space: 65
-        # addr: '27 Boulevard Voltaire, 75011 Paris'
+        stepCount: 23
         # An image with all ads
         allAds: new Image
         # Default currency
@@ -133,7 +130,7 @@ angular
             else if @level > avg * 0.95 then 2 is p
             else if @level < avg * 0.85 then 3 is p
             else if @level < avg * 0.95 then 4 is p
-            else no
+            else 5 is p
         #   * using rents around a given center
         userCenterFeedback: =>
           avg = @centerStats.avgPricePerSqm
@@ -145,10 +142,19 @@ angular
           percentage: Math.round( (@rent / @space - avg) / avg * 100)
           is: (p)->
             # Part ranges are algorithmically obtained
-            if      @level > avg * 2  then 0 is p
+            if      @level > avg * 2    then 0 is p
             else if @level > avg * 1.05 then 1 is p
             else if @level > avg * 0.95 then 2 is p
-            else no
+            else 3 is p
+        userFinalFeedback: =>
+          avg = @centerStats.avgPricePerSqm
+          avgPricePerSqm:  avg
+          level: @rent / @space
+          is: (p)->
+            # Part ranges are algorithmically obtained
+            if      @level > avg *  2 then 0 is p
+            else if @level > avg * .8 then 1 is p
+            else 2 is p
         # Geocoder the given address and extract stats about it
         geocode: (query)=>
           # Freeze the app
