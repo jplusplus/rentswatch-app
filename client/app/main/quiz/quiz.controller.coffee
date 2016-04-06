@@ -9,17 +9,20 @@ angular
       SPACE_REQUIRED_FROM  = 15
       CENTER_REQUIRED_FROM = 17
       # Some steps trigger an autoplay
-      AUTOPLAYED_STEPS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16]
-      AUTOPLAY_TIMEOUT = 4000 * 1e5
+      AUTOPLAYED_STEPS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16, 19]
+      AUTOPLAY_TIMEOUT_DEFAULT = 4000
+      AUTOPLAY_TIMEOUT_QUICK = 1000
       # Some steps contain forms
-      FORM_STEPS = [12, 13, 15, 17]
+      FORM_STEPS = [12, 13, 15, 17, 19, 20, 21, 22]
+      # Steps played rapidely
+      QUICK_STEPS = [12, 19]
       # Return an instance of the class
       new class
         # Current step
-        step: 16
+        step: 0
         stepCount: 22
-        rent: 750*2
-        space: 65
+        # rent: 750*2
+        # space: 65
         # addr: '27 Boulevard Voltaire, 75011 Paris'
         # An image with all ads
         allAds: new Image
@@ -48,10 +51,12 @@ angular
           $scope.$watch 'quiz.step', (step)=>
             # Always cancel current timeout
             $timeout.cancel @autoplay
-            # Then if the step must be autoplayed...
+            # Then if the step must be autoplayed:
             if AUTOPLAYED_STEPS.indexOf(step) > -1
+              # Some step are quicker than the other!
+              delay = if QUICK_STEPS.indexOf(step) > -1 then AUTOPLAY_TIMEOUT_QUICK else AUTOPLAY_TIMEOUT_DEFAULT
               # Create a new timeout
-              @autoplay = $timeout @next, AUTOPLAY_TIMEOUT
+              @autoplay = $timeout @next, delay
         # Create axis ticks
         xticks: =>
           min  = 20
@@ -111,26 +116,39 @@ angular
           # Return an object
           level: level
           is: (p)-> level <= ranges[p][0] and level > ranges[p][1]
-        userSpaceFeedback: (avgPricePerSqm)=>
-          # How big is the difference between the user's average space by euro
-          # and the global average we get from the ads
-          avgPricePerSqm: avgPricePerSqm
-          level: @rent / @space
-          times: Math.round (@rent / @space) / avgPricePerSqm
-          percentage: Math.round( (@rent / @space - avgPricePerSqm) / avgPricePerSqm * 100)
-          is: (p)->
-            # Part ranges are algorithmically obtained
-            if      @level > avgPricePerSqm * 1.5  then 0 is p
-            else if @level > avgPricePerSqm * 1.05 then 1 is p
-            else if @level > avgPricePerSqm * 0.95 then 2 is p
-            else if @level < avgPricePerSqm * 0.85 then 3 is p
-            else if @level < avgPricePerSqm * 0.95 then 4 is p
-            else no
         # There is two ways to get feedback about rent and space:
         #   * using all ads in Europe
-        userGlobalFeedback: => @userSpaceFeedback stats.avgPricePerSqm
+        userGlobalFeedback: =>
+          avg = stats.avgPricePerSqm
+          # How big is the difference between the user's average space by euro
+          # and the global average we get from the ads
+          avgPricePerSqm: avg
+          level: @rent / @space
+          times: Math.round (@rent / @space) / avg
+          percentage: Math.round( (@rent / @space - avg) / avg * 100)
+          is: (p)->
+            # Part ranges are algorithmically obtained
+            if      @level > avg * 1.5  then 0 is p
+            else if @level > avg * 1.05 then 1 is p
+            else if @level > avg * 0.95 then 2 is p
+            else if @level < avg * 0.85 then 3 is p
+            else if @level < avg * 0.95 then 4 is p
+            else no
         #   * using rents around a given center
-        userCenterFeedback: => @userSpaceFeedback @centerStats.avgPricePerSqm
+        userCenterFeedback: =>
+          avg = @centerStats.avgPricePerSqm
+          # How big is the difference between the user's average space by euro
+          # and the global average we get from the ads
+          avgPricePerSqm:  avg
+          level: @rent / @space
+          times: Math.round (@rent / @space) / avg
+          percentage: Math.round( (@rent / @space - avg) / avg * 100)
+          is: (p)->
+            # Part ranges are algorithmically obtained
+            if      @level > avg * 2  then 0 is p
+            else if @level > avg * 1.05 then 1 is p
+            else if @level > avg * 0.95 then 2 is p
+            else no
         # Geocoder the given address and extract stats about it
         geocode: (query)=>
           # Freeze the app
@@ -154,17 +172,22 @@ angular
           cvswidth = cvsheight = 480*2
           canvas = angular.element("<canvas />").attr width: cvswidth, height: cvsheight
           ctx = canvas[0].getContext '2d'
-
-          MAX_TOTAL_RENT = settings.MAX_TOTAL_RENT
           # Create scale for y (rent)
-          y = d3.scale.linear().domain([0, MAX_TOTAL_RENT]).range [cvsheight, 0]
+          y = d3.scale.linear().domain([0, settings.MAX_TOTAL_RENT]).range [cvsheight, 0]
+
+          startx = cvswidth * 20/settings.MAX_LIVING_SPACE
+          starty = cvsheight
+
+          endx = cvswidth
+          endy = y(settings.MAX_LIVING_SPACE * avgPricePerSqm)
+
           # Points color
           ctx.strokeStyle = "#ffd633"
 
           do ctx.beginPath
-          ctx.moveTo 0, cvsheight
+          ctx.moveTo startx, starty
           ctx.lineWidth = 2
-          ctx.lineTo cvswidth, y(settings.MAX_LIVING_SPACE * avgPricePerSqm)
+          ctx.lineTo endx, endy
           do ctx.stroke
           # Returns a base64
           do canvas[0].toDataURL

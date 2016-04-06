@@ -7,7 +7,6 @@ var response = require('../response');
 var router = express.Router();
 
 router.get('/all.png', response.cachedPng(), controller.allPng);
-router.get('/all.json', response.cachedJson(), controller.allJson);
 router.get('/center.png', response.cachedPng(), controller.centerPng);
 router.get('/center.json', response.cachedJson(), controller.centerJson);
 

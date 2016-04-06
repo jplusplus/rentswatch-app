@@ -68,7 +68,7 @@
   .quiz__step.animated(ng-if="quiz.is(10)")
     h2.quiz__step__heading {{ 'quiz.step.heading.7' | translate }}
         
-  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(10)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
+  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(10)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm(), 'quiz__step--muted': quiz.in(18)} ")
     // The plot itself!
     .quiz__step__scatterplot
       img.quiz__step__scatterplot__chart(ng-src="/api/docs/all.png")
@@ -76,7 +76,7 @@
   .quiz__step.animated(ng-if="quiz.is(11)")
     h2.quiz__step__heading {{ 'quiz.step.heading.8' | translate }}
         
-  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(11)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
+  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(11)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm(), 'quiz__step--muted': quiz.in(18)} ")
     // The regression line
     .quiz__step__scatterplot
       img.quiz__step__scatterplot__chart(ng-src="{{ :: quiz.losRegression() }}")    
@@ -92,17 +92,23 @@
                 input.form-control.input-lg(type='number', min="100", max="3000", id="inputrent", ng-model='quiz.rent', required='required', placeholder="{{ 'quiz.step.how-much.placeholder' | translate }}")
                 span.input-group-addon.dropdown.quiz__step__form__dropdown
                   .dropdown-toggle
-                    | {{ quiz.currency }}&nbsp;<i class="caret"></i>
+                    | {{ 'quiz.step.how-much.currency' | translate:{ currency: quiz.currency } }}
+                    span.hidden &nbsp;<i class="caret"></i>
                   ul.dropdown-menu.dropdown-menu-right.quiz__step__form__dropdown__menu
                     li(ng-repeat="(currency, value) in quiz.currencies", 
                        ng-class="{ 'active': quiz.currency === currency }",
                        ng-click="quiz.currency = currency")
-                      a {{ currency }}
+                      a {{ 'quiz.step.how-much.currency' | translate:{ currency: currency } }}
         .col-sm-3
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") {{ 'quiz.step.continue' | translate }}  
               
       strong.animated(ng-if="quiz.is(13)")  {{ 'quiz.step.how-much.shy' | translate }}
-      
+  
+  .quiz__step.animated(ng-if="quiz.in(14, 15)", ng-class="{ 'quiz__step--disabled' : quiz.hasForm() }")
+    // User rent level (without knowing the living space)
+    .quiz__step__scatterplot
+      .quiz__step__scatterplot__user-rent-part(ng-style="{ bottom: quiz.userRentPart() }")
+    
   .quiz__step.animated(ng-if="quiz.is(14)")
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(0)")
       | {{ "quiz.step.rent-feedback.0" | translate }}
@@ -154,19 +160,34 @@
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid || quiz.freezed")
             | {{ 'quiz.step.continue' | translate }}
             
-  .quiz__step.quiz__step--bg.animated(ng-if="quiz.is(18)")    
+  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(18)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ") 
     .quiz__step__scatterplot
       img.quiz__step__scatterplot__chart(ng-src="/api/docs/center.png?latlng={{ quiz.center.join(',') }}")
+      span.quiz__step__scatterplot__legend
+        | {{ 'quiz.step.addr.legend' | translate: { total: quiz.centerStats.total } }}
     
   .quiz__step.animated(ng-if="quiz.is(18)")  
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(0)")
-      | {{ 'quiz.step.addr-feedback.1' | translate }}
+      | {{ 'quiz.step.addr-feedback.0' | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(1)")
-      | {{ 'quiz.step.addr-feedback.2' | translate }}
+      | {{ 'quiz.step.addr-feedback.1' | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(2)")
+      | {{ 'quiz.step.addr-feedback.2' | translate }}
+    h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(3)")
       | {{ 'quiz.step.addr-feedback.3' | translate }}
+      
+  .quiz__step.animated(ng-if="quiz.in(19, 20)")
+    h2.quiz__step__heading {{ 'quiz.step.heading.9' | translate }}
+    .text-center
+      button.btn.btn-lg.btn-default(ng-click="quiz.step = 21")
+        | {{ 'quiz.step.save.no' | translate }}    
+      =" "
+      button.btn.btn-lg.btn-primary(ng-click="quiz.step = 21")
+        | {{ 'quiz.step.save.yes' | translate }}
         
-  .quiz__step.animated(ng-if="quiz.is(19)")
+      div.animated.quiz__step__happy(ng-if="quiz.is(20)") {{ 'quiz.step.save.happy' | translate }}
+          
+  .quiz__step.animated(ng-if="quiz.is(21)")
     h2.quiz__step__heading(ng-show="true")
       | {{ 'quiz.step.share-feedback.1' | translate }}
     h2.quiz__step__heading(ng-show="false")
@@ -187,17 +208,6 @@
             i.fa.fa-fw.fa-facebook.fa-stack-1x.fa-inverse
           span.sr-only Facebook
     
-  .quiz__step.animated(ng-if="quiz.is(20)")
-    h2.quiz__step__heading {{ 'quiz.step.heading.9' | translate }}
-    .text-center
-      button.btn.btn-lg.btn-default(ng-click="quiz.next()")
-        | {{ 'quiz.step.save.yes' | translate }}
-      =" "
-      button.btn.btn-lg.btn-primary(ng-click="quiz.next()")
-        | {{ 'quiz.step.save.no' | translate }}
-      
-  .quiz__step.animated(ng-if="quiz.is(21)")
-    h2.quiz__step__heading {{ 'quiz.step.heading.10' | translate }}
 
 .quiz-nav
   .quiz-nav__item.quiz-nav__item--space.hidden-sm.hidden-xs(ng-show="quiz.hasNext()")

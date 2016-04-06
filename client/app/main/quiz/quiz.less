@@ -93,8 +93,17 @@
       opacity:.5;
     }
 
+    &--muted {
+      opacity:.2;
+    }
+
     &--bg {
       z-index:-1;
+    }
+    
+    &__happy {
+      margin-top:20px;
+      font-weight: bold;
     }
 
     &__form {
@@ -185,13 +194,22 @@
 
 
 
-       &:before {
-         width:100%;
-         padding-top:100%;
-         visibility: hidden;
-         display: block;
-         content:"";
-       }
+      &:before {
+        width:100%;
+        padding-top:100%;
+        visibility: hidden;
+        display: block;
+        content:"";
+      }
+
+      &__legend  {
+        position: absolute;
+        bottom:10px;
+        right:10px;
+        max-width: 220px;
+        text-align: right;
+      }
+
 
       &__chart {
         width:100%;
@@ -293,6 +311,13 @@
             border-bottom:5px solid white;
           }
         }
+      }
+
+      &__user-rent-part {
+        position: absolute;
+        left:0;
+        right:0;
+        border-top:1px dashed white;
       }
 
       &__axis {

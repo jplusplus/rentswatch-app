@@ -2,6 +2,7 @@
 
 var  doc = require('./doc.model'),
 response = require("../response"),
+ request = require('request'),
     path = require("path"),
        _ = require('lodash');
 
@@ -12,10 +13,6 @@ exports.allPng = function(req, res) {
   res.sendFile( path.resolve( __dirname, "../../cache/all.png") );
 };
 
-
-exports.allJson  = function(req, res) {
-  res.json( require("../../cache/all.json") );
-};
 
 var reqCenter = function(req) {
   // Extract coordinates from query
@@ -76,19 +73,19 @@ exports.centerJson = function(req, res) {
     return response.validationError(res)({ error: "'latlng' parameter is malformed."});
   }
 
-  // Get center according to the request
-  // doc.centeredDecades.apply(null, center(req) ).then(function(decades) { });
-  var decades = []
-  var stats = { decades: decades };
-  // Extracting slope...
-  doc.losRegression.apply(null, center).then(function(slope) {
-    stats.slope = slope;
-    // Timestamp of the last snapshot
-    stats.lastSnapshot =  ~~(Date.now()/1e3)
-    // Calculates the total number of docs
-    stats.total = _.reduce( _.pluck(decades, 'count'), function(sum, c) {
-      return sum + c;
-    }, 0);
-    res.json(stats);
+  var url = "http://api.rentswatch.com/api/cities/geocode";
+  // Build geocoder params
+  var params = {
+    token: process.env.RENTSWATCH_API_TOKEN,
+    // Rejoin params to avoid mistakes
+    q: center.join(','),
+    radius: 10
+  };
+  // Geocode the query
+  request({ url: url, json: true, qs: params }, function(err, resp, body) {
+    res.json({
+      total: body.total,
+      avgPricePerSqm: body.avgPricePerSqm
+    });
   });
 };

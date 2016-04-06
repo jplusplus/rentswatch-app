@@ -6,7 +6,6 @@ angular
       class Geocoder
         @place: (query)->
           deferred = do $q.defer
-          console.log query
           # If no address is provided
           if not query?
             deferred.reject('No value')
