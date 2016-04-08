@@ -1,13 +1,13 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html ng-app="rentswatchApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html ng-app="rentswatchApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html ng-app="rentswatchApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html ng-app="rentswatchApp" class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <base href="/">
-    <title>Rentswatch by Journalism++</title>
+    <title ng-bind="'app.title' | translate">Rentswatch</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -23,10 +23,27 @@
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
       <!-- endinjector -->
-    <!-- endbuild -->    
+    <!-- endbuild -->
     <meta name="fragment" content="!">
+
+    <meta name="description" content="{{ 'app.desription' | translate }}">
+
+    <meta property="og:title" content="{{ 'app.title' | translate }}" />
+    <meta property="og:description" content="{{ 'app.desription' | translate }}" />
+    <meta property="og:url" content="http://beta.rentswatch.com/" />
+    <meta property="og:image" content="http://beta.rentswatch.com/assets/images/share-1.png" />
+    <meta property="og:image" content="http://beta.rentswatch.com/assets/images/share-2.png" />
+    <meta property="og:image" content="http://beta.rentswatch.com/assets/images/share-3.png" />
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@rentswatch" />
+    <meta name="twitter:title" content="{{ 'app.title' | translate }}" />
+    <meta name="twitter:description" content="{{ 'app.desription' | translate }}" />
+
+    <meta name="twitter:image" content="http://beta.rentswatch.com/assets/images/share-2.png" />
+    <meta name="twitter:url" content="http://beta.rentswatch.com/" />
   </head>
-  <body ng-app="rentswatchApp">
+  <body>
 
     <!-- Add your site or application content here -->
     <div ui-view=""></div>
@@ -59,6 +76,7 @@
       <script src="bower_components/chroma-js/chroma.js"></script>
       <script src="bower_components/c3/c3.js"></script>
       <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+      <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 

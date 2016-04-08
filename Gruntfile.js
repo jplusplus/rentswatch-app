@@ -365,7 +365,8 @@ module.exports = function (grunt) {
             'assets/images/{,*/}*.{png,jpg,svg,webp}',
             'assets/fonts/**/*',
             '**/*.json',
-            'index.html'
+            'index.html',
+            'close.html'
           ]
         }, {
           expand: true,

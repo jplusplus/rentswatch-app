@@ -2,7 +2,7 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'QuizCtrl', ($scope, $timeout, $http, stats, steps, settings, hotkeys, Geocoder)->
+    .controller 'QuizCtrl', ($scope, $timeout, $http, $state, stats, steps, settings, hotkeys, Geocoder)->
       'ngInject'
       # Some step may not be available until class values are filled
       RENT_REQUIRED_FROM   = 13
@@ -24,6 +24,7 @@ angular
         currencies: settings.CURRENCIES
         # True when the whole app is freezed
         freezed: no
+        href: $state.href 'main.quiz', {}, absolute: yes
         constructor: ->
           # Set the Image src to start loading it
           @allAds.src =  '/api/docs/all.png'
@@ -147,7 +148,7 @@ angular
             else 5 is p
         #   * using rents around a given center
         userCenterFeedback: =>
-          avg = @centerStats.avgPricePerSqm
+          avg = @centerStats?.avgPricePerSqm or stats.avgPricePerSqm
           # How big is the difference between the user's average space by euro
           # and the global average we get from the ads
           avgPricePerSqm:  avg
@@ -161,7 +162,7 @@ angular
             else if @level > avg * 0.95 then 2 is p
             else 3 is p
         userFinalFeedback: =>
-          avg = @centerStats.avgPricePerSqm
+          avg = @centerStats?.avgPricePerSqm or stats.avgPricePerSqm
           avgPricePerSqm:  avg
           level: @rent / @space
           is: (p)->

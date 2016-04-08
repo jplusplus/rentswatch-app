@@ -1,4 +1,6 @@
 {
+    "app.title": "Rentswatch by Journalism++",
+    "app.description": "Keeps an eye on rents. Everywhere in Europe, all the time.",
     "dashboard.pick.heading": "Get insights about your city",
     "dashboard.pick.description": "We analysed thousands of flats all around Europe. What about your city?  ",
     "dashboard.context.toggler.off": "See the metrics",

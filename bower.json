@@ -24,7 +24,8 @@
     "tilelayer-geojson": "https://raw.githubusercontent.com/glenrobertson/leaflet-tilelayer-geojson/master/TileLayer.GeoJSON.js",
     "chroma-js": "~1.1.1",
     "c3": "0.4.11-rc4",
-    "angular-dynamic-locale": "~0.1.30"
+    "angular-dynamic-locale": "~0.1.30",
+    "angular-socialshare": "angularjs-socialshare#~0.1.20"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.*",
