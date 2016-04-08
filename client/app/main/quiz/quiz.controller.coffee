@@ -13,9 +13,6 @@ angular
         # Current step
         step: 0
         stepCount: steps.length
-        rent: 300
-        space: 64
-        addr: 'Paris, 75011'
         # An image with all ads
         allAds: new Image
         # Default currency

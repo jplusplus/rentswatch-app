@@ -224,7 +224,7 @@
           button.btn.btn-primary(type="submit", ng-disabled="save.$invalid")
             | {{ 'quiz.step.save.submit' | translate }}
         
-  .quiz__step.quiz__step.animated(ng-if="quiz.is('SHARE')")
+  .quiz__step.quiz__step--share.animated(ng-if="quiz.is('SHARE')")
     h2.quiz__step__heading(ng-show=":: quiz.userFinalFeedback().is(0)")
       | {{ 'quiz.step.share-feedback.0' | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userFinalFeedback().is(1)")
@@ -239,7 +239,7 @@
           socialshare-via="rentswatch",
           socialshare-hashtags="#rentswatch")
           span.fa-stack.fa-lg
-            i.fa.fa-square.fa-stack-2x
+            i.fa.fa-square-o.fa-stack-2x.fa-inverse
             i.fa.fa-fw.fa-twitter.fa-stack-1x.fa-inverse
           span.sr-only Twitter
       li 
@@ -251,7 +251,7 @@
           socialshare-provider="facebook",
           socialshare-via="901779263268056")
           span.fa-stack.fa-lg
-            i.fa.fa-square.fa-stack-2x
+            i.fa.fa-square-o.fa-stack-2x.fa-inverse
             i.fa.fa-fw.fa-facebook.fa-stack-1x.fa-inverse
           span.sr-only Facebook
     
