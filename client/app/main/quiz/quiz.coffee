@@ -7,3 +7,6 @@ angular.module 'rentswatchApp'
     url: 'q/'
     templateUrl: 'app/main/quiz/quiz.html'
     controller: 'QuizCtrl as quiz'
+    resolve:
+      steps: ($http)->
+        $http.get('app/main/quiz/quiz.json').then (r)-> r.data

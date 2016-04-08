@@ -1,27 +1,27 @@
 .quiz(ng-class="{ 'quiz--freezed': quiz.freezed }", ng-click="quiz.next(true)")
-  .quiz__step.animated(ng-if="quiz.is(0)")
+  .quiz__step.animated(ng-if="quiz.is('INTRO')")
     h2.quiz__step__heading
       div.small {{ 'quiz.step.heading.0a' | translate:{ total: main.totalAds } }}
       div {{ 'quiz.step.heading.0b' | translate }}
     .text-center
-      button.btn.btn-lg.btn-outline(ng-click="quiz.next()")
+      button.btn.btn-lg.btn-outline
         | {{ 'quiz.step.start' | translate }}
             
-  .quiz__step.animated(ng-if="quiz.is(1)")
+  .quiz__step.animated(ng-if="quiz.is('INTRO_CONFIRM')")
     h2.quiz__step__heading {{ 'quiz.step.heading.1' | translate }}
     .text-center
-      button.btn.btn-lg.btn-outline(ng-click="quiz.next()") 
+      button.btn.btn-lg.btn-outline
         | {{ 'quiz.step.yes' | translate }}
             
-  .quiz__step.animated(ng-if="quiz.is(2)")
+  .quiz__step.animated(ng-if="quiz.is('INTRO_QUICK')")
     h2.quiz__step__heading {{ 'quiz.step.heading.2' | translate }}
             
-  .quiz__step.animated(ng-if="quiz.is(3)")
+  .quiz__step.animated(ng-if="quiz.is('INTRO_HOW')")
     h2.quiz__step__heading {{ 'quiz.step.heading.3' | translate }}
     
-  .quiz__step.animated(ng-if="quiz.is(4)")
+  .quiz__step.animated(ng-if="quiz.is('INTRO_SIZE')")
     h2.quiz__step__heading {{ 'quiz.step.heading.4' | translate }}
-      
+          
   .quiz__step.quiz__step--bg(ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
     .quiz__step__scatterplot
       // Empty element to occupy the space
@@ -29,12 +29,12 @@
       // Axis group for the living space
       .quiz__step__scatterplot__axis.quiz__step__scatterplot__axis--x 
         // Axis Line on x
-        span.quiz__step__scatterplot__axis__line.animated.hopen(ng-if="quiz.in(4)")
-        span.quiz__step__scatterplot__axis__ticks.animated(ng-if="quiz.in(4)")
+        span.quiz__step__scatterplot__axis__line.animated.hopen(ng-if="quiz.in('INTRO_SIZE')")
+        span.quiz__step__scatterplot__axis__ticks.animated(ng-if="quiz.in('INTRO_SIZE')")
           span.quiz__step__scatterplot__axis__ticks__tick(ng-repeat="t in quiz.xticks()") 
             span.quiz__step__scatterplot__axis__ticks__tick__wrap {{ t }} 
       
-  .quiz__step.animated(ng-if="quiz.is(5)")
+  .quiz__step.animated(ng-if="quiz.is('INTRO_RENT')")
     h2.quiz__step__heading {{ 'quiz.step.heading.5' | translate }}
           
   .quiz__step.quiz__step--bg(ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
@@ -42,47 +42,47 @@
       // Axis group for the total rent
       .quiz__step__scatterplot__axis.quiz__step__scatterplot__axis--y
         // Axis Line on y
-        span.quiz__step__scatterplot__axis__line.animated.vopen(ng-if="quiz.in(5)")
-        span.quiz__step__scatterplot__axis__ticks.animated(ng-if="quiz.in(5)")
+        span.quiz__step__scatterplot__axis__line.animated.vopen(ng-if="quiz.in('INTRO_RENT')")
+        span.quiz__step__scatterplot__axis__ticks.animated(ng-if="quiz.in('INTRO_RENT')")
           span.quiz__step__scatterplot__axis__ticks__tick(ng-repeat="t in quiz.yticks()")
             span.quiz__step__scatterplot__axis__ticks__tick__wrap {{ t }}
             
-  .quiz__step.animated(ng-if="quiz.is(6)")
+  .quiz__step.animated(ng-if="quiz.is('INTRO_CLEAR')")
     h2.quiz__step__heading {{ 'quiz.step.heading.6a' | translate }}
             
-  .quiz__step.animated(ng-if="quiz.is(7)")
+  .quiz__step.animated(ng-if="quiz.is('INTRO_CHEAP')")
     .quiz__step__scatterplot
       h2.quiz__step__heading.quiz__step__heading--blc
         | {{ 'quiz.step.heading.6b' | translate }}
             
-  .quiz__step.animated(ng-if="quiz.is(8)")
+  .quiz__step.animated(ng-if="quiz.is('INTRO_EXPENSIVE')")
     .quiz__step__scatterplot
       h2.quiz__step__heading.quiz__step__heading--trc
         | {{ 'quiz.step.heading.6c' | translate }}
             
-  .quiz__step.animated(ng-if="quiz.is(9)")  
+  .quiz__step.animated(ng-if="quiz.is('INTRO_DREAMS')")  
     .quiz__step__scatterplot
       h2.quiz__step__heading.quiz__step__heading--brc
         | {{ 'quiz.step.heading.6d' | translate }}
         
-  .quiz__step.animated(ng-if="quiz.is(10)")
+  .quiz__step.animated(ng-if="quiz.is('INTRO_ALL_FLATS')")
     h2.quiz__step__heading {{ 'quiz.step.heading.7' | translate }}
-        
-  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(10)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm(), 'quiz__step--muted': quiz.in(18)} ")
+            
+  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in('INTRO_ALL_FLATS')", ng-class="{ 'quiz__step--disabled' : quiz.hasForm(), 'quiz__step--muted': quiz.in('ADDR_FEEDBACK')} ")
     // The plot itself!
     .quiz__step__scatterplot
       img.quiz__step__scatterplot__chart(ng-src="/api/docs/all.png")
         
-  .quiz__step.animated(ng-if="quiz.is(11)")
+  .quiz__step.animated(ng-if="quiz.is('INTRO_AVERAGE')")
     h2.quiz__step__heading {{ 'quiz.step.heading.8' | translate }}
         
-  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(11)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm(), 'quiz__step--muted': quiz.in(18)} ")
+  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in('INTRO_AVERAGE')", ng-class=" { 'quiz__step--disabled' : quiz.hasForm(), 'quiz__step--muted': quiz.in('ADDR_FEEDBACK')} ")
     // The regression line
     .quiz__step__scatterplot
       img.quiz__step__scatterplot__chart(ng-src="{{ :: quiz.losRegression() }}")    
           
-  .quiz__step.animated(ng-if="quiz.in(12, 13)")
-    form.quiz__step__form(name="form", ng-submit="quiz.step = 14")
+  .quiz__step.animated(ng-if="quiz.in('INPUT_HOW_MUCH', 'DONT_BE_SHY')")
+    form.quiz__step__form(name="form", ng-submit="quiz.step = quiz.stepIndex('RENT_FEEDBACK')")
       label.control-label(for="inputrent")
         span {{ 'quiz.step.how-much.label' | translate }}
       .row
@@ -102,14 +102,14 @@
         .col-sm-3
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") {{ 'quiz.step.continue' | translate }}  
               
-      strong.animated(ng-if="quiz.is(13)")  {{ 'quiz.step.how-much.shy' | translate }}
+      strong.animated(ng-if="quiz.is('DONT_BE_SHY')") {{ 'quiz.step.how-much.shy' | translate }}
   
-  .quiz__step.animated(ng-if="quiz.in(14, 15)", ng-class="{ 'quiz__step--disabled' : quiz.hasForm() }")
+  .quiz__step.animated(ng-if="quiz.in('RENT_FEEDBACK', 'INPUT_HOW_BIG')", ng-class="{ 'quiz__step--disabled' : quiz.hasForm() }")
     // User rent level (without knowing the living space)
     .quiz__step__scatterplot
       .quiz__step__scatterplot__user-rent-part(ng-style="{ bottom: quiz.userRentPart() }")
     
-  .quiz__step.animated(ng-if="quiz.is(14)")
+  .quiz__step.animated(ng-if="quiz.is('RENT_FEEDBACK')")
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(0)")
       | {{ "quiz.step.rent-feedback.0" | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(1)")
@@ -119,7 +119,7 @@
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(3)")
       | {{ "quiz.step.rent-feedback.3" | translate }}
     
-  .quiz__step.animated(ng-if="quiz.is(15)")    
+  .quiz__step.animated(ng-if="quiz.is('INPUT_HOW_BIG')")    
     form.quiz__step__form(name="form", ng-submit="quiz.next()")
       label.control-label(for="inputaddr")
         | {{ 'quiz.step.how-big.label' | translate }}
@@ -132,7 +132,7 @@
         .col-sm-3
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") {{ 'quiz.step.continue' | translate }}
           
-  .quiz__step.animated(ng-if="quiz.is(16)")
+  .quiz__step.animated(ng-if="quiz.is('SPACE_FEEDBACK')")
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(0)")
       | {{ 'quiz.step.space-feedback.0' | translate: { times: quiz.userGlobalFeedback().times } }}
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(1)")
@@ -144,11 +144,11 @@
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(4)")
       | {{ 'quiz.step.space-feedback.4' | translate }}
     
-  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(16)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")  
+  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in('SPACE_FEEDBACK')", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")  
     .quiz__step__scatterplot
       .quiz__step__scatterplot__user-point(ng-style="quiz.userPoint()")
      
-  .quiz__step.animated(ng-if="quiz.is(17)")    
+  .quiz__step.animated(ng-if="quiz.is('INPUT_ADDR')")    
     form.quiz__step__form(name="form", ng-submit="quiz.geocode(quiz.addr)")
       p {{ 'quiz.step.addr.heading' | translate }}
       label.control-label(for="inputaddr")
@@ -160,13 +160,13 @@
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid || quiz.freezed")
             | {{ 'quiz.step.continue' | translate }}
             
-  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in(18)", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ") 
+  .quiz__step.quiz__step--bg.animated(ng-if="quiz.in('ADDR_FEEDBACK')", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ") 
     .quiz__step__scatterplot
       img.quiz__step__scatterplot__chart(ng-src="/api/docs/center.png?latlng={{ quiz.center.join(',') }}")
       span.quiz__step__scatterplot__legend
         | {{ 'quiz.step.addr.legend' | translate: { total: quiz.centerStats.total } }}
     
-  .quiz__step.animated(ng-if="quiz.is(18)")  
+  .quiz__step.animated(ng-if="quiz.is('ADDR_FEEDBACK')")  
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(0)")
       | {{ 'quiz.step.addr-feedback.0' | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(1)")
@@ -176,21 +176,21 @@
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(3)")
       | {{ 'quiz.step.addr-feedback.3' | translate }}
       
-  .quiz__step.animated(ng-if="quiz.in(19, 20)")
+  .quiz__step.animated(ng-if="quiz.in('ASK_DATA', 'MAKE_US_HAPPY')")
     h2.quiz__step__heading {{ 'quiz.step.heading.9' | translate }}
     .text-center
-      button.btn.btn-lg.btn-default(ng-click="quiz.step = 22")
+      button.btn.btn-lg.btn-default(ng-click="quiz.step = quiz.stepIndex('SHARE')")
         | {{ 'quiz.step.save.no' | translate }}    
       =" "
-      button.btn.btn-lg.btn-primary(ng-click="quiz.step = 21")
+      button.btn.btn-lg.btn-primary(ng-click="quiz.step = quiz.stepIndex('DATA_FORM')")
         | {{ 'quiz.step.save.yes' | translate }}
         
       div.animated.quiz__step__happy(ng-if="quiz.is(20)") {{ 'quiz.step.save.happy' | translate }}
       
-  .quiz__step.animated(ng-if="quiz.is(21)")
+  .quiz__step.animated(ng-if="quiz.is('DATA_FORM')")
     form.quiz__step__form(name="form", ng-submit="quiz.next()")
     
-  .quiz__step.animated(ng-if="quiz.is(22)")
+  .quiz__step.animated(ng-if="quiz.is('SHARE')")
     h2.quiz__step__heading(ng-show=":: quiz.userFinalFeedback().is(0)")
       | {{ 'quiz.step.share-feedback.0' | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userFinalFeedback().is(1)")

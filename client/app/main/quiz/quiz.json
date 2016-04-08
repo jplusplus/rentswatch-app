@@ -1,0 +1,96 @@
+[
+  {
+    "id": "INTRO"
+  },
+  {
+    "id": "INTRO_CONFIRM"
+  },
+  {
+    "id": "INTRO_QUICK",
+    "autoplay": true
+  },
+  {
+    "id": "INTRO_HOW",
+    "autoplay": true
+  },
+  {
+    "id": "INTRO_SIZE",
+    "autoplay": true
+  },
+  {
+    "id": "INTRO_RENT",
+    "autoplay": true
+  },
+  {
+    "id": "INTRO_CLEAR",
+    "autoplay": true
+  },
+  {
+    "id": "INTRO_CHEAP",
+    "autoplay": true
+  },
+  {
+    "id": "INTRO_EXPENSIVE",
+    "autoplay": true
+  },
+  {
+    "id": "INTRO_DREAMS",
+    "autoplay": true
+  },
+  {
+    "id": "INTRO_ALL_FLATS",
+    "autoplay": true
+  },
+  {
+    "id": "INTRO_AVERAGE",
+    "autoplay": true
+  },
+  {
+    "id": "INPUT_HOW_MUCH",
+    "autoplay": true,
+    "autoplay_delay": 1000,
+    "form": true
+  },
+  {
+    "id": "DONT_BE_SHY",
+    "form": true
+  },
+  {
+    "id": "RENT_FEEDBACK",
+    "autoplay": true
+  },
+  {
+    "id": "INPUT_HOW_BIG",
+    "form": true
+  },
+  {
+    "id": "SPACE_FEEDBACK",
+    "autoplay": true
+  },
+  {
+    "id": "INPUT_ADDR",
+    "form": true
+  },
+  {
+    "id": "ADDR_FEEDBACK",
+    "autoplay": true
+  },
+  {
+    "id": "ASK_DATA",
+    "autoplay": true,
+    "autoplay_delay": 1000,
+    "form": true
+  },
+  {
+    "id": "MAKE_US_HAPPY",
+    "form": true
+  },
+  {
+    "id": "DATA_FORM",
+    "form": true
+  },
+  {
+    "id": "SHARE",
+    "form": true
+  }
+]

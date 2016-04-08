@@ -2,25 +2,17 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'QuizCtrl', ($scope, $timeout, $http, stats, settings, hotkeys, Geocoder)->
+    .controller 'QuizCtrl', ($scope, $timeout, $http, stats, steps, settings, hotkeys, Geocoder)->
       'ngInject'
       # Some step may not be available until class values are filled
       RENT_REQUIRED_FROM   = 13
       SPACE_REQUIRED_FROM  = 15
       CENTER_REQUIRED_FROM = 17
-      # Some steps trigger an autoplay
-      AUTOPLAYED_STEPS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16, 19]
-      AUTOPLAY_TIMEOUT_DEFAULT = 4000
-      AUTOPLAY_TIMEOUT_QUICK = 1000
-      # Some steps contain forms
-      FORM_STEPS = [12, 13, 15, 17, 19, 20, 21, 22]
-      # Steps played rapidely
-      QUICK_STEPS = [12, 19]
       # Return an instance of the class
       new class
         # Current step
         step: 0
-        stepCount: 23
+        stepCount: steps.length
         # An image with all ads
         allAds: new Image
         # Default currency
@@ -49,11 +41,10 @@ angular
             # Always cancel current timeout
             $timeout.cancel @autoplay
             # Then if the step must be autoplayed:
-            if AUTOPLAYED_STEPS.indexOf(step) > -1
-              # Some step are quicker than the other!
-              delay = if QUICK_STEPS.indexOf(step) > -1 then AUTOPLAY_TIMEOUT_QUICK else AUTOPLAY_TIMEOUT_DEFAULT
+            if @current().autoplay
+              console.log  @current().autoplay_delay
               # Create a new timeout
-              @autoplay = $timeout @next, delay
+              @autoplay = $timeout @next,  @current().autoplay_delay
         # Create axis ticks
         xticks: =>
           min  = 20
@@ -65,10 +56,29 @@ angular
           max  = @rate * settings.MAX_TOTAL_RENT
           tick = @currencies[@currency].TICK
           ( Math.round(t * min) for t in [0..(max/tick)-1] )
+        stepIndex: (id)=> _.findIndex(steps, id: id)
+        # Current step
+        current: =>
+          # Extend default values with the current step
+          angular.extend {
+            'autoplay': false,
+            'autoplay_delay': 4000,
+            'form': false
+          }, steps[@step]
         # Comparaison helper
-        in: (from, to=1e9)=> @step >= from and @step <= to
-        is: => _.chain(arguments).values().any( (s)=> @step is s ).value()
-        hasForm: => @is.apply @, FORM_STEPS
+        in: (from, to=steps.length)=>
+          # Convert given step's id to index
+          from = if isNaN from then @stepIndex(from) else from
+          to =   if isNaN to then @stepIndex(to) else to
+          # Current step must be in the range
+          @step >= from and @step <= to
+        is: =>
+          # Convert strings arguments to indexes
+          indexes = _.map arguments, (a)=>
+            a = if isNaN a then @stepIndex(a) else a
+          # Current step must be at least one of the given indexes
+          _.chain(indexes).values().any( (s)=> @step is s ).value()
+        hasForm: => @current().form
         hasNext: =>
           # Disabled going further step N without:
           #   * a rend
