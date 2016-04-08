@@ -100,7 +100,7 @@
     &--bg {
       z-index:-1;
     }
-    
+
     &__happy {
       margin-top:20px;
       font-weight: bold;
@@ -139,16 +139,18 @@
         margin:0;
 
         &:after {
-          font-size:1.5em;
           content:"x";
           position:absolute;
+          font:normal normal normal FontAwesome;
+          font-size:1.5em;
+          -webkit-font-smoothing: antialiased;
         }
       }
 
-      &--trc:after { content: "⬏"; }
-      &--brc:after { content: "⬎"; }
-      &--blc:after { content: "⬐"; }
-      &--tlc:after { content: "⬑"; }
+      &--trc:after { content: "\f178"; }
+      &--brc:after { content: "\f178"; }
+      &--blc:after { content: "\f177"; }
+      &--tlc:after { content: "\f177"; }
 
       &--tlc, &--trc {
         top:20px;
