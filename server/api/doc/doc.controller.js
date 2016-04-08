@@ -9,6 +9,13 @@ response = require("../response"),
 // Default cache duration
 var CACHE_DURATION = 24*60*60*1000;
 
+exports.create = function(req, res) {
+  doc.save(req.body).then(function(rent) {
+    res.json(req.body);
+  // Handles errors
+}, response.handleError(res, 500)).fail(response.handleError(res, 500));
+};
+
 exports.allPng = function(req, res) {
   res.sendFile( path.resolve( __dirname, "../../cache/all.png") );
 };

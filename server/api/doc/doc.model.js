@@ -25,6 +25,23 @@ var extractSlope = module.exports.extractSlope = function(rows) {
 }
 
 // Gets all ads
+var save = module.exports.save = function(data) {
+  var deferred = Q.defer();
+  // For better performance we use a poolConnection
+  sqldb.mysql.getConnection(function(err, connection) {
+    // We use the given connection
+    connection.query('INSERT INTO rent SET ?', data, function(err, rent) {
+      if(err) deferred.reject(err);
+      else deferred.resolve(rent);
+      // And done with the connection.
+      connection.release();
+    });
+  });
+  // Return the promise
+  return deferred.promise;
+};
+
+// Gets all ads
 var all = module.exports.all = function() {
   var deferred = Q.defer();
   // Build a query to get every trustable ads

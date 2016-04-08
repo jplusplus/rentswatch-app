@@ -188,8 +188,42 @@
       div.animated.quiz__step__happy(ng-if="quiz.is(20)") {{ 'quiz.step.save.happy' | translate }}
       
   .quiz__step.animated(ng-if="quiz.is('DATA_FORM')")
-    form.quiz__step__form(name="form", ng-submit="quiz.next()")
-    
+    form.quiz__step__form.form-horizontal(name="save", 
+      ng-submit="quiz.save(user)", 
+      ng-init="user = { total_rent: quiz.rent, living_space: quiz.space, address: quiz.addr }")
+      .form-group
+        .col-sm-5.control-label
+          label(for="input-save-rent") {{ 'quiz.step.save.rent.label' | translate }}
+          .small.text-muted {{ 'quiz.step.save.rent.help' | translate }}
+        .col-sm-7          
+          .input-group
+            input.form-control(type='number', min="100", max="3000", id="input-save-rent", ng-model="user.total_rent", required='required', placeholder="{{ 'quiz.step.how-much.placeholder' | translate }}")
+            span.input-group-addon {{ 'quiz.step.how-much.currency' | translate:{ currency: quiz.currency } }}
+      .form-group
+        .col-sm-5.control-label
+          label(for="input-save-space") {{ 'quiz.step.save.space.label' | translate }}
+        .col-sm-7        
+          .input-group
+            input.form-control(type="number", id="input-save-space", min="1", max="200", ng-model="user.living_space", required='required', placeholder="{{ 'quiz.step.how-big.placeholder' | translate }}")
+            span.input-group-addon {{ 'quiz.step.how-big.unit' | translate  }}
+      .form-group
+        .col-sm-5.control-label
+          label(for="input-save-addr") {{ 'quiz.step.save.addr.label' | translate }}
+          .small.text-muted {{ 'quiz.step.save.addr.help' | translate }}
+        .col-sm-7
+          input.form-control(type="text", id="input-save-addr", ng-model="user.address")
+      .form-group
+        .col-sm-5.control-label
+          label(for="input-save-move-in") {{ 'quiz.step.save.move-in.label' | translate }}
+        .col-sm-7
+          select.form-control(id="input-save-move-in", ng-model="user.move_in", 
+            ng-options="m.dt as (m.dt | date:'MMMM' )  group by m.year for m in :: quiz.moveInRange")
+            option(value="") 
+      .form-group        
+        .col-sm-7.col-sm-offset-5
+          button.btn.btn-primary(type="submit", ng-disabled="save.$invalid")
+            | {{ 'quiz.step.save.submit' | translate }}
+        
   .quiz__step.animated(ng-if="quiz.is('SHARE')")
     h2.quiz__step__heading(ng-show=":: quiz.userFinalFeedback().is(0)")
       | {{ 'quiz.step.share-feedback.0' | translate }}

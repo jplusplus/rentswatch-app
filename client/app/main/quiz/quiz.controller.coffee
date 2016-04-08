@@ -13,6 +13,9 @@ angular
         # Current step
         step: 0
         stepCount: steps.length
+        rent: 1600
+        space: 64
+        addr: 'Paris, 75011'
         # An image with all ads
         allAds: new Image
         # Default currency
@@ -24,6 +27,8 @@ angular
         constructor: ->
           # Set the Image src to start loading it
           @allAds.src =  '/api/docs/all.png'
+          # Avalaible move-in months
+          @moveInRange = do @getMoveInRange
           # Bind keyboard shortcuts
           hotkeys.add
             combo: ['right', 'space']
@@ -42,7 +47,6 @@ angular
             $timeout.cancel @autoplay
             # Then if the step must be autoplayed:
             if @current().autoplay
-              console.log  @current().autoplay_delay
               # Create a new timeout
               @autoplay = $timeout @next,  @current().autoplay_delay
         # Create axis ticks
@@ -183,6 +187,23 @@ angular
                 @centerStats = res.data
                 # Go to the next point
                 do @next
+        getMoveInRange: ->
+          months = []
+          startYear = (new Date).getFullYear()
+          for y in [startYear..(startYear - 4)]
+            for m in [11..0]
+              dt = new Date y, m, 1, 0, 0, 0
+              if dt.getTime() <= Date.now()
+                months.push
+                  year: y
+                  month: m
+                  dt: dt
+          months
+        save: (user)=>
+          # Save user with the API
+          $http.post('/api/docs/', user)
+          # Do not wait and go to the next step
+          do @next
         # Draw the linear regression of the data
         losRegression: (avgPricePerSqm=stats.avgPricePerSqm)=>
           cvswidth = cvsheight = 480*2
