@@ -224,7 +224,7 @@
           button.btn.btn-primary(type="submit", ng-disabled="save.$invalid")
             | {{ 'quiz.step.save.submit' | translate }}
         
-  .quiz__step.animated(ng-if="quiz.is('SHARE')")
+  .quiz__step.quiz__step.animated(ng-if="quiz.is('SHARE')")
     h2.quiz__step__heading(ng-show=":: quiz.userFinalFeedback().is(0)")
       | {{ 'quiz.step.share-feedback.0' | translate }}
     h2.quiz__step__heading(ng-show=":: quiz.userFinalFeedback().is(1)")
@@ -247,7 +247,7 @@
           socialshare-url="{{ quiz.href }}",
           socialshare-text="{{ quiz.userShare() | translate }}",
           socialshare-caption="{{ app.title | translate }}",
-          socialshare-type="dialog",
+          socialshare-type="feed",
           socialshare-provider="facebook",
           socialshare-via="901779263268056")
           span.fa-stack.fa-lg
