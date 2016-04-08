@@ -1,6 +1,4 @@
 {
-    "app.title": "Rentswatch by Journalism++",
-    "app.description": "Keeps an eye on rents. Everywhere in Europe, all the time.",
     "dashboard.pick.heading": "Get insights about your city",
     "dashboard.pick.description": "We analysed thousands of flats all around Europe. What about your city?  ",
     "dashboard.context.toggler.off": "See the metrics",
@@ -50,7 +48,6 @@
     "quiz.step.how-much.shy": "Don't be shy…",
     "quiz.step.how-big.label": "How big is it?",
     "quiz.step.how-big.placeholder": "e.g 60",
-    "quiz.step.how-big.unit": "sq. meters",
     "quiz.step.space-feedback.0": "Holly Moly! We told you it would be painful: you pay {{ times }} times more than average for a flat this large",
     "quiz.step.space-feedback.1": "Ouch! We told you it would be painful: you pay {{ percentage }}% more than average for a flat this large",
     "quiz.step.space-feedback.2": "Well, sounds good, you seem to pay an average rent for a flat this large.",
@@ -70,6 +67,7 @@
     "quiz.step.save.rent.label": "You pay",
     "quiz.step.save.rent.help": "Including heating",
     "quiz.step.save.space.label": "For a living space of",
+    "quiz.step.how-big.unit": "sq. meters",
     "quiz.step.save.addr.label": "At the address",
     "quiz.step.save.addr.help": "You don't have to give the precise number but the actual street would be very nice.",
     "quiz.step.save.move-in.label": "When did you move in?",
@@ -90,5 +88,7 @@
     "navbar.link.blog": "Blog",
     "navbar.link.api": "API",
     "navbar.link.language": "Language",
+    "app.title": "Rentswatch by Journalism++",
+    "app.description": "Keeps an eye on rents. Everywhere in Europe, all the time.",
     "quiz.step.heading.10": "To know more about rents near you, visit rentswatch.com (yes, we’re non-profit and nice)"
 }

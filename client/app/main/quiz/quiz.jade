@@ -234,8 +234,7 @@
     ul.list-inline.text-center
       li
         a(socialshare,
-          socialshare-url="{{ quiz.href }}",
-          socialshare-text="My rent is way too high. How about yours?"
+          socialshare-text="My rent is way too high. How about yours? {{ quiz.href }}"
           socialshare-provider="twitter",
           socialshare-via="rentswatch",
           socialshare-hashtags="#rentswatch")
@@ -246,7 +245,8 @@
       li 
         a(socialshare,
           socialshare-url="{{ quiz.href }}",
-          socialshare-text="My rent is way too high. How about yours?"
+          socialshare-text="My rent is way too high. How about yours?",
+          socialshare-type="dialog",
           socialshare-provider="facebook",
           socialshare-via="901779263268056")
           span.fa-stack.fa-lg
