@@ -13,7 +13,7 @@ angular
         # Current step
         step: 0
         stepCount: steps.length
-        rent: 1600
+        rent: 300
         space: 64
         addr: 'Paris, 75011'
         # An image with all ads
@@ -170,6 +170,9 @@ angular
             if      @level > avg *  2 then 0 is p
             else if @level > avg * .8 then 1 is p
             else 2 is p
+        userShare: =>
+          for i in [0..2]
+            return "quiz.step.share.#{i}" if @userFinalFeedback().is i
         # Geocoder the given address and extract stats about it
         geocode: (query)=>
           # Freeze the app

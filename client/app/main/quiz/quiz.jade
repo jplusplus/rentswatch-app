@@ -234,7 +234,7 @@
     ul.list-inline.text-center
       li
         a(socialshare,
-          socialshare-text="My rent is way too high. How about yours? {{ quiz.href }}"
+          socialshare-text="{{ quiz.userShare() | translate }} {{ quiz.href }}"
           socialshare-provider="twitter",
           socialshare-via="rentswatch",
           socialshare-hashtags="#rentswatch")
@@ -245,7 +245,8 @@
       li 
         a(socialshare,
           socialshare-url="{{ quiz.href }}",
-          socialshare-text="My rent is way too high. How about yours?",
+          socialshare-text="{{ quiz.userShare() | translate }}",
+          socialshare-caption="{{ app.title | translate }}",
           socialshare-type="dialog",
           socialshare-provider="facebook",
           socialshare-via="901779263268056")
@@ -256,12 +257,8 @@
     
 
 .quiz-nav
-  .quiz-nav__item.quiz-nav__item--space.hidden-sm.hidden-xs(ng-show="quiz.hasNext()")
+  .quiz-nav__item(ng-show="quiz.hasNext()")
     | {{ 'quiz.nav.manual' | translate }}
-     
-  .quiz-nav__item
-    span(ng-show="quiz.rent") Your rent is {{quiz.rent}} {{ quiz.currency }}/month
-    span(ng-show="quiz.space") &nbsp;for {{quiz.space}}m² flat
      
   .quiz-nav__item.quiz-nav__item--right
     button.btn.btn-primary(ng-disabled="!quiz.hasPrevious()", ng-click="quiz.previous()")
