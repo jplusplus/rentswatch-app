@@ -57,7 +57,8 @@
   },
   {
     "id": "RENT_FEEDBACK",
-    "autoplay": true
+    "autoplay": true,
+    "autoplay_delay": 6000
   },
   {
     "id": "INPUT_HOW_BIG",
@@ -65,7 +66,8 @@
   },
   {
     "id": "SPACE_FEEDBACK",
-    "autoplay": true
+    "autoplay": true,
+    "autoplay_delay": 6000
   },
   {
     "id": "INPUT_ADDR",
@@ -73,7 +75,8 @@
   },
   {
     "id": "ADDR_FEEDBACK",
-    "autoplay": true
+    "autoplay": true,
+    "autoplay_delay": 6000
   },
   {
     "id": "ASK_DATA",
