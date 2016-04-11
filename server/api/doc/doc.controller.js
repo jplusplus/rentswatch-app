@@ -10,8 +10,12 @@ response = require("../response"),
 var CACHE_DURATION = 24*60*60*1000;
 
 exports.create = function(req, res) {
-  doc.save(req.body).then(function(rent) {
-    res.json(req.body);
+  var rent = _.clone(req.body);
+  // Save user ip to avoid flooding
+  rent.ip_hash = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  // Save the rent
+  doc.save(rent).then(function(rent) {
+    res.json(rent);
   // Handles errors
 }, response.handleError(res, 500)).fail(response.handleError(res, 500));
 };
