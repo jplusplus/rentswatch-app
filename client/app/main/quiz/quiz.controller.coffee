@@ -27,6 +27,12 @@ angular
           @allAds.src =  '/api/docs/all.png'
           # Avalaible move-in months
           @moveInRange = do @getMoveInRange
+
+          @step = @stepIndex 'INPUT_ADDR'
+          @rent = 1500
+          @space = 90
+          @addr = "Berlin, Germany"
+
           # Bind keyboard shortcuts
           hotkeys.add
             combo: ['right', 'space']
@@ -206,7 +212,7 @@ angular
           # Do not wait and go to the next step
           do @next
         # Draw the linear regression of the data
-        losRegression: (avgPricePerSqm=stats.avgPricePerSqm)=>
+        losRegression: (avgPricePerSqm=stats.avgPricePerSqm, stroke="#ffd633")=>
           cvswidth = cvsheight = 480*2
           canvas = angular.element("<canvas />").attr width: cvswidth, height: cvsheight
           ctx = canvas[0].getContext '2d'
@@ -220,7 +226,7 @@ angular
           endy = y(settings.MAX_LIVING_SPACE * avgPricePerSqm)
 
           # Points color
-          ctx.strokeStyle = "#ffd633"
+          ctx.strokeStyle = stroke
 
           do ctx.beginPath
           ctx.moveTo startx, starty
@@ -229,3 +235,7 @@ angular
           do ctx.stroke
           # Returns a base64
           do canvas[0].toDataURL
+        # Draw a log regression using the user data
+        userLosRegression: =>
+          # To do so we use the centered stats and a differente color
+          @losRegression @centerStats?.avgPricePerSqm or stats.avgPricePerSqm, "#FFF"
