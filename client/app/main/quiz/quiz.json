@@ -27,7 +27,8 @@
   },
   {
     "id": "INTRO_CHEAP",
-    "autoplay": true
+    "autoplay": true,
+    "autoplay_delay": 111111111111111111111
   },
   {
     "id": "INTRO_EXPENSIVE",

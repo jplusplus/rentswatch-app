@@ -15,7 +15,6 @@
     "angular-translate-loader-static-files": "~2.11.*",
     "angular-translate-storage-cookie": "~2.11.*",
     "ui-select": "angular-ui-select#0.14.9",
-    "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
     "angular-ui-router": "~0.2.15",
     "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.6.0",
