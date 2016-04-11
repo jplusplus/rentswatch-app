@@ -22,6 +22,8 @@ angular
         # True when the whole app is freezed
         freezed: no
         href: $state.href 'main.quiz', {}, absolute: yes
+        # Use interaction may disable autoplay
+        autoplayed: yes
         constructor: ->
           # Set the Image src to start loading it
           @allAds.src =  '/api/docs/all.png'
@@ -37,11 +39,11 @@ angular
           hotkeys.add
             combo: ['right', 'space']
             description: "Go to the next screen."
-            callback: @next
+            callback: => @next(false, true)
           hotkeys.add
             combo: ['left']
             description: "Go to the previous screen."
-            callback: @previous
+            callback: => @previous(true)
           # Save the currency's conversion rate
           $scope.$watch 'quiz.currency', (c)=>
             @rate = @currencies[c].CONVERSION_RATE if c? and @currencies[c]?
@@ -50,9 +52,9 @@ angular
             # Always cancel current timeout
             $timeout.cancel @autoplay
             # Then if the step must be autoplayed:
-            if @current().autoplay
+            if @current().autoplay and (@autoplayed or @current().autoplay_force)
               # Create a new timeout
-              @autoplay = $timeout @next,  @current().autoplay_delay
+              @autoplay = $timeout @next, @current().autoplay_delay
         # Create axis ticks
         xticks: =>
           min  = 20
@@ -71,6 +73,7 @@ angular
           angular.extend {
             'autoplay': false,
             'autoplay_delay': 4000,
+            'autoplay_force': false,
             'form': false
           }, steps[@step]
         # Comparaison helper
@@ -101,10 +104,14 @@ angular
           return yes
         hasPrevious: => not @freezed and @step > 0
         # Go the next step
-        next: (disableOnForm=false)=>
+        next: (disableOnForm=false, stop=false)=>
           if do @hasNext and ( not disableOnForm or not @hasForm @step )
+            @autoplayed = not stop if @autoplayed
             @step++
-        previous: => @step-- if do @hasPrevious
+        previous: (stop=false)=>
+          if do @hasPrevious
+            @autoplayed = not stop if @autoplayed
+            @step--
         # Get the part of the user rent's according to the max value
         userRentPart: =>
           @rent/(@rate * settings.MAX_TOTAL_RENT) * 100 + '%'

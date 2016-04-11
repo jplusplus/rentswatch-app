@@ -1,4 +1,4 @@
-.quiz(ng-class="{ 'quiz--freezed': quiz.freezed }", ng-click="quiz.next(true)")
+.quiz(ng-class="{ 'quiz--freezed': quiz.freezed }", ng-click="quiz.next(true, true)")
   .quiz__step.animated(ng-if="quiz.is('INTRO')")
     h2.quiz__step__heading
       div.small {{ 'quiz.step.heading.0a' | translate:{ total: main.totalAds } }}
@@ -266,11 +266,11 @@
     | {{ 'quiz.nav.manual' | translate }}
      
   .quiz-nav__item.quiz-nav__item--right
-    button.btn.btn-primary(ng-disabled="!quiz.hasPrevious()", ng-click="quiz.previous()")
+    button.btn.btn-primary(ng-disabled="!quiz.hasPrevious()", ng-click="quiz.previous(true)")
       i.fa.fa-chevron-left
       span.sr-only {{ 'quiz.nav.prev' | translate }}
     span &nbsp;
-    button.btn.btn-primary(ng-disabled="!quiz.hasNext()", ng-click="quiz.next()")
+    button.btn.btn-primary(ng-disabled="!quiz.hasNext()", ng-click="quiz.next(false, true)")
       i.fa.fa-chevron-right
       span.sr-only {{ 'quiz.nav.next' | translate }}
       

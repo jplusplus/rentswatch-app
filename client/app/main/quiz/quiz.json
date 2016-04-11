@@ -49,6 +49,7 @@
     "id": "INPUT_HOW_MUCH",
     "autoplay": true,
     "autoplay_delay": 1000,
+    "autoplay_force": true,
     "form": true
   },
   {
@@ -82,6 +83,7 @@
     "id": "ASK_DATA",
     "autoplay": true,
     "autoplay_delay": 1000,
+    "autoplay_force": true,
     "form": true
   },
   {
