@@ -214,7 +214,7 @@ angular
           y = d3.scale.linear().domain([0, settings.MAX_TOTAL_RENT]).range [cvsheight, 0]
 
           startx = cvswidth * 20/settings.MAX_LIVING_SPACE
-          starty = cvsheight
+          starty = y(20 * avgPricePerSqm)
 
           endx = cvswidth
           endy = y(settings.MAX_LIVING_SPACE * avgPricePerSqm)
