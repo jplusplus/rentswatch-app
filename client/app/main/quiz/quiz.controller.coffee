@@ -38,17 +38,17 @@ angular
           @allAds.src =  '/api/docs/all.png'
           # Avalaible move-in months
           @moveInRange = do @getMoveInRange
-
+          ###
           @step = @stepIndex 'INPUT_ADDR'
           @rent = 1500
           @space = 90
           @addr = "Berlin"
-
+          ###
           # Bind keyboard shortcuts
           hotkeys.add
             combo: ['right', 'space']
             description: "Go to the next screen."
-            callback: => @next(false, true)
+            callback: => @next(true, true)
           hotkeys.add
             combo: ['left']
             description: "Go to the previous screen."
@@ -213,7 +213,7 @@ angular
                       # Save center-related stats
                       @centerStats = res.data
                       # Go to the next point
-                      do @next
+                      @step = @stepIndex 'ADDR_FEEDBACK'
           , @noFlatsForCenter)
         noFlatsForCenter: =>
           @centerError = yes
