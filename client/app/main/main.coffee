@@ -11,8 +11,10 @@ angular.module 'rentswatchApp'
     templateUrl: 'app/main/main.html'
     controller: 'MainCtrl as main'
     resolve:
-      use: ($stateParams, $translate)->
-         $translate.use $stateParams.lang if $stateParams.lang?
+      use: ($stateParams, $state, $translate)->
+        if $stateParams.lang?
+          $translate.use $stateParams.lang
+          $state.go 'main', lang: null
       stats: ($http, settings)->
         'ngInject'
         # Simply gets figures from database
