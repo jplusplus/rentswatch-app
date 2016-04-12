@@ -14,7 +14,6 @@ angular.module 'rentswatchApp'
       use: ($stateParams, $state, $translate)->
         if $stateParams.lang?
           $translate.use $stateParams.lang
-          $state.go 'main', lang: null
       stats: ($http, settings)->
         'ngInject'
         # Simply gets figures from database
