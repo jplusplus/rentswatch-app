@@ -55,6 +55,8 @@
     "quiz.step.space-feedback.4": "Some have to be the lucky ones… Your rent is cheaper than average for a flat this large",
     "quiz.step.addr.heading": "But of course, average may be different where you live.",
     "quiz.step.addr.label": "What is your address?",
+    "quiz.step.addr.error": "Sorry, we didn't find any flat...",
+    "quiz.step.addr.ignore": "Ignore",
     "quiz.step.addr.legend": "The white dots show {{ total | number }} flats within 10km of your location.",
     "quiz.step.addr-feedback.0": "There's nothing we can do for you… YOU PAY GOD DAMN TOO MUCH !",
     "quiz.step.addr-feedback.1": "We're so sorry… That's still much more than average! Maybe one day you'll own the flat? (just kidding)",

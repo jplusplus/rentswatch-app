@@ -38,12 +38,6 @@ angular
           @allAds.src =  '/api/docs/all.png'
           # Avalaible move-in months
           @moveInRange = do @getMoveInRange
-
-          @step = @stepIndex 'INPUT_ADDR'
-          @rent = 1500
-          @space = 90
-          @addr = "Berlin, Germany"
-
           # Bind keyboard shortcuts
           hotkeys.add
             combo: ['right', 'space']
@@ -100,8 +94,6 @@ angular
           return no if @step + 1 > RENT_REQUIRED_FROM   and not @rent?
           #   * a space
           return no if @step + 1 > SPACE_REQUIRED_FROM  and not @space?
-          #   * a center's stats
-          return no if @step + 1 > CENTER_REQUIRED_FROM and not @centerStats?
           # Disabled step beyond the end
           return no if @freezed or @step >= @stepCount - 1
           # At least, yes!
@@ -200,20 +192,27 @@ angular
           # Reinitialize address geocoding trackers
           @center = @centerError = @centerStats = null
           # Geocode the addreess
-          Geocoder.place(query).then (place)=>
+          Geocoder.place(query).then( (place)=>
             @center = [ place.lat, place.lon ]
             # Get stat about it
             $http.get '/api/docs/center.json?latlng=' + @center.join(',')
               .then (res)=>
-                @centerAds.src = '/api/docs/center.png?latlng=' + @center.join(',')
-                angular.element(@centerAds).on 'load', =>
-                  $scope.$apply =>
-                    # Un-freeze the app
-                    @freezed = no
-                    # Save center-related stats
-                    @centerStats = res.data
-                    # Go to the next point
-                    do @next
+                if res.data.total <= 3 then do @noFlatsForCenter
+                else
+                  @centerAds.src = '/api/docs/center.png?latlng=' + @center.join(',')
+                  angular.element(@centerAds).on 'load', =>
+                    $scope.$apply =>
+                      # Un-freeze the app
+                      @freezed = no
+                      # Save center-related stats
+                      @centerStats = res.data
+                      # Go to the next point
+                      do @next
+          , @noFlatsForCenter)
+        noFlatsForCenter: =>
+          @centerError = yes
+          # Un-freeze the app
+          @freezed = no
         getMoveInRange: ->
           months = []
           startYear = (new Date).getFullYear()

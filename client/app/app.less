@@ -21,6 +21,7 @@
 @text-muted: lighten(#211F30, 60%);
 
 @brand-primary: #d35f5f;
+@state-warning-text: #e5b82e;
 @link-color: @brand-primary;
 
 @input-bg: darken(@body-bg, 14);
@@ -60,6 +61,29 @@ html {
   border:3px solid white;
   background:transparent;
 }
+
+.t-xs { margin-top: 1em; }
+.t-sm { margin-top: 1.5em; }
+.t-md { margin-top: 2em; }
+.t-lg { margin-top: 2.5em; }
+
+.b-xs { margin-bottom: 1em; }
+.b-sm { margin-bottom: 1.5em; }
+.b-md { margin-bottom: 2em; }
+.b-lg { margin-bottom: 2.5em; }
+
+.l-xs { margin-left: 1em; }
+.l-sm { margin-left: 1.5em; }
+.l-md { margin-left: 2em; }
+.l-lg { margin-left: 2.5em; }
+
+.r-xs { margin-right: 1em; }
+.r-sm { margin-right: 1.5em; }
+.r-md { margin-right: 2em; }
+.r-lg { margin-right: 2.5em; }
+
+a { cursor:pointer; }
+a.text-danger, a.text-success, a.text-warning, a.text-info { text-decoration:underline; }
 
 // injector
 @import 'app.animations.less';

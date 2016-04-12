@@ -78,7 +78,8 @@
   {
     "id": "ADDR_FEEDBACK",
     "autoplay": true,
-    "autoplay_delay": 6000
+    "autoplay_delay": 6000,
+    "backward": false
   },
   {
     "id": "ASK_DATA",
