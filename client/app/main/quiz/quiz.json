@@ -54,7 +54,8 @@
   },
   {
     "id": "DONT_BE_SHY",
-    "form": true
+    "form": true,
+    "backward": false
   },
   {
     "id": "RENT_FEEDBACK",
@@ -88,11 +89,13 @@
   },
   {
     "id": "MAKE_US_HAPPY",
-    "form": true
+    "form": true,
+    "backward": false
   },
   {
     "id": "DATA_FORM",
-    "form": true
+    "form": true,
+    "backward": false
   },
   {
     "id": "SHARE",

@@ -8,6 +8,13 @@ angular
       RENT_REQUIRED_FROM   = 13
       SPACE_REQUIRED_FROM  = 15
       CENTER_REQUIRED_FROM = 17
+      # Step's default settings
+      STEP_DEFAULT =
+        'autoplay': no
+        'autoplay_delay': 4000
+        'autoplay_force': no
+        'form': no
+        "backward": yes
       # Return an instance of the class
       new class
         # Current step
@@ -15,6 +22,8 @@ angular
         stepCount: steps.length
         # An image with all ads
         allAds: new Image
+        # An image with ads arround a center
+        centerAds: new Image
         # Default currency
         currency: settings.DEFAULT_CURRENCY
         # List of available currencies
@@ -68,14 +77,9 @@ angular
           ( Math.round(t * min) for t in [0..(max/tick)-1] )
         stepIndex: (id)=> _.findIndex(steps, id: id)
         # Current step
-        current: =>
-          # Extend default values with the current step
-          angular.extend {
-            'autoplay': false,
-            'autoplay_delay': 4000,
-            'autoplay_force': false,
-            'form': false
-          }, steps[@step]
+        current: => @get @step
+        # Extend default values with the current step
+        get: (i)=> angular.extend angular.copy(STEP_DEFAULT), steps[i]
         # Comparaison helper
         in: (from, to=steps.length)=>
           # Convert given step's id to index
@@ -106,12 +110,18 @@ angular
         # Go the next step
         next: (disableOnForm=false, stop=false)=>
           if do @hasNext and ( not disableOnForm or not @hasForm @step )
+            # Did we stop the autoplay?
             @autoplayed = not stop if @autoplayed
+            # Go to the next level
             @step++
         previous: (stop=false)=>
           if do @hasPrevious
+            # Did we stop the autoplay?
             @autoplayed = not stop if @autoplayed
+            # Go to the previous level
             @step--
+            # Some level can't be accessed backward, we may skip this one
+            @previous(stop) unless @get(@step).backward
         # Get the part of the user rent's according to the max value
         userRentPart: =>
           @rent/(@rate * settings.MAX_TOTAL_RENT) * 100 + '%'
@@ -195,12 +205,15 @@ angular
             # Get stat about it
             $http.get '/api/docs/center.json?latlng=' + @center.join(',')
               .then (res)=>
-                # Un-freeze the app
-                @freezed = no
-                # Save center-related stats
-                @centerStats = res.data
-                # Go to the next point
-                do @next
+                @centerAds.src = '/api/docs/center.png?latlng=' + @center.join(',')
+                angular.element(@centerAds).on 'load', =>
+                  $scope.$apply =>
+                    # Un-freeze the app
+                    @freezed = no
+                    # Save center-related stats
+                    @centerStats = res.data
+                    # Go to the next point
+                    do @next
         getMoveInRange: ->
           months = []
           startYear = (new Date).getFullYear()
