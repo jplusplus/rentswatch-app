@@ -82,6 +82,8 @@
     "quiz.step.rent-feedback.1": "",
     "quiz.step.rent-feedback.2": "",
     "quiz.step.rent-feedback.3": "",
+    "quiz.step.addr.error": "",
+    "quiz.step.addr.ignore": "",
     "navbar.link.toggler": "Toggle navigation",
     "navbar.link.dashboard": "Rent in your city",
     "navbar.link.quiz": "Do you pay the right rent?",

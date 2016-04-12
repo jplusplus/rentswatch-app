@@ -3,7 +3,9 @@
 
   &.ng-enter, &.ng-leave-active {
     opacity:0;
-    filter:blur(20px);
+    @media (min-width: @screen-md) {
+      filter:blur(20px);
+    }
   }
 
   &.hopen {

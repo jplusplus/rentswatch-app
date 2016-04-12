@@ -88,9 +88,12 @@
 
     &--disabled {
       .transform( translate(-50%, 0) scale(0.95) );
-      filter: blur(5px);
       pointer-events: none;
-      opacity:.5;
+      opacity:.2;
+
+      @media (min-width: @screen-md) {
+        filter: blur(5px);
+      }
     }
 
     &--muted {
