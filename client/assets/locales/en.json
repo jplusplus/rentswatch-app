@@ -48,7 +48,7 @@
     "quiz.step.how-much.shy": "Don't be shy…",
     "quiz.step.how-big.label": "How big is it?",
     "quiz.step.how-big.placeholder": "e.g 60",
-    "quiz.step.space-feedback.0": "Holly Moly! We told you it would be painful: you pay {{ times }} times more than average for a flat this large",
+    "quiz.step.space-feedback.0": "Holy Moly! We told you it would be painful: you pay {{ times }} times more than average for a flat this large",
     "quiz.step.space-feedback.1": "Ouch! We told you it would be painful: you pay {{ percentage }}% more than average for a flat this large",
     "quiz.step.space-feedback.2": "Well, sounds good, you seem to pay an average rent for a flat this large.",
     "quiz.step.space-feedback.3": "We envy you… You rent is very cheap compared to the average!",
@@ -59,7 +59,7 @@
     "quiz.step.addr-feedback.0": "There's nothing we can do for you… YOU PAY GOD DAMN TOO MUCH !",
     "quiz.step.addr-feedback.1": "We're so sorry… That's still much more than average! Maybe one day you'll own the flat? (just kidding)",
     "quiz.step.addr-feedback.2": "Not bad… which is very good. You pay a good price, you may have a good day.",
-    "quiz.step.addr-feedback.3": "Good news : Your rent is very cheap, lucky you! Bad news: Everybody hates you!",
+    "quiz.step.addr-feedback.3": "Good news: Your rent is very cheap, lucky you! Bad news: Everybody hates you!",
     "quiz.step.heading.9": "Can we use the data you just entered? You'll be doing a good deed for the next user!",
     "quiz.step.save.no": "No",
     "quiz.step.save.yes": "Yes",
@@ -94,6 +94,5 @@
     "quiz.step.share.1": "My rent is sweet and mellow. How about yours?",
     "quiz.step.share.2": "My rent is so cheap! How about yours?",
     "app.title": "Rentswatch by Journalism++",
-    "app.description": "Keeps an eye on rents. Everywhere in Europe, all the time.",
-    "quiz.step.heading.10": "To know more about rents near you, visit rentswatch.com (yes, we’re non-profit and nice)"
+    "app.description": "Keeps an eye on rents. Everywhere in Europe, all the time."
 }
