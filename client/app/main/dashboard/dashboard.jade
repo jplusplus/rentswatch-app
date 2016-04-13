@@ -48,7 +48,7 @@
         .dashboard__view__context__body__months(ng-show="dashboard.city.months.length")
           h4(translate="") dashboard.context.months.title
           p.small.text-muted   
-            | {{ 'dashboard.context.months.description' | translate }}
+            | {{ 'dashboard.context.months.description' | translate:{radius: dashboard.city.radius, city: dashboard.city.name } }}
           rent-price-changes(months="dashboard.city.months")
           
         .dashboard__view__context__body__ranking.dashboard__view__context__body__ranking--avg-price-per-sqm
