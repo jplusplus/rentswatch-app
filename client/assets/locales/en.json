@@ -84,6 +84,7 @@
     "quiz.step.rent-feedback.3": "That’s cheap… and cheap is good! Especially if your flat is big.",
     "quiz.step.addr.error": "Sorry, we didn't find any flat...",
     "quiz.step.addr.ignore": "Ignore",
+    "quiz.step.back-viz": "Back to the visualization",
     "navbar.link.toggler": "Toggle navigation",
     "navbar.link.dashboard": "Rent in your city",
     "navbar.link.quiz": "Do you pay the right rent?",

@@ -200,7 +200,14 @@
   .quiz__step.animated(ng-if="quiz.is('DATA_FORM')")
     form.quiz__step__form.form-horizontal(name="save", 
       ng-submit="quiz.save(user)", 
-      ng-init="user = { total_rent: quiz.rent, living_space: quiz.space, address: quiz.addr }")
+      ng-init="user = { total_rent: quiz.rent, living_space: quiz.space, address: quiz.addr }")      
+      .form-group
+        .col-sm-5.control-label
+          label(for="input-save-move-in") {{ 'quiz.step.save.move-in.label' | translate }}
+        .col-sm-7
+          select.form-control(id="input-save-move-in", ng-model="user.move_in", 
+            ng-options="m.dt as (m.dt | date:'MMMM' )  group by m.year for m in :: quiz.moveInRange")
+            option(value="") --
       .form-group
         .col-sm-5.control-label
           label(for="input-save-rent") {{ 'quiz.step.save.rent.label' | translate }}
@@ -222,13 +229,6 @@
           .small.text-muted {{ 'quiz.step.save.addr.help' | translate }}
         .col-sm-7
           input.form-control(type="text", id="input-save-addr", ng-model="user.address")
-      .form-group
-        .col-sm-5.control-label
-          label(for="input-save-move-in") {{ 'quiz.step.save.move-in.label' | translate }}
-        .col-sm-7
-          select.form-control(id="input-save-move-in", ng-model="user.move_in", 
-            ng-options="m.dt as (m.dt | date:'MMMM' )  group by m.year for m in :: quiz.moveInRange")
-            option(value="") 
       .form-group        
         .col-sm-7.col-sm-offset-5
           button.btn.btn-primary(type="submit", ng-disabled="save.$invalid")
