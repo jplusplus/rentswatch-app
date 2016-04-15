@@ -86,6 +86,10 @@
     .transform( translate(-50%, 0) );
     .transition(all linear .4s);
 
+    @media (max-width: @screen-md) {
+      top:10px;
+    }
+
     &--disabled {
       .transform( translate(-50%, 0) scale(0.95) );
       pointer-events: none;

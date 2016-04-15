@@ -264,6 +264,8 @@
             i.fa.fa-square-o.fa-stack-2x.fa-inverse
             i.fa.fa-fw.fa-facebook.fa-stack-1x.fa-inverse
           span.sr-only Facebook
+    p.text-center.small
+      a(ng-click="quiz.step = quiz.stepIndex('FINAL')") {{ "quiz.step.back-viz" | translate }}
     
 
 .quiz-nav

@@ -101,5 +101,8 @@
   {
     "id": "SHARE",
     "form": true
+  },
+  {
+    "id": "FINAL"
   }
 ]

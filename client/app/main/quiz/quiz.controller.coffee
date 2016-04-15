@@ -28,6 +28,8 @@ angular
         currency: settings.DEFAULT_CURRENCY
         # List of available currencies
         currencies: settings.CURRENCIES
+        # List of passed steps
+        history: []
         # True when the whole app is freezed
         freezed: no
         href: $state.href 'main.quiz', {}, absolute: yes
@@ -38,11 +40,12 @@ angular
           @allAds.src =  '/api/docs/all.png'
           # Avalaible move-in months
           @moveInRange = do @getMoveInRange
-          ###
+
           @step = @stepIndex 'INPUT_ADDR'
           @rent = 1500
           @space = 90
           @addr = "Berlin"
+          ###
           ###
           # Bind keyboard shortcuts
           hotkeys.add
