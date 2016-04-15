@@ -64,16 +64,17 @@
     "quiz.step.save.no": "Nein",
     "quiz.step.save.yes": "Ja",
     "quiz.step.save.happy": "Damit wir happy werden",
+    "quiz.step.save.move-in.label": "Wann hast Du den Vertrag unterzeichnet?",
     "quiz.step.save.rent.label": "Du zahlst",
     "quiz.step.save.rent.help": "(Warm)",
     "quiz.step.save.space.label": "Für eine Wohnfläche von",
     "quiz.step.how-big.unit": "m²",
     "quiz.step.save.addr.label": "Adresse",
     "quiz.step.save.addr.help": "Nur die richtige Straße würde uns etwas bringen.",
-    "quiz.step.save.move-in.label": "Wann hast Du den Vertrag unterzeichnet?",
     "quiz.step.save.submit": "Alles gut",
     "quiz.step.share-feedback.0": "Vielleicht bist du nicht der Einzige, der zu viel zahlt… Teile deine Enttäuschung mit deinen Freunden und gründe einen Club.",
     "quiz.step.share-feedback.1": "Gestalte deinen Tag noch angenehmer: Teile dein Ergebnis und erfreue dich am Pech deiner Freunde.",
+    "quiz.step.share-feedback.2": "Teile deinen Freunden mit, was du für ein Glück hast. Du kannst beneidet werden! (Es macht nichts, wenn du nun ein paar Facebook Freunde weniger hast.)",
     "quiz.nav.manual": "Leertaste drücken oder auf den Bildschirm tippen um fortzufahren.",
     "quiz.nav.prev": "Zurück",
     "quiz.nav.next": "Weiter",
@@ -83,12 +84,11 @@
     "quiz.step.rent-feedback.3": "Das ist günstig, und günstig ist gut! Besonders wenn die Wohnung groß ist",
     "quiz.step.addr.error": "Sorry, wir haben keine Daten für diesen Ort",
     "quiz.step.addr.ignore": "Weiter",
+    "quiz.step.back-viz": "",
     "navbar.link.toggler": "Navigation umschalten",
     "navbar.link.dashboard": "Mietpreise nach Städten",
     "navbar.link.quiz": "Ist dein Mietpreis angemessen?",
     "navbar.link.blog": "Blog",
     "navbar.link.api": "API",
-    "navbar.link.language": "Sprache",
-    "quiz.step.share-feedback.2": "Teile deinen Freunden mit, was du für ein Glück hast. Du kannst beneidet werden! (Es macht nichts, wenn du nun ein paar Facebook Freunde weniger hast.)"
-
+    "navbar.link.language": "Sprache"
 }
