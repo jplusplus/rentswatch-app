@@ -14,7 +14,7 @@
     "dashboard.pick.examples": "Par exemple: <a href=\"#!/paris\">Paris</a>, <a href=\"#!/berlin\">Berlin</a> ou <a href=\"#!/copenhagen\">Copenhague</a>.",
     "dashboard.context.heading.name": "{{ name }} <span class=\"text-muted\">en bref</span>",
     "dashboard.context.heading.total": "Nous avons analysé {{ total | number }} loyers dans cette ville",
-    "main.intro.punchline": "Tous les loyers en l'Europe, en temps réel",
+    "main.intro.punchline": "Tous les loyers en Europe, en temps réel",
     "main.links.dashboard.heading": "Votre ville en bref",
     "main.links.dashboard.description": "Un état des lieux du marché de la location dans les grandes villes européennes.",
     "main.links.view": "Voir",
