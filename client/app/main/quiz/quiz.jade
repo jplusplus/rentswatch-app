@@ -1,4 +1,4 @@
-.quiz(ng-class="{ 'quiz--freezed': quiz.freezed }", ng-click="quiz.next(true, true)")
+.quiz(ng-class="{ 'quiz--freezed': quiz.freezed }", ng-click="quiz.next()")
   .quiz__step.animated(ng-if="quiz.is('INTRO')")
     h2.quiz__step__heading
       div.small {{ 'quiz.step.heading.0a' | translate:{ total: main.totalAds } }}
@@ -13,8 +13,10 @@
       button.btn.btn-lg.btn-outline
         | {{ 'quiz.step.yes' | translate }}
             
-  .quiz__step.animated(ng-if="quiz.is('INTRO_QUICK')")
+  .quiz__step.animated(ng-if="quiz.in('INTRO_QUICK', 'INTRO_QUICK_INTERACT')")
     h2.quiz__step__heading {{ 'quiz.step.heading.2' | translate }}
+    .lead.text-muted.text-center.animated(ng-if="quiz.is('INTRO_QUICK_INTERACT')")
+      | {{ 'quiz.step.interact' | translate }}
             
   .quiz__step.animated(ng-if="quiz.is('INTRO_HOW')")
     h2.quiz__step__heading {{ 'quiz.step.heading.3' | translate }}
@@ -82,7 +84,7 @@
       img.quiz__step__scatterplot__chart(ng-src="{{ :: quiz.losRegression() }}")    
           
   .quiz__step.animated(ng-if="quiz.in('INPUT_HOW_MUCH', 'DONT_BE_SHY')")
-    form.quiz__step__form(name="form", ng-submit="quiz.step = quiz.stepIndex('RENT_FEEDBACK')")
+    form.quiz__step__form(name="form", ng-submit="quiz.submit()")
       label.control-label(for="inputrent")
         span {{ 'quiz.step.how-much.label' | translate }}
       .row
@@ -120,7 +122,7 @@
       | {{ "quiz.step.rent-feedback.3" | translate }}
     
   .quiz__step.animated(ng-if="quiz.is('INPUT_HOW_BIG')")    
-    form.quiz__step__form(name="form", ng-submit="quiz.next()")
+    form.quiz__step__form(name="form", ng-submit="quiz.submit()")
       label.control-label(for="inputaddr")
         | {{ 'quiz.step.how-big.label' | translate }}
       .row
@@ -195,7 +197,7 @@
       button.btn.btn-lg.btn-primary(ng-click="quiz.step = quiz.stepIndex('DATA_FORM')")
         | {{ 'quiz.step.save.yes' | translate }}
         
-      div.animated.quiz__step__happy(ng-if="quiz.is(20)") {{ 'quiz.step.save.happy' | translate }}
+      div.animated.quiz__step__happy(ng-if="quiz.is('MAKE_US_HAPPY')") {{ 'quiz.step.save.happy' | translate }}
       
   .quiz__step.animated(ng-if="quiz.is('DATA_FORM')")
     form.quiz__step__form.form-horizontal(name="save", 
@@ -266,18 +268,19 @@
           span.sr-only Facebook
     p.text-center.small
       a(ng-click="quiz.step = quiz.stepIndex('FINAL')") {{ "quiz.step.back-viz" | translate }}
-    
+  
+  // pre {{ quiz.steps[quiz.step] | json }}
 
 .quiz-nav
   .quiz-nav__item(ng-show="quiz.hasNext()")
     | {{ 'quiz.nav.manual' | translate }}
      
   .quiz-nav__item.quiz-nav__item--right
-    button.btn.btn-primary(ng-disabled="!quiz.hasPrevious()", ng-click="quiz.previous(true)")
+    button.btn.btn-primary(ng-disabled="!quiz.hasPrevious()", ng-click="quiz.previous()")
       i.fa.fa-chevron-left
       span.sr-only {{ 'quiz.nav.prev' | translate }}
     span &nbsp;
-    button.btn.btn-primary(ng-disabled="!quiz.hasNext()", ng-click="quiz.next(false, true)")
+    button.btn.btn-primary(ng-disabled="!quiz.hasNext()", ng-click="quiz.next()")
       i.fa.fa-chevron-right
       span.sr-only {{ 'quiz.nav.next' | translate }}
       

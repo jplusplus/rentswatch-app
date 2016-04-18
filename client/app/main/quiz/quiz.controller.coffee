@@ -4,10 +4,6 @@ angular
   .module 'rentswatchApp'
     .controller 'QuizCtrl', ($scope, $timeout, $http, $state, stats, steps, settings, hotkeys, Geocoder)->
       'ngInject'
-      # Some step may not be available until class values are filled
-      RENT_REQUIRED_FROM   = 13
-      SPACE_REQUIRED_FROM  = 15
-      CENTER_REQUIRED_FROM = 17
       # Step's default settings
       STEP_DEFAULT =
         'autoplay': no
@@ -28,13 +24,10 @@ angular
         currency: settings.DEFAULT_CURRENCY
         # List of available currencies
         currencies: settings.CURRENCIES
-        # List of passed steps
-        history: []
+        steps: steps
         # True when the whole app is freezed
         freezed: no
         href: $state.href 'main.quiz', {}, absolute: yes
-        # Use interaction may disable autoplay
-        autoplayed: yes
         constructor: ->
           # Set the Image src to start loading it
           @allAds.src =  '/api/docs/all.png'
@@ -50,11 +43,11 @@ angular
           hotkeys.add
             combo: ['right', 'space']
             description: "Go to the next screen."
-            callback: => @next(true, true)
+            callback: => do @next
           hotkeys.add
             combo: ['left']
             description: "Go to the previous screen."
-            callback: => @previous(true)
+            callback: => do @previous
           # Save the currency's conversion rate
           $scope.$watch 'quiz.currency', (c)=>
             @rate = @currencies[c].CONVERSION_RATE if c? and @currencies[c]?
@@ -63,9 +56,16 @@ angular
             # Always cancel current timeout
             $timeout.cancel @autoplay
             # Then if the step must be autoplayed:
-            if @current().autoplay and (@autoplayed or @current().autoplay_force)
+            if @current().autoplay
               # Create a new timeout
-              @autoplay = $timeout @next, @current().autoplay_delay
+              @autoplay = $timeout( =>
+                # We might have an explicitf next state
+                if @current().autoplay_next?
+                  @step = @stepIndex @current().autoplay_next
+                # Use the default next function
+                else do @next
+              # Use the current state's delay
+              , @current().autoplay_delay)
         # Create axis ticks
         xticks: =>
           min  = 20
@@ -77,7 +77,7 @@ angular
           max  = @rate * settings.MAX_TOTAL_RENT
           tick = @currencies[@currency].TICK
           ( Math.round(t * min) for t in [0..(max/tick)-1] )
-        stepIndex: (id)=> _.findIndex(steps, id: id)
+        stepIndex: (id)=> if isNaN(id) then _.findIndex(steps, id: id) else id
         # Current step
         current: => @get @step
         # Extend default values with the current step
@@ -96,32 +96,22 @@ angular
           # Current step must be at least one of the given indexes
           _.chain(indexes).values().any( (s)=> @step is s ).value()
         hasForm: => @current().form
-        hasNext: =>
-          # Disabled going further step N without:
-          #   * a rend
-          return no if @step + 1 > RENT_REQUIRED_FROM   and not @rent?
-          #   * a space
-          return no if @step + 1 > SPACE_REQUIRED_FROM  and not @space?
-          # Disabled step beyond the end
-          return no if @freezed or @step >= @stepCount - 1
-          # At least, yes!
-          return yes
+        # Disabled step beyond the end
+        hasNext: => not (@freezed or @step >= @stepCount - 1)
         hasPrevious: => not @freezed and @step > 0
+        submit: =>
+          @step = @stepIndex @current().next or @step + 1 if do @hasNext
         # Go the next step
-        next: (disableOnForm=false, stop=false)=>
-          if do @hasNext and ( not disableOnForm or not @hasForm @step )
-            # Did we stop the autoplay?
-            @autoplayed = not stop if @autoplayed
-            # Go to the next level
-            @step++
-        previous: (stop=false)=>
+        next: (id)=>
+          if do @hasNext and not @hasForm @step
+            # Explicite next state?
+            @step = @stepIndex(if id? then id else @current().next or @step + 1)
+        previous: =>
           if do @hasPrevious
-            # Did we stop the autoplay?
-            @autoplayed = not stop if @autoplayed
             # Go to the previous level
             @step--
             # Some level can't be accessed backward, we may skip this one
-            @previous(stop) unless @get(@step).backward
+            do @previous unless @get(@step).backward
         # Get the part of the user rent's according to the max value
         userRentPart: =>
           @rent/(@rate * settings.MAX_TOTAL_RENT) * 100 + '%'
@@ -215,7 +205,7 @@ angular
                       # Save center-related stats
                       @centerStats = res.data
                       # Go to the next point
-                      @step = @stepIndex 'ADDR_FEEDBACK'
+                      do @submit
           , @noFlatsForCenter)
         noFlatsForCenter: =>
           @centerError = yes
@@ -237,7 +227,7 @@ angular
           # Save user with the API
           $http.post('/api/docs/', user)
           # Do not wait and go to the next step
-          do @next
+          do @submit
         # Draw the linear regression of the data
         losRegression: (avgPricePerSqm=stats.avgPricePerSqm, stroke="#ffd633")=>
           cvswidth = cvsheight = 480*2

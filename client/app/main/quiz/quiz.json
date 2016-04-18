@@ -7,50 +7,49 @@
   },
   {
     "id": "INTRO_QUICK",
-    "autoplay": true
+    "autoplay": true,
+    "autoplay_delay": 3000,
+    "autoplay_next": "INTRO_QUICK_INTERACT",
+    "next": "INTRO_HOW"
   },
   {
-    "id": "INTRO_HOW",
-    "autoplay": true
+    "id": "INTRO_QUICK_INTERACT",
+    "backward": false
   },
   {
-    "id": "INTRO_SIZE",
-    "autoplay": true
+    "id": "INTRO_HOW"
   },
   {
-    "id": "INTRO_RENT",
-    "autoplay": true
+    "id": "INTRO_SIZE"
   },
   {
-    "id": "INTRO_CLEAR",
-    "autoplay": true
+    "id": "INTRO_RENT"
   },
   {
-    "id": "INTRO_CHEAP",
-    "autoplay": true
+    "id": "INTRO_CLEAR"
   },
   {
-    "id": "INTRO_EXPENSIVE",
-    "autoplay": true
+    "id": "INTRO_CHEAP"
   },
   {
-    "id": "INTRO_DREAMS",
-    "autoplay": true
+    "id": "INTRO_EXPENSIVE"
   },
   {
-    "id": "INTRO_ALL_FLATS",
-    "autoplay": true
+    "id": "INTRO_DREAMS"
   },
   {
-    "id": "INTRO_AVERAGE",
-    "autoplay": true
+    "id": "INTRO_ALL_FLATS"
+  },
+  {
+    "id": "INTRO_AVERAGE"
   },
   {
     "id": "INPUT_HOW_MUCH",
     "autoplay": true,
     "autoplay_delay": 1000,
-    "autoplay_force": true,
-    "form": true
+    "autoplay_next": "DONT_BE_SHY",
+    "form": true,
+    "next": "RENT_FEEDBACK"
   },
   {
     "id": "DONT_BE_SHY",
@@ -58,34 +57,28 @@
     "backward": false
   },
   {
-    "id": "RENT_FEEDBACK",
-    "autoplay": true,
-    "autoplay_delay": 6000
+    "id": "RENT_FEEDBACK"
   },
   {
     "id": "INPUT_HOW_BIG",
     "form": true
   },
   {
-    "id": "SPACE_FEEDBACK",
-    "autoplay": true,
-    "autoplay_delay": 6000
+    "id": "SPACE_FEEDBACK"
   },
   {
     "id": "INPUT_ADDR",
-    "form": true
+    "form": true,
+    "next": "ADDR_FEEDBACK"
   },
   {
-    "id": "ADDR_FEEDBACK",
-    "autoplay": true,
-    "autoplay_delay": 6000,
-    "backward": false
+    "id": "ADDR_FEEDBACK"
   },
   {
     "id": "ASK_DATA",
     "autoplay": true,
     "autoplay_delay": 1000,
-    "autoplay_force": true,
+    "autoplay_next": "MAKE_US_HAPPY",
     "form": true
   },
   {
