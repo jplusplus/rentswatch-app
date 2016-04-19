@@ -1,7 +1,6 @@
 {
-    "dashboard.choose-city": "Choose a city",
     "dashboard.pick.heading": "Gewinne Erkenntnisse über deine Stadt",
-    "dashboard.pick.description": "Wir haben die Mietpreise tausender Wohnungen miteinander verglichen.<br />Wie steht‘s um deine Stadt?",
+    "dashboard.choose-city": "Choose a city",
     "dashboard.context.toggler.off": "Metrik ansehen",
     "dashboard.context.toggler.on": "Zurück zur Karte",
     "dashboard.context.neighborhoods.description": "Angezeigt wird der durchschnittliche Mietpreis für Wohnungen, die in den letzten sechs Monaten neu bezogen wurden und sich im Umkreis von 2 km innerhalb des Stadtviertels befinden.",
@@ -12,9 +11,11 @@
     "dashboard.context.months.title": "Mietpreisentwicklung",
     "dashboard.context.avg.title": "Die teuersten Städte",
     "dashboard.context.index.title": "Ungleichheitsindex",
+    "dashboard.pick.description": "Wir haben die Mietpreise tausender Wohnungen miteinander verglichen.<br />Wie steht‘s um deine Stadt?",
     "dashboard.pick.examples": "Zum Beispiel: <a href=\"#!/paris\">Paris</a>, <a href=\"#!/berlin\">Berlin</a> oder <a href=\"#!/copenhagen\">Kopenhagen</a>.",
     "dashboard.context.heading.name": "{{ name }} <span class=\"text-muted\">in Kurzen</span>",
     "dashboard.context.heading.total": "Wir haben {{ total | number }} Mietpreise der Wohnungen in dieser Stadt analysiert.",
+    "navbar.link.language": "Sprache",
     "main.intro.punchline": "Alle Mietpreise, überall in Europa, in Echtzeit",
     "main.links.dashboard.heading": "Deine Stadt",
     "main.links.dashboard.description": "Ein Mietpreisvergleichsrechner für die größten Städte Europas.",
@@ -91,6 +92,5 @@
     "navbar.link.dashboard": "Mietpreise nach Städten",
     "navbar.link.quiz": "Ist dein Mietpreis angemessen?",
     "navbar.link.blog": "Blog",
-    "navbar.link.api": "API",
-    "navbar.link.language": "Sprache"
+    "navbar.link.api": "API"
 }
