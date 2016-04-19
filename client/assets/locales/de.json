@@ -1,6 +1,7 @@
 {
+    "dashboard.choose-city": "Choose a city",
     "dashboard.pick.heading": "Gewinne Erkenntnisse über deine Stadt",
-    "dashboard.pick.description": "Wir haben die Mietpreise tausender Wohnungen miteinander verglichen. Wie steht‘s um deine Stadt?",
+    "dashboard.pick.description": "Wir haben die Mietpreise tausender Wohnungen miteinander verglichen.<br />Wie steht‘s um deine Stadt?",
     "dashboard.context.toggler.off": "Metrik ansehen",
     "dashboard.context.toggler.on": "Zurück zur Karte",
     "dashboard.context.neighborhoods.description": "Angezeigt wird der durchschnittliche Mietpreis für Wohnungen, die in den letzten sechs Monaten neu bezogen wurden und sich im Umkreis von 2 km innerhalb des Stadtviertels befinden.",

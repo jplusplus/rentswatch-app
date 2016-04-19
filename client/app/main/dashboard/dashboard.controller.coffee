@@ -2,20 +2,28 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'DashboardCtrl', ($http, $state, $scope, $timeout, settings, dashboard, city, rankings, leafletData)->
+    .controller 'DashboardCtrl', ($http, $state, $scope, $timeout, settings, dashboard, all, city, rankings, leafletData)->
       'ngInject'
       # Return an instance of the class
       new class
+        # All available cities (will be overrided by cityLookup)
+        cities: all
+        # Cuurent city
+        city: city
+        # Show or no the context menu
+        showContext: no
         constructor: ->
-          @city = city
-          @showContext = no
-          if not @city?
-            do @cityLookup
+          if @city?
+            if @city.neighborhoods?
+              @map = angular.copy dashboard.map
+              @map.center.lat = @city.latitude
+              @map.center.lng = @city.longitude
+              leafletData.getMap().then @applyGeoJSON
+            else
+              $state.go 'main.dashboard', city: null
           else
-            @map = angular.copy dashboard.map
-            @map.center.lat = @city.latitude
-            @map.center.lng = @city.longitude
-            leafletData.getMap().then @applyGeoJSON
+            # Deactivated until we use the autocomplete
+            # do @cityLookup
         cityLookup: (q)=>
           return @cities = [] unless q? and q.length > 1
           # Build lookup params
@@ -26,7 +34,9 @@ angular
             # Update the cities list
             @cities = r.data
         selectCity: (city)->
-          $state.go 'main.dashboard', city: city.slug
+          if city?
+            $state.go 'main.dashboard', city: city.slug
+          @city
         itemBarStyle: (item, set=[], indicator='avgPricePerSqm')=>
           max = _.max set, indicator
           width: 100 * (item[indicator] / max[indicator]) + '%'

@@ -1,6 +1,7 @@
 {
+    "dashboard.choose-city": "Choisissez une ville",
     "dashboard.pick.heading": "Votre ville en bref",
-    "dashboard.pick.description": "Nous avons analysé des milliers de loyers partout en Europe. Que se passe-t-il près de chez vous ?",
+    "dashboard.pick.description": "Nous avons analysé des milliers de loyers partout en Europe.<br />Que se passe-t-il près de chez vous ?",
     "dashboard.context.toggler.off": "Chiffres clés",
     "dashboard.context.toggler.on": "Retourner sur la carte",
     "dashboard.context.neighborhoods.description": "Les loyers sont calculés en utilisant le loyer moyen des nouveaux contrats de location au cours des 6 derniers mois, dans un rayon de 2km par quartier.",

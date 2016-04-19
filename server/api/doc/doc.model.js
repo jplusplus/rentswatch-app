@@ -84,11 +84,12 @@ var center = module.exports.center = function(lat, lng, distance) {
     'AND POWER(' + lng + ' - longitude, 2) + POWER(' + lat + ' - latitude, 2) <= POWER(' + deg + ', 2)',
     //'AND price_per_sqm < 70',
     // 'AND price_per_sqm > 3',
-  ].join("\n");
+    'LIMIT 5000',
+  ];
   // For better performance we use a poolConnection
   sqldb.mysql.getConnection(function(err, connection) {
     // We use the given connection
-    connection.query(query, function(err, rows) {
+    connection.query(query.join('\n'), function(err, rows) {
       if(err) deferred.reject(err);
       else deferred.resolve(rows);
       // And done with the connection.

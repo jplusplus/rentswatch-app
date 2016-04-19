@@ -15,9 +15,9 @@ exports.create = function(req, res) {
   rent.ip_hash = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   // Save the rent
   doc.save(rent).then(function(rent) {
-    res.json(rent);
-  // Handles errors
-}, response.handleError(res, 500)).fail(response.handleError(res, 500));
+      res.json(rent);
+    // Handles errors
+  }, response.handleError(res, 500)).fail(response.handleError(res, 500));
 };
 
 exports.allPng = function(req, res) {
@@ -90,7 +90,8 @@ exports.centerJson = function(req, res) {
     token: process.env.RENTSWATCH_API_TOKEN,
     // Rejoin params to avoid mistakes
     q: center.join(','),
-    radius: 10
+    radius: 10,
+    limit: 5000
   };
   // Geocode the query
   request({ url: url, json: true, qs: params }, function(err, resp, body) {

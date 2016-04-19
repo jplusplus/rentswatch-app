@@ -1,6 +1,7 @@
 {
+    "dashboard.choose-city": "Choose a city",
     "dashboard.pick.heading": "Get insights about your city",
-    "dashboard.pick.description": "We analysed thousands of flats all around Europe. What about your city?",
+    "dashboard.pick.description": "We analysed thousands of flats all around Europe.<br />What about your city?",
     "dashboard.context.toggler.off": "See the metrics",
     "dashboard.context.toggler.on": "Back to the map",
     "dashboard.context.neighborhoods.description": "Prices represent the average price for new rental contracts in the last 6 months within 2 kilometers of the center of each neighborhood.",
