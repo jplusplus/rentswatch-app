@@ -2,7 +2,24 @@ div(ng-include='"components/navbar/navbar.html"')
 
 .ui-view
   .main
-    .main__intro
+    .main__intro    
+      .main__intro__languages
+        div(uib-dropdown)
+          a(uib-dropdown-toggle, href="")
+            | {{ 'navbar.link.language' | translate }} <span class="caret"></span>
+          ul.dropdown-menu-right(uib-dropdown-menu)
+            li(ng-class="{ active: main.use() === 'fr' }")
+              a(ng-click="main.use('fr')", href="")
+                | Français
+
+            li(ng-class="{ active: main.use() === 'en' }")
+              a(ng-click="main.use('en')", href="")
+                | English
+
+            li(ng-class="{ active: main.use() === 'de' }")
+              a(ng-click="main.use('de')", href="")
+                | Deutch
+
       img.main__intro__logo(src="assets/images/site-logo-bordered.svg", width="150")
       h2.main__intro__heading
         | Rentswatch

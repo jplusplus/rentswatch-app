@@ -2,11 +2,12 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'MainCtrl', ($timeout, stats)->
+    .controller 'MainCtrl', ($timeout, $translate, stats)->
       'ngInject'
       # Return an instance of the class
       new class
         constructor: ->
+          @use = $translate.use
           # Start estimation loop
           do @estimationLoop
         # There is approximatively 1 ad scraped by second so

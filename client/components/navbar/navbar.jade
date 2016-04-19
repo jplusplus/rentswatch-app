@@ -23,11 +23,11 @@
         li
           a(href="http://api.rentswatch.com", target="_blank")
             | {{ 'navbar.link.api' | translate }}
-      ul.nav.navbar-nav
+      ul.nav.navbar-nav.navbar-right
         li(uib-dropdown)
           a(uib-dropdown-toggle, href="")
             | {{ 'navbar.link.language' | translate }} <span class="caret"></span>
-          ul(uib-dropdown-menu)
+          ul.dropdown-menu-right(uib-dropdown-menu)
             li(ng-class="{ active: use() === 'fr' }")
               a(ng-click="use('fr')", href="")
                 | Français
