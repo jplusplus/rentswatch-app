@@ -13,4 +13,3 @@ deploy: build
 
 prefetch:
 	node server/commands/scatterplot.js --output=./server/cache/all.png
-	node server/commands/stats.js --output=./server/cache/all.json

@@ -49,7 +49,8 @@ exports.centerPng = function(req, res) {
   if( isNaN(center[0]) || isNaN(center[1])  ) {
     return response.validationError(res)({ error: "'latlng' parameter is malformed."});
   }
-
+  // Distance in km
+  center[2] = 3;
   // Get center according to the request
   doc.center.apply(null, center).then(function(rows) {
     try {
@@ -66,7 +67,7 @@ exports.centerPng = function(req, res) {
 
     res.type('image/png');
     res.end(image, 'binary');
-  });
+  }, response.handleError(res, 500)).fail(response.handleError(res, 500));
 };
 
 
