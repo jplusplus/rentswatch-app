@@ -15,6 +15,7 @@ angular
         constructor: ->
           if @city?
             if @city.neighborhoods?
+              @city.neighborhoods = _.filter @city.neighborhoods, (n)-> n.avgPricePerSqm?
               @map = angular.copy dashboard.map
               @map.center.lat = @city.latitude
               @map.center.lng = @city.longitude

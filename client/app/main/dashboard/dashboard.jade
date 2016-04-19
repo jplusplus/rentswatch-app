@@ -4,7 +4,7 @@
     p(ng-bind-html="'dashboard.pick.description' | translate")
     
     .dashboard__pick__form
-      select.form-control.input-lg(ng-options="city as city.name for city in dashboard.cities", 
+      select.form-control.input-lg(ng-options="city as city.name for city in dashboard.cities | orderBy:'name'", 
                           ng-model="dashboard.selectCity",
                           ng-model-options="{ getterSetter: true }")
         option(value="") {{ 'dashboard.choose-city' | translate }}
@@ -47,7 +47,7 @@
               span.dashboard__view__context__body__ranking__item__label
                 | {{ neighborhood.name }}
                 span.dashboard__view__context__body__ranking__item__label__price
-                  | {{ neighborhood.avgPricePerSqm | number:1 }}
+                  | {{ neighborhood.avgPricePerSqm | number:1 }} - {{ neighborhood.total }}
                   span(ng-show="$first")&nbsp;€/m²
         
         .dashboard__view__context__body__months(ng-show="dashboard.city.months.length")
