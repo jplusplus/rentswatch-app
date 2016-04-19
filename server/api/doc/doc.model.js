@@ -106,10 +106,8 @@ var center = module.exports.center = function(lat, lon, radius) {
   }
   // For better performance we use a poolConnection
   sqldb.mysql.getConnection(function(err, connection) {
-    console.log('connected')
     // We use the given connection
     connection.query(query.join("\n"), function(err, rows) {
-      console.log('requeted', err)
       if(err) deferred.reject(err);
       else {
         // We refilter every rows to have more precise selection

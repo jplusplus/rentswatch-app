@@ -97,7 +97,7 @@ exports.centerJson = function(req, res) {
   // Geocode the query
   request({ url: url, json: true, qs: params }, function(err, resp, body) {
     res.json({
-      total: body.total,
+      total: body.total || 0,
       avgPricePerSqm: body.avgPricePerSqm
     });
   });
