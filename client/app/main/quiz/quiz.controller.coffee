@@ -188,12 +188,12 @@ angular
           # Freeze the app
           @freezed = yes
           # Reinitialize address geocoding trackers
-          @center = @centerError = @centerStats = null
+          @center = @centerError = @centerStats = @address = null
           # Geocode the addreess
           Geocoder.place(query).then( (place)=>
             # Round to 1km
             @center = [ Math.round(place.lat*100)/100, Math.round(place.lon*100)/100 ]
-            console.log place, @center
+            @address = place.address
             # Get stat about it
             $http.get '/api/docs/center.json?latlng=' + @center.join(',')
               .then (res)=>

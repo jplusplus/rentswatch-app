@@ -58,7 +58,7 @@
     "quiz.step.space-feedback.4": "Petit veinard… Votre loyer est vraiment bas pour un appartement de cette taille.",
     "quiz.step.addr.heading": "Evidemment, le loyer moyen peut être différent selon là où vous vivez.",
     "quiz.step.addr.label": "Quelle est votre adresse ?",
-    "quiz.step.addr.legend": "En blanc, les {{ total | number }} appartements dans un rayon de 10km autour de chez vous.",
+    "quiz.step.addr.legend": "En blanc, les {{ total | number }} appartements dans un rayon de 10km autour de {{ city }} ({{ country }}).",
     "quiz.step.addr-feedback.0": "Nom de Zeus, Marty! On savait que ce serait douloureux, mais là… Vous payez beaucoup plus que la moyenne!",
     "quiz.step.addr-feedback.1": "Désolé mais c'est quand même au dessus de la moyenne… vous avez déjà pensé à acheter? (Sorry, mauvaise blague)",
     "quiz.step.addr-feedback.2": "Pas mal ! Vous payez un bon loyer, vous pouvez passer une bonne journée!",

@@ -15,6 +15,7 @@ angular
             url += "format=json&"
             url += "limit=1&"
             url += "osm_type=N&"
+            url += "addressdetails=1&"
             url += "&q=" + query + "&json_callback=JSON_CALLBACK"
             # OSM API uses JSONP to return result
             $http.jsonp(url).then (res)->
