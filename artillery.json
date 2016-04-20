@@ -1,0 +1,25 @@
+{
+  "config": {
+    "target": "http://beta.rentswatch.com",
+    "phases": [
+      {
+        "duration": 600,
+        "arrivalRate": 100
+      }
+    ],
+    "payload": {
+      "fields": ["lat", "lng"]
+    }
+  },
+  "scenarios": [
+    {
+      "flow": [
+        {
+          "get": {
+            "url": "/api/docs/center.json?latlng={{ lat }},{{ lng }}"
+          }
+        }
+      ]
+    }
+  ]
+}
