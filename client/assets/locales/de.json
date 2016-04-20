@@ -58,7 +58,7 @@
     "quiz.step.space-feedback.4": "Du bist ein Glückspilz! Du zahlst durchschnittlich weniger Miete als andere!",
     "quiz.step.addr.heading": "Natürlich hängt es davon ab, wo Du wohnst.",
     "quiz.step.addr.label": "Wie lautet deine Adresse? (Oder deine Stadt)",
-    "quiz.step.addr.legend": "Die weißen Punkte zeigen die Anzahl von {{ total | number }} Wohnungen im Umkreis von 10 km an.",
+    "quiz.step.addr.legend": "Die weißen Punkte zeigen die Anzahl von {{ total | number }} Wohnungen im Umkreis von 10 km von {{ city }} ({{ country }}) an.",
     "quiz.step.addr-feedback.0": "Ok, wir kapitulieren! DU ZAHLST EINFACH ZU VIEL!",
     "quiz.step.addr-feedback.1": "Es tut uns wirklich Leid… Deine Miete liegt weit über dem Durchschnitt!",
     "quiz.step.addr-feedback.2": "Nicht schlecht… Du zahlst eine angemessene Miete und kannst dich entspannt zurücklehnen.",
