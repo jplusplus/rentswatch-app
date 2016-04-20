@@ -186,7 +186,7 @@
   .quiz__step.quiz__step--bg.animated(ng-if="quiz.in('ADDR_FEEDBACK') && quiz.centerStats", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ") 
     // The regression line
     .quiz__step__scatterplot
-      img.quiz__step__scatterplot__chart(ng-src="{{ :: quiz.userLosRegression() }}")   
+      img.quiz__step__scatterplot__chart(ng-src="{{ quiz.userLosRegression() }}")   
       
   .quiz__step.animated(ng-if="quiz.in('ASK_DATA', 'MAKE_US_HAPPY')")
     h2.quiz__step__heading {{ 'quiz.step.heading.9' | translate }}
