@@ -13,3 +13,6 @@ deploy: build
 
 prefetch:
 	node server/commands/scatterplot.js --output=./server/cache/all.png
+
+artillery:
+	artillery run artillery.json -p artillery.csv
