@@ -8,3 +8,4 @@ dist
 npm-debug.log
 build
 artillery_*
+artillery.csv

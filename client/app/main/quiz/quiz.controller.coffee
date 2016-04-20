@@ -191,7 +191,9 @@ angular
           @center = @centerError = @centerStats = null
           # Geocode the addreess
           Geocoder.place(query).then( (place)=>
-            @center = [ place.lat, place.lon ]
+            # Round to 1km
+            @center = [ Math.round(place.lat*100)/100, Math.round(place.lon*100)/100 ]
+            console.log place, @center
             # Get stat about it
             $http.get '/api/docs/center.json?latlng=' + @center.join(',')
               .then (res)=>

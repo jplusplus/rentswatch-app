@@ -47,7 +47,7 @@
               span.dashboard__view__context__body__ranking__item__label
                 | {{ neighborhood.name }}
                 span.dashboard__view__context__body__ranking__item__label__price
-                  | {{ neighborhood.avgPricePerSqm | number:1 }} - {{ neighborhood.total }}
+                  | {{ neighborhood.avgPricePerSqm | number:1 }}
                   span(ng-show="$first")&nbsp;€/m²
         
         .dashboard__view__context__body__months(ng-show="dashboard.city.months.length")
