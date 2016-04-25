@@ -19,3 +19,9 @@ angular
         #   TICK: 800
       DEFAULT_CURRENCY: 'CHF'
       LOCALE_LOCATION: '//code.angularjs.org/1.2.20/i18n/angular-locale_{{locale}}.js'
+      STEP_DEFAULT:
+        'autoplay': no
+        'autoplay_delay': 4000
+        'autoplay_force': no
+        'form': no
+        "backward": yes

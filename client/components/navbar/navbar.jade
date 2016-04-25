@@ -36,18 +36,24 @@
               | &nbsp;
               | {{ 'navbar.link.facebook' | translate }}
       ul.nav.navbar-nav.navbar-right
+        li(uib-dropdown)        
+          a(uib-dropdown-toggle, href="")
+            | {{ currency.use() | translate }} <i class="caret"></i>
+          ul.dropdown-menu-right(uib-dropdown-menu)
+            li(ng-repeat="(c, value) in currencies", 
+               ng-class="{ 'active': currency.is(c) }",
+               ng-click="currency.use(c)")
+              a {{ c | translate }}
         li(uib-dropdown)
           a(uib-dropdown-toggle, href="")
             | {{ 'navbar.link.language' | translate }} <span class="caret"></span>
           ul.dropdown-menu-right(uib-dropdown-menu)
-            li(ng-class="{ active: use() === 'fr' }")
-              a(ng-click="use('fr')", href="")
+            li(ng-class="{ active: language.is('fr') }")
+              a(ng-click="language.use('fr')", href="")
                 | Français
-
-            li(ng-class="{ active: use() === 'en' }")
-              a(ng-click="use('en')", href="")
+            li(ng-class="{ active: language.is('en') }")
+              a(ng-click="language.use('en')", href="")
                 | English
-
-            li(ng-class="{ active: use() === 'de' }")
-              a(ng-click="use('de')", href="")
+            li(ng-class="{ active: language.is('de') }")
+              a(ng-click="language.use('de')", href="")
                 | Deutch

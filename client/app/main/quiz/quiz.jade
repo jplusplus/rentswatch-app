@@ -33,11 +33,11 @@
         // Axis Line on x
         span.quiz__step__scatterplot__axis__line.animated.hopen(ng-if="quiz.in('INTRO_SIZE')")
         span.quiz__step__scatterplot__axis__ticks.animated(ng-if="quiz.in('INTRO_SIZE')")
-          span.quiz__step__scatterplot__axis__ticks__tick(ng-repeat="t in quiz.xticks()") 
+          span.quiz__step__scatterplot__axis__ticks__tick(ng-repeat="t in quiz.xticks() track by $index") 
             span.quiz__step__scatterplot__axis__ticks__tick__wrap {{ t }} 
       
   .quiz__step.animated(ng-if="quiz.is('INTRO_RENT')")
-    h2.quiz__step__heading {{ 'quiz.step.heading.5' | translate }}
+    h2.quiz__step__heading {{ 'quiz.step.heading.5' | translate:{ currency: quiz.currency.use() } }}
           
   .quiz__step.quiz__step--bg(ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
     .quiz__step__scatterplot
@@ -46,8 +46,10 @@
         // Axis Line on y
         span.quiz__step__scatterplot__axis__line.animated.vopen(ng-if="quiz.in('INTRO_RENT')")
         span.quiz__step__scatterplot__axis__ticks.animated(ng-if="quiz.in('INTRO_RENT')")
-          span.quiz__step__scatterplot__axis__ticks__tick(ng-repeat="t in quiz.yticks()")
-            span.quiz__step__scatterplot__axis__ticks__tick__wrap {{ t }}
+          span.quiz__step__scatterplot__axis__ticks__tick(ng-repeat="t in quiz.yticks() track by $index")
+            span.quiz__step__scatterplot__axis__ticks__tick__wrap 
+              | {{ t }}
+              span(ng-show="$last") &nbsp;{{ quiz.currency.use() }}
             
   .quiz__step.animated(ng-if="quiz.is('INTRO_CLEAR')")
     h2.quiz__step__heading {{ 'quiz.step.heading.6a' | translate }}
@@ -92,14 +94,14 @@
           .form-group.form-group-lg
               .input-group
                 input.form-control.input-lg(type='number', min="100", max="3000", id="inputrent", ng-model='quiz.rent', required='required', placeholder="{{ 'quiz.step.how-much.placeholder' | translate }}")
-                span.input-group-addon.dropdown.quiz__step__form__dropdown
-                  .dropdown-toggle
-                    | {{ 'quiz.step.how-much.currency' | translate:{ currency: quiz.currency } }}
-                    span.hidden &nbsp;<i class="caret"></i>
-                  ul.dropdown-menu.dropdown-menu-right.quiz__step__form__dropdown__menu
+                span.input-group-addon.quiz__step__form__dropdown(uib-dropdown)
+                  a(uib-dropdown-toggle)
+                    | {{ 'quiz.step.how-much.currency' | translate:{ currency: quiz.currency.use() } }}
+                    span &nbsp;<i class="caret"></i>
+                  ul.dropdown-menu.dropdown-menu-right.quiz__step__form__dropdown__menu(uib-dropdown-menu)
                     li(ng-repeat="(currency, value) in quiz.currencies", 
-                       ng-class="{ 'active': quiz.currency === currency }",
-                       ng-click="quiz.currency = currency")
+                       ng-class="{ 'active': quiz.currency.is(currency) }",
+                       ng-click="quiz.currency.use(currency)")
                       a {{ 'quiz.step.how-much.currency' | translate:{ currency: currency } }}
         .col-sm-3
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") {{ 'quiz.step.continue' | translate }}  
@@ -202,7 +204,7 @@
   .quiz__step.animated(ng-if="quiz.is('DATA_FORM')")
     form.quiz__step__form.form-horizontal(name="save", 
       ng-submit="quiz.save(user)", 
-      ng-init="user = { total_rent: quiz.rent, living_space: quiz.space, address: quiz.addr }")      
+      ng-init="user = { total_rent: quiz.rent, living_space: quiz.space, address: quiz.addr, currency: quiz.currency.use() }")      
       .form-group
         .col-sm-5.control-label
           label(for="input-save-move-in") {{ 'quiz.step.save.move-in.label' | translate }}
@@ -217,7 +219,7 @@
         .col-sm-7          
           .input-group
             input.form-control(type='number', min="100", max="3000", id="input-save-rent", ng-model="user.total_rent", required='required', placeholder="{{ 'quiz.step.how-much.placeholder' | translate }}")
-            span.input-group-addon {{ 'quiz.step.how-much.currency' | translate:{ currency: quiz.currency } }}
+            span.input-group-addon {{ 'quiz.step.how-much.currency' | translate:{ currency: quiz.currency.use() } }}
       .form-group
         .col-sm-5.control-label
           label(for="input-save-space") {{ 'quiz.step.save.space.label' | translate }}

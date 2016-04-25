@@ -2,15 +2,8 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'QuizCtrl', ($scope, $timeout, $http, $state, stats, steps, settings, hotkeys, Geocoder)->
+    .controller 'QuizCtrl', ($scope, $timeout, $http, $state, stats, steps, settings, hotkeys, rate, Geocoder)->
       'ngInject'
-      # Step's default settings
-      STEP_DEFAULT =
-        'autoplay': no
-        'autoplay_delay': 4000
-        'autoplay_force': no
-        'form': no
-        "backward": yes
       # Return an instance of the class
       new class
         # Current step
@@ -20,10 +13,14 @@ angular
         allAds: new Image
         # An image with ads arround a center
         centerAds: new Image
-        # Default currency
-        currency: settings.DEFAULT_CURRENCY
         # List of available currencies
         currencies: settings.CURRENCIES
+        # Currency helper
+        currency:
+          is: (c)-> rate.use() is c
+          use: rate.use
+        # Use default conversion rate
+        rate: rate.get()
         steps: steps
         # True when the whole app is freezed
         freezed: no
@@ -48,9 +45,10 @@ angular
             combo: ['left']
             description: "Go to the previous screen."
             callback: => do @previous
-          # Save the currency's conversion rate
-          $scope.$watch 'quiz.currency', (c)=>
-            @rate = @currencies[c].CONVERSION_RATE if c? and @currencies[c]?
+          # Current currency might change
+          $scope.$on 'currency:change', (ev, currency)=>
+            # Save the currency's conversion rate
+            @rate = @currencies[currency].CONVERSION_RATE
           # Save the currency's conversion rate
           $scope.$watch 'quiz.step', (step)=>
             # Always cancel current timeout
@@ -73,15 +71,15 @@ angular
           tick = 20
           ( Math.round(t * min) for t in [0..(max/tick)-1] )
         yticks: =>
-          min  = @rate * 200
-          max  = @rate * settings.MAX_TOTAL_RENT
-          tick = @currencies[@currency].TICK
-          ( Math.round(t * min) for t in [0..(max/tick)-1] )
+          min  = 200
+          max  = settings.MAX_TOTAL_RENT
+          tick = 200
+          ( Math.round(@rate * t * min/10)*10 for t in [0..(max/tick)-1] )
         stepIndex: (id)=> if isNaN(id) then _.findIndex(steps, id: id) else id
         # Current step
         current: => @get @step
         # Extend default values with the current step
-        get: (i)=> angular.extend angular.copy(STEP_DEFAULT), steps[i]
+        get: (i)=> angular.extend angular.copy(settings.STEP_DEFAULT), steps[i]
         # Comparaison helper
         in: (from, to=steps.length)=>
           # Convert given step's id to index
@@ -100,7 +98,8 @@ angular
         hasNext: => not (@freezed or @step >= @stepCount - 1)
         hasPrevious: => not @freezed and @step > 0
         submit: =>
-          @step = @stepIndex @current().next or @step + 1 if do @hasNext
+          if do @hasNext
+            @step = @stepIndex @current().next or @step + 1
         # Go the next step
         next: (id)=>
           if do @hasNext and not @hasForm @step
@@ -121,11 +120,11 @@ angular
           left: @space/settings.MAX_LIVING_SPACE * 100 + '%'
         # Get the user level compared to other deciles
         userRentLevel: =>
-          rent = @rate * @rent
+          rentEur = @rent / @rate
           # Count smaller and higher values
           figures = _.reduce stats.deciles, (res, row)=>
-            res.smaller += row.count * (row.to <= rent)
-            res.higher += row.count * (row.from > rent)
+            res.smaller += row.count * (row.to <= rentEur)
+            res.higher += row.count * (row.from > rentEur)
             res
           , higher: 0, smaller: 0
           # Compute level
@@ -142,12 +141,13 @@ angular
         #   * using all ads in Europe
         userGlobalFeedback: =>
           avg = stats.avgPricePerSqm
+          rentEur = @rent / @rate
           # How big is the difference between the user's average space by euro
           # and the global average we get from the ads
           avgPricePerSqm: avg
-          level: @rent / @space
-          times: Math.round (@rent / @space) / avg
-          percentage: Math.round( (@rent / @space - avg) / avg * 100)
+          level: rentEur / @space
+          times: Math.round (rentEur / @space) / avg
+          percentage: Math.round( (rentEur / @space - avg) / avg * 100)
           is: (p)->
             # Part ranges are algorithmically obtained
             if      @level > avg * 1.5  then 0 is p
@@ -159,12 +159,13 @@ angular
         #   * using rents around a given center
         userCenterFeedback: =>
           avg = @centerStats?.avgPricePerSqm or stats.avgPricePerSqm
+          rentEur = @rent / @rate
           # How big is the difference between the user's average space by euro
           # and the global average we get from the ads
           avgPricePerSqm:  avg
-          level: @rent / @space
-          times: Math.round (@rent / @space) / avg
-          percentage: Math.round( (@rent / @space - avg) / avg * 100)
+          level: rentEur / @space
+          times: Math.round (rentEur / @space) / avg
+          percentage: Math.round( (rentEur / @space - avg) / avg * 100)
           is: (p)->
             # Part ranges are algorithmically obtained
             if      @level > avg * 2    then 0 is p
@@ -173,8 +174,9 @@ angular
             else 3 is p
         userFinalFeedback: =>
           avg = @centerStats?.avgPricePerSqm or stats.avgPricePerSqm
+          rentEur = @rent / @rate
           avgPricePerSqm:  avg
-          level: @rent / @space
+          level: rentEur / @space
           is: (p)->
             # Part ranges are algorithmically obtained
             if      @level > avg *  2 then 0 is p
