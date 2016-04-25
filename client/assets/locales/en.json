@@ -15,6 +15,8 @@
     "dashboard.pick.examples": "Examples: <a href=\"#!/paris\">Paris</a>, <a href=\"#!/berlin\">Berlin</a> or <a href=\"#!/copenhagen\">Copenhagen</a>.",
     "dashboard.context.heading.name": "{{ name }} <span class=\"text-muted\">at a glance</span>",
     "dashboard.context.heading.total": "We analysed {{ total | number }} flats in this city",
+    "dashboard.current.numobs": "Flats analyzed: ",
+    "dashboard.current.median-living-space": "Median flat size: ",
     "navbar.link.language": "Language",
     "navbar.link.currency": "Currency",
     "main.intro.punchline": " All rents, all over Europe, in real time",

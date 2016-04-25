@@ -22,8 +22,11 @@
     
   .dashboard__view(ng-if="dashboard.city")
     leaflet.dashboard__view__map(center="dashboard.map.center", tiles="dashboard.map.tiles", defaults="dashboard.map.defaults")
-    .dashboard__view__current-price-per-sqm(ng-show="dashboard.showCurrentPricePerSqm()")
-      | {{ dashboard.currentPricePerSqm() | rate | number:2 }}&nbsp;{{ dashboard.currency | currencySymbol }}/m²
+    .dashboard__view__current(ng-show="dashboard.showCurrentPricePerSqm()")      
+      p {{ dashboard.current().price_per_sqm | rate | number:2 }}&nbsp;{{ dashboard.currency | currencySymbol }}/m²
+      p.small.lead {{ 'dashboard.current.numobs' | translate }} {{ dashboard.current().numobs | number:0 }}
+      p.small.lead {{ 'dashboard.current.median-living-space' | translate }} {{ dashboard.current().median_living_space | number:2}}
+      
     .dashboard__view__context(ng-class="{ 'dashboard__view__context--open': dashboard.showContext }")
       .dashboard__view__context__heading 
         h2(ng-bind-html=" 'dashboard.context.heading.name' | translate:dashboard.city ")
