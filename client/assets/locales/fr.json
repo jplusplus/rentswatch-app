@@ -87,7 +87,7 @@
     "quiz.step.rent-feedback.3": "C'est cadeau ! Surtout si votre appartement est grand !",
     "quiz.step.addr.error": "Nous n'avons aucun point de donnée pour cette zone.",
     "quiz.step.addr.ignore": "Ignorer",
-    "quiz.step.back-viz": "",
+    "quiz.step.back-viz": "Retourner à la visualization",
     "navbar.link.toggler": "Afficher le menu",
     "navbar.link.dashboard": "Votre ville en bref",
     "navbar.link.quiz": "Votre loyer est-il trop élevé ?",

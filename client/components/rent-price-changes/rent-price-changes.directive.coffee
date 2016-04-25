@@ -42,7 +42,7 @@ angular.module 'rentswatchApp'
           tick:
             format: (d)->
               unit = if d is max then ' €/m²' else ''
-              $filter('number')(d) + unit
+              $filter('number')( $filter('rate')(d), 1) + unit
           padding:
             bottom: 0
         generateColors: =>
