@@ -25,7 +25,7 @@ angular.module 'rentswatchApp'
             multiline: no
         getMinY: =>
           Math.floor(_.chain(scope.months)
-          .map( (m)-> m.avgPricePerSqm * (1 - m.stdErr) )
+          .map( (m)-> Math.max 0, m.avgPricePerSqm * (1 - m.stdErr) )
           .min()
           .value())
         getMaxY: =>
