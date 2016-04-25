@@ -60,7 +60,7 @@
     "quiz.step.addr.label": "Quelle est votre adresse ?",
     "quiz.step.addr.legend": "En blanc, les {{ total | number }} appartements dans un rayon de 10km autour de {{ city }} ({{ country }}).",
     "quiz.step.addr-feedback.0": "Nom de Zeus, Marty! On savait que ce serait douloureux, mais là… Vous payez beaucoup plus que la moyenne!",
-    "quiz.step.addr-feedback.1": "Désolé mais c'est quand même au dessus de la moyenne… vous avez déjà pensé à acheter? (Sorry, mauvaise blague)",
+    "quiz.step.addr-feedback.1": "Désolé mais c'est au dessus de la moyenne… vous avez déjà pensé à acheter? (Sorry, mauvaise blague)",
     "quiz.step.addr-feedback.2": "Pas mal ! Vous payez un bon loyer, vous pouvez passer une bonne journée!",
     "quiz.step.addr-feedback.3": "Bonne nouvelle : votre loyer est vraiment bon marché. Mauvaise nouvelle : tout le monde vous déteste !",
     "quiz.step.heading.9": "Pouvons nous utiliser les informations que vous venez de saisir ? Nous utiliserons ces données pour aider les prochains utilisateurs.",
