@@ -23,7 +23,7 @@
   .dashboard__view(ng-if="dashboard.city")
     leaflet.dashboard__view__map(center="dashboard.map.center", tiles="dashboard.map.tiles", defaults="dashboard.map.defaults")
     .dashboard__view__current-price-per-sqm(ng-show="dashboard.showCurrentPricePerSqm()")
-      | {{ dashboard.currentPricePerSqm() | rate | number:2 }}&nbsp;{{ dashboard.currency }}/m²
+      | {{ dashboard.currentPricePerSqm() | rate | number:2 }}&nbsp;{{ dashboard.currency | currencySymbol }}/m²
     .dashboard__view__context(ng-class="{ 'dashboard__view__context--open': dashboard.showContext }")
       .dashboard__view__context__heading 
         h2(ng-bind-html=" 'dashboard.context.heading.name' | translate:dashboard.city ")
@@ -48,7 +48,7 @@
                 | {{ neighborhood.name }}
                 span.dashboard__view__context__body__ranking__item__label__price
                   | {{ neighborhood.avgPricePerSqm | rate | number:1 }}
-                  span(ng-show="$first")&nbsp;{{ dashboard.currency }}/m²
+                  span(ng-show="$first")&nbsp;{{ dashboard.currency | currencySymbol }}/m²
         
         .dashboard__view__context__body__months(ng-show="dashboard.city.months.length")
           h4(translate="") dashboard.context.months.title
@@ -69,7 +69,7 @@
                 span {{ city.name }}
                 span.dashboard__view__context__body__ranking__item__label__price
                   | {{ city.avgPricePerSqm | rate | number:1 }}
-                  span(ng-show="$first")&nbsp;{{ dashboard.currency }}/m²
+                  span(ng-show="$first")&nbsp;{{ dashboard.currency | currencySymbol }}/m²
           
         .dashboard__view__context__body__ranking.dashboard__view__context__body__ranking--inequality-index
           h4(translate="") dashboard.context.index.title

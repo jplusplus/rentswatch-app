@@ -11,9 +11,11 @@ angular
         EUR:
           CONVERSION_RATE: 1
           TICK: 200
+          SYMBOL: '€'
         CHF:
           CONVERSION_RATE: 1.0985
           TICK: 220
+          SYMBOL: 'CHF'
         # PLN:
         #   CONVERSION_RATE: 4.30715
         #   TICK: 800
