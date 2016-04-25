@@ -1,14 +1,17 @@
 {
   "config": {
-    "target": "http://beta.rentswatch.com",
+    "target": "http://api.rentswatch.com",
     "phases": [
       {
         "duration": 600,
-        "arrivalRate": 100
+        "arrivalRate": 150
       }
     ],
     "payload": {
       "fields": ["lat", "lng"]
+    },
+    "variables": {
+      "city": [ "vienna", "brussels", "zurich", "prague", "hamburg", "berlin", "copenhagen", "madrid", "barcelona", "paris", "rome", "amsterdam", "warsaw", "geneva"]
     }
   },
   "scenarios": [
@@ -16,7 +19,16 @@
       "flow": [
         {
           "get": {
-            "url": "/api/docs/center.json?latlng={{ lat }},{{ lng }}"
+            "url": "/api/cities/geocode?q={{ lat }},{{ lng }}"
+          }
+        }
+      ]
+    },
+    {
+      "flow": [
+        {
+          "get": {
+            "url": "/api/cities/{{ city }}"
           }
         }
       ]

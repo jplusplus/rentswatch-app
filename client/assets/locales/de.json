@@ -92,5 +92,7 @@
     "navbar.link.dashboard": "Mietpreise nach Städten",
     "navbar.link.quiz": "Ist dein Mietpreis angemessen?",
     "navbar.link.blog": "Blog",
-    "navbar.link.api": "API"
+    "navbar.link.api": "API",
+    "navbar.link.twitter": "",
+    "navbar.link.facebook": ""
 }

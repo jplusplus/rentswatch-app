@@ -25,7 +25,7 @@ angular.module 'rentswatchApp'
             multiline: no
         getMinY: =>
           Math.floor(_.chain(scope.months)
-          .map( (m)-> m.avgPricePerSqm * (1 - m.stdErr) )
+          .map( (m)-> Math.max 0, m.avgPricePerSqm * (1 - m.stdErr) )
           .min()
           .value())
         getMaxY: =>
@@ -42,7 +42,7 @@ angular.module 'rentswatchApp'
           tick:
             format: (d)->
               unit = if d is max then ' €/m²' else ''
-              $filter('number')(d) + unit
+              $filter('number')( $filter('rate')(d), 1) + unit
           padding:
             bottom: 0
         generateColors: =>

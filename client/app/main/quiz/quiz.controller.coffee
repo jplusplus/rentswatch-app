@@ -200,8 +200,11 @@ angular
                 if res.data.total <= 3 then do @noFlatsForCenter
                 else
                   @centerAds.src = '/api/docs/center.png?latlng=' + @center.join(',')
-                  angular.element(@centerAds).on 'load', =>
-                    $scope.$apply =>
+                  angular.element(@centerAds)
+                    # Image failed to load
+                    .on 'error', @noFlatsForCenter
+                    # Image loaded
+                    .on 'load', =>
                       # Un-freeze the app
                       @freezed = no
                       # Save center-related stats
