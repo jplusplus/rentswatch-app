@@ -2,7 +2,7 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'DashboardCtrl', ($http, $state, $scope, $timeout, settings, dashboard, all, city, rankings, leafletData)->
+    .controller 'DashboardCtrl', ($http, $state, $scope, $timeout, settings, dashboard, all, city, rankings, leafletData, rate)->
       'ngInject'
       # Return an instance of the class
       new class
@@ -12,7 +12,12 @@ angular
         city: city
         # Show or no the context menu
         showContext: no
+        # Current currency
+        currency: rate.use()
         constructor: ->
+          # Current currency might change
+          $scope.$on 'currency:change', (ev, currency)=> @currency = currency
+          # Is a city given?
           if @city?
             if @city.neighborhoods?
               @city.neighborhoods = _.filter @city.neighborhoods, (n)-> n.avgPricePerSqm?
@@ -22,8 +27,8 @@ angular
               leafletData.getMap().then @applyGeoJSON
             else
               $state.go 'main.dashboard', city: null
-          else
-            # Deactivated until we use the autocomplete
+          # Deactivated until we use the autocomplete
+          # else
             # do @cityLookup
         cityLookup: (q)=>
           return @cities = [] unless q? and q.length > 1
