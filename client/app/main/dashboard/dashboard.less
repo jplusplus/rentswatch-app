@@ -80,7 +80,6 @@
       @media (max-width: @screen-md) {
         right:0;
         bottom:150px;
-        text-align: right;
       }
 
       &.leaflet-container {
@@ -105,7 +104,8 @@
       font-size:2em;
       z-index:180;
       font-weight: bolder;
-      text-shadow: 0 0 10px fade(black, 90);
+      text-shadow: 2px 2px 2px fade(@body-bg, 80),  2px -2px 2px fade(@body-bg, 80),
+                   -2px -2px 2px fade(@body-bg, 80),  -2px 2px 2px fade(@body-bg, 80);
       pointer-events: none;
       white-space: nowrap;
       .transition(opacity 1s);
@@ -124,6 +124,8 @@
         right:20px;
         left:auto;
         bottom:auto;
+        font-size:5vw;
+        text-align: right;
       }
     }
 
