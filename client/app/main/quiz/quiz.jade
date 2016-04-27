@@ -173,7 +173,7 @@
     .quiz__step__scatterplot
       img.quiz__step__scatterplot__chart(ng-src="/api/docs/center.png?latlng={{ quiz.center.join(',') }}")
       span.quiz__step__scatterplot__legend
-        | {{ 'quiz.step.addr.legend' | translate: { total: quiz.centerStats.total, country: quiz.address.country, city: quiz.address.city } }}
+        | {{ 'quiz.step.addr.legend' | translate: { total: quiz.centerStats.total, country: quiz.address.country, city: quiz.address.city || quiz.address.city_district || quiz.address.state } }}
     
   .quiz__step.animated(ng-if="quiz.is('ADDR_FEEDBACK') && quiz.centerStats")  
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(0)")
