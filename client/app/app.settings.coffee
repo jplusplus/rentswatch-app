@@ -19,7 +19,7 @@ angular
         # PLN:
         #   CONVERSION_RATE: 4.30715
         #   TICK: 800
-      DEFAULT_CURRENCY: 'CHF'
+      DEFAULT_CURRENCY: 'EUR'
       LOCALE_LOCATION: '//code.angularjs.org/1.2.20/i18n/angular-locale_{{locale}}.js'
       STEP_DEFAULT:
         'autoplay': no
