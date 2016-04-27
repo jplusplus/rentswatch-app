@@ -25,7 +25,7 @@
     .dashboard__view__current(ng-show="dashboard.showCurrentPricePerSqm()")      
       p {{ dashboard.current().price_per_sqm | rate | number:2 }}&nbsp;{{ dashboard.currency | currencySymbol }}/m²
       p.small.lead {{ 'dashboard.current.numobs' | translate }} {{ dashboard.current().numobs | number:0 }}
-      p.small.lead {{ 'dashboard.current.median-living-space' | translate }} {{ dashboard.current().median_living_space | number:2}}
+      p.small.lead {{ 'dashboard.current.median-living-space' | translate }} {{ dashboard.current().median_living_space | number:0}}m²
       
     .dashboard__view__context(ng-class="{ 'dashboard__view__context--open': dashboard.showContext }")
       .dashboard__view__context__heading 

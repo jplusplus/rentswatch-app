@@ -30,6 +30,7 @@
     "main.links.api.description": "Nous souhaitons que les développeurs et nos partenaires puissent utiliser notre base de données pour créer des outils et raconter les histoires derrière ces chiffres.",
     "main.intro.by": "Par <a href=\"http://jplusplus.org\" target=\"_blank\">Journalism++</a>",
     "main.outro.legal": "CC-BY Journalism++",
+    "main.understand-rentswatch": "Comprendre Rentswatch",
     "quiz.step.heading.0a": "Nous avons analysé {{ total | number }} appartements et pouvons vous dire :",
     "quiz.step.heading.0b": "Est-ce que votre loyer est trop élevé ?",
     "quiz.step.start": "Je veux savoir",
