@@ -219,7 +219,7 @@
         .col-sm-7          
           .input-group
             input.form-control(type='number', min="100", max="3000", id="input-save-rent", ng-model="user.total_rent", required='required', placeholder="{{ 'quiz.step.how-much.placeholder' | translate }}")
-            span.input-group-addon {{ 'quiz.step.how-much.currency' | translate:{ currency: quiz.currency.use() } }}
+            span.input-group-addon {{ quiz.currency.use() | currencySymbol }}
       .form-group
         .col-sm-5.control-label
           label(for="input-save-space") {{ 'quiz.step.save.space.label' | translate }}

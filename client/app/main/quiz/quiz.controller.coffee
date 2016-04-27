@@ -31,11 +31,11 @@ angular
           # Avalaible move-in months
           @moveInRange = do @getMoveInRange
           ###
+          ###
           @step = @stepIndex 'INPUT_ADDR'
           @rent = 1500
           @space = 90
           @addr = "Berlin"
-          ###
           # Bind keyboard shortcuts
           hotkeys.add
             combo: ['right', 'space']
@@ -201,6 +201,7 @@ angular
               .then (res)=>
                 if res.data.total <= 3 then do @noFlatsForCenter
                 else
+                  @centerAds = new Image
                   @centerAds.src = '/api/docs/center.png?latlng=' + @center.join(',')
                   angular.element(@centerAds)
                     # Image failed to load
