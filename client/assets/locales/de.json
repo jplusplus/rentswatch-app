@@ -1,6 +1,8 @@
 {
     "dashboard.pick.heading": "Gewinne Erkenntnisse über deine Stadt",
     "dashboard.choose-city": "Choose a city",
+    "dashboard.current.numobs": "",
+    "dashboard.current.median-living-space": "",
     "dashboard.context.toggler.off": "Metrik ansehen",
     "dashboard.context.toggler.on": "Zurück zur Karte",
     "dashboard.context.neighborhoods.description": "Angezeigt wird der durchschnittliche Mietpreis für Wohnungen, die in den letzten sechs Monaten neu bezogen wurden und sich im Umkreis von 2 km innerhalb des Stadtviertels befinden.",
@@ -37,7 +39,7 @@
     "quiz.step.interact": "",
     "quiz.step.heading.3": "Es funktioniert so:",
     "quiz.step.heading.4": "Hier ist die Größe der Wohnung",
-    "quiz.step.heading.5": "Und hier, die Mietpreise, in € pro Monat.",
+    "quiz.step.heading.5": "Und hier, die Mietpreise, in {{ currency }} pro Monat.",
     "quiz.step.heading.6a": "Im Klartext…",
     "quiz.step.heading.6b": "klein und günstig",
     "quiz.step.heading.6c": "groß und teuer",
@@ -46,7 +48,6 @@
     "quiz.step.heading.8": "…und der durchschnittliche Preis",
     "quiz.step.how-much.label": "Los geht's: wie hoch ist deine Warmmiete?",
     "quiz.step.how-much.placeholder": "z.B. 700",
-    "quiz.step.how-much.currency": "",
     "quiz.step.continue": "Weiter",
     "quiz.step.how-much.shy": "Sei nicht scheu…",
     "quiz.step.how-big.label": "Wie groß ist sie?",
@@ -70,6 +71,7 @@
     "quiz.step.save.move-in.label": "Wann hast Du den Vertrag unterzeichnet?",
     "quiz.step.save.rent.label": "Du zahlst",
     "quiz.step.save.rent.help": "(Warm)",
+    "quiz.step.how-much.currency": "",
     "quiz.step.save.space.label": "Für eine Wohnfläche von",
     "quiz.step.how-big.unit": "m²",
     "quiz.step.save.addr.label": "Adresse",
@@ -94,5 +96,6 @@
     "navbar.link.blog": "Blog",
     "navbar.link.api": "API",
     "navbar.link.twitter": "",
-    "navbar.link.facebook": ""
+    "navbar.link.facebook": "",
+    "navbar.link.currency": ""
 }

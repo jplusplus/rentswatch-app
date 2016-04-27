@@ -30,15 +30,15 @@
 
     <meta property="og:title" content="{{ 'app.title' | translate }}" />
     <meta property="og:description" content="{{ 'app.description' | translate }}" />
-    <meta property="og:url" content="http://beta.rentswatch.com/" />
-    <meta property="og:image" content="http://beta.rentswatch.com/assets/images/share-1.png" />
+    <meta property="og:url" content="http://www.rentswatch.com/" />
+    <meta property="og:image" content="http://www.rentswatch.com/assets/images/share-1.png" />
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@rentswatch" />
     <meta name="twitter:title" content="{{ 'app.title' | translate }}" />
     <meta name="twitter:description" content="{{ 'app.description' | translate }}" />
 
-    <meta name="twitter:image" content="http://beta.rentswatch.com/assets/images/share-1.png" />
-    <meta name="twitter:url" content="http://beta.rentswatch.com/" />
+    <meta name="twitter:image" content="http://www.rentswatch.com/assets/images/share-1.png" />
+    <meta name="twitter:url" content="http://www.rentswatch.com/" />
   </head>
   <body>
 
@@ -49,6 +49,15 @@
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
+
+    <script>
+      (function(p,i,r,h,o,O){p.GoogleAnalyticsObject=h;p[h]||(p[h]=
+      function(){(p[h].q=p[h].q||[]).push(arguments)});p[h].h=+new Date;
+      o=i.createElement(r);O=i.getElementsByTagName(r)[0];
+      o.src='//www.google-analytics.com/analytics.js';
+      O.parentNode.insertBefore(o,O)}(window,document,'script','ga'));
+      ga('create','UA-35984661-6');
+    </script>
 
     <!-- build:js({client,node_modules}) app/vendor.js -->
       <!-- bower:js -->
@@ -84,6 +93,7 @@
       <script src="app/main/dashboard/dashboard.js"></script>
       <script src="app/main/main.js"></script>
       <script src="app/main/quiz/quiz.js"></script>
+      <script src="components/currency-symbol/currency-symbol.js"></script>
       <script src="components/geocoder/geocoder.js"></script>
       <script src="components/navbar/navbar.js"></script>
       <script src="components/progress/progress.js"></script>

@@ -65,18 +65,18 @@ angular
             @scale = chroma.scale(dashboard.fillcolors).domain([min, max], 7, 'quantiles')
           # Get color for the given value
           do @scale(v).hex
-        showCurrentPricePerSqm: =>!! @_showCurrentPricePerSqm
-        currentPricePerSqm: (currentPricePerSqm)=>
-          if currentPricePerSqm?
-            @_currentPricePerSqm = currentPricePerSqm
-            @_showCurrentPricePerSqm = yes
+        showCurrentPricePerSqm: =>!! @_showCurrent
+        current: (current)=>
+          if current?
+            @_current = current
+            @_showCurrent = yes
             # Clear existing timeout
-            $timeout.cancel @currentPricePerSqmTimeout
-            @currentPricePerSqmTimeout = $timeout =>
+            $timeout.cancel @currentTimeout
+            @currentTimeout = $timeout =>
               # Activate price displaying
-              @_showCurrentPricePerSqm = no
+              @_showCurrent = no
             , 4000
-          @_currentPricePerSqm
+          @_current
         applyGeoJSON: (map)=>
           # Create the tiles layer
           @geojsonTileLayer = new L.TileLayer.GeoJSON dashboard.geojson.url, {
@@ -99,4 +99,4 @@ angular
             unless event.layer?
               $scope.$apply =>
                 # Register the last overed tile's price
-                @currentPricePerSqm properties.price_per_sqm
+                @current properties

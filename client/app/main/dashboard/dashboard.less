@@ -97,7 +97,7 @@
       }
     }
 
-    &__current-price-per-sqm {
+    &__current {
       position:absolute;
       left:20px;
       bottom:20px;
@@ -105,10 +105,17 @@
       z-index:180;
       font-weight: bolder;
       text-shadow: 0 0 10px fade(black, 90);
+      pointer-events: none;
+      white-space: nowrap;
       .transition(opacity 1s);
+
 
       &.ng-hide {
         opacity:0;
+      }
+
+      p {
+        margin: 0;
       }
 
       @media (max-width: @screen-md) {

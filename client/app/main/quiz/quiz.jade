@@ -37,7 +37,7 @@
             span.quiz__step__scatterplot__axis__ticks__tick__wrap {{ t }} 
       
   .quiz__step.animated(ng-if="quiz.is('INTRO_RENT')")
-    h2.quiz__step__heading {{ 'quiz.step.heading.5' | translate:{ currency: quiz.currency.use() } }}
+    h2.quiz__step__heading {{ 'quiz.step.heading.5' | translate:{ currency: (quiz.currency.use() | currencySymbol) } }}
           
   .quiz__step.quiz__step--bg(ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
     .quiz__step__scatterplot
@@ -49,7 +49,7 @@
           span.quiz__step__scatterplot__axis__ticks__tick(ng-repeat="t in quiz.yticks() track by $index")
             span.quiz__step__scatterplot__axis__ticks__tick__wrap 
               | {{ t }}
-              span(ng-show="$last") &nbsp;{{ quiz.currency.use() }}
+              span(ng-show="$last")&nbsp;{{ quiz.currency.use() | currencySymbol }}
             
   .quiz__step.animated(ng-if="quiz.is('INTRO_CLEAR')")
     h2.quiz__step__heading {{ 'quiz.step.heading.6a' | translate }}
@@ -96,13 +96,13 @@
                 input.form-control.input-lg(type='number', min="100", max="3000", id="inputrent", ng-model='quiz.rent', required='required', placeholder="{{ 'quiz.step.how-much.placeholder' | translate }}")
                 span.input-group-addon.quiz__step__form__dropdown(uib-dropdown)
                   a(uib-dropdown-toggle)
-                    | {{ 'quiz.step.how-much.currency' | translate:{ currency: quiz.currency.use() } }}
+                    | {{ quiz.currency.use() | currencySymbol }}
                     span &nbsp;<i class="caret"></i>
                   ul.dropdown-menu.dropdown-menu-right.quiz__step__form__dropdown__menu(uib-dropdown-menu)
                     li(ng-repeat="(currency, value) in quiz.currencies", 
                        ng-class="{ 'active': quiz.currency.is(currency) }",
                        ng-click="quiz.currency.use(currency)")
-                      a {{ 'quiz.step.how-much.currency' | translate:{ currency: currency } }}
+                      a {{ currency | currencySymbol }}
         .col-sm-3
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid") {{ 'quiz.step.continue' | translate }}  
               

@@ -15,14 +15,19 @@
     }
   }
 
+  .dropdown .dropdown-menu {
+    text-align: center;
+    min-width:120px;
+  }
+
   & &-nav > li > a {
     &:hover, &:active, &:focus {
       color:white;
     }
   }
 
-    & &-nav > li.active a {
-      .box-shadow(1px 1px 6px 0 black inset);
-    }
+  & &-nav > li.active a {
+    .box-shadow(1px 1px 6px 0 black inset);
+  }
 
 }

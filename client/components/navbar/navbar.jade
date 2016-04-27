@@ -38,12 +38,12 @@
       ul.nav.navbar-nav.navbar-right
         li(uib-dropdown)        
           a(uib-dropdown-toggle, href="")
-            | {{ currency.use() | translate }} <i class="caret"></i>
+            | {{ 'navbar.link.currency' | translate }} <i class="caret"></i>
           ul.dropdown-menu-right(uib-dropdown-menu)
             li(ng-repeat="(c, value) in currencies", 
                ng-class="{ 'active': currency.is(c) }",
                ng-click="currency.use(c)")
-              a {{ c | translate }}
+              a {{ c | currencySymbol }}
         li(uib-dropdown)
           a(uib-dropdown-toggle, href="")
             | {{ 'navbar.link.language' | translate }} <span class="caret"></span>
