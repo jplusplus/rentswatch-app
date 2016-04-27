@@ -6,7 +6,7 @@
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(ui-sref="main")   
+      a.navbar-brand(ui-sref="main", ng-click="isCollapsed = true")   
         img(src="assets/images/site-logo-bordered.svg", height="60px", alt="Rentswatch")
 
     .navbar-collapse(ng-class="{ collapse: isCollapsed }")
@@ -38,7 +38,8 @@
       ul.nav.navbar-nav.navbar-right
         li(uib-dropdown)        
           a(uib-dropdown-toggle, href="")
-            span(ng-bind-html="'navbar.link.currency' | translate") <i class="caret"></i>
+            span(ng-bind-html="'navbar.link.currency' | translate")
+            span.caret
           ul.dropdown-menu-right(uib-dropdown-menu)
             li(ng-repeat="(c, value) in currencies", 
                ng-class="{ 'active': currency.is(c) }",
@@ -46,7 +47,8 @@
               a {{ c | currencySymbol }}
         li(uib-dropdown)
           a(uib-dropdown-toggle, href="")
-            span(ng-bind-html="'navbar.link.language' | translate") <span class="caret"></span>
+            span(ng-bind-html="'navbar.link.language' | translate") 
+            span.caret
           ul.dropdown-menu-right(uib-dropdown-menu)
             li(ng-class="{ active: language.is('fr') }")
               a(ng-click="language.use('fr')", href="")
@@ -56,4 +58,4 @@
                 | English
             li(ng-class="{ active: language.is('de') }")
               a(ng-click="language.use('de')", href="")
-                | Deutch
+                | Deutsch
