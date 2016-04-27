@@ -31,11 +31,11 @@ angular
           # Avalaible move-in months
           @moveInRange = do @getMoveInRange
           ###
-          ###
           @step = @stepIndex 'INPUT_ADDR'
           @rent = 1500
           @space = 90
           @addr = "Berlin"
+          ###
           # Bind keyboard shortcuts
           hotkeys.add
             combo: ['right', 'space']
