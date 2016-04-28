@@ -65,13 +65,45 @@
 
   }
 
+  &__video {
+    padding:2vh 1vw;
+    background:  #211F30;
+    text-align: center;
+
+    &__heading {
+      margin:4vh 0;
+    }
+
+    &__iframe {
+      margin:auto;
+      display: block;
+      position: relative;
+      width:100%;
+      max-width:900px;
+
+      &:after {
+        content:"";
+        width:100%;
+        padding-top:9/16*100%;
+        display: block;
+      }
+
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
   &__links {
     text-align:center;
     position:relative;
     z-index:90;
     background:url("../assets/images/buildings.png") right bottom repeat-x @body-bg;
     background-size:auto 350px;
-
 
     @media (max-width: @screen-md) {
       min-height:auto !important;

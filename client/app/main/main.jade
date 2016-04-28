@@ -31,36 +31,43 @@ div(ng-include='"components/navbar/navbar.html"')
       a.main__links__pan.main__links__pan--1(ui-sref="main.dashboard")
         .main__links__pan__wrapper
           h2.main__links__pan__heading
-            | {{ 'main.links.dashboard.heading' | translate }}
+            span(ng-bind-html="'main.links.dashboard.heading' | translate")
           p.main__links__pan__description
-            | {{ 'main.links.dashboard.description' | translate }}
+            span(ng-bind-html="'main.links.dashboard.description' | translate")
           span.main__links__pan__btn.btn.btn-outline
-            | {{ 'main.links.view' | translate }}
+            span(ng-bind-html="'main.links.view' | translate")
       a.main__links__pan.main__links__pan--2(ui-sref="main.quiz")
         .main__links__pan__wrapper
           h2.main__links__pan__heading
-            | {{ 'main.links.quiz.heading' | translate }}
+            span(ng-bind-html="'main.links.quiz.heading' | translate")
           p.main__links__pan__description
-            | {{ 'main.links.quiz.description' | translate }}
+            span(ng-bind-html="'main.links.quiz.description' | translate")
           span.main__links__pan__btn.btn.btn-outline
-            | {{ 'main.links.view' | translate }}
+            span(ng-bind-html="'main.links.view' | translate")
       a.main__links__pan.main__links__pan--3(href="http://blog.rentswatch.com")
         .main__links__pan__wrapper
           h2.main__links__pan__heading
-            | {{ 'main.links.blog.heading' | translate }}
+            span(ng-bind-html="'main.links.blog.heading' | translate")
           p.main__links__pan__description
-            | {{ 'main.links.blog.description' | translate }}
+            span(ng-bind-html="'main.links.blog.description' | translate")
           span.main__links__pan__btn.btn.btn-outline
-            | {{ 'main.links.view' | translate }}
+            span(ng-bind-html="'main.links.view' | translate")
       a.main__links__pan.main__links__pan--4(href="http://api.rentswatch.com")
         .main__links__pan__wrapper
           h2.main__links__pan__heading
-            | {{ 'main.links.api.heading' | translate }}
+            span(ng-bind-html="'main.links.api.heading' | translate")
           p.main__links__pan__description
-            | {{ 'main.links.api.description' | translate }}
+            span(ng-bind-html="'main.links.api.description' | translate")
           span.main__links__pan__btn.btn.btn-outline
-            | {{ 'main.links.view' | translate }}
-          
+            span(ng-bind-html="'main.links.view' | translate")
+    .main__video
+      h2.main__video__heading {{ 'main.understand-rentswatch' | translate }}
+      .main__video__iframe
+        iframe(frameborder="0",
+          src="https://player.vimeo.com/video/160970985",
+          width="100%",
+          height="100%",
+          webkitallowfullscreen, mozallowfullscreen, allowfullscreen)
     footer.main__outro
       .row
         .col-md-6

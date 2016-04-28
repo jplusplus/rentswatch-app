@@ -201,6 +201,7 @@ angular
               .then (res)=>
                 if res.data.total <= 3 then do @noFlatsForCenter
                 else
+                  @centerAds = new Image
                   @centerAds.src = '/api/docs/center.png?latlng=' + @center.join(',')
                   angular.element(@centerAds)
                     # Image failed to load

@@ -1,28 +1,28 @@
 .quiz(ng-class="{ 'quiz--freezed': quiz.freezed }", ng-click="quiz.next()")
   .quiz__step.animated(ng-if="quiz.is('INTRO')")
     h2.quiz__step__heading
-      div.small {{ 'quiz.step.heading.0a' | translate:{ total: main.totalAds } }}
-      div {{ 'quiz.step.heading.0b' | translate }}
+      div.small(ng-bind-html="'quiz.step.heading.0a' | translate:{ total: main.totalAds }")
+      div(ng-bind-html="'quiz.step.heading.0b' | translate")
     .text-center
       button.btn.btn-lg.btn-outline
         | {{ 'quiz.step.start' | translate }}
             
   .quiz__step.animated(ng-if="quiz.is('INTRO_CONFIRM')")
-    h2.quiz__step__heading {{ 'quiz.step.heading.1' | translate }}
+    h2.quiz__step__heading(ng-bind-html="'quiz.step.heading.1' | translate")
     .text-center
       button.btn.btn-lg.btn-outline
         | {{ 'quiz.step.yes' | translate }}
             
   .quiz__step.animated(ng-if="quiz.in('INTRO_QUICK', 'INTRO_QUICK_INTERACT')")
-    h2.quiz__step__heading {{ 'quiz.step.heading.2' | translate }}
+    h2.quiz__step__heading(ng-bind-html="'quiz.step.heading.2' | translate")
     .lead.text-muted.text-center.animated(ng-if="quiz.is('INTRO_QUICK_INTERACT')")
       | {{ 'quiz.step.interact' | translate }}
             
   .quiz__step.animated(ng-if="quiz.is('INTRO_HOW')")
-    h2.quiz__step__heading {{ 'quiz.step.heading.3' | translate }}
+    h2.quiz__step__heading(ng-bind-html="'quiz.step.heading.3' | translate")
     
   .quiz__step.animated(ng-if="quiz.is('INTRO_SIZE')")
-    h2.quiz__step__heading {{ 'quiz.step.heading.4' | translate }}
+    h2.quiz__step__heading(ng-bind-html="'quiz.step.heading.4' | translate")
           
   .quiz__step.quiz__step--bg(ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
     .quiz__step__scatterplot
@@ -37,7 +37,7 @@
             span.quiz__step__scatterplot__axis__ticks__tick__wrap {{ t }} 
       
   .quiz__step.animated(ng-if="quiz.is('INTRO_RENT')")
-    h2.quiz__step__heading {{ 'quiz.step.heading.5' | translate:{ currency: (quiz.currency.use() | currencySymbol) } }}
+    h2.quiz__step__heading(ng-bind-html="'quiz.step.heading.5' | translate: { currency: (quiz.currency.use() | currencySymbol) }")
           
   .quiz__step.quiz__step--bg(ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")
     .quiz__step__scatterplot
@@ -52,25 +52,26 @@
               span(ng-show="$last")&nbsp;{{ quiz.currency.use() | currencySymbol }}
             
   .quiz__step.animated(ng-if="quiz.is('INTRO_CLEAR')")
-    h2.quiz__step__heading {{ 'quiz.step.heading.6a' | translate }}
+    h2.quiz__step__heading(ng-bind-html="'quiz.step.heading.6a' | translate")
             
   .quiz__step.animated(ng-if="quiz.is('INTRO_CHEAP')")
     .quiz__step__scatterplot
       h2.quiz__step__heading.quiz__step__heading--blc
-        | {{ 'quiz.step.heading.6b' | translate }}
+        span(ng-bind-html="'quiz.step.heading.6b' | translate")
             
   .quiz__step.animated(ng-if="quiz.is('INTRO_EXPENSIVE')")
     .quiz__step__scatterplot
       h2.quiz__step__heading.quiz__step__heading--trc
-        | {{ 'quiz.step.heading.6c' | translate }}
+        span(ng-bind-html="'quiz.step.heading.6c' | translate")
             
   .quiz__step.animated(ng-if="quiz.is('INTRO_DREAMS')")  
     .quiz__step__scatterplot
       h2.quiz__step__heading.quiz__step__heading--brc
-        | {{ 'quiz.step.heading.6d' | translate }}
+        span(ng-bind-html="'quiz.step.heading.6d' | translate")
         
   .quiz__step.animated(ng-if="quiz.is('INTRO_ALL_FLATS')")
-    h2.quiz__step__heading {{ 'quiz.step.heading.7' | translate }}
+    h2.quiz__step__heading
+      span(ng-bind-html="'quiz.step.heading.7' | translate")
             
   .quiz__step.quiz__step--bg.animated(ng-if="quiz.in('INTRO_ALL_FLATS')", ng-class="{ 'quiz__step--disabled' : quiz.hasForm(), 'quiz__step--muted': quiz.in('ADDR_FEEDBACK')} ")
     // The plot itself!
@@ -78,7 +79,7 @@
       img.quiz__step__scatterplot__chart(ng-src="/api/docs/all.png")
         
   .quiz__step.animated(ng-if="quiz.is('INTRO_AVERAGE')")
-    h2.quiz__step__heading {{ 'quiz.step.heading.8' | translate }}
+    h2.quiz__step__heading(ng-bind-html="'quiz.step.heading.8' | translate")
         
   .quiz__step.quiz__step--bg.animated(ng-if="quiz.in('INTRO_AVERAGE')", ng-class=" { 'quiz__step--disabled' : quiz.hasForm(), 'quiz__step--muted': quiz.in('ADDR_FEEDBACK')} ")
     // The regression line
@@ -88,7 +89,7 @@
   .quiz__step.animated(ng-if="quiz.in('INPUT_HOW_MUCH', 'DONT_BE_SHY')")
     form.quiz__step__form(name="form", ng-submit="quiz.submit()")
       label.control-label(for="inputrent")
-        span {{ 'quiz.step.how-much.label' | translate }}
+        span(ng-bind-html="'quiz.step.how-much.label' | translate")
       .row
         .col-sm-9
           .form-group.form-group-lg
@@ -115,18 +116,18 @@
     
   .quiz__step.animated(ng-if="quiz.is('RENT_FEEDBACK')")
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(0)")
-      | {{ "quiz.step.rent-feedback.0" | translate }}
+      span(ng-bind-html="'quiz.step.rent-feedback.0' | translate")
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(1)")
-      | {{ "quiz.step.rent-feedback.1" | translate }}
+      span(ng-bind-html="'quiz.step.rent-feedback.1' | translate")
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(2)")
-      | {{ "quiz.step.rent-feedback.2" | translate }}
+      span(ng-bind-html="'quiz.step.rent-feedback.2' | translate")
     h2.quiz__step__heading(ng-show=":: quiz.userRentFeedback().is(3)")
-      | {{ "quiz.step.rent-feedback.3" | translate }}
+      span(ng-bind-html="'quiz.step.rent-feedback.3' | translate")
     
   .quiz__step.animated(ng-if="quiz.is('INPUT_HOW_BIG')")    
     form.quiz__step__form(name="form", ng-submit="quiz.submit()")
       label.control-label(for="inputaddr")
-        | {{ 'quiz.step.how-big.label' | translate }}
+        span(ng-bind-html="'quiz.step.how-big.label' | translate")
       .row
         .col-sm-9
           .form-group.form-group-lg
@@ -138,15 +139,15 @@
           
   .quiz__step.animated(ng-if="quiz.is('SPACE_FEEDBACK')")
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(0)")
-      | {{ 'quiz.step.space-feedback.0' | translate: { times: quiz.userGlobalFeedback().times } }}
+      span(ng-bind-html="'quiz.step.space-feedback.0' | translate: { times: quiz.userGlobalFeedback().times }")
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(1)")
-      | {{ 'quiz.step.space-feedback.1' | translate: { percentage: quiz.userGlobalFeedback().percentage } }}
+      span(ng-bind-html="'quiz.step.space-feedback.1' | translate: { percentage: quiz.userGlobalFeedback().percentage }")
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(2)")
-      | {{ 'quiz.step.space-feedback.2' | translate }}
+      span(ng-bind-html="'quiz.step.space-feedback.2' | translate")
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(3)")
-      | {{ 'quiz.step.space-feedback.3' | translate }}
+      span(ng-bind-html="'quiz.step.space-feedback.3' | translate")
     h2.quiz__step__heading(ng-show=":: quiz.userGlobalFeedback().is(4)")
-      | {{ 'quiz.step.space-feedback.4' | translate }}
+      span(ng-bind-html="'quiz.step.space-feedback.4' | translate")
     
   .quiz__step.quiz__step--bg.animated(ng-if="quiz.in('SPACE_FEEDBACK')", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ")  
     .quiz__step__scatterplot
@@ -154,18 +155,18 @@
      
   .quiz__step.animated(ng-if="quiz.is('INPUT_ADDR')")    
     form.quiz__step__form(name="form", ng-submit="quiz.geocode(quiz.addr)")
-      p {{ 'quiz.step.addr.heading' | translate }}
+      p(ng-bind-html="'quiz.step.addr.heading' | translate")
       label.control-label(for="inputaddr")
-        | {{ 'quiz.step.addr.label' | translate }}
+        span(ng-bind-html="'quiz.step.addr.label' | translate")
       .row
         .col-sm-9
           input.form-control.input-lg(type='text', id="inputaddr", ng-model='quiz.addr', required='required', ng-disabled="quiz.freezed" placeholder="")                
         .col-sm-3
           button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="form.$invalid || quiz.freezed")
-            | {{ 'quiz.step.continue' | translate }}
+            span(ng-bind-html="'quiz.step.continue' | translate")
     p.text-warning.t-sm(ng-show="quiz.centerError")
       | <i class="fa fa-warning"></i>
-      | {{ "quiz.step.addr.error" | translate }}&nbsp;      
+      span(ng-bind-html="'quiz.step.addr.error' | translate")&nbsp;      
       a.text-warning(ng-click="quiz.step = quiz.stepIndex('ASK_DATA')") 
         | {{ "quiz.step.addr.ignore" | translate }}
             
@@ -173,17 +174,17 @@
     .quiz__step__scatterplot
       img.quiz__step__scatterplot__chart(ng-src="/api/docs/center.png?latlng={{ quiz.center.join(',') }}")
       span.quiz__step__scatterplot__legend
-        | {{ 'quiz.step.addr.legend' | translate: { total: quiz.centerStats.total, country: quiz.address.country, city: quiz.address.city } }}
+        span(ng-bind-html="'quiz.step.addr.legend' | translate: { total: quiz.centerStats.total, country: quiz.address.country, city: quiz.address.city || quiz.address.city_district || quiz.address.state }")
     
   .quiz__step.animated(ng-if="quiz.is('ADDR_FEEDBACK') && quiz.centerStats")  
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(0)")
-      | {{ 'quiz.step.addr-feedback.0' | translate }}
+      span(ng-bind-html="'quiz.step.addr-feedback.0' | translate")
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(1)")
-      | {{ 'quiz.step.addr-feedback.1' | translate }}
+      span(ng-bind-html="'quiz.step.addr-feedback.1' | translate")
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(2)")
-      | {{ 'quiz.step.addr-feedback.2' | translate }}
+      span(ng-bind-html="'quiz.step.addr-feedback.2' | translate")
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(3)")
-      | {{ 'quiz.step.addr-feedback.3' | translate }}
+      span(ng-bind-html="'quiz.step.addr-feedback.3' | translate")
       
   .quiz__step.quiz__step--bg.animated(ng-if="quiz.in('ADDR_FEEDBACK') && quiz.centerStats", ng-class=" { 'quiz__step--disabled' : quiz.hasForm() } ") 
     // The regression line
@@ -191,7 +192,7 @@
       img.quiz__step__scatterplot__chart(ng-src="{{ quiz.userLosRegression() }}")   
       
   .quiz__step.animated(ng-if="quiz.in('ASK_DATA', 'MAKE_US_HAPPY')")
-    h2.quiz__step__heading {{ 'quiz.step.heading.9' | translate }}
+    h2.quiz__step__heading(ng-bind-html="'quiz.step.heading.9' | translate")
     .text-center
       button.btn.btn-lg.btn-default(ng-click="quiz.step = quiz.stepIndex('SHARE')")
         | {{ 'quiz.step.save.no' | translate }}    
@@ -207,30 +208,30 @@
       ng-init="user = { total_rent: quiz.rent, living_space: quiz.space, address: quiz.addr, currency: quiz.currency.use() }")      
       .form-group
         .col-sm-5.control-label
-          label(for="input-save-move-in") {{ 'quiz.step.save.move-in.label' | translate }}
+          label(for="input-save-move-in", ng-bind-html="'quiz.step.save.move-in.label' | translate")
         .col-sm-7
           select.form-control(id="input-save-move-in", ng-model="user.move_in", 
             ng-options="m.dt as (m.dt | date:'MMMM' )  group by m.year for m in :: quiz.moveInRange")
             option(value="") --
       .form-group
         .col-sm-5.control-label
-          label(for="input-save-rent") {{ 'quiz.step.save.rent.label' | translate }}
-          .small.text-muted {{ 'quiz.step.save.rent.help' | translate }}
+          label(for="input-save-rent", ng-bind-html="'quiz.step.save.rent.label' | translate")
+          .small.text-muted(ng-bind-html="'quiz.step.save.rent.help' | translate")
         .col-sm-7          
           .input-group
             input.form-control(type='number', min="100", max="3000", id="input-save-rent", ng-model="user.total_rent", required='required', placeholder="{{ 'quiz.step.how-much.placeholder' | translate }}")
-            span.input-group-addon {{ 'quiz.step.how-much.currency' | translate:{ currency: quiz.currency.use() } }}
+            span.input-group-addon(ng-bind-html="quiz.currency.use() | currencySymbol")
       .form-group
         .col-sm-5.control-label
-          label(for="input-save-space") {{ 'quiz.step.save.space.label' | translate }}
+          label(for="input-save-space", ng-bind-html="'quiz.step.save.space.label' | translate")
         .col-sm-7        
           .input-group
             input.form-control(type="number", id="input-save-space", min="1", max="200", ng-model="user.living_space", required='required', placeholder="{{ 'quiz.step.how-big.placeholder' | translate }}")
-            span.input-group-addon {{ 'quiz.step.how-big.unit' | translate  }}
+            span.input-group-addon(ng-bind-html="'quiz.step.how-big.unit' | translate")
       .form-group
         .col-sm-5.control-label
-          label(for="input-save-addr") {{ 'quiz.step.save.addr.label' | translate }}
-          .small.text-muted {{ 'quiz.step.save.addr.help' | translate }}
+          label(for="input-save-addr", ng-bind-html="'quiz.step.save.addr.label' | translate")
+          .small.text-muted(ng-bind-html="'quiz.step.save.addr.help' | translate")
         .col-sm-7
           input.form-control(type="text", id="input-save-addr", ng-model="user.address")
       .form-group        
@@ -240,11 +241,11 @@
         
   .quiz__step.quiz__step--share.animated(ng-if="quiz.is('SHARE')")
     h2.quiz__step__heading(ng-show=":: quiz.userFinalFeedback().is(0)")
-      | {{ 'quiz.step.share-feedback.0' | translate }}
+      span(ng-bind-html="'quiz.step.share-feedback.0' | translate")
     h2.quiz__step__heading(ng-show=":: quiz.userFinalFeedback().is(1)")
-      | {{ 'quiz.step.share-feedback.1' | translate }}
+      span(ng-bind-html="'quiz.step.share-feedback.1' | translate")
     h2.quiz__step__heading(ng-show=":: quiz.userFinalFeedback().is(2)")
-      | {{ 'quiz.step.share-feedback.2' | translate }}
+      span(ng-bind-html="'quiz.step.share-feedback.2' | translate")
     ul.list-inline.text-center
       li
         a(socialshare,
@@ -269,13 +270,13 @@
             i.fa.fa-fw.fa-facebook.fa-stack-1x.fa-inverse
           span.sr-only Facebook
     p.text-center.small
-      a(ng-click="quiz.step = quiz.stepIndex('FINAL')") {{ "quiz.step.back-viz" | translate }}
+      a(ng-click="quiz.step = quiz.stepIndex('FINAL')", ng-bind-html="'quiz.step.back-viz' | translate")
   
   // pre {{ quiz.steps[quiz.step] | json }}
 
 .quiz-nav
   .quiz-nav__item(ng-show="quiz.hasNext()")
-    | {{ 'quiz.nav.manual' | translate }}
+    span(ng-bind-html="'quiz.nav.manual' | translate")
      
   .quiz-nav__item.quiz-nav__item--right
     button.btn.btn-primary(ng-disabled="!quiz.hasPrevious()", ng-click="quiz.previous()")

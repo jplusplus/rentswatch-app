@@ -30,6 +30,7 @@
     "main.links.api.description": "We want developers and partners to be able to build great stories with our database.",
     "main.intro.by": "By <a href=\"http://jplusplus.org\" target=\"_blank\">Journalism++</a>",
     "main.outro.legal": "Insert here legal mention about the ownership of data and the code. Links to Github and Twitter might be good too.",
+    "main.understand-rentswatch": "Understand Rentswatch",
     "quiz.step.heading.0a": "We analyzed {{ total | number }} flats and can tell you:",
     "quiz.step.heading.0b": "Do you pay the right rent for the right flat?",
     "quiz.step.start": "Find out",
