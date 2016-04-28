@@ -91,7 +91,7 @@ exports.centerJson = function(req, res) {
     token: process.env.RENTSWATCH_API_TOKEN,
     // Rejoin params to avoid mistakes
     q: center.join(','),
-    radius: 10,
+    radius: 2,
     limit: 5000
   };
   // Geocode the query
