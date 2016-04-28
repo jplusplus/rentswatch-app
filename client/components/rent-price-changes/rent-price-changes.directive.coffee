@@ -93,8 +93,8 @@ angular.module 'rentswatchApp'
         getArea: =>
           d3.svg.area()
             .x (d, i)=> @chart.internal.x i
-            .y0 (d)=> @chart.internal.y(d.avgPricePerSqm * (1-d.stdErr))
-            .y1 (d)=> @chart.internal.y(d.avgPricePerSqm * (1+d.stdErr))
+            .y0 (d)=> @chart.internal.y(d.avgPricePerSqm - (1.96 * d.stdErr))
+            .y1 (d)=> @chart.internal.y(d.avgPricePerSqm + (1.96 * d.stdErr))
         enhanceChart: =>
           # Prepare areas
           do @setupAreas
