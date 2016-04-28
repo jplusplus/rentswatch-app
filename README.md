@@ -57,7 +57,7 @@ You may now install the [Heroku Toolbet](https://toolbelt.heroku.com/) as follow
 wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 ```
 
-And the Docker plugin for the toolbelt;
+And the Docker plugin for the toolbelt:
 
 ```
 heroku plugins:install heroku-docker
