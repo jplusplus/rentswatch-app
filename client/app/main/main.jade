@@ -28,20 +28,20 @@ div(ng-include='"components/navbar/navbar.html"')
         span.lead(ng-bind-html="'main.intro.by' | translate")
         
     .main__links(screen-height)
-      a.main__links__pan.main__links__pan--1(ui-sref="main.dashboard")
-        .main__links__pan__wrapper
-          h2.main__links__pan__heading
-            span(ng-bind-html="'main.links.dashboard.heading' | translate")
-          p.main__links__pan__description
-            span(ng-bind-html="'main.links.dashboard.description' | translate")
-          span.main__links__pan__btn.btn.btn-outline
-            span(ng-bind-html="'main.links.view' | translate")
-      a.main__links__pan.main__links__pan--2(ui-sref="main.quiz")
+      a.main__links__pan.main__links__pan--1(ui-sref="main.quiz")
         .main__links__pan__wrapper
           h2.main__links__pan__heading
             span(ng-bind-html="'main.links.quiz.heading' | translate")
           p.main__links__pan__description
             span(ng-bind-html="'main.links.quiz.description' | translate")
+          span.main__links__pan__btn.btn.btn-outline
+            span(ng-bind-html="'main.links.view' | translate")
+      a.main__links__pan.main__links__pan--2(ui-sref="main.dashboard")
+        .main__links__pan__wrapper
+          h2.main__links__pan__heading
+            span(ng-bind-html="'main.links.dashboard.heading' | translate")
+          p.main__links__pan__description
+            span(ng-bind-html="'main.links.dashboard.description' | translate")
           span.main__links__pan__btn.btn.btn-outline
             span(ng-bind-html="'main.links.view' | translate")
       a.main__links__pan.main__links__pan--3(href="http://blog.rentswatch.com")

@@ -11,12 +11,12 @@
 
     .navbar-collapse(ng-class="{ collapse: isCollapsed }")
       ul.nav.navbar-nav(ng-click="isCollapsed = true")
-        li(ui-sref-active="active")
-          a(ui-sref='main.dashboard({city: null})')
-            span(ng-bind-html="'navbar.link.dashboard' | translate")
         li(ui-sref-active-eq="active")
           a(ui-sref='main.quiz') 
             span(ng-bind-html="'navbar.link.quiz' | translate")
+        li(ui-sref-active="active")
+          a(ui-sref='main.dashboard({city: null})')
+            span(ng-bind-html="'navbar.link.dashboard' | translate")
         li
           a(href="http://blog.rentswatch.com", target="_blank")
             span(ng-bind-html="'navbar.link.blog' | translate")
@@ -26,13 +26,13 @@
         li
           a(href="http://twitter.com/rentswatch", target="_blank")
             i.fa.fa-twitter
-            span.hidden-sm
+            span.hidden-md
               | &nbsp;
               span(ng-bind-html="'navbar.link.twitter' | translate")
         li
           a(href="http://facebook.com/rentswatch", target="_blank")
             i.fa.fa-facebook
-            span.hidden-sm
+            span.hidden-md
               | &nbsp;
               span(ng-bind-html="'navbar.link.facebook' | translate")
       ul.nav.navbar-nav.navbar-right

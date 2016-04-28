@@ -275,7 +275,7 @@
   // pre {{ quiz.steps[quiz.step] | json }}
 
 .quiz-nav
-  .quiz-nav__item(ng-show="quiz.hasNext()")
+  .quiz-nav__item.hidden-xs(ng-show="quiz.hasNext()")
     span(ng-bind-html="'quiz.nav.manual' | translate")
      
   .quiz-nav__item.quiz-nav__item--right
