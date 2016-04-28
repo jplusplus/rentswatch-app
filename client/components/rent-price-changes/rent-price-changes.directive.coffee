@@ -1,5 +1,5 @@
 angular.module 'rentswatchApp'
-  .directive 'rentPriceChanges', (dashboard, $filter)->
+  .directive 'rentPriceChanges', (dashboard, $filter, rate)->
     'ngInject'
     restrict: 'E'
     scope:
@@ -8,6 +8,7 @@ angular.module 'rentswatchApp'
       new class RentPriceChanges
         TRANSITION_DURATION: 600
         DEFAULT_CONFIG: c3.chart.internal.fn.getDefaultConfig()
+        getCurrency: -> $filter('currencySymbol') rate.use()
         getXValues: => _.map(scope.months, 'month')
         generateColumns: =>
           series = [ ['x'].concat do @getXValues ]
@@ -41,8 +42,8 @@ angular.module 'rentswatchApp'
           min: min
           max: max
           tick:
-            format: (d)->
-              unit = if d is max then ' €/m²' else ''
+            format: (d)=>
+              unit = if d is max then ' ' + @getCurrency() + '/m²' else ''
               $filter('number')( $filter('rate')(d), 1) + unit
           padding:
             top: 0
@@ -50,7 +51,9 @@ angular.module 'rentswatchApp'
         generateColors: =>
           changes: dashboard.fillcolors[0]
         generateChart: =>
-          columns = do @generateColumns
+          # Destroy existing chart
+          if @chart? then do @chart.destroy
+          # Generate the chart!
           @chart = c3.generate
             # Enhance the chart with d3
             bindto: element[0]
@@ -78,20 +81,20 @@ angular.module 'rentswatchApp'
             data:
               x: 'x'
               type: 'line'
-              columns: columns
+              columns: @generateColumns()
               colors: @generateColors()
           setTimeout @enhanceChart, 1000
         setupAreas: =>
-          # First time we create areas
-          if not @svg? or not @areasGroup?
-            # Create a D3 elemnt
-            @svg = d3.select(element[0]).select('svg')
-            # Select the existing c3 chart
-            @areasGroup = @svg.select '.c3-chart'
-              # Create a group
-              .insert 'g', '.c3-chart-lines'
-              # Name it accordingly
-              .attr 'class', 'd3-chart-areas'
+          # Not the first time we create areas
+          if @areasGroup? then do @areasGroup.remove
+          # Create a D3 elemnt
+          @svg = d3.select(element[0]).select('svg')
+          # Select the existing c3 chart
+          @areasGroup = @svg.select '.c3-chart'
+            # Create a group
+            .insert 'g', '.c3-chart-lines'
+            # Name it accordingly
+            .attr 'class', 'd3-chart-areas'
         getArea: =>
           d3.svg.area()
             .x (d, i)=> @chart.internal.x i
@@ -111,3 +114,5 @@ angular.module 'rentswatchApp'
         constructor: ->
           # Generate the chart
           do @generateChart
+          # Refresh graph on currency change
+          scope.$watch (-> rate.use() ), @generateChart
