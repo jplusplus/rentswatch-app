@@ -51,6 +51,8 @@ angular
             @rate = @currencies[currency].CONVERSION_RATE
           # Save the currency's conversion rate
           $scope.$watch 'quiz.step', (step)=>
+            # Did we reach the end?
+            @hasEnded = @hasEnded or step >= @stepCount - 1
             # Always cancel current timeout
             $timeout.cancel @autoplay
             # Then if the step must be autoplayed:
@@ -102,7 +104,7 @@ angular
             @step = @stepIndex @current().next or @step + 1
         # Go the next step
         next: (id)=>
-          if do @hasNext and not @hasForm @step
+          if do @hasNext and not @hasForm()
             # Explicite next state?
             @step = @stepIndex(if id? then id else @current().next or @step + 1)
         previous: =>
@@ -208,8 +210,8 @@ angular
                     .on 'error', @noFlatsForCenter
                     # Image loaded
                     .on 'load', =>
-                      # Un-freeze the app
-                      @freezed = no
+                      # Un-freeze the app and considerates that we didn't end it
+                      @freezed = @hasEnded = no
                       # Save center-related stats
                       @centerStats = res.data
                       # Go to the next point

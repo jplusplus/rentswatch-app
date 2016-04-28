@@ -178,7 +178,7 @@
       span.quiz__step__scatterplot__legend
         span(ng-bind-html="'quiz.step.addr.legend' | translate: { total: quiz.centerStats.total, country: quiz.address.country, city: quiz.address.city || quiz.address.city_district || quiz.address.state }")
     
-  .quiz__step.animated(ng-if="quiz.is('ADDR_FEEDBACK') && quiz.centerStats")  
+  .quiz__step.animated(ng-if="quiz.is('ADDR_FEEDBACK') && quiz.centerStats && !quiz.hasEnded")  
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(0)")
       span(ng-bind-html="'quiz.step.addr-feedback.0' | translate")
     h2.quiz__step__heading(ng-show=":: quiz.userCenterFeedback().is(1)")
@@ -272,7 +272,7 @@
             i.fa.fa-fw.fa-facebook.fa-stack-1x.fa-inverse
           span.sr-only Facebook
     p.text-center.small
-      a(ng-click="quiz.step = quiz.stepIndex('FINAL')", ng-bind-html="'quiz.step.back-viz' | translate")
+      a(ng-click="quiz.step = quiz.stepIndex('ADDR_FEEDBACK'); $event.stopPropagation()", ng-bind-html="'quiz.step.back-viz' | translate")
   
   // pre {{ quiz.steps[quiz.step] | json }}
 
