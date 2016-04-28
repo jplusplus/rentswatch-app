@@ -25,17 +25,18 @@ angular.module 'rentswatchApp'
             multiline: no
         getMinY: =>
           Math.floor(_.chain(scope.months)
-          .map( (m)-> Math.max 0, m.avgPricePerSqm * (1 - m.stdErr) )
+          .map (d)-> Math.max 0, d.avgPricePerSqm - (1.96 * d.stdErr)
           .min()
           .value())
         getMaxY: =>
           Math.ceil(_.chain(scope.months)
-          .map( (m)-> m.avgPricePerSqm * (1 + m.stdErr) )
+          .map (d)-> d.avgPricePerSqm + (1.96 * d.stdErr)
           .max()
           .value())
         generateYAxis: =>
           min = do @getMinY
           max = do @getMaxY
+          console.log max
           # Return a configuration objects
           min: min
           max: max
@@ -44,6 +45,7 @@ angular.module 'rentswatchApp'
               unit = if d is max then ' €/m²' else ''
               $filter('number')( $filter('rate')(d), 1) + unit
           padding:
+            top: 0
             bottom: 0
         generateColors: =>
           changes: dashboard.fillcolors[0]
