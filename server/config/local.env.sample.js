@@ -7,8 +7,9 @@
 
 module.exports = {
   DOMAIN: 'http://localhost:9000',
-  SESSION_SECRET: 'rentswatchapp-secret',
+  SESSION_SECRET: "rentswatchapp-secret",
+  DATABASE_URL: 'mysql://...',
+  RENTSWATCH_API_TOKEN: '...',
   // Control debug level for modules using visionmedia/debug
   DEBUG: '',
-  RENTSWATCH_API_TOKEN: ''
 };
