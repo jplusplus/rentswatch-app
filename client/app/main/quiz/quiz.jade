@@ -263,7 +263,8 @@
         a(socialshare,
           socialshare-url="{{ quiz.href }}",
           socialshare-text="{{ quiz.userShare() | translate }}",
-          socialshare-caption="{{ app.title | translate }}",
+          socialshare-caption="{{ 'app.title' | translate }}",
+          socialshare-description="{{ 'app.description' | translate }}"
           socialshare-type="feed",
           socialshare-provider="facebook",
           socialshare-via="901779263268056")
