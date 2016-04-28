@@ -29,7 +29,7 @@
     "main.links.api.heading": "API",
     "main.links.api.description": "Nous souhaitons que les développeurs et nos partenaires puissent utiliser notre base de données pour créer des outils et raconter les histoires derrière ces chiffres.",
     "main.intro.by": "Par <a href=\"http://jplusplus.org\" target=\"_blank\">Journalism++</a>",
-    "main.outro.legal": "CC-BY Journalism++",
+    "main.outro.legal": "Rentswatch est un projet mené par <a href=\"http://jplusplus.org\" target=\"_blank\">Journalism++</a> avec le support de MIZ-Babelsberg. Son code est <a href=\"https://github.com/jplusplus?utf8=%E2%9C%93&query=rentswatch\" target=\"_blank\">disponible sur Github</a> sous licence LGPL-3.0.",
     "main.understand-rentswatch": "Comprendre Rentswatch",
     "quiz.step.heading.0a": "Nous avons analysé {{ total | number }} appartements et pouvons vous dire&nbsp;:",
     "quiz.step.heading.0b": "Est-ce que votre loyer est trop élevé&nbsp;?",

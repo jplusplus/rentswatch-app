@@ -29,7 +29,7 @@
     "main.links.api.heading": "Entwickler API",
     "main.links.api.description": "Mithilfe der Daten von Rentswatch können Entwickler und Partner ihre eigenen Ideen entwickeln.",
     "main.intro.by": "Von <a href=\"http://jplusplus.org\" target=\"_blank\">Journalism++</a> entwickelt",
-    "main.outro.legal": "CC-BY Journalism++ 2016.",
+    "main.outro.legal": "",
     "quiz.step.heading.0a": "Wir haben {{ total | number }} Mietpreise analysiert und können dir sagen:",
     "quiz.step.heading.0b": "Ist die Höhe deiner Miete angemessen?",
     "quiz.step.start": "Finde es heraus",

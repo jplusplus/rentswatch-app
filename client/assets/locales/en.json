@@ -29,7 +29,7 @@
     "main.links.api.heading": "API",
     "main.links.api.description": "We want developers and partners to be able to build great stories with our database.",
     "main.intro.by": "By <a href=\"http://jplusplus.org\" target=\"_blank\">Journalism++</a>",
-    "main.outro.legal": "Insert here legal mention about the ownership of data and the code. Links to Github and Twitter might be good too.",
+    "main.outro.legal": "Rentswatch is built by <a href=\"http://jplusplus.org\" target=\"_blank\">Journalism++</a> with support from MIZ-Babelsberg. The code of this project is <a href=\"https://github.com/jplusplus?utf8=%E2%9C%93&query=rentswatch\" target=\"_blank\">available on Github</a> and under LGPL-3.0 License.",
     "main.understand-rentswatch": "Understand Rentswatch",
     "quiz.step.heading.0a": "We analyzed {{ total | number }} flats and can tell you:",
     "quiz.step.heading.0b": "Do you pay the right rent for the right flat?",
