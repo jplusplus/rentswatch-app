@@ -34,7 +34,9 @@
         span.quiz__step__scatterplot__axis__line.animated.hopen(ng-if="quiz.in('INTRO_SIZE')")
         span.quiz__step__scatterplot__axis__ticks.animated(ng-if="quiz.in('INTRO_SIZE')")
           span.quiz__step__scatterplot__axis__ticks__tick(ng-repeat="t in quiz.xticks() track by $index") 
-            span.quiz__step__scatterplot__axis__ticks__tick__wrap {{ t }} 
+            span.quiz__step__scatterplot__axis__ticks__tick__wrap 
+              | {{ t }} 
+              span(ng-show="$last")&nbsp;m²
       
   .quiz__step.animated(ng-if="quiz.is('INTRO_RENT')")
     h2.quiz__step__heading(ng-bind-html="'quiz.step.heading.5' | translate: { currency: (quiz.currency.use() | currencySymbol) }")
