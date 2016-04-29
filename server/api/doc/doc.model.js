@@ -51,9 +51,7 @@ var all = module.exports.all = function() {
     'FROM ad',
     'WHERE total_rent IS NOT NULL',
     'AND total_rent < ' + MAX_TOTAL_RENT,
-    'AND living_space < ' + MAX_LIVING_SPACE,
-    'LIMIT 5000',
-    'ORDER BY created_at DESC'
+    'AND living_space < ' + MAX_LIVING_SPACE
     //'AND price_per_sqm < 70',
     // 'AND price_per_sqm > 3',
   ].join("\n");

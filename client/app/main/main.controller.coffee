@@ -17,7 +17,7 @@ angular
             "&amp;cc_lang_pref=",
             $translate.use()
           ].join('')
-        # There is approximatively 1 ad scraped by second so
+        # There is approximatively 1 flat analysed by second so
         # we should be able to estimated approximatively the number
         # of ad currently in the database.
         estimateAds: ->
