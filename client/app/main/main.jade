@@ -63,9 +63,8 @@ div(ng-include='"components/navbar/navbar.html"')
     .main__video
       h2.main__video__heading {{ 'main.understand-rentswatch' | translate }}
       .main__video__iframe
-      <iframe width="560" height="315" src="https:" frameborder="0" allowfullscreen></iframe>
         iframe(frameborder="0",
-          src="//www.youtube.com/embed/_a7g69kXn_o?cc_load_policy=1&amp;hl=fr&amp;cc_lang_pref=fr",
+          src="//www.youtube.com/embed/_a7g69kXn_o?cc_load_policy=1&amp;hl={{ main.use() }}&amp;cc_lang_pref={{ main.use() }}",
           width="100%",
           height="100%",
           webkitallowfullscreen, mozallowfullscreen, allowfullscreen)
