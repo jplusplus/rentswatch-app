@@ -11,6 +11,9 @@ build:
 deploy: build
 	heroku docker:release -a rentswatch-app
 
+staging: build
+	heroku docker:release -a rentswatch-staging
+
 prefetch:
 	node server/commands/scatterplot.js --output=./server/cache/all.png
 
