@@ -2,7 +2,7 @@
 
 angular
   .module 'rentswatchApp'
-    .controller 'MainCtrl', ($timeout, $translate, stats)->
+    .controller 'MainCtrl', ($timeout, $translate, $sce, stats)->
       'ngInject'
       # Return an instance of the class
       new class
@@ -10,6 +10,13 @@ angular
           @use = $translate.use
           # Start estimation loop
           do @estimationLoop
+        videoSrc: ->
+          $sce.trustAsResourceUrl [
+            "//www.youtube.com/embed/_a7g69kXn_o?cc_load_policy=1&amp;hl=",
+            $translate.use(),
+            "&amp;cc_lang_pref=",
+            $translate.use()
+          ].join('')
         # There is approximatively 1 ad scraped by second so
         # we should be able to estimated approximatively the number
         # of ad currently in the database.
