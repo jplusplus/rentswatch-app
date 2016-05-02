@@ -55,7 +55,7 @@
     "quiz.step.how-big.placeholder": "e.g 60",
     "quiz.step.space-feedback.0": "Holy Moly! We told you it would be painful: you pay {{ times }} times more than average for a flat this large",
     "quiz.step.space-feedback.1": "Ouch! We told you it would be painful: you pay {{ percentage }}% more than average for a flat this large",
-    "quiz.step.space-feedback.2": "Well, sounds good, you seem to pay an average rent for a flat this large.",
+    "quiz.step.space-feedback.2": "Well, sounds good, you seem to be paying an average rent for a flat this large.",
     "quiz.step.space-feedback.3": "We envy you… You rent is very cheap compared to the average!",
     "quiz.step.space-feedback.4": "Some have to be the lucky ones… Your rent is cheaper than average for a flat this large",
     "quiz.step.addr.heading": "But of course, average may be different where you live.",
