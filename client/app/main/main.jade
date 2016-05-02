@@ -20,6 +20,10 @@ div(ng-include='"components/navbar/navbar.html"')
               a(ng-click="main.use('de')", href="")
                 | Deutsch
 
+            li(ng-class="{ active: main.use() === 'es' }")
+              a(ng-click="main.use('es')", href="")
+                | Español
+
       img.main__intro__logo(src="assets/images/site-logo-bordered.svg", width="150")
       h2.main__intro__heading
         | Rentswatch
