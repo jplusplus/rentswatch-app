@@ -18,7 +18,7 @@
     "dashboard.context.heading.name": "{{ name }} <span class=\"text-muted\">de un vistazo</span>",
     "dashboard.context.heading.total": "Hemos analizado {{ total | number }} pisos en esta ciudad",
     "navbar.link.language": "Idioma",
-    "main.intro.punchline": " Todos los alquileres, en todas las ciudades de Europa, en tiempo real",
+    "main.intro.punchline": " Todos los alquileres, en las ciudades de Europa, en tiempo real",
     "main.links.dashboard.heading": "¿Quieres conocer qué ocurre en tu ciudad?",
     "main.links.dashboard.description": "Un inventario de la industria inmobiliaria del alquiler en las grandes ciudades de Europa.",
     "main.links.view": "Descúbrelo",
