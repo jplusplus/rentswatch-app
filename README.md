@@ -83,7 +83,8 @@ Command | Description
 
 ## Press coverage
 
-- [Votre loyer est-il trop élevé ?](http://www.francetvinfo.fr/economie/immobilier/prix-immobilier/votre-loyer-est-il-trop-eleve_1428059.html)
-- [Une application pour savoir si son loyer correspond au prix du marché](http://www.directmatin.fr/france/2016-05-01/une-application-pour-savoir-si-son-loyer-correspond-au-prix-du-marche-728575)
-- [Votre loyer est-il trop élevé? La réponse en quelques clics](http://lexpansion.lexpress.fr/actualite-economique/votre-loyer-est-il-trop-eleve-la-reponse-en-quelques-clics_1788005.html)
-- [Non, la rue la plus chère de Suisse n'est pas celle que vous croyez](http://www.rts.ch/info/suisse/7677603-non-la-rue-la-plus-chere-de-suisse-n-est-pas-celle-que-vous-croyez.html)
+- [Votre loyer est-il trop élevé ?](http://www.francetvinfo.fr/economie/immobilier/prix-immobilier/votre-loyer-est-il-trop-eleve_1428059.html), FranceTV Info.
+- [Une application pour savoir si son loyer correspond au prix du marché](http://www.directmatin.fr/france/2016-05-01/une-application-pour-savoir-si-son-loyer-correspond-au-prix-du-marche-728575), DirectMatin.
+- [Votre loyer est-il trop élevé? La réponse en quelques clics](http://lexpansion.lexpress.fr/actualite-economique/votre-loyer-est-il-trop-eleve-la-reponse-en-quelques-clics_1788005.html), L'Expansion.
+- [Non, la rue la plus chère de Suisse n'est pas celle que vous croyez](http://www.rts.ch/info/suisse/7677603-non-la-rue-la-plus-chere-de-suisse-n-est-pas-celle-que-vous-croyez.html), RTS.
+- [Votre loyer est-il trop cher ? La réponse qui pique](http://www.lesinrocks.com/2016/05/news/loyer-cher-reponse-piquante/), Les Inrocks.
