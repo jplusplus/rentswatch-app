@@ -12,7 +12,7 @@ angular
           do @estimationLoop
         videoSrc: ->
           $sce.trustAsResourceUrl [
-            "//www.youtube.com/embed/_a7g69kXn_o?cc_load_policy=1&amp;hl=",
+            "//www.youtube.com/embed/_a7g69kXn_o?cc_load_policy=1&amp;rel=0&amp;hl=",
             $translate.use(),
             "&amp;cc_lang_pref=",
             $translate.use()
