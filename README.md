@@ -100,3 +100,4 @@ Command | Description
   - [VIDÉO - Avec l'application RentsWatch, découvrez si votre loyer est trop élevé](http://www.rtl.fr/culture/web-high-tech/video-avec-l-application-rentswatch-decouvrez-si-votre-loyer-est-trop-eleve-7783087152), RTL (Paris).
   - [Payez-vous trop cher votre loyer ? La réponse en quelques clics](http://www.midilibre.fr/2016/05/04/payez-vous-trop-cher-votre-loyer-la-reponse-en-quelques-clics,1326797.php), Midi Libre, (Montpellier).
   - [Bruxelles: votre loyer est-il trop élevé ? (INFOGRAPHIE)](http://www.dhnet.be/regions/bruxelles/bruxelles-votre-loyer-est-il-trop-eleve-infographie-5727b92635702a22d6fa902b), DHnet (Bruxelles).
+  - [Logement. Payez-vous votre loyer trop cher ?](http://m.jactiv.ouest-france.fr/actualites/france/logement-payez-vous-votre-loyer-trop-cher-62468), Ouest-France (Rennes)
