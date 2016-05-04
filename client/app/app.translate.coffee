@@ -8,7 +8,7 @@ angular.module 'rentswatchApp'
       .useStaticFilesLoader
         prefix: 'assets/locales/',
         suffix: '.json'
-      .registerAvailableLanguageKeys ['en', 'fr', 'de', 'es'],
+      .registerAvailableLanguageKeys ['en', 'fr', 'de', 'es', 'it'],
         'en_US': 'en',
         'en_UK': 'en',
         'en-US': 'en',
@@ -18,14 +18,17 @@ angular.module 'rentswatchApp'
         'de_DE': 'de',
         'de-DE': 'de',
         'es-ES': 'es',
-        'es_ES': 'es'
+        'es_ES': 'es',
+        'it_IT': 'it',
+        'it-IT': 'it'
       .determinePreferredLanguage ->
         lang = navigator.language or navigator.userLanguage
         avalaibleKeys = [
           'en_US', 'en_UK', 'en-UK', 'en-US', 'en',
           'fr_FR', 'fr-FR', 'fr',
           'de_DE', 'de-DE', 'de',
-          'es_ES', 'es-ES', 'es'
+          'es_ES', 'es-ES', 'es',
+          'it_IT', 'it-IT', 'it'
         ]
         if avalaibleKeys.indexOf(lang) is -1 then 'en' else lang
       .fallbackLanguage ['en']
