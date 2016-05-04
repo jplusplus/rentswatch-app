@@ -8,21 +8,25 @@ div(ng-include='"components/navbar/navbar.html"')
           a(uib-dropdown-toggle, href="")
             | {{ 'navbar.link.language' | translate }} <span class="caret"></span>
           ul.dropdown-menu-right(uib-dropdown-menu)
-            li(ng-class="{ active: main.use() === 'fr' }")
-              a(ng-click="main.use('fr')", href="")
-                | Français
+            li(ng-class="{ active: main.use() === 'de' }")
+              a(ng-click="main.use('de')", href="")
+                | Deutsch
 
             li(ng-class="{ active: main.use() === 'en' }")
               a(ng-click="main.use('en')", href="")
                 | English
 
-            li(ng-class="{ active: main.use() === 'de' }")
-              a(ng-click="main.use('de')", href="")
-                | Deutsch
-
             li(ng-class="{ active: main.use() === 'es' }")
               a(ng-click="main.use('es')", href="")
                 | Español
+
+            li(ng-class="{ active: main.use() === 'fr' }")
+              a(ng-click="main.use('fr')", href="")
+                | Français
+
+            li(ng-class="{ active: main.use() === 'it' }")
+              a(ng-click="main.use('it')", href="")
+                | Italiano
 
       img.main__intro__logo(src="assets/images/site-logo-bordered.svg", width="150")
       h2.main__intro__heading

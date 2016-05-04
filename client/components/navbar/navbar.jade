@@ -50,16 +50,19 @@
             span(ng-bind-html="'navbar.link.language' | translate") 
             span.caret
           ul.dropdown-menu-right(uib-dropdown-menu)
-            li(ng-class="{ active: language.is('fr') }")
-              a(ng-click="language.use('fr')", href="")
-                | Français
-            li(ng-class="{ active: language.is('en') }")
-              a(ng-click="language.use('en')", href="")
-                | English
-            li(ng-class="{ active: language.is('de') }")
-              a(ng-click="language.use('de')", href="")
+            li(ng-class="{ active: main.use() === 'de' }")
+              a(ng-click="main.use('de')", href="")
                 | Deutsch
-            li(ng-class="{ active: language.is('es') }")
-              a(ng-click="language.use('es')", href="")
+            li(ng-class="{ active: main.use() === 'en' }")
+              a(ng-click="main.use('en')", href="")
+                | English
+            li(ng-class="{ active: main.use() === 'es' }")
+              a(ng-click="main.use('es')", href="")
                 | Español
+            li(ng-class="{ active: main.use() === 'fr' }")
+              a(ng-click="main.use('fr')", href="")
+                | Français
+            li(ng-class="{ active: main.use() === 'it' }")
+              a(ng-click="main.use('it')", href="")
+                | Italiano
 
