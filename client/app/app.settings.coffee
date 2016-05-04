@@ -16,6 +16,10 @@ angular
           CONVERSION_RATE: 1.0985
           TICK: 220
           SYMBOL: 'CHF'
+        CZK:
+          CONVERSION_RATE: 27
+          TICK: 5400
+          SYMBOL: 'CZK'
         # PLN:
         #   CONVERSION_RATE: 4.30715
         #   TICK: 800

@@ -8,6 +8,10 @@ div(ng-include='"components/navbar/navbar.html"')
           a(uib-dropdown-toggle, href="")
             | {{ 'navbar.link.language' | translate }} <span class="caret"></span>
           ul.dropdown-menu-right(uib-dropdown-menu)
+            li(ng-class="{ active: main.use() === 'cs' }")
+              a(ng-click="main.use('cs')", href="")
+                | Čeština
+
             li(ng-class="{ active: main.use() === 'de' }")
               a(ng-click="main.use('de')", href="")
                 | Deutsch

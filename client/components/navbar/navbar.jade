@@ -50,6 +50,9 @@
             span(ng-bind-html="'navbar.link.language' | translate") 
             span.caret
           ul.dropdown-menu-right(uib-dropdown-menu)
+            li(ng-class="{ active: main.use() === 'cs' }")
+              a(ng-click="main.use('cs')", href="")
+                | Čeština
             li(ng-class="{ active: main.use() === 'de' }")
               a(ng-click="main.use('de')", href="")
                 | Deutsch
