@@ -221,14 +221,14 @@
           .small.text-muted(ng-bind-html="'quiz.step.save.rent.help' | translate")
         .col-sm-7          
           .input-group
-            input.form-control(type='number', min="100", max="3000", id="input-save-rent", ng-model="user.total_rent", required='required', placeholder="{{ 'quiz.step.how-much.placeholder' | translate }}")
+            input.form-control(type='number', min="100", max="80000", id="input-save-rent", ng-model="user.total_rent", required='required', placeholder="{{ 'quiz.step.how-much.placeholder' | translate }}")
             span.input-group-addon(ng-bind-html="quiz.currency.use() | currencySymbol")
       .form-group
         .col-sm-5.control-label
           label(for="input-save-space", ng-bind-html="'quiz.step.save.space.label' | translate")
         .col-sm-7        
           .input-group
-            input.form-control(type="number", id="input-save-space", min="1", max="200", ng-model="user.living_space", required='required', placeholder="{{ 'quiz.step.how-big.placeholder' | translate }}")
+            input.form-control(type="number", id="input-save-space", min="1", max="300", ng-model="user.living_space", required='required', placeholder="{{ 'quiz.step.how-big.placeholder' | translate }}")
             span.input-group-addon(ng-bind-html="'quiz.step.how-big.unit' | translate")
       .form-group
         .col-sm-5.control-label

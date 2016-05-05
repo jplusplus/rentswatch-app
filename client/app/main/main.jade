@@ -32,6 +32,10 @@ div(ng-include='"components/navbar/navbar.html"')
               a(ng-click="main.use('it')", href="")
                 | Italiano
 
+            li(ng-class="{ active: main.use() === 'sv' }")
+              a(ng-click="main.use('sv')", href="")
+                | Svenska
+
       img.main__intro__logo(src="assets/images/site-logo-bordered.svg", width="150")
       h2.main__intro__heading
         | Rentswatch

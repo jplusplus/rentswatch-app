@@ -20,6 +20,10 @@ angular
           CONVERSION_RATE: 27
           TICK: 5400
           SYMBOL: 'CZK'
+        SEK:
+          CONVERSION_RATE: 9.27
+          TICK: 1850
+          SYMBOL: 'SEK'
         # PLN:
         #   CONVERSION_RATE: 4.30715
         #   TICK: 800
