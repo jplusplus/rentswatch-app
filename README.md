@@ -118,3 +118,4 @@ and to [Pinkie](https://twitter.com/penhleakchan) for her help!
 - [Payez-vous trop cher votre loyer ?](http://start.lesechos.fr/continuer-etudes/vie-etudiante/payez-vous-trop-cher-votre-loyer-4563.php#xtor=CS2-9), Les Echos (Paris).
 - [RentsWatch : de la big data pour savoir si votre loyer est trop élevé](http://www.numerama.com/tech/167989-rentswatch-de-la-big-data-pour-savoir-si-votre-loyer-est-trop-eleve.html?utm_source=twitterfeed&utm_medium=twitter), Numérama (Paris).
 - [Votre loyer est-il trop cher ?](http://www.itele.fr/economie/video/votre-loyer-est-il-trop-cher-163645), iTélé (Paris).
+- [Ist ihre Miete angemessen?](http://www.bz-berlin.de/liveticker/ist-ihre-miete-angemessen), BZ (Berlin).
