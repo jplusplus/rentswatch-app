@@ -40,7 +40,9 @@ angular.module 'rentswatchApp'
       .fallbackLanguage ['en']
       .useLocalStorage()
       .useSanitizeValueStrategy null
-  .run ($rootScope, tmhDynamicLocale)->
+  .run ($rootScope, tmhDynamicLocale, $cookies)->
     'ngInject'
     $rootScope.$on '$translateChangeSuccess', (ev, data)->
       tmhDynamicLocale.set data.language
+    # Remove unused cookie
+    $cookies.remove 'NG_TRANSLATE_LANG_KEY'
