@@ -51,7 +51,12 @@ var all = module.exports.all = function() {
     'FROM ad',
     'WHERE total_rent IS NOT NULL',
     'AND total_rent < ' + MAX_TOTAL_RENT,
-    'AND living_space < ' + MAX_LIVING_SPACE
+    'AND living_space < ' + MAX_LIVING_SPACE,
+    // Rought Europe boundaries
+    'AND latitude >= 33',
+    'AND latitude <= 72',
+    'AND longitude >= -13',
+    'AND longitude <= 34',
     //'AND price_per_sqm < 70',
     // 'AND price_per_sqm > 3',
   ].join("\n");
