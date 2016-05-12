@@ -2,6 +2,16 @@
 
 This app requires a system with `node` (tested with *5.7.1*), `npm` (tested with *3.5.2*) and `grunt-cli` (tested wwith *0.1.13*).
 
+## Software dependencies
+
+To generate charts we need to install a few packages:
+
+```
+sudo apt-get install -y libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
+```
+
+Form other systems than Ubuntu see: https://www.npmjs.com/package/canvas#installation
+
 ## Quick install
 
 From the root directory
