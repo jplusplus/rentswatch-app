@@ -119,3 +119,18 @@ and to [Pinkie](https://twitter.com/penhleakchan) for her help!
 - [RentsWatch : de la big data pour savoir si votre loyer est trop élevé](http://www.numerama.com/tech/167989-rentswatch-de-la-big-data-pour-savoir-si-votre-loyer-est-trop-eleve.html?utm_source=twitterfeed&utm_medium=twitter), Numérama (Paris).
 - [Votre loyer est-il trop cher ?](http://www.itele.fr/economie/video/votre-loyer-est-il-trop-cher-163645), iTélé (Paris).
 - [Ist ihre Miete angemessen?](http://www.bz-berlin.de/liveticker/ist-ihre-miete-angemessen), BZ (Berlin).
+- [Un site internet pour savoir si vous ne payez pas trop cher votre loyer](Un site internet pour savoir si vous ne payez pas trop cher votre loyer), Var-Matin (Nice).
+- [Mit diesem Tool kannst du herausfinden, ob du zu viel Miete zahlst](http://ze.tt/mit-diesem-tool-kannst-du-herausfinden-ob-du-zu-viel-miete-zahlst/), Ze.tt (Berlin)
+- ["Rentswatch" : le site pratique qui nous dit si notre loyer est trop élevé](http://www.bibamagazine.fr/style-de-vie/bonsplans/rentswatch-le-site-pratique-qui-nous-dit-si-notre-loyer-est-trop-eleve-56055), BIBA (Paris).
+- [Payez-vous votre loyer trop cher? Faites le test!](http://www.bienpublic.com/actualite/2016/05/06/payez-vous-votre-loyer-trop-cher-faites-le-test), Le Bien Public (Dijon) & L'Alsace (Strasbourg).
+- [Эксперты опровергли предложенную в «Монополии» систему оценки недвижимости](http://dom.lenta.ru/news/2016/05/06/swiss/), Lenta.ru (Moskva)
+- [Votre loyer est-il trop élevé ? Une application le vérifie pour vous](http://www.sudouest.fr/2016/05/07/votre-loyer-est-il-trop-eleve-une-application-le-verifie-pour-vous-2354796-705.php), Sud Ouest (Bordeaux)
+- [Mit diesem Tool kannst du herausfinden, ob du zu viel Miete zahlst](http://businessinsider.de/mit-diesem-tool-kannst-du-herausfinden-ob-du-zu-viel-miete-zahlst-2016-5), Business Insider (Karlsruhe)
+- [Votre loyer est-il trop cher ? Faites le test](http://www.lequotidien.lu/economie/votre-loyer-est-il-trop-cher-faites-le-test/), Le Quotidien (Luxembourg)
+- [Voici l'application pour savoir si vous payez (vraiment) trop cher votre loyer](http://www.planet.fr/immobilier-voici-lapplication-pour-savoir-si-vous-payez-vraiment-trop-cher-votre-loyer.1070985.1555.html), Planet.fr (Paris).
+- [Ist die Miete zu hoch? – „Rentswatch“ verrät es ](http://www.noz.de/deutschland-welt/niedersachsen/artikel/710923/ist-die-miete-zu-hoch-rentswatch-verrat-es) Neue Osnabrücker Zeitung (Osnabrück).
+- [Votre loyer est-il trop élevé ?](http://blogs.lecho.be/tzine/2016/05/votre-loyer-est-il-trop-%C3%A9lev%C3%A9-.html), L'Echo (Bruxelles).
+- [RentsWatch, la mappa degli affitti in Europa](http://tg24.sky.it/tg24/economia/2016/05/11/rentswatch-mappa-affitti-europa.html?utm_source=dlvr.it&utm_medium=twitter), Sky (Milan)
+- [Una web permet de comparar el preu del lloguer del vostre pis amb el de tot Europa](http://www.vilaweb.cat/noticies/una-web-permet-comparar-el-vostre-preu-de-lloguer-amb-el-de-tot-europa/), VilaWeb (Barcelona)
+- [LA CARTE DES LOYERS PAR STATION DE MÉTRO](http://www.streetpress.com/sujet/1462985273-carte-loyers-par-station-de-metro), Streetpress (Paris)
+- [La carte de métro des loyers parisiens](http://www.lefigaro.fr/sortir-paris/2016/05/19/30004-20160519ARTFIG00369-la-carte-de-metro-des-loyers-parisiens.php), Le Figaro (Paris)
