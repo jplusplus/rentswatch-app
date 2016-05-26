@@ -17,11 +17,11 @@ angular
             "&amp;cc_lang_pref=",
             $translate.use()
           ].join('')
-        # There is approximatively 1 flat analysed by second so
+        # There is approximatively 1 flat analysed every 2 seconds so
         # we should be able to estimated approximatively the number
         # of ad currently in the database.
         estimateAds: ->
-          stats.total + ~~(stats.pace * (Date.now()/1e3 - stats.lastSnapshot))
+          stats.total + ~~(.5 * (Date.now()/1e3 - stats.lastSnapshot))
         # This will trigger an infinite (and irregular loop of estimation)
         estimationLoop: =>
           # This value will be updated regulary

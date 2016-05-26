@@ -3,7 +3,7 @@ angular.module 'rentswatchApp'
     'ngInject'
     # Load current locale
     tmhDynamicLocaleProvider.localeLocationPattern settings.LOCALE_LOCATION
-    
+
     $translateProvider
       .useStaticFilesLoader
         prefix: 'assets/locales/',
@@ -38,9 +38,11 @@ angular.module 'rentswatchApp'
         ]
         if avalaibleKeys.indexOf(lang) is -1 then 'en' else lang
       .fallbackLanguage ['en']
-      .useCookieStorage()
+      .useLocalStorage()
       .useSanitizeValueStrategy null
-  .run ($rootScope, tmhDynamicLocale)->
+  .run ($rootScope, tmhDynamicLocale, $cookies)->
     'ngInject'
     $rootScope.$on '$translateChangeSuccess', (ev, data)->
       tmhDynamicLocale.set data.language
+    # Remove unused cookie
+    $cookies.remove 'NG_TRANSLATE_LANG_KEY'
