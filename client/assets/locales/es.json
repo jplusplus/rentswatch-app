@@ -71,7 +71,7 @@
     "quiz.step.save.happy": "Eso nos haría muy felices",
     "quiz.step.save.move-in.label": "¿Cuándo te mudaste?",
     "quiz.step.save.rent.label": "Pagas",
-    "quiz.step.save.rent.help": "Incluyendo la calefacción",
+    "quiz.step.save.rent.help": "Excluyendo la calefacción",
     "quiz.step.how-much.currency": "quiz.step.how-much.currency",
     "quiz.step.save.space.label": "Por una vivienda con un tamaño de",
     "quiz.step.how-big.unit": "m2",
