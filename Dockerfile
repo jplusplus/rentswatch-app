@@ -26,6 +26,6 @@ RUN curl -s https://s3pository.heroku.com/node/v$NODE_ENGINE/node-v$NODE_ENGINE-
 RUN echo "export PATH=\"/app/heroku/node/bin:/app/user/node_modules/.bin:\$PATH\"" > /app/.profile.d/nodejs.sh
 
 ADD dist /app/user
-RUN /app/heroku/node/bin/npm install --production
+RUN /app/heroku/node/bin/npm install
 
-CMD node server/app.js
+CMD ["node", "server/app.js"]
