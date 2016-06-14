@@ -9,10 +9,10 @@ build:
 	grunt --force
 
 deploy: build
-	heroku docker:release -a rentswatch-app
+	heroku container:push -a rentswatch-app
 
 staging: build
-	heroku docker:release -a rentswatch-staging
+	heroku container:push -a rentswatch-staging
 
 prefetch:
 	node server/commands/scatterplot.js --output=./server/cache/all.png
