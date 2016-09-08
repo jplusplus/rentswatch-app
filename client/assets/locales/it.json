@@ -6,7 +6,7 @@
     "dashboard.context.toggler.off": "Visualizza le metriche",
     "dashboard.context.toggler.on": "Ritorna alla mappa",
     "dashboard.context.neighborhoods.description": "I prezzi rappresentano il prezzo medio di nuovi contratti d’affitto negli ultimi 6 mesi entro 2 kilometri dal centro di ogni quartiere.",
-    "dashboard.context.months.description": "Prezzi medi d’affitto per un nuovo contratto d’affitto entro  {{ radius }}km di {{ name }}. L’area grigia indica il margine d’errore.",
+    "dashboard.context.months.description": "Prezzi medi d’affitto per un nuovo contratto d’affitto entro  {{ radius }}km di {{ city }}. L’area grigia indica il margine d’errore.",
     "dashboard.context.avg.description": "I prezzi rappresentano il prezzo medio dei contratti d’affitto degli ultimi 6 mesi.",
     "dashboard.context.index.description": "L’indice di disuguaglianza urbana misura la differenza nei prezzi tra quartieri costosi e quartieri più economici. 0 significa che i prezzi sono uguali in tutta la città.",
     "dashboard.context.neighborhoods.title": "Quartieri più costosi",

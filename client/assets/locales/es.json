@@ -6,7 +6,7 @@
     "dashboard.context.toggler.off": "Conoce los datos",
     "dashboard.context.toggler.on": "Regresa al mapa",
     "dashboard.context.neighborhoods.description": "Los precios muestran el precio medio del alquiler para contratos nuevos en los últimos 6 meses y en un radio de 2 kms respecto al centro de cada uno de los barrios.",
-    "dashboard.context.months.description": "Precio medio del alquiler en un radio de {{ radius }}km de {{ name }}. El área gris indica el margen de error.",
+    "dashboard.context.months.description": "Precio medio del alquiler en un radio de {{ radius }}km de {{ city }}. El área gris indica el margen de error.",
     "dashboard.context.avg.description": "El precio representa la renta media de los contratos nuevos durante los últimos 6 meses.",
     "dashboard.context.index.description": "El Índice de desigualdad urbano mide la diferencia de precio entre los barrios más caros y los más baratos. 0 indica que los precios son iguales en toda la ciudad.",
     "dashboard.context.neighborhoods.title": "Los barrios más caros",

@@ -4,7 +4,7 @@
     "dashboard.context.toggler.off": "See the metrics",
     "dashboard.context.toggler.on": "Back to the map",
     "dashboard.context.neighborhoods.description": "Prices represent the average price for new rental contracts in the last 6 months within 2 kilometers of the center of each neighborhood.",
-    "dashboard.context.months.description": "Average rent price for a new rental contract within {{ radius }}km of {{ name }}. The gray area indicates the margin of error.",
+    "dashboard.context.months.description": "Average rent price for a new rental contract within {{ radius }}km of {{ city }}. The gray area indicates the margin of error.",
     "dashboard.context.avg.description": "Prices represent the average price for new rental contracts in the last 6 months.",
     "dashboard.context.index.description": "The Urban inequality index measures the difference in prices between expensive neighborhoods and cheaper ones. 0 means that prices are equal across the whole city.",
     "dashboard.context.neighborhoods.title": "Most expensive neighborhoods",

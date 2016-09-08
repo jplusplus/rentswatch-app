@@ -6,7 +6,7 @@
     "dashboard.context.toggler.off": "Prohlédněte si metriky",
     "dashboard.context.toggler.on": "Zpět na mapu",
     "dashboard.context.neighborhoods.description": "Ceny představují průměrnou cenu za nové nájemní smlouvy za posledních 6 měsíců v okolí 2 km od centra čtvrtě.",
-    "dashboard.context.months.description": "Průměrné nájemné podle nově uzavřené nájemní smlouvy v okruhu {{ radius }}km na {{ name }}. Šedá zóna značí toleranci chyb.",
+    "dashboard.context.months.description": "Průměrné nájemné podle nově uzavřené nájemní smlouvy v okruhu {{ radius }}km na {{ city }}. Šedá zóna značí toleranci chyb.",
     "dashboard.context.avg.description": "Ceny představují průměrou cenu za nové nájemní smlouvy za posledních 6 měsíců.",
     "dashboard.context.index.description": "Index městské nerovnosti měří rozdíl mezi cenami v drahých a levnějších čtvrtích. 0 znamená, že ceny jsou stejné po celém městě.",
     "dashboard.context.neighborhoods.title": "Nejdražší čtvrti",

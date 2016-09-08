@@ -6,7 +6,7 @@
     "dashboard.context.toggler.off": "Visa värdena",
     "dashboard.context.toggler.on": "Tillbaka till kartan",
     "dashboard.context.neighborhoods.description": "Priserna representerar det genomsnittliga priset för ett nytt hyreskontrakt de senaste 6 månaderna inom 2 kilometer från mittpunkten av varje kvarter.",
-    "dashboard.context.months.description": "Genomsnittlig hyreskostnad för ett nytt hyreskontrakt inom {{ radius }} kilometer från {{ name }}. Den gråa ytan visar felmarginalen.",
+    "dashboard.context.months.description": "Genomsnittlig hyreskostnad för ett nytt hyreskontrakt inom {{ radius }} kilometer från {{ city }}. Den gråa ytan visar felmarginalen.",
     "dashboard.context.avg.description": "Priserna representerar det genomsnittliga priset för ett nytt hyreskontrakt de senaste 6 månaderna.",
     "dashboard.context.index.description": "Det urbana ojämlikhetsindexet mäter skilladerna i priser mellan dyra kvarter och billigare. 0 betyder att priserna är likadana i hela staden.",
     "dashboard.context.neighborhoods.title": "De dyraste kvarteren",
