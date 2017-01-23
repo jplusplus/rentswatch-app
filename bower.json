@@ -32,6 +32,7 @@
   },
   "resolutions": {
     "angular": "~1.5.*",
-    "d3": "~3.5.12"
+    "d3": "~3.5.12",
+    "angular-translate": "~2.11.*"
   }
 }

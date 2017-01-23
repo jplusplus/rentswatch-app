@@ -21,7 +21,7 @@ angular
         # we should be able to estimated approximatively the number
         # of ad currently in the database.
         estimateAds: ->
-          stats.total + ~~(.5 * (Date.now()/1e3 - stats.lastSnapshot))
+          stats.total + ~~(.1 * (Date.now()/1e3 - stats.lastSnapshot))
         # This will trigger an infinite (and irregular loop of estimation)
         estimationLoop: =>
           # This value will be updated regulary
